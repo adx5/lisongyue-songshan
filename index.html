@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>天地之中 · 嵩山人文旅行操作系统</title>
-<meta name="description" content="少林禅武、嵩阳书院、中岳庙、登封窑——AI 为你匹配真正值得走一走、看一看的嵩山人文体验。" />
+<title>天地之中 · 嵩山人文志 | 文旅生态平台</title>
+<meta name="description" content="连接历史与未来、大咖与大众、文化与产业的文旅生态平台。少林禅武、嵩阳书院、中岳庙、登封窑——AI 为你匹配真正值得走一走、看一看的嵩山人文体验。" />
 
 <!-- Tailwind CSS CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -14,16 +14,9 @@
       extend: {
         colors: {
           shan: {
-            50:  '#ECFDF5',
-            100: '#D1FAE5',
-            200: '#A7F3D0',
-            300: '#6EE7B7',
-            400: '#34D399',
-            500: '#10B981',
-            600: '#059669',
-            700: '#047857',
-            800: '#065F46',
-            900: '#064E3B'
+            50:  '#ECFDF5', 100: '#D1FAE5', 200: '#A7F3D0', 300: '#6EE7B7',
+            400: '#34D399', 500: '#10B981', 600: '#059669', 700: '#047857',
+            800: '#065F46', 900: '#064E3B'
           },
           ink:  '#1F2937',
           sand: '#FAF9F6'
@@ -38,61 +31,23 @@
 
 <style>
   html { scroll-behavior: smooth; }
-  body {
-    background-color: #FAF9F6;
-    color: #1F2937;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* 1100px 版心 */
-  .container-1100 {
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
+  body { background-color: #FAF9F6; color: #1F2937; -webkit-font-smoothing: antialiased; }
+  .container-1100 { max-width: 1100px; margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px; }
   section[id] { scroll-margin-top: 80px; }
 
-  /* Hero 轮播指示点 */
-  .hero-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 9999px;
-    background: rgba(255, 255, 255, 0.45);
-    transition: all 0.3s ease;
-  }
+  .hero-dot { width: 8px; height: 8px; border-radius: 9999px; background: rgba(255, 255, 255, 0.45); transition: all 0.3s ease; }
   .hero-dot:hover { background: rgba(255, 255, 255, 0.8); }
   .hero-dot.active { width: 26px; background: #10B981; }
 
-  /* 体验库分类 Tab */
-  .tab {
-    padding: 6px 16px;
-    border-radius: 9999px;
-    font-size: 13px;
-    line-height: 1.4;
-    border: 1px solid #E5E7EB;
-    background: #FFFFFF;
-    color: #4B5563;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    white-space: nowrap;
-  }
+  .tab { padding: 6px 16px; border-radius: 9999px; font-size: 13px; line-height: 1.4; border: 1px solid #E5E7EB; background: #FFFFFF; color: #4B5563; transition: all 0.2s ease; cursor: pointer; white-space: nowrap; }
   .tab:hover { border-color: #34D399; color: #059669; }
   .tab.active { background: #059669; border-color: #059669; color: #FFFFFF; }
 
-  /* 高斯泼溅场景按钮 */
   .scene-btn { transition: all 0.2s ease; cursor: pointer; }
   .scene-btn:hover { border-color: #6EE7B7; }
-  .scene-btn.active {
-    border-color: #059669;
-    background: #ECFDF5;
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
-  }
+  .scene-btn.active { border-color: #059669; background: #ECFDF5; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12); }
 
   #splatCanvas { touch-action: none; display: block; }
-
   ::-webkit-scrollbar { width: 8px; height: 8px; }
   ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 9999px; }
   ::-webkit-scrollbar-track { background: transparent; }
@@ -106,14 +61,14 @@
   <div class="container-1100 h-16 flex items-center justify-between">
     <a href="index.html" class="flex items-center gap-2.5">
       <span class="w-9 h-9 rounded-lg bg-shan-600 text-white flex items-center justify-center font-serif text-lg shadow-sm">嵩</span>
-      <span class="font-serif text-lg font-bold tracking-wide text-ink">天地之中 · 嵩山</span>
+      <span class="font-serif text-lg font-bold tracking-wide text-ink">天地之中 · 嵩山人文志</span>
     </a>
 
     <nav class="hidden md:flex items-center gap-8 text-sm text-gray-600">
       <a href="#hero" class="text-shan-600 font-bold border-b-2 border-shan-600 pb-1">首页</a>
-      <a href="#library" class="hover:text-shan-600 transition">体验库</a>
+      <a href="#library" class="hover:text-shan-600 transition">生态体验库</a>
       <a href="#splat" class="hover:text-shan-600 transition">3D 景区</a>
-      <a href="#ai-match" class="hover:text-shan-600 transition">AI 定制</a>
+      <a href="#ai-match" class="hover:text-shan-600 transition">AI 寻路</a>
       <a href="events.html" class="hover:text-shan-600 transition">会议专题</a>
     </nav>
 
@@ -132,24 +87,24 @@
   <div class="relative z-10 container-1100 min-h-[560px] flex flex-col justify-center py-16">
     <span class="inline-flex items-center gap-2 w-fit text-[12px] tracking-widest text-shan-300 border border-shan-400/40 bg-shan-900/20 px-3 py-1.5 rounded-full">
       <span class="w-1.5 h-1.5 rounded-full bg-shan-400"></span>
-      世界文化遗产 · 天地之中历史建筑群
+      天地之中 · 嵩山人文志
     </span>
 
     <h1 class="mt-5 font-serif text-white text-3xl md:text-5xl leading-[1.25] font-bold drop-shadow-lg">
-      一步一景<br class="hidden md:block" />
-      读懂嵩山的千年文脉
+      连接历史与未来<br class="hidden md:block" />
+      大咖与大众、文化与产业的文旅生态
     </h1>
 
     <p class="mt-4 text-gray-200 text-sm md:text-base max-w-xl leading-relaxed">
-      少林禅武 · 嵩阳书院 · 中岳庙 · 登封窑 —— 把散落山间的文化，串成一条走得进去的旅程。
+      少林禅武 · 嵩阳书院 · 中岳庙 · 登封窑 —— 从深度研学、国际旅居，到非遗匠人与产业共建，读懂天地之中的大美嵩山。
     </p>
 
     <div class="mt-8 w-full max-w-2xl">
       <div class="bg-white/95 rounded-2xl p-2 flex flex-col sm:flex-row gap-2 shadow-2xl shadow-black/30">
-        <input id="aiSearchInput" type="text" placeholder="试试：少林功夫 / 非遗手作 / 亲子研学 / 一日禅修"
+        <input id="aiSearchInput" type="text" placeholder="试试：少林功夫 / 非遗手作 / 北大学子研学 / 深度旅居"
                class="flex-1 px-4 py-3 bg-transparent outline-none text-ink text-sm placeholder-gray-400 rounded-xl" />
         <button id="aiSearchBtn" class="bg-shan-600 hover:bg-shan-700 text-white px-6 py-3 rounded-xl text-sm font-medium transition disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap">
-          AI 智能匹配
+          AI 寻路
         </button>
       </div>
 
@@ -157,7 +112,7 @@
         <span class="text-gray-400">热门：</span>
         <button class="hot-tag px-3 py-1 rounded-full border border-white/25 hover:border-shan-400 hover:text-shan-300 transition" data-kw="少林">少林功夫</button>
         <button class="hot-tag px-3 py-1 rounded-full border border-white/25 hover:border-shan-400 hover:text-shan-300 transition" data-kw="非遗">非遗手作</button>
-        <button class="hot-tag px-3 py-1 rounded-full border border-white/25 hover:border-shan-400 hover:text-shan-300 transition" data-kw="书院">嵩阳书院</button>
+        <button class="hot-tag px-3 py-1 rounded-full border border-white/25 hover:border-shan-400 hover:text-shan-300 transition" data-kw="书院">书院研学</button>
         <button class="hot-tag px-3 py-1 rounded-full border border-white/25 hover:border-shan-400 hover:text-shan-300 transition" data-kw="徒步">地质徒步</button>
       </div>
     </div>
@@ -184,7 +139,7 @@
     <div class="lg:col-span-7">
       <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm h-full flex flex-col">
         <div class="flex items-center justify-between mb-2">
-          <h2 class="font-serif text-xl font-bold text-ink">AI 撮合演示</h2>
+          <h2 class="font-serif text-xl font-bold text-ink">AI 寻路演示</h2>
           <span class="text-[11px] text-shan-700 bg-shan-50 border border-shan-100 px-2.5 py-1 rounded-full">实时演示</span>
         </div>
         <p class="text-sm text-gray-500 leading-relaxed">
@@ -269,7 +224,7 @@
 <section id="library" class="container-1100 pb-16">
   <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
     <div>
-      <h2 class="font-serif text-2xl font-bold text-ink">嵩山体验库</h2>
+      <h2 class="font-serif text-2xl font-bold text-ink">嵩山生态体验库</h2>
       <p class="text-sm text-gray-500 mt-1.5">经本地文化顾问与 AI 双重筛选的人文体验，可按主题自由组合进行囊。</p>
     </div>
     <div id="filterTabs" class="flex flex-wrap gap-2">
@@ -350,20 +305,25 @@
     <div>
       <div class="flex items-center gap-2.5">
         <span class="w-9 h-9 rounded-lg bg-shan-600 text-white flex items-center justify-center font-serif text-lg">嵩</span>
-        <span class="font-serif text-lg font-bold text-white">天地之中 · 嵩山</span>
+        <span class="font-serif text-lg font-bold text-white">天地之中 · 嵩山人文志</span>
       </div>
       <p class="mt-4 text-sm text-gray-400 leading-relaxed">
-        我们相信，最好的文化体验不是被讲解出来的，而是被走出来的。把嵩山的历史、技艺与山水，装进一只可定制的行囊。
+        连接历史与未来、大咖与大众、文化与产业的文旅生态平台。把嵩山的历史、技艺与山水，装进一只可定制的行囊。
       </p>
+      <div class="mt-4">
+        <a href="#booking" class="inline-block text-sm text-shan-400 border border-shan-600/50 hover:bg-shan-600 hover:text-white px-4 py-2 rounded-lg transition">
+          我是主理人 / 诚邀共建 →
+        </a>
+      </div>
     </div>
 
     <div>
       <h3 class="text-white text-sm font-semibold mb-4">快速导航</h3>
       <ul class="space-y-2.5 text-sm text-gray-400">
         <li><a href="#hero" class="hover:text-shan-400 transition">首页</a></li>
-        <li><a href="#library" class="hover:text-shan-400 transition">嵩山体验库</a></li>
+        <li><a href="#library" class="hover:text-shan-400 transition">嵩山生态体验库</a></li>
         <li><a href="#splat" class="hover:text-shan-400 transition">景区高斯泼溅</a></li>
-        <li><a href="#ai-match" class="hover:text-shan-400 transition">AI 智能撮合</a></li>
+        <li><a href="#ai-match" class="hover:text-shan-400 transition">AI 寻路</a></li>
         <li><a href="#booking" class="hover:text-shan-400 transition">定制专属行囊</a></li>
         <li><a href="events.html" class="hover:text-shan-400 transition">会议专题</a></li>
       </ul>
@@ -371,20 +331,20 @@
 
     <div>
       <h3 class="text-white text-sm font-semibold mb-4">联系我们</h3>
-      <ul class="space-y-2.5 text-sm text-gray-400">
-        <li class="text-white font-bold mb-2">河南嵩玉文化旅游有限公司</li>
+      <ul class="space-y-2 text-sm text-gray-400">
         <li>服务时间：每日 09:00 - 21:00</li>
         <li>邮箱：hnsongyu@163.com</li>
         <li>电话：15515816811</li>
         <li>地址：中国 天地之中 登封嵩山</li>
+        <li class="pt-2 text-xs text-gray-500">学术支持：嵩山文化研究会</li>
+        <li class="text-xs text-gray-500">主办单位：河南嵩玉文化旅游有限公司</li>
       </ul>
     </div>
   </div>
 
   <div class="border-t border-white/10">
     <div class="container-1100 py-4 text-center text-xs text-gray-500">
-      © 2026 河南嵩玉文化旅游有限公司 · 天地之中 · 嵩山　保留所有权利<br>
-      学术支持：嵩山文化研究会
+      © 2026 河南嵩玉文化旅游有限公司 · 天地之中 · 嵩山人文志　保留所有权利
     </div>
   </div>
 </footer>
@@ -397,12 +357,7 @@
 (function () {
   'use strict';
 
-  /* =========================================================
-   * 0. 常量与工具
-   * ========================================================= */
-  // ✅ 已替换为真实的云端后端域名
   const API_BASE  = 'https://songshan-backend.fastapicloud.dev';
-
   const API_LEADS = API_BASE + '/api/leads';
   const API_LIST  = API_BASE + '/api/resources';
 
@@ -438,21 +393,15 @@
     };
   }
 
-  /* =========================================================
-   * 1. 首屏 Hero 轮播
-   * ========================================================= */
+  /* Hero 轮播 */
   const HERO_IMAGES = [
     'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1600&q=80',
     'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1600&q=80',
     'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=80',
     'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80'
   ];
-
-  const HERO_INTERVAL = 5000;
-  const HERO_ANIM_MS = 920;
-  const heroSection = document.getElementById('hero');
-  const heroTrack = document.getElementById('heroTrack');
-  const heroDots = document.getElementById('heroDots');
+  const HERO_INTERVAL = 5000, HERO_ANIM_MS = 920;
+  const heroSection = document.getElementById('hero'), heroTrack = document.getElementById('heroTrack'), heroDots = document.getElementById('heroDots');
   let heroIndex = 0, heroTimer = null, heroResetting = false;
 
   function buildHero() {
@@ -465,55 +414,41 @@
       img.className = 'absolute inset-0 w-full h-full object-cover select-none';
       img.setAttribute('draggable', 'false');
       img.onerror = function () { this.onerror = null; this.src = FALLBACK_IMG; };
-      slide.appendChild(img);
-      heroTrack.appendChild(slide);
+      slide.appendChild(img); heroTrack.appendChild(slide);
     });
     if (heroTrack.firstElementChild) {
       const clone = heroTrack.firstElementChild.cloneNode(true);
-      clone.setAttribute('aria-hidden', 'true');
-      heroTrack.appendChild(clone);
+      clone.setAttribute('aria-hidden', 'true'); heroTrack.appendChild(clone);
     }
     if (heroDots) {
       HERO_IMAGES.forEach(function (_, i) {
         const dot = document.createElement('button');
         dot.type = 'button'; dot.className = 'hero-dot';
         dot.setAttribute('aria-label', '切换到第 ' + (i + 1) + ' 张');
-        dot.addEventListener('click', function () {
-          if (heroResetting) return;
-          heroIndex = i; moveTo(heroIndex, true); updateDots();
-        });
+        dot.addEventListener('click', function () { if (heroResetting) return; heroIndex = i; moveTo(heroIndex, true); updateDots(); });
         heroDots.appendChild(dot);
       });
     }
     updateDots();
   }
-
   function moveTo(index, animate) {
     if (!heroTrack) return;
     heroTrack.style.transition = animate ? 'transform 900ms cubic-bezier(0.4, 0, 0.2, 1)' : 'none';
     heroTrack.style.transform = 'translateX(-' + (index * 100) + '%)';
   }
-
   function updateDots() {
     if (!heroDots) return;
     const active = heroIndex % HERO_IMAGES.length;
-    Array.prototype.forEach.call(heroDots.children, function (dot, i) {
-      dot.classList.toggle('active', i === active);
-    });
+    Array.prototype.forEach.call(heroDots.children, function (dot, i) { dot.classList.toggle('active', i === active); });
   }
-
   function nextSlide() {
     if (heroResetting) return;
     heroIndex++; moveTo(heroIndex, true); updateDots();
     if (heroIndex === HERO_IMAGES.length) {
       heroResetting = true;
-      setTimeout(function () {
-        heroIndex = 0; moveTo(0, false); updateDots();
-        void heroTrack.offsetWidth; heroResetting = false;
-      }, HERO_ANIM_MS);
+      setTimeout(function () { heroIndex = 0; moveTo(0, false); updateDots(); void heroTrack.offsetWidth; heroResetting = false; }, HERO_ANIM_MS);
     }
   }
-
   function startAutoPlay() { stopAutoPlay(); heroTimer = setInterval(nextSlide, HERO_INTERVAL); }
   function stopAutoPlay() { if (heroTimer) { clearInterval(heroTimer); heroTimer = null; } }
   buildHero(); moveTo(0, false); startAutoPlay();
@@ -525,9 +460,7 @@
   }
   document.addEventListener('visibilitychange', function () { document.hidden ? stopAutoPlay() : startAutoPlay(); });
 
-  /* =========================================================
-   * 2. 嵩山体验库
-   * ========================================================= */
+  /* 体验库 */
   const MOCK_EXPERIENCES = [
     { id: 1, category: '非遗', tag: '禅武传承', title: '少林功夫晨课', desc: '随武僧在塔林间习练八段锦与基础桩功，听一段禅武合一的故事，用身体记住这座山。', duration: '3 小时', price: 380, img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=70', keywords: '少林 功夫 武术 禅修 晨课 亲子' },
     { id: 2, category: '文化', tag: '书院研学', title: '嵩阳书院 · 国学讲坛', desc: '在千年书院里听一堂《中庸》，着汉服行释菜礼，完整体验一次古代书院的开学仪轨。', duration: '半日', price: 260, img: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=900&q=70', keywords: '书院 国学 研学 汉服 礼仪 亲子' },
@@ -538,19 +471,13 @@
     { id: 7, category: '商业', tag: '禅意食养', title: '嵩山素斋 · 禅意食养', desc: '一席时令素斋，配一壶嵩山云雾茶，由寺院厨师讲解每道菜的时节与因由，体验清淡饮食的哲学。', duration: '2 小时', price: 220, img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=70', keywords: '素斋 美食 食养 茶 禅意 餐饮' },
     { id: 8, category: '非遗', tag: '古法技艺', title: '唐碑拓印 · 古法技艺', desc: '学习上纸、捶拓、上墨三道工序，亲手拓下《大唐嵩阳观纪圣德感应之颂》碑文，带走一张会呼吸的纸。', duration: '2 小时', price: 240, img: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=70', keywords: '拓印 唐碑 非遗 古法 手作 文化' }
   ];
-
   let allExperiences = MOCK_EXPERIENCES.slice();
   let activeCategory = '全部', activeKeyword = '';
-  const expGrid = document.getElementById('expGrid');
-  const emptyState = document.getElementById('emptyState');
-  const resultHint = document.getElementById('resultHint');
-  const filterTabs = document.getElementById('filterTabs');
+  const expGrid = document.getElementById('expGrid'), emptyState = document.getElementById('emptyState'), resultHint = document.getElementById('resultHint'), filterTabs = document.getElementById('filterTabs');
 
   function renderExperiences(list) {
     if (!expGrid) return;
-    if (!list || list.length === 0) {
-      expGrid.innerHTML = ''; if (emptyState) emptyState.classList.remove('hidden'); return;
-    }
+    if (!list || list.length === 0) { expGrid.innerHTML = ''; if (emptyState) emptyState.classList.remove('hidden'); return; }
     if (emptyState) emptyState.classList.add('hidden');
     expGrid.innerHTML = list.map(function (item) {
       const priceText = (item.price === 0 || item.price === '0') ? '免费' : '¥ ' + esc(item.price);
@@ -571,12 +498,9 @@
         '</article>';
     }).join('');
   }
-
   function applyFilter() {
     let list = allExperiences.slice();
-    if (activeCategory !== '全部') {
-      list = list.filter(function (item) { return String(item.category).indexOf(activeCategory) !== -1; });
-    }
+    if (activeCategory !== '全部') list = list.filter(function (item) { return String(item.category).indexOf(activeCategory) !== -1; });
     if (activeKeyword) {
       const kw = activeKeyword.toLowerCase();
       list = list.filter(function (item) {
@@ -586,15 +510,12 @@
     }
     renderExperiences(list);
   }
-
   if (filterTabs) {
     filterTabs.addEventListener('click', function (e) {
       const btn = e.target.closest('.tab'); if (!btn) return;
       Array.prototype.forEach.call(filterTabs.querySelectorAll('.tab'), function (t) { t.classList.remove('active'); });
-      btn.classList.add('active');
-      activeCategory = btn.getAttribute('data-cat') || '全部';
-      if (resultHint) resultHint.classList.add('hidden');
-      applyFilter();
+      btn.classList.add('active'); activeCategory = btn.getAttribute('data-cat') || '全部';
+      if (resultHint) resultHint.classList.add('hidden'); applyFilter();
     });
   }
   if (expGrid) {
@@ -603,28 +524,22 @@
       showToast('已成功收入行囊', 'success');
     });
   }
-
   async function loadExperiences() {
     renderExperiences(allExperiences);
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(function () { controller.abort(); }, 3500);
       const res = await fetch(API_LIST, { method: 'GET', headers: { 'Accept': 'application/json' }, signal: controller.signal });
-      clearTimeout(timeoutId);
-      if (!res.ok) throw new Error('HTTP ' + res.status);
+      clearTimeout(timeoutId); if (!res.ok) throw new Error('HTTP ' + res.status);
       const data = await res.json();
       const rawList = Array.isArray(data) ? data : (Array.isArray(data && data.items) ? data.items : (Array.isArray(data && data.data) ? data.data : []));
       if (!rawList.length) throw new Error('empty list');
       const mapped = rawList.map(function (it, i) {
         return {
-          id: (it && it.id != null) ? it.id : i,
-          category: (it && (it.category || it.type)) || '文化',
-          tag: (it && (it.tag || it.sub_category)) || '精选',
-          title: (it && (it.title || it.name || it.resource_name)) || '',
-          desc: (it && (it.description || it.desc || it.summary)) || '',
-          duration: (it && it.duration) || '半日',
-          price: (it && it.price != null) ? it.price : '—',
-          img: (it && (it.image || it.cover || it.image_url)) || FALLBACK_IMG,
+          id: (it && it.id != null) ? it.id : i, category: (it && (it.category || it.type)) || '文化',
+          tag: (it && (it.tag || it.sub_category)) || '精选', title: (it && (it.title || it.name || it.resource_name)) || '',
+          desc: (it && (it.description || it.desc || it.summary)) || '', duration: (it && it.duration) || '半日',
+          price: (it && it.price != null) ? it.price : '—', img: (it && (it.image || it.cover || it.image_url)) || FALLBACK_IMG,
           keywords: (it && (it.keywords || it.title || it.name)) || ''
         };
       }).filter(function (it) { return !!it.title; });
@@ -636,18 +551,12 @@
   }
   loadExperiences();
 
-  /* =========================================================
-   * 3. AI 智能搜索
-   * ========================================================= */
-  const aiSearchInput = document.getElementById('aiSearchInput');
-  const aiSearchBtn = document.getElementById('aiSearchBtn');
-  const librarySection = document.getElementById('library');
-
+  /* AI 寻路 */
+  const aiSearchInput = document.getElementById('aiSearchInput'), aiSearchBtn = document.getElementById('aiSearchBtn'), librarySection = document.getElementById('library');
   function runAISearch(keyword) {
-    const kw = String(keyword || '').trim();
-    if (!kw) { showToast('先说说你想体验什么吧', 'warn'); return; }
-    const originalText = 'AI 智能匹配';
-    if (aiSearchBtn) { aiSearchBtn.disabled = true; aiSearchBtn.textContent = 'AI 匹配中…'; }
+    const kw = String(keyword || '').trim(); if (!kw) { showToast('先说说你想体验什么吧', 'warn'); return; }
+    const originalText = 'AI 寻路';
+    if (aiSearchBtn) { aiSearchBtn.disabled = true; aiSearchBtn.textContent = 'AI 寻路中…'; }
     setTimeout(function () {
       if (aiSearchBtn) { aiSearchBtn.disabled = false; aiSearchBtn.textContent = originalText; }
       activeKeyword = kw; activeCategory = '全部';
@@ -667,7 +576,6 @@
       if (librarySection) librarySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 900);
   }
-
   if (aiSearchBtn) { aiSearchBtn.addEventListener('click', function () { runAISearch(aiSearchInput ? aiSearchInput.value : ''); }); }
   if (aiSearchInput) { aiSearchInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); runAISearch(aiSearchInput.value); } }); }
   Array.prototype.forEach.call(document.querySelectorAll('.hot-tag'), function (btn) {
@@ -676,21 +584,13 @@
   const viewPlanBtn = document.getElementById('viewPlanBtn');
   if (viewPlanBtn) { viewPlanBtn.addEventListener('click', function () { if (aiSearchInput) aiSearchInput.value = '书院'; runAISearch('书院'); }); }
 
-  /* =========================================================
-   * 4. 定制专属行囊表单
-   * ========================================================= */
-  const bookingForm = document.getElementById('bookingForm');
-  const submitBtn = document.getElementById('submitBtn');
-
+  /* 表单 */
+  const bookingForm = document.getElementById('bookingForm'), submitBtn = document.getElementById('submitBtn');
   if (bookingForm) {
     bookingForm.addEventListener('submit', async function (e) {
       e.preventDefault();
-      const themeEl = document.getElementById('fTheme');
-      const timeEl = document.getElementById('fTime');
-      const noteEl = document.getElementById('fNote');
-      const theme = themeEl ? themeEl.value : '';
-      const time = timeEl ? timeEl.value.trim() : '';
-      const note = noteEl ? noteEl.value.trim() : '';
+      const themeEl = document.getElementById('fTheme'), timeEl = document.getElementById('fTime'), noteEl = document.getElementById('fNote');
+      const theme = themeEl ? themeEl.value : '', time = timeEl ? timeEl.value.trim() : '', note = noteEl ? noteEl.value.trim() : '';
       if (!time) { showToast('请填写出行时间', 'warn'); if (timeEl) timeEl.focus(); return; }
       const originalText = submitBtn ? submitBtn.textContent : '提交';
       if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '正在提交…'; }
@@ -698,89 +598,53 @@
       try {
         const res = await fetch(API_LEADS, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) });
         if (!res.ok) throw new Error('HTTP ' + res.status);
-        showToast('提交成功！文化顾问将在 24 小时内联系你', 'success');
-        bookingForm.reset();
-      } catch (err) {
-        console.warn('[定制行囊] 提交失败：', err);
-        showToast('提交失败，请稍后重试', 'error');
-      } finally {
-        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalText; }
-      }
+        showToast('提交成功！文化顾问将在 24 小时内联系你', 'success'); bookingForm.reset();
+      } catch (err) { console.warn('[定制行囊] 提交失败：', err); showToast('提交失败，请稍后重试', 'error'); }
+      finally { if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalText; } }
     });
   }
 
-  /* =========================================================
-   * 5. 景区高斯泼溅
-   * ========================================================= */
-  const splatCanvas = document.getElementById('splatCanvas');
-  const splatCtx = splatCanvas ? splatCanvas.getContext('2d') : null;
-  const splatScenesEl = document.getElementById('splatScenes');
-  const splatPointCountEl = document.getElementById('splatPointCount');
-  const splatLoadingEl = document.getElementById('splatLoading');
-  const splatSceneNameEl = document.getElementById('splatSceneName');
+  /* 3D 高斯泼溅 (保留原有逻辑，代码略缩，直接使用完整版) */
+  // ... (此处保留你之前的 3D 渲染逻辑 JS 代码，未做任何删减) ...
+  // 为了节省篇幅，在你的实际代码中请保留之前 index.html 中 `const splatCanvas = ...` 到 `initSplat();` 的所有代码。
 
+  // ========== 3D 渲染完整代码块 ==========
+  const splatCanvas = document.getElementById('splatCanvas'), splatCtx = splatCanvas ? splatCanvas.getContext('2d') : null;
+  const splatScenesEl = document.getElementById('splatScenes'), splatPointCountEl = document.getElementById('splatPointCount');
+  const splatLoadingEl = document.getElementById('splatLoading'), splatSceneNameEl = document.getElementById('splatSceneName');
   const SPLAT_PALETTES = {
     stone: ['#2E3A34', '#3C4A42', '#4C5C52', '#5E6E62', '#728275', '#8A9A8C', '#A2B2A4', '#BACABC'],
     wood: ['#2C342E', '#3A4840', '#485A50', '#586E60', '#6C8272', '#869C8C', '#A4B8A8', '#C2D2C4'],
     temple: ['#332C28', '#463C32', '#584C3E', '#6A6450', '#7C8A6E', '#8EA08A', '#A2B2A2', '#B8C8B8'],
     mountain: ['#1B2A22', '#263B31', '#334E42', '#436257', '#587A6B', '#6F9483', '#8AB09C', '#A8CCB8']
   };
-
   function pushHall(pts, rnd, cx, cz, W, D, H, rot) {
     const cos = Math.cos(rot), sin = Math.sin(rot);
     function put(x, y, z, b) { pts.push({ x: cx + x * cos - z * sin, y: y, z: cz + x * sin + z * cos, b: b }); }
-    for (let i = 0; i < 480; i++) {
-      const face = Math.floor(rnd() * 4); let x, z;
-      if (face === 0) { x = (rnd() - 0.5) * W; z = -D / 2; }
-      else if (face === 1) { x = (rnd() - 0.5) * W; z = D / 2; }
-      else if (face === 2) { x = -W / 2; z = (rnd() - 0.5) * D; }
-      else { x = W / 2; z = (rnd() - 0.5) * D; }
-      put(x, rnd() * H, z, 1 + Math.floor(rnd() * 3));
-    }
-    for (let i = 0; i < 380; i++) {
-      const x = (rnd() - 0.5) * (W + 1.1), z = (rnd() - 0.5) * (D + 1.1);
-      const ridge = H + 0.82, y = ridge - (Math.abs(z) / (D / 2 + 0.55)) * 1.05 + rnd() * 0.12;
-      put(x, y, z, 4 + Math.floor(rnd() * 3));
-    }
+    for (let i = 0; i < 480; i++) { const face = Math.floor(rnd() * 4); let x, z; if (face === 0) { x = (rnd() - 0.5) * W; z = -D / 2; } else if (face === 1) { x = (rnd() - 0.5) * W; z = D / 2; } else if (face === 2) { x = -W / 2; z = (rnd() - 0.5) * D; } else { x = W / 2; z = (rnd() - 0.5) * D; } put(x, rnd() * H, z, 1 + Math.floor(rnd() * 3)); }
+    for (let i = 0; i < 380; i++) { const x = (rnd() - 0.5) * (W + 1.1), z = (rnd() - 0.5) * (D + 1.1); const ridge = H + 0.82, y = ridge - (Math.abs(z) / (D / 2 + 0.55)) * 1.05 + rnd() * 0.12; put(x, y, z, 4 + Math.floor(rnd() * 3)); }
   }
-
   function genTalin() {
     const rnd = mulberry32(20240601), pts = [];
-    for (let t = 0; t < 10; t++) {
-      const ang = (t / 10) * Math.PI * 2 + rnd() * 0.7, rad = 2.4 + rnd() * 5.6, cx = Math.cos(ang) * rad, cz = Math.sin(ang) * rad, h = 2.8 + rnd() * 4.6, r = 0.5 + rnd() * 0.55;
-      for (let i = 0; i < 210; i++) {
-        const th = rnd() * Math.PI * 2, y = rnd() * h, taper = 1 - (y / h) * 0.3;
-        pts.push({ x: cx + Math.cos(th) * r * taper, y: y, z: cz + Math.sin(th) * r * taper, b: 2 + Math.floor(rnd() * 4) });
-      }
-      for (let i = 0; i < 55; i++) {
-        const th = rnd() * Math.PI * 2, tt = rnd();
-        pts.push({ x: cx + Math.cos(th) * r * 0.6 * (1 - tt), y: h + tt * 1.5, z: cz + Math.sin(th) * r * 0.6 * (1 - tt), b: 4 + Math.floor(rnd() * 3) });
-      }
+    for (let t = 0; t < 10; t++) { const ang = (t / 10) * Math.PI * 2 + rnd() * 0.7, rad = 2.4 + rnd() * 5.6, cx = Math.cos(ang) * rad, cz = Math.sin(ang) * rad, h = 2.8 + rnd() * 4.6, r = 0.5 + rnd() * 0.55;
+      for (let i = 0; i < 210; i++) { const th = rnd() * Math.PI * 2, y = rnd() * h, taper = 1 - (y / h) * 0.3; pts.push({ x: cx + Math.cos(th) * r * taper, y: y, z: cz + Math.sin(th) * r * taper, b: 2 + Math.floor(rnd() * 4) }); }
+      for (let i = 0; i < 55; i++) { const th = rnd() * Math.PI * 2, tt = rnd(); pts.push({ x: cx + Math.cos(th) * r * 0.6 * (1 - tt), y: h + tt * 1.5, z: cz + Math.sin(th) * r * 0.6 * (1 - tt), b: 4 + Math.floor(rnd() * 3) }); }
     }
     for (let i = 0; i < 380; i++) { pts.push({ x: (rnd() - 0.5) * 16, y: rnd() * 0.14, z: (rnd() - 0.5) * 16, b: Math.floor(rnd() * 2) }); }
     return pts;
   }
-
   function genShuyuan() {
     const rnd = mulberry32(1117), pts = [];
-    pushHall(pts, rnd, 0, 0, 7.0, 4.2, 2.2, 0);
-    pushHall(pts, rnd, -5.2, 2.4, 3.2, 2.0, 1.4, 0);
-    pushHall(pts, rnd, 5.2, 2.4, 3.2, 2.0, 1.4, 0);
+    pushHall(pts, rnd, 0, 0, 7.0, 4.2, 2.2, 0); pushHall(pts, rnd, -5.2, 2.4, 3.2, 2.0, 1.4, 0); pushHall(pts, rnd, 5.2, 2.4, 3.2, 2.0, 1.4, 0);
     for (let i = 0; i < 340; i++) { pts.push({ x: (rnd() - 0.5) * 15, y: rnd() * 0.12, z: (rnd() - 0.5) * 12, b: Math.floor(rnd() * 2) }); }
     return pts;
   }
-
   function genZhongyue() {
     const rnd = mulberry32(3301), pts = [];
-    pushHall(pts, rnd, 0, -5.5, 6.5, 3.6, 2.4, 0);
-    pushHall(pts, rnd, 0, 0.0, 7.5, 4.4, 2.8, 0);
-    pushHall(pts, rnd, 0, 5.5, 6.0, 3.4, 2.2, 0);
-    pushHall(pts, rnd, -5.0, 0, 2.6, 1.8, 1.3, 0);
-    pushHall(pts, rnd, 5.0, 0, 2.6, 1.8, 1.3, 0);
+    pushHall(pts, rnd, 0, -5.5, 6.5, 3.6, 2.4, 0); pushHall(pts, rnd, 0, 0.0, 7.5, 4.4, 2.8, 0); pushHall(pts, rnd, 0, 5.5, 6.0, 3.4, 2.2, 0); pushHall(pts, rnd, -5.0, 0, 2.6, 1.8, 1.3, 0); pushHall(pts, rnd, 5.0, 0, 2.6, 1.8, 1.3, 0);
     for (let i = 0; i < 320; i++) { pts.push({ x: (rnd() - 0.5) * 15, y: rnd() * 0.12, z: (rnd() - 0.5) * 18, b: Math.floor(rnd() * 2) }); }
     return pts;
   }
-
   function genMountain() {
     const rnd = mulberry32(8848), pts = [], N = 4200;
     for (let i = 0; i < N; i++) {
@@ -792,90 +656,51 @@
     }
     return pts;
   }
-
   const SPLAT_SCENES = [
     { id: 'talin', name: '少林塔林', sub: '全国现存规模最大的古塔群', palette: 'stone', gen: genTalin },
     { id: 'shuyuan', name: '嵩阳书院', sub: '北宋四大书院之一', palette: 'wood', gen: genShuyuan },
     { id: 'zhongyue', name: '中岳庙', sub: '中原最大的道教古建筑群', palette: 'temple', gen: genZhongyue },
     { id: 'songshan', name: '嵩山主峰', sub: '30 亿年“五代同堂”地质剖面', palette: 'mountain', gen: genMountain }
   ];
-
   const splatState = { points: [], buckets: [[], [], [], [], [], [], [], []], palette: 'stone', rotY: 0.6, rotX: -0.12, zoom: 1, autoRotate: true, currentScene: 0 };
   let splatW = 0, splatH = 0, splatVisible = false, splatRAF = null;
-
-  function groupSplatPoints(pts) {
-    const buckets = [[], [], [], [], [], [], [], []];
-    for (let i = 0; i < pts.length; i++) {
-      const p = pts[i]; let b = p.b | 0;
-      if (b < 0) b = 0; if (b > 7) b = 7; p.b = b; buckets[b].push(p);
-    }
-    return buckets;
-  }
-
-  function resizeSplatCanvas() {
-    if (!splatCanvas || !splatCtx) return;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2), rect = splatCanvas.getBoundingClientRect();
-    const cssW = Math.max(1, rect.width), cssH = Math.max(1, rect.height);
-    splatCanvas.width = Math.round(cssW * dpr); splatCanvas.height = Math.round(cssH * dpr);
-    splatCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    splatW = cssW; splatH = cssH;
-  }
-
+  function groupSplatPoints(pts) { const buckets = [[], [], [], [], [], [], [], []]; for (let i = 0; i < pts.length; i++) { const p = pts[i]; let b = p.b | 0; if (b < 0) b = 0; if (b > 7) b = 7; p.b = b; buckets[b].push(p); } return buckets; }
+  function resizeSplatCanvas() { if (!splatCanvas || !splatCtx) return; const dpr = Math.min(window.devicePixelRatio || 1, 2), rect = splatCanvas.getBoundingClientRect(); const cssW = Math.max(1, rect.width), cssH = Math.max(1, rect.height); splatCanvas.width = Math.round(cssW * dpr); splatCanvas.height = Math.round(cssH * dpr); splatCtx.setTransform(dpr, 0, 0, dpr, 0, 0); splatW = cssW; splatH = cssH; }
   function drawSplatFrame() {
-    if (!splatCtx || splatW <= 0 || splatH <= 0) return;
-    const W = splatW, H = splatH;
-    splatCtx.clearRect(0, 0, W, H);
-    const bg = splatCtx.createRadialGradient(W * 0.5, H * 0.55, 20, W * 0.5, H * 0.55, Math.max(W, H) * 0.75);
-    bg.addColorStop(0, '#13261D'); bg.addColorStop(1, '#070E0B');
-    splatCtx.fillStyle = bg; splatCtx.fillRect(0, 0, W, H);
-
+    if (!splatCtx || splatW <= 0 || splatH <= 0) return; const W = splatW, H = splatH;
+    splatCtx.clearRect(0, 0, W, H); const bg = splatCtx.createRadialGradient(W * 0.5, H * 0.55, 20, W * 0.5, H * 0.55, Math.max(W, H) * 0.75);
+    bg.addColorStop(0, '#13261D'); bg.addColorStop(1, '#070E0B'); splatCtx.fillStyle = bg; splatCtx.fillRect(0, 0, W, H);
     const s = splatState, cosY = Math.cos(s.rotY), sinY = Math.sin(s.rotY), cosX = Math.cos(s.rotX), sinX = Math.sin(s.rotX);
     const fov = Math.min(W, H) * 1.18, camDist = 15, cx = W / 2, cy = H * 0.58, groundY = 2.2, zoom = s.zoom;
-    const palette = SPLAT_PALETTES[s.palette] || SPLAT_PALETTES.stone, buckets = s.buckets;
-    splatCtx.globalAlpha = 0.92;
-
+    const palette = SPLAT_PALETTES[s.palette] || SPLAT_PALETTES.stone, buckets = s.buckets; splatCtx.globalAlpha = 0.92;
     for (let b = 0; b < buckets.length; b++) {
-      const arr = buckets[b]; if (!arr.length) continue;
-      splatCtx.fillStyle = palette[b] || palette[0];
+      const arr = buckets[b]; if (!arr.length) continue; splatCtx.fillStyle = palette[b] || palette[0];
       for (let i = 0; i < arr.length; i++) {
         const p = arr[i], x1 = p.x * cosY - p.z * sinY, z1 = p.x * sinY + p.z * cosY;
         const yBase = p.y - groundY, y1 = yBase * cosX - z1 * sinX, z2 = yBase * sinX + z1 * cosX;
         const depth = z2 + camDist; if (depth < 1) continue;
         const scale = (fov * zoom) / depth, sx = cx + x1 * scale, sy = cy - y1 * scale;
         if (sx < -8 || sx > W + 8 || sy < -8 || sy > H + 8) continue;
-        const size = Math.max(0.6, Math.min(3, scale * 0.024));
-        splatCtx.fillRect(sx, sy, size, size);
+        const size = Math.max(0.6, Math.min(3, scale * 0.024)); splatCtx.fillRect(sx, sy, size, size);
       }
     }
     splatCtx.globalAlpha = 1;
   }
-
-  function splatLoop() {
-    splatRAF = requestAnimationFrame(splatLoop);
-    if (!splatVisible) { cancelAnimationFrame(splatRAF); splatRAF = null; return; }
-    if (splatState.autoRotate) splatState.rotY += 0.0032;
-    drawSplatFrame();
-  }
+  function splatLoop() { splatRAF = requestAnimationFrame(splatLoop); if (!splatVisible) { cancelAnimationFrame(splatRAF); splatRAF = null; return; } if (splatState.autoRotate) splatState.rotY += 0.0032; drawSplatFrame(); }
   function startSplatLoop() { if (splatRAF == null) splatRAF = requestAnimationFrame(splatLoop); }
-
   function selectSplatScene(index) {
-    const scene = SPLAT_SCENES[index]; if (!scene) return;
-    splatState.currentScene = index;
-    if (splatScenesEl) {
-      Array.prototype.forEach.call(splatScenesEl.querySelectorAll('.scene-btn'), function (btn, i) { btn.classList.toggle('active', i === index); });
-    }
+    const scene = SPLAT_SCENES[index]; if (!scene) return; splatState.currentScene = index;
+    if (splatScenesEl) { Array.prototype.forEach.call(splatScenesEl.querySelectorAll('.scene-btn'), function (btn, i) { btn.classList.toggle('active', i === index); }); }
     if (splatSceneNameEl) splatSceneNameEl.textContent = scene.name;
     if (splatLoadingEl) { splatLoadingEl.style.opacity = '1'; splatLoadingEl.style.pointerEvents = 'auto'; }
     setTimeout(function () {
-      const pts = scene.gen();
-      splatState.points = pts; splatState.buckets = groupSplatPoints(pts);
+      const pts = scene.gen(); splatState.points = pts; splatState.buckets = groupSplatPoints(pts);
       splatState.palette = scene.palette; splatState.rotY = 0.6; splatState.rotX = -0.12; splatState.zoom = 1;
       if (splatPointCountEl) splatPointCountEl.textContent = pts.length.toLocaleString() + ' 个高斯点';
       if (splatLoadingEl) { splatLoadingEl.style.opacity = '0'; splatLoadingEl.style.pointerEvents = 'none'; }
       drawSplatFrame();
     }, 280);
   }
-
   function initSplatScenes() {
     if (!splatScenesEl) return;
     splatScenesEl.innerHTML = SPLAT_SCENES.map(function (s, i) {
@@ -885,29 +710,16 @@
           '<span class="text-[10px] text-gray-400 whitespace-nowrap">' + (s.id === 'songshan' ? '4.2k' : '3k+') + ' 点</span>' +
         '</button>';
     }).join('');
-    splatScenesEl.addEventListener('click', function (e) {
-      const btn = e.target.closest('.scene-btn'); if (!btn) return;
-      const idx = parseInt(btn.getAttribute('data-idx'), 10); if (!isNaN(idx)) selectSplatScene(idx);
-    });
+    splatScenesEl.addEventListener('click', function (e) { const btn = e.target.closest('.scene-btn'); if (!btn) return; const idx = parseInt(btn.getAttribute('data-idx'), 10); if (!isNaN(idx)) selectSplatScene(idx); });
   }
-
   function bindSplatInteraction() {
-    if (!splatCanvas) return;
-    let dragging = false, lastX = 0, lastY = 0, idleTimer = null;
-    splatCanvas.addEventListener('pointerdown', function (e) {
-      dragging = true; lastX = e.clientX; lastY = e.clientY; splatState.autoRotate = false;
-      if (splatCanvas.setPointerCapture) { try { splatCanvas.setPointerCapture(e.pointerId); } catch (err) {} }
-    });
-    splatCanvas.addEventListener('pointermove', function (e) {
-      if (!dragging) return;
-      const dx = e.clientX - lastX, dy = e.clientY - lastY; lastX = e.clientX; lastY = e.clientY;
-      splatState.rotY += dx * 0.008; splatState.rotX = Math.max(-0.6, Math.min(0.5, splatState.rotX + dy * 0.005));
-    });
+    if (!splatCanvas) return; let dragging = false, lastX = 0, lastY = 0, idleTimer = null;
+    splatCanvas.addEventListener('pointerdown', function (e) { dragging = true; lastX = e.clientX; lastY = e.clientY; splatState.autoRotate = false; if (splatCanvas.setPointerCapture) { try { splatCanvas.setPointerCapture(e.pointerId); } catch (err) {} } });
+    splatCanvas.addEventListener('pointermove', function (e) { if (!dragging) return; const dx = e.clientX - lastX, dy = e.clientY - lastY; lastX = e.clientX; lastY = e.clientY; splatState.rotY += dx * 0.008; splatState.rotX = Math.max(-0.6, Math.min(0.5, splatState.rotX + dy * 0.005)); });
     function endDrag() { if (!dragging) return; dragging = false; clearTimeout(idleTimer); idleTimer = setTimeout(function () { splatState.autoRotate = true; }, 1500); }
     splatCanvas.addEventListener('pointerup', endDrag); splatCanvas.addEventListener('pointercancel', endDrag); splatCanvas.addEventListener('pointerleave', endDrag);
     splatCanvas.addEventListener('wheel', function (e) { e.preventDefault(); const factor = e.deltaY > 0 ? 0.94 : 1.06; splatState.zoom = Math.max(0.5, Math.min(2.4, splatState.zoom * factor)); }, { passive: false });
   }
-
   function initSplat() {
     if (!splatCanvas || !splatCtx) return;
     initSplatScenes(); bindSplatInteraction(); resizeSplatCanvas();
@@ -917,9 +729,7 @@
     if (splatSceneNameEl) splatSceneNameEl.textContent = first.name;
     drawSplatFrame();
     if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) { splatVisible = en.isIntersecting; if (splatVisible) startSplatLoop(); });
-      }, { threshold: 0.05 });
+      const observer = new IntersectionObserver(function (entries) { entries.forEach(function (en) { splatVisible = en.isIntersecting; if (splatVisible) startSplatLoop(); }); }, { threshold: 0.05 });
       observer.observe(splatCanvas);
     } else { splatVisible = true; startSplatLoop(); }
     let resizeTimer = null;
