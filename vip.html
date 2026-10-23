@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>品牌专属推荐 - 星火引力</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 🌟 1. 定义 5 套微官网主题变量 */
+                :root, [data-theme="warm"] {
+            /* 默认：烟火暖色（餐饮/食品） */
+            --bg-page: #F3ECE1; /* 🌟 加深为更有质感的米色 */
+            --bg-card: #FFFFFF;
+            --text-main: #1A1A1A;
+            --text-muted: #78716C;
+            --brand-main: #E60012;
+            --brand-accent: #D4AF37;
+            --brand-hover: #C5000F;
+            --hero-mask: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(153,0,12,0.8));
+            --border-color: #E5D9C9; /* 加深边框色，适配新底色 */
+        }
+
+        [data-theme="orange"] {
+            /* 星火橙（品牌默认） */
+            --bg-page: #F2F3F5; /* 🌟 加深为更明显的浅灰 */
+            --bg-card: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --brand-main: #FF6B00;
+            --brand-accent: #F59E0B;
+            --brand-hover: #E65C00;
+            --hero-mask: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(230,92,0,0.8));
+            --border-color: #E2E8F0;
+        }
+
+        [data-theme="dark"] {
+            /* 极客深色（科技/新能源） */
+            --bg-page: #0A0F1D; /* 🌟 加深黑夜感，让卡片更凸显 */
+            --bg-card: #1E293B;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --brand-main: #3B82F6;
+            --brand-accent: #10B981;
+            --brand-hover: #2563EB;
+            --hero-mask: linear-gradient(to bottom, rgba(10,15,29,0.6), rgba(30,58,138,0.8));
+            --border-color: #334155;
+        }
+
+        [data-theme="biz"] {
+            /* 经典商务（金融/政企） */
+            --bg-page: #EFF3F8; /* 🌟 加深冷灰色调 */
+            --bg-card: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --brand-main: #1E40AF;
+            --brand-accent: #F59E0B;
+            --brand-hover: #1E3A8A;
+            --hero-mask: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(30,64,175,0.8));
+            --border-color: #CBD5E1;
+        }
+
+        [data-theme="fresh"] {
+            /* 自然清新（美妆/大健康） */
+            --bg-page: #E7EFE9; /* 🌟 加深薄荷绿底色 */
+            --bg-card: #FFFFFF;
+            --text-main: #2D3436;
+            --text-muted: #636E72;
+            --brand-main: #10B981;
+            --brand-accent: #FBBF24;
+            --brand-hover: #059669;
+            --hero-mask: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(6,78,59,0.8));
+            --border-color: #C8D8CE;
+        }
+
+        /* 🌟 2. 基础页面映射 */
+        body {
+            background-color: var(--bg-page) !important;
+            color: var(--text-main) !important;
+            transition: background-color 0.4s, color 0.4s;
+        }
+
+        /* 🌟 3. 暴力覆盖原有的 Tailwind 写死颜色 */
+        /* 品牌色 */
+        .text-brand-red, .text-brand-main { color: var(--brand-main) !important; }
+        .bg-brand-red, .bg-brand-main { background-color: var(--brand-main) !important; }
+        .bg-brand-red-hover:hover, .bg-brand-main-hover:hover { background-color: var(--brand-hover) !important; }
+        .border-brand-red { border-color: var(--brand-main) !important; }
+
+        /* 辅助色（原流沙金） */
+        .text-brand-gold, .text-brand-accent { color: var(--brand-accent) !important; }
+        .bg-brand-gold, .bg-brand-accent { background-color: var(--brand-accent) !important; }
+        .border-brand-gold { border-color: var(--brand-accent) !important; }
+
+        /* 卡片与文字 */
+        .bg-white { background-color: var(--bg-card) !important; }
+        .text-gray-900, .text-gray-800 { color: var(--text-main) !important; }
+        .text-gray-700, .text-gray-600, .text-gray-500 { color: var(--text-muted) !important; }
+        .bg-gray-50 { background-color: var(--bg-page) !important; }
+        .border-gray-100, .border-gray-200 { border-color: var(--border-color) !important; }
+
+        /* 底部转化区背景（深色块） */
+        /* 精确指定底部的留资卡片，避免误伤首屏 header */
+        /* 🌟 大矩形：跟随当前主题的卡片色（深色主题就是深色，浅色主题就是白色/浅灰） */
+        div.bg-gray-900.rounded-2xl {
+            background-color: var(--bg-card) !important;
+            color: var(--text-main) !important;
+            border: 1px solid var(--border-color) !important;
+        }
+        /* 左侧文字适配 */
+        div.bg-gray-900.rounded-2xl p.text-gray-400 { color: var(--text-muted) !important; }
+
+        /* 左侧外链按钮适配（防止在浅色背景上出现白底白字） */
+        div.bg-gray-900.rounded-2xl #btnLink {
+            background-color: var(--bg-page) !important;
+            color: var(--text-main) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        /* 🌟 右侧留资框：强制纯白底 + 阴影 */
+        div.bg-gray-900.rounded-2xl > .grid > div.bg-white\/5 {
+            background-color: #FFFFFF !important;
+            border: 1px solid #E5E7EB !important;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+        /* 留资框内的标题和输入框改为深色（适配白底） */
+        div.bg-gray-900.rounded-2xl > .grid > div.bg-white\/5 h3 { color: var(--text-main) !important; }
+        div.bg-gray-900.rounded-2xl > .grid > div.bg-white\/5 input,
+        div.bg-gray-900.rounded-2xl > .grid > div.bg-white\/5 textarea {
+            background-color: #F9FAFB !important;
+            color: #1F2937 !important;
+            border: 1px solid #E5E7EB !important;
+        }
+        div.bg-gray-900.rounded-2xl > .grid > div.bg-white\/5 input::placeholder,
+        div.bg-gray-900.rounded-2xl > .grid > div.bg-white\/5 textarea::placeholder {
+            color: #9CA3AF !important;
+        }
+        /* 提交按钮跟随主色/辅色 */
+        div.bg-gray-900.rounded-2xl > .grid > div.bg-white\/5 button {
+            background-color: var(--brand-main) !important;
+            color: #FFFFFF !important;
+        }
+        /* 给首屏加个保险，强制白字 */
+        #vipHeader h1 { color: #FFFFFF !important; }
+        #vipHeader p { color: var(--brand-accent) !important; }
+
+        /* 首屏大图遮罩 */
+        #vipHeader .absolute.inset-0 { background: var(--hero-mask) !important; }
+
+        /* 动画保留 */
+        .hero-bg { background-size: cover; background-position: center; }
+        .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; transform: translateY(20px); }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased pb-20">
+
+    <!-- 顶部首屏大图 (红色遮罩层) -->
+    <header id="vipHeader" class="relative w-full h-[50vh] md:h-[60vh] bg-gray-900 flex items-center justify-center text-center hero-bg">
+        <!-- 分享按钮 -->
+        <button onclick="copyShareLink()" class="absolute top-4 right-4 z-20 bg-black/30 hover:bg-black/50 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm flex items-center gap-2 transition border border-white/20">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
+            分享
+        </button>
+
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-red-900/80"></div>
+        <div class="relative z-10 px-4 fade-in-up">
+            <h1 id="vipTitle" class="text-4xl md:text-6xl font-extrabold text-white mb-4 tracking-wider drop-shadow-lg">加载中...</h1>
+            <p id="vipSlogan" class="text-lg md:text-2xl text-brand-gold font-medium tracking-wide drop-shadow-md"></p>
+        </div>
+    </header>
+
+    <!-- 主体内容区 (向上浮动覆盖在首屏上) -->
+    <main class="max-w-4xl mx-auto px-4 -mt-10 relative z-20">
+
+        <!-- 公司实力介绍 -->
+        <div class="bg-white rounded-2xl shadow-xl p-6 md:p-10 mb-8 border-t-4 border-brand-red fade-in-up" style="animation-delay: 0.1s;">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <span class="w-1.5 h-6 bg-brand-red rounded-full"></span> 企业实力
+            </h2>
+            <p id="vipIntro" class="text-gray-600 leading-loose whitespace-pre-wrap text-justify"></p>
+        </div>
+
+        <!-- 产品图集 -->
+        <div id="gallerySection" class="mb-8 hidden fade-in-up" style="animation-delay: 0.2s;">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2 px-2">
+                <span class="w-1.5 h-6 bg-brand-gold rounded-full"></span> 产品与实景
+            </h2>
+            <div id="galleryGrid" class="grid grid-cols-2 md:grid-cols-3 gap-4"></div>
+        </div>
+
+        <!-- 合作案例 -->
+        <div id="casesSection" class="bg-white rounded-2xl shadow-xl p-6 md:p-10 mb-8 border border-gray-100 hidden fade-in-up" style="animation-delay: 0.3s;">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <span class="w-1.5 h-6 bg-brand-red rounded-full"></span> 合作案例
+            </h2>
+            <ul id="casesList" class="space-y-4"></ul>
+        </div>
+
+        <!-- 转化区块 (联系与留资) -->
+        <div class="bg-gray-900 rounded-2xl shadow-2xl p-6 md:p-10 text-white fade-in-up" style="animation-delay: 0.4s;">
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <!-- 左侧：直接联系 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-brand-gold">与我们取得联系</h3>
+                    <p class="text-xs text-gray-400 mb-6">专属商务顾问 1对1 服务</p>
+                    <div class="space-y-4">
+                        <button id="btnCall" class="w-full flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-red-hover text-white font-bold py-3 rounded-xl transition shadow-lg transform hover:scale-[1.02]">
+                            📞 <span>一键拨打电话</span>
+                        </button>
+                        <button id="btnWechat" class="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition shadow-lg transform hover:scale-[1.02]">
+                            💬 <span>复制专属微信号</span>
+                        </button>
+                        <a id="btnLink" href="#" target="_blank" class="w-full flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold py-3 rounded-xl transition border border-white/20">
+                            🌐 <span>访问官方网站/抖音</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 右侧：留资表单 -->
+                <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+                    <h3 class="text-lg font-bold mb-4">留下您的联系方式</h3>
+                    <form onsubmit="return false;" class="space-y-3">
+                        <input type="text" id="leadName" placeholder="您的称呼 (如: 王总)" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-gray-400 focus:outline-none focus:border-brand-gold transition">
+                        <input type="text" id="leadContact" placeholder="手机号 / 微信号" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-gray-400 focus:outline-none focus:border-brand-gold transition">
+                        <textarea id="leadMsg" rows="2" placeholder="您想咨询的食品/合作需求..." class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-gray-400 focus:outline-none focus:border-brand-gold transition resize-none"></textarea>
+                        <button onclick="submitVipLead()" class="w-full bg-brand-gold hover:bg-yellow-600 text-gray-900 font-bold py-3 rounded-lg transition shadow-md mt-2">立即提交</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="text-center mt-10 mb-6">
+        <a href="https://adx5.github.io/xinghuo-platform/index.html" class="text-gray-500 hover:text-brand-red text-sm font-medium transition">← 返回星火引力首页</a>
+    </div>
+
+    <div id="toast" class="fixed top-10 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-2xl z-[200] text-sm font-medium transition-opacity duration-300 opacity-0 pointer-events-none"></div>
+
+    <script>
+        let currentVipId = new URLSearchParams(window.location.search).get('id');
+        let vipData = {};
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            if(!t) return;
+            t.innerText = msg; t.classList.remove('opacity-0');
+            setTimeout(() => t.classList.add('opacity-0'), 2500);
+        }
+
+        function copyShareLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                showToast("🔗 专属链接已复制，快去微信分享给朋友吧！");
+            }).catch(() => {
+                alert("复制失败，请手动复制浏览器地址栏链接");
+            });
+        }
+
+                document.addEventListener('DOMContentLoaded', async () => {
+            if (!currentVipId) { alert("参数错误，缺少大客户ID"); return; }
+
+            try {
+                const res = await fetch(`https://xinghuo-backend.fastapicloud.dev/api/vips/${currentVipId}`);
+                if (!res.ok) throw new Error("未找到该客户信息");
+                vipData = await res.json();
+
+                // 🌟 核心：读取 URL 参数（方便你临时演示）或数据库里的主题，并应用
+                const urlParams = new URLSearchParams(window.location.search);
+                const urlTheme = urlParams.get('theme');
+                const activeTheme = urlTheme || vipData.theme || 'warm';
+                document.documentElement.setAttribute('data-theme', activeTheme);
+
+                // 🌟 终极防呆：所有 DOM 操作前先判空
+                if(document.title) document.title = `${vipData.title} - 星火引力推荐`;
+
+                const headerEl = document.getElementById('vipHeader');
+                if (headerEl && vipData.banner_url) {
+                    headerEl.style.backgroundImage = `url('${vipData.banner_url}')`;
+                }
+
+                if(document.getElementById('vipTitle')) document.getElementById('vipTitle').innerText = vipData.title || '专属推荐';
+                if(document.getElementById('vipSlogan')) document.getElementById('vipSlogan').innerText = vipData.slogan || '';
+                if(document.getElementById('vipIntro')) document.getElementById('vipIntro').innerText = vipData.intro || '暂无介绍';
+
+
+                // 渲染图集
+                if (vipData.gallery_urls) {
+                    const urls = vipData.gallery_urls.split(/[,\n，]/).filter(u => u.trim() !== '');
+                    if (urls.length > 0 && document.getElementById('gallerySection')) {
+                        document.getElementById('gallerySection').classList.remove('hidden');
+                        const grid = document.getElementById('galleryGrid');
+                        urls.forEach(url => {
+                            grid.innerHTML += `
+                                <div class="aspect-square overflow-hidden rounded-xl shadow-md bg-gray-100 border border-gray-200">
+                                    <img src="${url.trim()}" class="w-full h-full object-cover hover:scale-110 transition duration-500 cursor-pointer">
+                                </div>
+                            `;
+                        });
+                    }
+                }
+
+                // 渲染案例
+                if (vipData.cases) {
+                    const caseList = vipData.cases.split(/[,\n，]/).filter(c => c.trim() !== '');
+                    if (caseList.length > 0 && document.getElementById('casesSection')) {
+                        document.getElementById('casesSection').classList.remove('hidden');
+                        const ul = document.getElementById('casesList');
+                        caseList.forEach(c => {
+                            ul.innerHTML += `
+                                <li class="flex items-start gap-3 text-gray-700 bg-gray-50 p-3 rounded-lg border border-gray-100">
+                                    <span class="text-brand-red font-bold text-lg mt-0.5">✔</span>
+                                    <span class="font-medium">${c.trim()}</span>
+                                </li>
+                            `;
+                        });
+                    }
+                }
+
+                // 渲染按钮
+                const btnCall = document.getElementById('btnCall');
+                if (btnCall) {
+                    if (vipData.phone) {
+                        btnCall.onclick = () => window.location.href = `tel:${vipData.phone}`;
+                        if(btnCall.querySelector('span')) btnCall.querySelector('span').innerText = `致电 ${vipData.phone}`;
+                    } else {
+                        btnCall.style.display = 'none';
+                    }
+                }
+
+                const btnWechat = document.getElementById('btnWechat');
+                if (btnWechat) {
+                    if (vipData.wechat) {
+                        btnWechat.onclick = () => {
+                            navigator.clipboard.writeText(vipData.wechat).then(() => showToast('微信号已复制，请前往微信添加'));
+                        };
+                        if(btnWechat.querySelector('span')) btnWechat.querySelector('span').innerText = `复制微信: ${vipData.wechat}`;
+                    } else {
+                        btnWechat.style.display = 'none';
+                    }
+                }
+
+                const btnLink = document.getElementById('btnLink');
+                if (btnLink) {
+                    if (vipData.ext_link) {
+                        btnLink.href = vipData.ext_link;
+                    } else {
+                        btnLink.style.display = 'none';
+                    }
+                }
+
+            } catch (e) {
+                console.error(e);
+                alert("加载失败，请返回重试");
+            }
+        });
+
+        async function submitVipLead() {
+            const name = document.getElementById('leadName').value;
+            const contact = document.getElementById('leadContact').value;
+            const msg = document.getElementById('leadMsg').value;
+            if (!name || !contact) { showToast("请填写称呼和联系方式"); return; }
+
+            const data = { resource_id: `VIP_${currentVipId}`, resource_name: vipData.title || '专属客户', client_name: name, contact_info: contact, address: "", message: msg || "微官网留资" };
+            try {
+                const res = await fetch('https://xinghuo-backend.fastapicloud.dev/api/leads', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
+                });
+                if (res.ok) {
+                    showToast("🎉 提交成功，我们会尽快联系您！");
+                    document.getElementById('leadName').value = '';
+                    document.getElementById('leadContact').value = '';
+                    document.getElementById('leadMsg').value = '';
+                } else { showToast("提交失败，请重试"); }
+            } catch (e) { showToast("网络异常"); }
+        }
+    </script>
+</body>
+</html>

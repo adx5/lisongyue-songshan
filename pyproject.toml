@@ -1,0 +1,23 @@
+[project]
+name = "xinghuo-backend"
+version = "0.1.0"
+description = "星火引力后端服务"
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "fastapi[standard]",
+    "uvicorn",
+    "openai",
+    "python-dotenv",
+    "sqlalchemy",
+    "langgraph",
+    "psycopg2-binary",
+    "boto3",
+    "python-multipart",
+    "requests"
+]
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.fastapi]
+entrypoint = "app.server:app"
