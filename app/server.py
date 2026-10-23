@@ -16,7 +16,20 @@ from app.database import SessionLocal, Resource, Lead, VipClient, get_prefix
 from app.vector_store import sync_resources_to_vector_db
 from app.region_data import REGIONS_DATA, CORE_CITIES
 
-app = FastAPI(title="星火引力 - 智能商务撮合 API", version="1.0.0")
+app = FastAPI(
+    title="天地之中 · 嵩山人文旅行操作系统 API",
+    description="为嵩山文旅定制的智能撮合与资源管理后端",
+    version="1.0.0"
+)
+
+# 允许前端跨域请求
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False, # 注意：如果 allow_origins 是 ["*"]，这里通常要设为 False
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=False, allow_methods=["*"],
                    allow_headers=["*"])
 workflow_app = build_graph()
