@@ -104,17 +104,17 @@
 <!-- ============================= 顶部导航 ============================= -->
 <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
   <div class="container-1100 h-16 flex items-center justify-between">
-    <a href="#hero" class="flex items-center gap-2.5">
+    <a href="index.html" class="flex items-center gap-2.5">
       <span class="w-9 h-9 rounded-lg bg-shan-600 text-white flex items-center justify-center font-serif text-lg shadow-sm">嵩</span>
       <span class="font-serif text-lg font-bold tracking-wide text-ink">天地之中 · 嵩山</span>
     </a>
 
     <nav class="hidden md:flex items-center gap-8 text-sm text-gray-600">
-      <a href="#hero" class="hover:text-shan-600 transition">首页</a>
+      <a href="#hero" class="text-shan-600 font-bold border-b-2 border-shan-600 pb-1">首页</a>
       <a href="#library" class="hover:text-shan-600 transition">体验库</a>
       <a href="#splat" class="hover:text-shan-600 transition">3D 景区</a>
       <a href="#ai-match" class="hover:text-shan-600 transition">AI 定制</a>
-      <a href="#footer" class="hover:text-shan-600 transition">关于嵩山</a>
+      <a href="events.html" class="hover:text-shan-600 transition">会议专题</a>
     </nav>
 
     <a href="#booking" class="bg-shan-600 hover:bg-shan-700 text-white text-sm px-4 py-2 rounded-lg transition shadow-sm">
@@ -163,6 +163,19 @@
     </div>
   </div>
   <div id="heroDots" class="absolute z-10 bottom-6 right-8 flex items-center gap-2"></div>
+</section>
+
+<!-- ============================= 会议专题入口横幅 ============================= -->
+<section class="bg-shan-900 py-3 relative z-20">
+  <div class="container-1100 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-shan-100">
+    <span class="flex items-center gap-2">
+      <span class="inline-block px-2 py-0.5 rounded bg-shan-600 text-white text-[10px] font-bold tracking-wider">最新专题</span>
+      <span class="truncate">天地之中·中华优秀传统文化传承发展工程会议（2026.6.23）成功举办</span>
+    </span>
+    <a href="events.html" class="text-white font-medium hover:underline flex items-center gap-1 whitespace-nowrap shrink-0">
+      查看会议全记录 <span>→</span>
+    </a>
+  </div>
 </section>
 
 <!-- ============================= 上半部分：AI 撮合 + 定制行囊 ============================= -->
@@ -339,8 +352,11 @@
         <span class="w-9 h-9 rounded-lg bg-shan-600 text-white flex items-center justify-center font-serif text-lg">嵩</span>
         <span class="font-serif text-lg font-bold text-white">天地之中 · 嵩山</span>
       </div>
-      <p class="mt-4 text-sm text-gray-400 leading-relaxed">我们相信，最好的文化体验不是被讲解出来的，而是被走出来的。把嵩山的历史、技艺与山水，装进一只可定制的行囊。</p>
+      <p class="mt-4 text-sm text-gray-400 leading-relaxed">
+        我们相信，最好的文化体验不是被讲解出来的，而是被走出来的。把嵩山的历史、技艺与山水，装进一只可定制的行囊。
+      </p>
     </div>
+
     <div>
       <h3 class="text-white text-sm font-semibold mb-4">快速导航</h3>
       <ul class="space-y-2.5 text-sm text-gray-400">
@@ -349,24 +365,34 @@
         <li><a href="#splat" class="hover:text-shan-400 transition">景区高斯泼溅</a></li>
         <li><a href="#ai-match" class="hover:text-shan-400 transition">AI 智能撮合</a></li>
         <li><a href="#booking" class="hover:text-shan-400 transition">定制专属行囊</a></li>
+        <li><a href="events.html" class="hover:text-shan-400 transition">会议专题</a></li>
       </ul>
     </div>
+
     <div>
       <h3 class="text-white text-sm font-semibold mb-4">联系我们</h3>
       <ul class="space-y-2.5 text-sm text-gray-400">
+        <li class="text-white font-bold mb-2">河南嵩玉文化旅游有限公司</li>
         <li>服务时间：每日 09:00 - 21:00</li>
-        <li>邮箱：hello@songshan-os.com</li>
-        <li>地址：河南省郑州市登封市嵩山风景名胜区</li>
+        <li>邮箱：hnsongyu@163.com</li>
+        <li>电话：15515816811</li>
+        <li>地址：中国 天地之中 登封嵩山</li>
       </ul>
     </div>
   </div>
+
   <div class="border-t border-white/10">
-    <div class="container-1100 py-4 text-center text-xs text-gray-500">© 2026 天地之中 · 嵩山人文旅行操作系统　保留所有权利</div>
+    <div class="container-1100 py-4 text-center text-xs text-gray-500">
+      © 2026 河南嵩玉文化旅游有限公司 · 天地之中 · 嵩山　保留所有权利<br>
+      学术支持：嵩山文化研究会
+    </div>
   </div>
 </footer>
 
+<!-- ============================= 全局 Toast ============================= -->
 <div id="toast" class="fixed left-1/2 bottom-8 z-[100] px-5 py-3 rounded-xl text-white text-sm shadow-2xl transition-all duration-300 opacity-0 translate-y-4 -translate-x-1/2 pointer-events-none bg-shan-600"></div>
 
+<!-- ============================= 脚本 ============================= -->
 <script>
 (function () {
   'use strict';
@@ -374,8 +400,8 @@
   /* =========================================================
    * 0. 常量与工具
    * ========================================================= */
-  // ⚠️ 全新后端：等你部署完 FastAPI Cloud 后，把下面的链接替换成你新的域名（结尾不要带斜杠）
-  const API_BASE = 'https://songshan-backend.fastapicloud.dev';
+  // ✅ 已替换为真实的云端后端域名
+  const API_BASE  = 'https://songshan-backend.fastapicloud.dev';
 
   const API_LEADS = API_BASE + '/api/leads';
   const API_LIST  = API_BASE + '/api/resources';

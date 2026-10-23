@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>会议专题 · 天地之中 | 嵩山人文旅行操作系统</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          shan: { 50:'#ECFDF5', 100:'#D1FAE5', 200:'#A7F3D0', 300:'#6EE7B7', 400:'#34D399', 500:'#10B981', 600:'#059669', 700:'#047857', 800:'#065F46', 900:'#064E3B' },
+          ink: '#1F2937', sand: '#FAF9F6'
+        },
+        fontFamily: { serif: ['"Noto Serif SC"', '"Songti SC"', 'STSong', 'SimSun', 'serif'] }
+      }
+    }
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { background-color: #FAF9F6; color: #1F2937; -webkit-font-smoothing: antialiased; }
+  .container-1100 { max-width: 1100px; margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px; }
+  section[id] { scroll-margin-top: 80px; }
+  /* 时间线样式 */
+  .timeline-item { position: relative; padding-left: 2rem; padding-bottom: 2rem; border-left: 2px solid #D1FAE5; }
+  .timeline-item:last-child { border-left: 2px solid transparent; padding-bottom: 0; }
+  .timeline-dot { position: absolute; left: -7px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: #059669; border: 2px solid #fff; box-shadow: 0 0 0 2px #D1FAE5; }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<!-- 导航栏 -->
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+  <div class="container-1100 h-16 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2.5">
+      <span class="w-9 h-9 rounded-lg bg-shan-600 text-white flex items-center justify-center font-serif text-lg shadow-sm">嵩</span>
+      <span class="font-serif text-lg font-bold tracking-wide text-ink">天地之中 · 嵩山</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-sm text-gray-600">
+      <a href="index.html" class="hover:text-shan-600 transition">首页</a>
+      <a href="index.html#library" class="hover:text-shan-600 transition">体验库</a>
+      <a href="index.html#splat" class="hover:text-shan-600 transition">3D 景区</a>
+      <a href="events.html" class="text-shan-600 font-bold border-b-2 border-shan-600 pb-1">会议专题</a>
+    </nav>
+    <a href="index.html#booking" class="bg-shan-600 hover:bg-shan-700 text-white text-sm px-4 py-2 rounded-lg transition shadow-sm">定制行囊</a>
+  </div>
+</header>
+
+<!-- Hero 区 -->
+<section class="bg-ink text-white py-16 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center"></div>
+  <div class="absolute inset-0 bg-gradient-to-r from-[#08130F]/95 to-[#08130F]/60"></div>
+  <div class="container-1100 relative z-10">
+    <span class="inline-flex items-center gap-2 text-[12px] tracking-widest text-shan-300 border border-shan-400/40 bg-shan-900/20 px-3 py-1.5 rounded-full mb-4">
+      <span class="w-1.5 h-1.5 rounded-full bg-shan-400"></span>
+      学术支持 · 嵩山文化研究会
+    </span>
+    <h1 class="font-serif text-3xl md:text-5xl font-bold leading-tight mb-4">
+      天地之中 · 中华优秀传统文化传承发展工程
+    </h1>
+    <p class="text-gray-300 text-sm md:text-base max-w-2xl leading-relaxed mb-6">
+      2026年6月23日，河南登封。汇聚学界、业界与政界智慧，深入挖掘中华文化核心资源，探讨在中华文明主根主脉上推进中华文化自主知识体系建设。
+    </p>
+    <div class="flex flex-wrap gap-4 text-xs text-gray-400">
+      <span class="bg-white/10 px-3 py-1.5 rounded-md">📅 2026年6月23日</span>
+      <span class="bg-white/10 px-3 py-1.5 rounded-md">📍 河南 · 登封</span>
+      <span class="bg-white/10 px-3 py-1.5 rounded-md">🏛️ 中国移动通信联合会 · 北京大学经典与文明研究中心 · 嵩山文化研究会</span>
+    </div>
+  </div>
+</section>
+
+<!-- 会议全流程记录 -->
+<section class="container-1100 py-16">
+  <div class="text-center mb-12">
+    <h2 class="font-serif text-2xl font-bold text-ink">会议全流程记录</h2>
+    <p class="text-sm text-gray-500 mt-2">回顾议程，重温思想交锋</p>
+  </div>
+
+  <div class="max-w-3xl mx-auto">
+    <!-- 6月22日 -->
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="mb-1 text-sm text-shan-600 font-bold">6月22日 下午 · 预热</div>
+      <h3 class="text-lg font-bold text-ink mb-2">嵩阳书院 · 千年讲堂文化对话</h3>
+      <p class="text-sm text-gray-600 leading-relaxed">与会专家学者提前走进嵩阳书院，在千年讲堂前展开文化对话并接受媒体采访，为正式会议完成思想预热。</p>
+    </div>
+
+    <!-- 6月23日上午 -->
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="mb-1 text-sm text-shan-600 font-bold">6月23日 上午 · 开幕式与主旨报告</div>
+      <h3 class="text-lg font-bold text-ink mb-2">双引擎驱动：文化传承与 5A 景区创建</h3>
+      <ul class="text-sm text-gray-600 leading-relaxed space-y-2 list-disc list-inside">
+        <li><strong>致辞：</strong>嵩山文化研究会名誉会长段玉山代表主办方致辞。</li>
+        <li><strong>杨炳忻：</strong>《追溯太极图的由来——探寻中华传统文化的根与源》</li>
+        <li><strong>吕宏军：</strong>《中岳嵩山——中华文化的脊梁》（提出“万山之祖、天地之中、人文之宗”等六大维度）</li>
+        <li><strong>徐冬冬：</strong>《以艺术的形式开掘二十四节气的当代价值》</li>
+      </ul>
+    </div>
+
+    <!-- 6月23日下午 -->
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="mb-1 text-sm text-shan-600 font-bold">6月23日 下午 · 专题报告</div>
+      <h3 class="text-lg font-bold text-ink mb-2">从上古天文到数智未来</h3>
+      <p class="text-sm text-gray-600 leading-relaxed mb-3"><strong>第一单元（上古天文与文明探源）：</strong>章越琴、莫飞智分别从上古天文学和律历同源角度做报告。茶歇期间，嘉宾观摩少林武术表演。</p>
+      <p class="text-sm text-gray-600 leading-relaxed"><strong>第二单元（康养文旅与数智化）：</strong>李量、魏育林探讨康养文旅景区创建。倪健中作《上古天文与数智时代》报告，提出 AI 语义破译、算力回溯模拟等数字活化路径。</p>
+    </div>
+
+    <!-- 闭幕 -->
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="mb-1 text-sm text-shan-600 font-bold">闭幕 · 学术小结</div>
+      <h3 class="text-lg font-bold text-ink mb-2">为嵩山 5A 级景区注入文化灵魂</h3>
+      <p class="text-sm text-gray-600 leading-relaxed">杨炳忻作学术小结，指出会议不仅深度深耕了中华文脉，更为嵩山 5A 级景区创建注入了坚实的文化灵魂与理论工程支撑。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 专栏转载文章 -->
+<section class="bg-white py-16 border-t border-gray-100">
+  <div class="container-1100">
+    <div class="text-center mb-12">
+      <h2 class="font-serif text-2xl font-bold text-ink">深度报道 · 精选转载</h2>
+      <p class="text-sm text-gray-500 mt-2">全方位、多角度读懂“天地之中”</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- 卡片 1 -->
+      <article class="bg-sand rounded-2xl p-6 border border-gray-100 hover:shadow-lg transition">
+        <div class="text-xs text-shan-600 font-bold mb-2">香港商报网</div>
+        <h3 class="font-serif text-lg font-bold text-ink mb-3">吕宏军：嵩山是中华文化的脊梁</h3>
+        <p class="text-sm text-gray-600 leading-relaxed mb-4 line-clamp-3">从“万山之祖”（36亿年地质史）到“天地之中”（周公测影定地中），再到“人文之宗”，系统阐述嵩山作为中华文明核心地标的六维框架。</p>
+        <a href="#" class="text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a>
+      </article>
+
+      <!-- 卡片 2 -->
+      <article class="bg-sand rounded-2xl p-6 border border-gray-100 hover:shadow-lg transition">
+        <div class="text-xs text-shan-600 font-bold mb-2">香港商报网</div>
+        <h3 class="font-serif text-lg font-bold text-ink mb-3">倪健中：上古天文是中华文明的底层原始码</h3>
+        <p class="text-sm text-gray-600 leading-relaxed mb-4 line-clamp-3">数智科技是人类文明的未来运行系统。提出 AI 语义破译、算力回溯模拟、数字建模复刻三条当代激活路径。</p>
+        <a href="#" class="text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a>
+      </article>
+
+      <!-- 卡片 3 -->
+      <article class="bg-sand rounded-2xl p-6 border border-gray-100 hover:shadow-lg transition">
+        <div class="text-xs text-shan-600 font-bold mb-2">香港商报网</div>
+        <h3 class="font-serif text-lg font-bold text-ink mb-3">「天地之中·中华优秀传统文化传承发展工程」会议成功举办</h3>
+        <p class="text-sm text-gray-600 leading-relaxed mb-4 line-clamp-3">完整覆盖会议主办方、开幕式致辞、全部报告环节及学术小结，是专栏中唯一的全景式流程底稿。</p>
+        <a href="#" class="text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a>
+      </article>
+
+      <!-- 卡片 4 -->
+      <article class="bg-sand rounded-2xl p-6 border border-gray-100 hover:shadow-lg transition">
+        <div class="text-xs text-shan-600 font-bold mb-2">会议主旨报告</div>
+        <h3 class="font-serif text-lg font-bold text-ink mb-3">追溯太极图的由来——探寻中华传统文化的根与源</h3>
+        <p class="text-sm text-gray-600 leading-relaxed mb-4 line-clamp-3">从上古符号学视角解读太极图的科学来源，论证其为中华古天文观测实验的成果。</p>
+        <a href="#" class="text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 页脚 (简版) -->
+<footer class="bg-ink text-gray-300 py-10 border-t border-white/10">
+  <div class="container-1100 text-center text-xs text-gray-500">
+    © 2026 河南嵩玉文化旅游有限公司 · 天地之中 · 嵩山　保留所有权利<br>
+    学术支持：嵩山文化研究会
+  </div>
+</footer>
+
+</body>
+</html>
