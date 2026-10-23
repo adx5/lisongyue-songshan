@@ -1,33 +1,40 @@
-import json
-import sys
-from pathlib import Path
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from app.database import engine, Base, seed_initial_data
+# 如果有其他路由或接口，这里按需导入，比如：
+# from app.api import router as api_router
 
-# 确保项目根目录在 sys.path 中，这样绝对导入才能生效
-if __name__ == "__main__":
-    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+# 1. 创建 FastAPI 实例（变量名必须叫 app）
+app = FastAPI(
+    title="天地之中 · 嵩山人文旅行操作系统 API",
+    description="为嵩山文旅定制的智能撮合与资源管理后端",
+    version="1.0.0"
+)
 
-from app.graph import build_graph
+# 2. 配置跨域（非常重要！让 GitHub Pages 的前端能请求云端后端）
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # 开发阶段允许所有，上线后可改成 ["https://adx5.github.io"]
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-EXAMPLES = [
-    "寻求华东地区快消品商超渠道合作，预算50万，希望联合推广。",
-    "guaranteed 高回报，零风险，赶紧打款，错过不再有。",
-]
+# 3. 挂载其他路由（如果原来代码里有，就把这行取消注释）
+# app.include_router(api_router, prefix="/api")
 
+# 4. 健康检查接口（测试用）
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to Songshan OS API!"}
 
-def run(text: str):
-    app = build_graph()
-    init = {
-        "raw_requirement": text,
-        "match_round": 0,
-        "candidates": [],
-        "final_status": "pending",
-    }
-    return app.invoke(init)
+@app.get("/health")
+def health_check():
+    return {"status": "ok", "database": "connected"}
 
-
-if __name__ == "__main__":
-    for example in EXAMPLES:
-        print("=" * 80)
-        print("需求：", example)
-        result = run(example)
-        print(json.dumps(result, ensure_ascii=False, indent=2))
+# 5. 启动事件（可选，用于初始化数据）
+@app.on_event("startup")
+def startup_event():
+    # 如果你需要每次启动时检查表或播种数据，可以在这里调用
+    # seed_initial_data()
+    pass

@@ -2,19 +2,31 @@ import os
 from pathlib import Path
 from sqlalchemy import create_engine, Column, Integer, String, Text, Boolean
 from sqlalchemy.orm import declarative_base, sessionmaker
+from dotenv import load_dotenv  # 确保环境变量优先加载
+
+# 尝试加载 .env 文件
+load_dotenv()
+
 from app.seed_data import INITIAL_RESOURCES
 
-SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL")
+# 1. 获取 URL 并做强力清理（去掉可能存在的首尾引号、空格、换行符）
+raw_url = os.getenv("DATABASE_URL")
+SQLALCHEMY_DATABASE_URL = raw_url.strip().strip("'\"").replace("\n", "").replace("\r", "") if raw_url else None
+
 if SQLALCHEMY_DATABASE_URL:
+    # 2. 驱动替换
     if SQLALCHEMY_DATABASE_URL.startswith("postgres://"):
         SQLALCHEMY_DATABASE_URL = SQLALCHEMY_DATABASE_URL.replace("postgres://", "postgresql+psycopg2://", 1)
     elif SQLALCHEMY_DATABASE_URL.startswith("postgresql://"):
         SQLALCHEMY_DATABASE_URL = SQLALCHEMY_DATABASE_URL.replace("postgresql://", "postgresql+psycopg2://", 1)
 
-    # 加上 pool_pre_ping=True，每次连库前先探活，防止 Neon 休眠断开报错
+    print(f"DEBUG: 准备连接的数据库是: {SQLALCHEMY_DATABASE_URL.split('@')[-1]}")  # 安全打印，隐藏密码
+
+    # 加上 pool_pre_ping=True，每次连库前先探活
     engine = create_engine(SQLALCHEMY_DATABASE_URL, pool_pre_ping=True)
 
 else:
+    print("⚠️ 未检测到 DATABASE_URL，回退到本地 SQLite 数据库")
     BASE_DIR = Path(__file__).resolve().parent.parent
     DB_PATH = BASE_DIR / "xinshangquan.db"
     engine = create_engine(f"sqlite:///{DB_PATH}", connect_args={"check_same_thread": False})
@@ -33,8 +45,6 @@ class Resource(Base):
     resource_type = Column(String(50))
     description = Column(Text)
     is_vip = Column(Boolean, default=False)
-
-    # 🌟 新增：B端资源发布者联系方式
     contact_name = Column(String(50), comment="联系人姓名")
     contact_phone = Column(String(100), comment="联系人手机/微信")
 
@@ -46,11 +56,10 @@ class Lead(Base):
     resource_name = Column(String(100))
     client_name = Column(String(50))
     contact_info = Column(String(100))
-    address = Column(String(200))  # 新增：客户地址
+    address = Column(String(200))
     message = Column(Text)
 
 
-# 大客户微官网表
 class VipClient(Base):
     __tablename__ = "vip_clients"
     id = Column(Integer, primary_key=True, index=True)
@@ -67,6 +76,7 @@ class VipClient(Base):
     sort_order = Column(Integer, default=0, comment="排序权重")
     view_count = Column(Integer, default=0, comment="访问量统计")
     theme = Column(String(20), default='warm', comment="微官网主题风格")
+
 
 try:
     Base.metadata.create_all(bind=engine)
