@@ -35,7 +35,6 @@
   .container-1100 { max-width: 1100px; margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px; }
   section[id] { scroll-margin-top: 80px; }
 
-  /* 隐藏移动端横向滚动条 */
   .hide-scrollbar::-webkit-scrollbar { display: none; }
   .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -53,7 +52,6 @@
 
   #splatCanvas { touch-action: none; display: block; }
 
-  /* 移动端菜单动画 */
   #mobileMenu { transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; }
   #mobileMenu.hidden-menu { transform: translateY(-100%); opacity: 0; pointer-events: none; }
 </style>
@@ -61,7 +59,7 @@
 
 <body class="font-sans antialiased overflow-x-hidden">
 
-<!-- ============================= 顶部导航 ============================= -->
+<!-- 顶部导航 -->
 <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
   <div class="container-1100 h-16 flex items-center justify-between">
     <a href="index.html" class="flex items-center gap-2.5">
@@ -69,7 +67,6 @@
       <span class="font-serif text-base md:text-lg font-bold tracking-wide text-ink">天地之中 · 嵩山人文志</span>
     </a>
 
-    <!-- PC 导航 -->
     <nav class="hidden md:flex items-center gap-8 text-sm text-gray-600">
       <a href="#hero" class="text-shan-600 font-bold border-b-2 border-shan-600 pb-1">首页</a>
       <a href="#library" class="hover:text-shan-600 transition">生态体验库</a>
@@ -78,18 +75,14 @@
       <a href="events.html" class="hover:text-shan-600 transition">会议专题</a>
     </nav>
 
-    <!-- PC 定制按钮 / 移动端菜单按钮 -->
     <div class="flex items-center gap-3">
-      <a href="#booking" class="hidden sm:inline-block bg-shan-600 hover:bg-shan-700 text-white text-sm px-5 py-2 rounded-lg transition shadow-sm">
-        定制行囊
-      </a>
+      <a href="#booking" class="hidden sm:inline-block bg-shan-600 hover:bg-shan-700 text-white text-sm px-5 py-2 rounded-lg transition shadow-sm">定制行囊</a>
       <button id="menuBtn" class="md:hidden p-2 text-gray-600 hover:text-shan-600 focus:outline-none">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
       </button>
     </div>
   </div>
 
-  <!-- 移动端全屏导航 -->
   <div id="mobileMenu" class="hidden-menu md:hidden absolute top-16 left-0 w-full bg-white border-b border-gray-100 shadow-xl z-40 flex flex-col p-4 space-y-2">
     <a href="#hero" class="block px-4 py-3 text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">首页</a>
     <a href="#library" class="block px-4 py-3 text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">生态体验库</a>
@@ -99,7 +92,7 @@
   </div>
 </header>
 
-<!-- ============================= 首屏 Hero ============================= -->
+<!-- 首屏 Hero -->
 <section id="hero" class="relative min-h-[500px] md:min-h-[560px] overflow-hidden bg-ink">
   <div id="heroTrack" class="absolute inset-0 flex will-change-transform"></div>
   <div class="absolute inset-0 bg-gradient-to-r from-[#08130F]/95 via-[#08130F]/75 to-[#08130F]/25"></div>
@@ -120,7 +113,6 @@
       少林禅武 · 嵩阳书院 · 中岳庙 · 登封窑 —— 从深度研学、国际旅居，到非遗匠人与产业共建，读懂天地之中的大美嵩山。
     </p>
 
-    <!-- AI 搜索框（移动端上下堆叠） -->
     <div class="mt-6 md:mt-8 w-full max-w-2xl">
       <div class="bg-white/95 rounded-2xl p-1.5 md:p-2 flex flex-col sm:flex-row gap-2 shadow-2xl shadow-black/30">
         <input id="aiSearchInput" type="text" placeholder="试试：少林功夫 / 非遗手作 / 研学 / 旅居"
@@ -134,14 +126,14 @@
         <span class="text-gray-400">热门：</span>
         <button class="hot-tag px-3 py-1.5 md:py-1 rounded-full border border-white/20 bg-black/20 hover:border-shan-400 hover:text-shan-300 transition" data-kw="少林">少林功夫</button>
         <button class="hot-tag px-3 py-1.5 md:py-1 rounded-full border border-white/20 bg-black/20 hover:border-shan-400 hover:text-shan-300 transition" data-kw="非遗">非遗手作</button>
-        <button class="hot-tag px-3 py-1.5 md:py-1 rounded-full border border-white/20 bg-black/20 hover:border-shan-400 hover:text-shan-300 transition" data-kw="研学">研学之旅</button>
+        <button class="hot-tag px-3 py-1.5 md:py-1 rounded-full border border-white/20 bg-black/20 hover:border-shan-400 hover:text-shan-300 transition" data-kw="研学">北大学子研学</button>
       </div>
     </div>
   </div>
   <div id="heroDots" class="absolute z-10 bottom-4 md:bottom-6 right-4 md:right-8 flex items-center gap-2"></div>
 </section>
 
-<!-- ============================= 会议专题入口横幅 ============================= -->
+<!-- 会议专题入口横幅 -->
 <section class="bg-shan-900 py-3 md:py-3 relative z-20">
   <div class="container-1100 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs md:text-sm text-shan-100 text-center sm:text-left">
     <span class="flex flex-col sm:flex-row items-center gap-1.5 md:gap-2 w-full sm:w-auto">
@@ -154,7 +146,7 @@
   </div>
 </section>
 
-<!-- ============================= AI 撮合 + 定制行囊 ============================= -->
+<!-- AI 撮合 + 定制行囊 -->
 <section id="ai-match" class="container-1100 py-10 md:py-14">
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
     <div class="lg:col-span-7">
@@ -234,20 +226,21 @@
   </div>
 </section>
 
-<!-- ============================= 体验库 ============================= -->
+<!-- 体验库 (加入文化图书、嵩山礼物) -->
 <section id="library" class="container-1100 pb-12 md:pb-16">
   <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-5 md:mb-6">
     <div>
-      <h2 class="font-serif text-xl md:text-2xl font-bold text-ink">嵩山生态体验库</h2>
-      <p class="text-xs md:text-sm text-gray-500 mt-1.5">经文化顾问与 AI 双重筛选的人文体验，按主题自由组合。</p>
+      <h2 class="font-serif text-xl md:text-2xl font-bold text-ink">嵩山生态与人文体验库</h2>
+      <p class="text-xs md:text-sm text-gray-500 mt-1.5">经文化顾问与 AI 双重筛选的人文体验、图书与文创特产。</p>
     </div>
     <!-- 移动端横向滑动 Tab -->
     <div id="filterTabs" class="flex flex-nowrap md:flex-wrap overflow-x-auto hide-scrollbar gap-2 pb-1 -mx-4 px-4 md:mx-0 md:px-0">
       <button class="tab active" data-cat="全部">全部</button>
-      <button class="tab" data-cat="文化">文化</button>
-      <button class="tab" data-cat="非遗">非遗</button>
-      <button class="tab" data-cat="自然">自然</button>
-      <button class="tab" data-cat="商业">商业</button>
+      <button class="tab" data-cat="文化">文化图书</button>
+      <button class="tab" data-cat="礼物">嵩山礼物</button>
+      <button class="tab" data-cat="非遗">非遗体验</button>
+      <button class="tab" data-cat="自然">自然徒步</button>
+      <button class="tab" data-cat="商业">商业服务</button>
     </div>
   </div>
 
@@ -261,7 +254,7 @@
   </div>
 </section>
 
-<!-- ============================= 3D 景区 ============================= -->
+<!-- 3D 景区 -->
 <section id="splat" class="bg-white py-12 md:py-16 border-t border-gray-100">
   <div class="container-1100">
     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6 md:mb-8">
@@ -280,7 +273,6 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
       <div class="lg:col-span-8">
         <div class="relative rounded-xl md:rounded-2xl overflow-hidden border border-gray-200 shadow-sm bg-[#0B1410]">
-          <!-- 移动端降低画布高度，防止占满屏幕 -->
           <canvas id="splatCanvas" class="w-full h-[280px] md:h-[480px]"></canvas>
           <div class="absolute top-3 left-3 md:top-4 md:left-4 flex items-center gap-2">
             <span id="splatSceneName" class="text-[11px] md:text-[12px] font-medium text-white bg-black/40 backdrop-blur-sm px-2.5 py-1 md:px-3 md:py-1.5 rounded-md md:rounded-lg border border-white/10">少林塔林</span>
@@ -298,7 +290,6 @@
       </div>
 
       <div class="lg:col-span-4">
-        <!-- 移动端横向滚动，PC端垂直排列 -->
         <div id="splatScenes" class="flex lg:flex-col overflow-x-auto lg:overflow-visible hide-scrollbar gap-3 pb-2 lg:pb-0 scroll-smooth snap-x snap-mandatory"></div>
         <p class="mt-3 md:mt-4 text-[10px] md:text-[11px] text-gray-400 leading-relaxed">
           点云为公开资料的视觉模拟；实际景区数字孪生需现场采集后重建。
@@ -308,7 +299,7 @@
   </div>
 </section>
 
-<!-- ============================= 页脚 ============================= -->
+<!-- 页脚 -->
 <footer id="footer" class="bg-ink text-gray-300 pt-10 md:pt-12 pb-6 md:pb-8">
   <div class="container-1100 grid grid-cols-1 md:grid-cols-3 gap-8">
     <div>
@@ -346,7 +337,6 @@
         <li>电话：15515816811</li>
         <li>地址：中国 天地之中 登封嵩山</li>
         <li class="pt-2 text-[10px] md:text-xs text-gray-500">学术支持：嵩山文化研究会</li>
-        <li class="text-[10px] md:text-xs text-gray-500">主办单位：河南嵩玉文化旅游有限公司</li>
       </ul>
     </div>
   </div>
@@ -358,27 +348,12 @@
   </div>
 </footer>
 
-<!-- ============================= 全局 Toast ============================= -->
+<!-- 全局 Toast -->
 <div id="toast" class="fixed left-1/2 bottom-8 z-[100] px-5 py-3 rounded-xl text-white text-sm shadow-2xl transition-all duration-300 opacity-0 translate-y-4 -translate-x-1/2 pointer-events-none bg-shan-600"></div>
 
 <script>
 (function () {
   'use strict';
-
-  // 移动端菜单逻辑
-  const menuBtn = document.getElementById('menuBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  if (menuBtn && mobileMenu) {
-    menuBtn.addEventListener('click', function() {
-      mobileMenu.classList.toggle('hidden-menu');
-    });
-    // 点击菜单项后自动关闭
-    Array.prototype.forEach.call(mobileMenu.querySelectorAll('a'), function(link) {
-      link.addEventListener('click', function() {
-        mobileMenu.classList.add('hidden-menu');
-      });
-    });
-  }
 
   const API_BASE  = 'https://songshan-backend.fastapicloud.dev';
   const API_LEADS = API_BASE + '/api/leads';
@@ -483,7 +458,7 @@
   }
   document.addEventListener('visibilitychange', function () { document.hidden ? stopAutoPlay() : startAutoPlay(); });
 
-  /* 体验库 */
+  /* 体验库 Mock 数据（新增文化与礼物类别） */
   const MOCK_EXPERIENCES = [
     { id: 1, category: '非遗', tag: '禅武传承', title: '少林功夫晨课', desc: '随武僧在塔林间习练八段锦与基础桩功，听一段禅武合一的故事，用身体记住这座山。', duration: '3 小时', price: 380, img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=70', keywords: '少林 功夫 武术 禅修 晨课 亲子' },
     { id: 2, category: '文化', tag: '书院研学', title: '嵩阳书院 · 国学讲坛', desc: '在千年书院里听一堂《中庸》，着汉服行释菜礼，完整体验一次古代书院的开学仪轨。', duration: '半日', price: 260, img: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=900&q=70', keywords: '书院 国学 研学 汉服 礼仪 亲子' },
@@ -492,8 +467,14 @@
     { id: 5, category: '自然', tag: '地质徒步', title: '嵩山地质奇观徒步', desc: '穿越“五代同堂”地质剖面，在 30 亿年岩层里读地球记忆，全程有地质学背景的向导随行。', duration: '1 日', price: 560, img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=70', keywords: '徒步 地质 嵩山 户外 自然 登山' },
     { id: 6, category: '文化', tag: '夜游演艺', title: '禅宗音乐大典 · 夜游', desc: '以嵩山为幕、溪谷为台，在实景山水间聆听禅宗音乐与光影叙事，是一场需要安静坐下来的演出。', duration: '2.5 小时', price: 320, img: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=70', keywords: '音乐大典 夜游 演出 禅宗 实景' },
     { id: 7, category: '商业', tag: '禅意食养', title: '嵩山素斋 · 禅意食养', desc: '一席时令素斋，配一壶嵩山云雾茶，由寺院厨师讲解每道菜的时节与因由，体验清淡饮食的哲学。', duration: '2 小时', price: 220, img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=70', keywords: '素斋 美食 食养 茶 禅意 餐饮' },
-    { id: 8, category: '非遗', tag: '古法技艺', title: '唐碑拓印 · 古法技艺', desc: '学习上纸、捶拓、上墨三道工序，亲手拓下《大唐嵩阳观纪圣德感应之颂》碑文，带走一张会呼吸的纸。', duration: '2 小时', price: 240, img: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=70', keywords: '拓印 唐碑 非遗 古法 手作 文化' }
+    { id: 8, category: '非遗', tag: '古法技艺', title: '唐碑拓印 · 古法技艺', desc: '学习上纸、捶拓、上墨三道工序，亲手拓下《大唐嵩阳观纪圣德感应之颂》碑文，带走一张会呼吸的纸。', duration: '2 小时', price: 240, img: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=70', keywords: '拓印 唐碑 非遗 古法 手作 文化' },
+    // 👇 新增：嵩山礼物、文化图书
+    { id: 9, category: '礼物', tag: '当地特产', title: '少林素饼礼盒', desc: '少林寺传统手工素饼，选用嵩山本地核桃、芝麻、花生等原生态食材，低糖少油，禅意健康。', duration: '快递包邮', price: 88, img: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=900&q=70', keywords: '少林 素饼 特产 伴手礼 礼物' },
+    { id: 10, category: '礼物', tag: '非遗文创', title: '登封窑 · 珍珠地划花梅瓶', desc: '非遗传承人手工拉坯、珍珠地划花工艺烧制，重现唐宋登封窑神韵，极具收藏与观赏价值。', duration: '顺丰包邮', price: 1280, img: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=900&q=70', keywords: '登封窑 陶瓷 梅瓶 非遗 礼物' },
+    { id: 11, category: '文化', tag: '图书推荐', title: '《嵩山志》典藏版', desc: '嵩山文化研究会吕宏军会长主编，系统梳理嵩山自然地理、历史沿革、文物古迹与文化传承的集大成之作。', duration: '现货速发', price: 168, img: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=900&q=70', keywords: '嵩山志 图书 吕宏军 文化' },
+    { id: 12, category: '文化', tag: '文化读本', title: '《二十四节气·黄河文明的杰作》', desc: '带你穿越千年，从天文历法到农耕物候，读懂“天地之中”的节气密码与东方生活美学。', duration: '现货速发', price: 78, img: 'https://images.unsplash.com/photo-1589998059171-988d887df646?auto=format&fit=crop&w=900&q=70', keywords: '二十四节气 图书 吕宏军 文化' }
   ];
+
   let allExperiences = MOCK_EXPERIENCES.slice();
   let activeCategory = '全部', activeKeyword = '';
   const expGrid = document.getElementById('expGrid'), emptyState = document.getElementById('emptyState'), resultHint = document.getElementById('resultHint'), filterTabs = document.getElementById('filterTabs');
@@ -561,7 +542,7 @@
         return {
           id: (it && it.id != null) ? it.id : i, category: (it && (it.category || it.type)) || '文化',
           tag: (it && (it.tag || it.sub_category)) || '精选', title: (it && (it.title || it.name || it.resource_name)) || '',
-          desc: (it && (it.description || it.desc || it.summary)) || '', duration: (it && it.duration) || '半日',
+          desc: (it && (it.description || it.desc || it.summary)) || '', duration: (it && it.duration) || '精选',
           price: (it && it.price != null) ? it.price : '—', img: (it && (it.image || it.cover || it.image_url)) || FALLBACK_IMG,
           keywords: (it && (it.keywords || it.title || it.name)) || ''
         };
@@ -627,7 +608,7 @@
     });
   }
 
-  /* ========== 3D 渲染完整代码块 ========== */
+  /* 3D 渲染 */
   const splatCanvas = document.getElementById('splatCanvas'), splatCtx = splatCanvas ? splatCanvas.getContext('2d') : null;
   const splatScenesEl = document.getElementById('splatScenes'), splatPointCountEl = document.getElementById('splatPointCount');
   const splatLoadingEl = document.getElementById('splatLoading'), splatSceneNameEl = document.getElementById('splatSceneName');
@@ -755,6 +736,20 @@
     window.addEventListener('resize', function () { clearTimeout(resizeTimer); resizeTimer = setTimeout(function () { resizeSplatCanvas(); drawSplatFrame(); }, 160); });
   }
   initSplat();
+
+  // 移动端菜单逻辑
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener('click', function() {
+      mobileMenu.classList.toggle('hidden-menu');
+    });
+    Array.prototype.forEach.call(mobileMenu.querySelectorAll('a'), function(link) {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.add('hidden-menu');
+      });
+    });
+  }
 
   window.addEventListener('load', function () { moveTo(heroIndex, false); resizeSplatCanvas(); drawSplatFrame(); });
 })();
