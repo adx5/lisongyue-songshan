@@ -42,7 +42,7 @@
   <div class="container-1100 h-16 flex items-center justify-between">
     <a href="index.html" class="flex items-center gap-2.5">
       <span class="w-9 h-9 rounded-lg bg-shan-600 text-white flex items-center justify-center font-serif text-lg shadow-sm">嵩</span>
-      <span class="font-serif text-base md:text-lg font-bold tracking-wide text-ink">天地之中 · 嵩山人文志</span>
+      <span class="font-serif text-[17px] md:text-lg font-bold tracking-wide text-ink">天地之中 · 嵩山人文志</span>
     </a>
     <nav class="hidden md:flex items-center gap-8 text-sm text-gray-600">
       <a href="index.html" class="hover:text-shan-600 transition">首页</a>
@@ -58,29 +58,32 @@
     </div>
   </div>
   <div id="mobileMenu" class="hidden-menu md:hidden absolute top-16 left-0 w-full bg-white border-b border-gray-100 shadow-xl z-40 flex flex-col p-4 space-y-2">
-    <a href="index.html" class="block px-4 py-3 text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">首页</a>
-    <a href="index.html#library" class="block px-4 py-3 text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">生态体验库</a>
-    <a href="index.html#splat" class="block px-4 py-3 text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">3D 景区</a>
+    <a href="index.html" class="block px-4 py-3 text-[15px] text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">首页</a>
+    <a href="index.html#library" class="block px-4 py-3 text-[15px] text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">生态体验库</a>
+    <a href="index.html#splat" class="block px-4 py-3 text-[15px] text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">3D 景区</a>
     <a href="events.html" class="block px-4 py-3 text-shan-600 font-bold bg-shan-50 rounded-lg transition">会议专题</a>
   </div>
 </header>
 
-<!-- Hero 区 -->
+<!-- Hero 区 (色彩优化版) -->
 <section class="bg-ink text-white py-16 md:py-24 relative overflow-hidden">
-  <div class="absolute inset-0 opacity-30 bg-[url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center"></div>
-  <div class="absolute inset-0 bg-gradient-to-r from-[#08130F]/95 to-[#08130F]/60"></div>
+  <!-- 提高透明度，透出原图的山水色彩 -->
+  <div class="absolute inset-0 opacity-60 bg-[url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center"></div>
+  <!-- 嵩山青质感渐变遮罩，告别死黑 -->
+  <div class="absolute inset-0 bg-gradient-to-r from-[#022c22]/95 via-[#064E3B]/80 to-[#059669]/30"></div>
+
   <div class="container-1100 relative z-10">
     <span class="inline-flex items-center gap-2 text-[11px] md:text-[12px] tracking-widest text-shan-300 border border-shan-400/40 bg-shan-900/30 px-3 py-1.5 rounded-full mb-4 md:mb-6 backdrop-blur-sm">
       <span class="w-1.5 h-1.5 rounded-full bg-shan-400"></span>
       学术支持 · 会议专题
     </span>
-    <h1 class="font-serif text-3xl md:text-5xl font-bold leading-tight mb-4">
+    <h1 class="font-serif text-[2.2rem] md:text-5xl font-bold leading-tight mb-4 tracking-wide drop-shadow-md">
       天地之中 · 中华优秀传统文化<br class="hidden md:block" />传承发展工程
     </h1>
-    <p class="text-gray-300 text-sm md:text-base max-w-2xl leading-relaxed mb-6 md:mb-8">
+    <p class="text-gray-200 text-base md:text-base max-w-2xl leading-relaxed mb-6 md:mb-8">
       2026年6月23日，河南登封。汇聚学界、业界与政界智慧，深入挖掘中华文化核心资源，探讨在中华文明主根主脉上推进中华文化自主知识体系建设。
     </p>
-    <div class="flex flex-wrap gap-2 md:gap-4 text-[11px] md:text-xs text-gray-400">
+    <div class="flex flex-wrap gap-2 md:gap-4 text-xs md:text-xs text-gray-300">
       <span class="bg-white/10 px-3 py-1.5 rounded-md backdrop-blur-sm">📅 2026年6月23日</span>
       <span class="bg-white/10 px-3 py-1.5 rounded-md backdrop-blur-sm">📍 河南 · 登封</span>
       <span class="bg-white/10 px-3 py-1.5 rounded-md backdrop-blur-sm">🏛️ 中国移动通信联合会 · 北京大学经典与文明研究中心 · 嵩山文化研究会</span>
@@ -92,23 +95,23 @@
 <section class="bg-white py-12 md:py-20 border-t border-gray-100">
   <div class="container-1100">
     <div class="text-center mb-10 md:mb-16">
-      <h2 class="font-serif text-2xl md:text-3xl font-bold text-ink">6月23日 · 会议全流程记录</h2>
-      <p class="text-xs md:text-sm text-gray-500 mt-2 md:mt-3">回顾议程，重温思想交锋</p>
+      <h2 class="font-serif text-2xl md:text-2xl font-bold text-ink">6月23日 · 会议全流程记录</h2>
+      <p class="text-sm md:text-sm text-gray-600 mt-2 md:mt-3">回顾议程，重温思想交锋</p>
     </div>
 
     <!-- 会议定位（并入流程板块） -->
     <div class="max-w-3xl mx-auto mb-10 md:mb-14">
       <div class="bg-sand rounded-2xl p-5 md:p-8 relative overflow-hidden border border-gray-100">
         <div class="absolute top-0 left-0 w-1 md:w-1.5 h-full bg-shan-500"></div>
-        <h3 class="font-serif text-base md:text-lg font-bold text-ink mb-3">会议定位</h3>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed mb-5">
+        <h3 class="font-serif text-lg md:text-lg font-bold text-ink mb-3">会议定位</h3>
+        <p class="text-sm md:text-sm text-gray-600 leading-relaxed mb-5">
           会议以“中华优秀传统文化传承发展工程与中岳嵩山 5A 级景区创建”为引擎，探讨在中华文明主根主脉上扎实推进中华文化自主知识体系建设，深化产业协同，强化科技和政策支持，将环嵩山地区打造成中华文明起源、传承创新发展的<strong>“国家文化地标”</strong>和<strong>“世界文化旅游胜地”</strong>。
         </p>
         <div class="pl-4 border-l-4 border-shan-600 py-1">
-          <p class="text-shan-900 font-bold text-sm md:text-base tracking-wider">
+          <p class="text-shan-900 font-bold text-base md:text-base tracking-wider">
             “由点成珠、点珠成钻、串钻成链、聚链成群、集群成势”
           </p>
-          <p class="text-[10px] md:text-xs text-shan-700/70 mt-1">—— 会议系统观念</p>
+          <p class="text-xs md:text-xs text-shan-700/70 mt-1">—— 会议系统观念</p>
         </div>
       </div>
     </div>
@@ -117,15 +120,15 @@
 
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="mb-1 text-xs md:text-sm text-shan-600 font-bold">09:00 — 09:30 · 开幕致辞</div>
-        <p class="text-xs md:text-sm text-gray-600">主持人戴熙宁介绍出席嘉宾，嵩山文化研究会名誉会长段玉山代表主办方致欢迎辞。</p>
+        <div class="mb-1 text-sm md:text-sm text-shan-600 font-bold">09:00 — 09:30 · 开幕致辞</div>
+        <p class="text-sm md:text-sm text-gray-600">主持人戴熙宁介绍出席嘉宾，嵩山文化研究会名誉会长段玉山代表主办方致欢迎辞。</p>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="mb-1 text-xs md:text-sm text-shan-600 font-bold">09:30 — 12:00 · 主旨报告</div>
-        <h3 class="text-base md:text-lg font-bold text-ink mb-2">主持人：戴熙宁</h3>
-        <ul class="text-xs md:text-sm text-gray-600 leading-relaxed space-y-2 list-disc list-inside">
+        <div class="mb-1 text-sm md:text-sm text-shan-600 font-bold">09:30 — 12:00 · 主旨报告</div>
+        <h3 class="text-base md:text-base font-bold text-ink mb-2">主持人：戴熙宁</h3>
+        <ul class="text-sm md:text-sm text-gray-600 leading-relaxed space-y-2 list-disc list-inside">
           <li><strong>杨炳忻：</strong>《追溯太极图的由来——探寻中华传统文化的根与源》</li>
           <li><strong>吕宏军：</strong>《中岳嵩山——中华文化的脊梁》</li>
           <li><strong>倪健中：</strong>《上古天文与数智时代》</li>
@@ -134,31 +137,31 @@
 
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="mb-1 text-xs md:text-sm text-shan-600 font-bold">14:00 — 15:00 · 专题报告（第一单元）</div>
-        <h3 class="text-base md:text-lg font-bold text-ink mb-2">主持人：杨炳忻</h3>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed mb-1"><strong>章越琴：</strong>《为什么中华文明探源要以上古天文学为切入点》</p>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed"><strong>莫飞智：</strong>《古代律历同源的时空与数理同构研究》</p>
+        <div class="mb-1 text-sm md:text-sm text-shan-600 font-bold">14:00 — 15:00 · 专题报告（第一单元）</div>
+        <h3 class="text-base md:text-base font-bold text-ink mb-2">主持人：杨炳忻</h3>
+        <p class="text-sm md:text-sm text-gray-600 leading-relaxed mb-1"><strong>章越琴：</strong>《为什么中华文明探源要以上古天文学为切入点》</p>
+        <p class="text-sm md:text-sm text-gray-600 leading-relaxed"><strong>莫飞智：</strong>《古代律历同源的时空与数理同构研究》</p>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="mb-1 text-xs md:text-sm text-amber-600 font-bold">15:00 — 15:50 · 观看武术表演</div>
-        <p class="text-xs md:text-sm text-gray-600">地点：小龙武校演武厅</p>
+        <div class="mb-1 text-sm md:text-sm text-amber-600 font-bold">15:00 — 15:50 · 观看武术表演</div>
+        <p class="text-sm md:text-sm text-gray-600">地点：小龙武校演武厅</p>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="mb-1 text-xs md:text-sm text-shan-600 font-bold">15:50 — 18:20 · 专题报告（第二单元）</div>
-        <h3 class="text-base md:text-lg font-bold text-ink mb-2">主持人：戴熙宁</h3>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed mb-1"><strong>李量：</strong>《基于OMO的健康文艺系统工程——推动功夫艺术与全民健身的深度融合》</p>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed mb-1"><strong>魏育林：</strong>《系统观念指导下的天地之中特色（情志）健康文旅景区创建》</p>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed"><strong>徐冬冬：</strong>《以艺术的形式开掘二十四节气的当代价值》</p>
+        <div class="mb-1 text-sm md:text-sm text-shan-600 font-bold">15:50 — 18:20 · 专题报告（第二单元）</div>
+        <h3 class="text-base md:text-base font-bold text-ink mb-2">主持人：戴熙宁</h3>
+        <p class="text-sm md:text-sm text-gray-600 leading-relaxed mb-1"><strong>李量：</strong>《基于OMO的健康文艺系统工程——推动功夫艺术与全民健身的深度融合》</p>
+        <p class="text-sm md:text-sm text-gray-600 leading-relaxed mb-1"><strong>魏育林：</strong>《系统观念指导下的天地之中特色（情志）健康文旅景区创建》</p>
+        <p class="text-sm md:text-sm text-gray-600 leading-relaxed"><strong>徐冬冬：</strong>《以艺术的形式开掘二十四节气的当代价值》</p>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="mb-1 text-xs md:text-sm text-shan-600 font-bold">18:20 · 会议小结</div>
-        <p class="text-xs md:text-sm text-gray-600">杨炳忻教授作会议核心梳理并小结。</p>
+        <div class="mb-1 text-sm md:text-sm text-shan-600 font-bold">18:20 · 会议小结</div>
+        <p class="text-sm md:text-sm text-gray-600">杨炳忻教授作会议核心梳理并小结。</p>
       </div>
 
     </div>
@@ -169,59 +172,59 @@
 <section class="bg-white py-12 md:py-20 border-t border-gray-100">
   <div class="container-1100">
     <div class="text-center mb-10 md:mb-16">
-      <h2 class="font-serif text-2xl md:text-3xl font-bold text-ink">核心学术精要</h2>
-      <p class="text-xs md:text-sm text-gray-500 mt-2 md:mt-3">传承不泥古，创新不离宗</p>
+      <h2 class="font-serif text-2xl md:text-2xl font-bold text-ink">核心学术精要</h2>
+      <p class="text-sm md:text-sm text-gray-600 mt-2 md:mt-3">传承不泥古，创新不离宗</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
       <!-- 吕宏军 -->
       <div class="bg-sand rounded-2xl p-5 md:p-8 border border-gray-100 relative overflow-hidden group hover:shadow-lg transition flex flex-col">
         <div class="absolute top-0 right-0 p-4 opacity-5 text-6xl font-serif font-bold text-shan-900 group-hover:scale-110 transition-transform">脊梁</div>
-        <div class="text-xs text-shan-600 font-bold mb-2">吕宏军 · 嵩山文化研究会会长</div>
+        <div class="text-sm text-shan-600 font-bold mb-2">吕宏军 · 嵩山文化研究会会长</div>
         <h3 class="font-serif text-lg md:text-xl font-bold text-ink mb-3">中岳嵩山——中华文化的脊梁</h3>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed mb-4 flex-1">
+        <p class="text-sm md:text-sm text-gray-600 leading-relaxed mb-4 flex-1">
           系统提出支撑嵩山文化地位的六大维度：<strong>万山之祖</strong>（36亿年地质史）、<strong>天地之中</strong>（周公测影定地中）、<strong>人文之宗</strong>（黄帝与华夏民族）、<strong>河洛之根</strong>、<strong>神话之源</strong>、<strong>三代之都</strong>。
         </p>
         <div class="mt-auto pt-2">
-          <a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199864.html" target="_blank" class="text-xs text-shan-600 font-medium hover:underline">详见香港商报网报道 →</a>
+          <a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199864.html" target="_blank" class="text-sm text-shan-600 font-medium hover:underline">详见香港商报网报道 →</a>
         </div>
       </div>
 
       <!-- 杨炳忻 -->
       <div class="bg-sand rounded-2xl p-5 md:p-8 border border-gray-100 relative overflow-hidden group hover:shadow-lg transition flex flex-col">
         <div class="absolute top-0 right-0 p-4 opacity-5 text-6xl font-serif font-bold text-shan-900 group-hover:scale-110 transition-transform">太极</div>
-        <div class="text-xs text-shan-600 font-bold mb-2">杨炳忻 · 中国科学院大学教授</div>
+        <div class="text-sm text-shan-600 font-bold mb-2">杨炳忻 · 中国科学院大学教授</div>
         <h3 class="font-serif text-lg md:text-xl font-bold text-ink mb-3">追溯太极图的由来</h3>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed mb-4 flex-1">
+        <p class="text-sm md:text-sm text-gray-600 leading-relaxed mb-4 flex-1">
           论证太极图是中华古天文实验观测科学的伟大研究成果，100%符合现代科学可测量、可重复的规范。指出阴阳五行源于“十月太阳历”，绝非玄学。
         </p>
         <div class="mt-auto pt-2">
-          <a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199864.html" target="_blank" class="text-xs text-shan-600 font-medium hover:underline">详见香港商报网报道 →</a>
+          <a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199864.html" target="_blank" class="text-sm text-shan-600 font-medium hover:underline">详见香港商报网报道 →</a>
         </div>
       </div>
 
       <!-- 倪健中 -->
       <div class="bg-sand rounded-2xl p-5 md:p-8 border border-gray-100 relative overflow-hidden group hover:shadow-lg transition flex flex-col">
         <div class="absolute top-0 right-0 p-4 opacity-5 text-6xl font-serif font-bold text-shan-900 group-hover:scale-110 transition-transform">数智</div>
-        <div class="text-xs text-shan-600 font-bold mb-2">倪健中 · 中国移动通信联合会执行会长</div>
+        <div class="text-sm text-shan-600 font-bold mb-2">倪健中 · 中国移动通信联合会执行会长</div>
         <h3 class="font-serif text-lg md:text-xl font-bold text-ink mb-3">上古天文与数智时代</h3>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed mb-4 flex-1">
+        <p class="text-sm md:text-sm text-gray-600 leading-relaxed mb-4 flex-1">
           核心命题：“上古天文是中华文明的底层原始码，数智科技是人类文明的未来运行系统。”提出AI语义破译、算力回溯模拟等数字活化路径。
         </p>
         <div class="mt-auto pt-2">
-          <a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199864.html" target="_blank" class="text-xs text-shan-600 font-medium hover:underline">详见香港商报网报道 →</a>
+          <a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199864.html" target="_blank" class="text-sm text-shan-600 font-medium hover:underline">详见香港商报网报道 →</a>
         </div>
       </div>
 
       <!-- 莫飞智 -->
       <div class="bg-sand rounded-2xl p-5 md:p-8 border border-gray-100 relative overflow-hidden group hover:shadow-lg transition flex flex-col">
         <div class="absolute top-0 right-0 p-4 opacity-5 text-6xl font-serif font-bold text-shan-900 group-hover:scale-110 transition-transform">律历</div>
-        <div class="text-xs text-shan-600 font-bold mb-2">莫飞智 · 香港中医药科技学院</div>
+        <div class="text-sm text-shan-600 font-bold mb-2">莫飞智 · 香港中医药科技学院</div>
         <h3 class="font-serif text-lg md:text-xl font-bold text-ink mb-3">古代律历同源的时空与数理同构</h3>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed mb-4 flex-1">
+        <p class="text-sm md:text-sm text-gray-600 leading-relaxed mb-4 flex-1">
           提出“冬至（时间起点）—黄钟（音律基准）—地中（空间定位）”三位一体的基准。深入解读《后汉书》候气之法，论证其本质是一套可持续、可重复的国家级声学计量校准实验。
         </p>
         <div class="mt-auto pt-2">
-          <span class="text-xs text-gray-400 font-medium">会议专题报告 · 2026.06.23</span>
+          <span class="text-sm text-gray-500 font-medium">会议专题报告 · 2026.06.23</span>
         </div>
       </div>
     </div>
@@ -231,85 +234,85 @@
 <!-- 媒体转载（权威平台链接） -->
 <section class="container-1100 py-12 md:py-20">
   <div class="text-center mb-10 md:mb-16">
-    <h2 class="font-serif text-2xl md:text-3xl font-bold text-ink">深度报道 · 权威媒体矩阵</h2>
-    <p class="text-xs md:text-sm text-gray-500 mt-2 md:mt-3">全方位、多角度读懂“天地之中”</p>
+    <h2 class="font-serif text-2xl md:text-2xl font-bold text-ink">深度报道 · 权威媒体矩阵</h2>
+    <p class="text-sm md:text-sm text-gray-600 mt-2 md:mt-3">全方位、多角度读懂“天地之中”</p>
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
     <!-- 1. 香港商报网 - 综合报道 -->
     <article class="bg-white rounded-2xl p-5 md:p-6 border border-gray-100 hover:shadow-lg transition flex flex-col justify-between">
       <div>
-        <div class="text-[10px] md:text-xs text-shan-600 font-bold mb-2">香港商报网 · 2026-06-25</div>
-        <h3 class="font-serif text-base md:text-lg font-bold text-ink mb-2 leading-snug">「天地之中·中华优秀传统文化传承发展工程」会议在河南登封成功举办</h3>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed line-clamp-3">全景式记录会议主办方、开幕式致辞、主旨报告、专题报告及学术小结，并明确提出“由点成珠…集群成势”的系统观念。</p>
+        <div class="text-xs md:text-xs text-shan-600 font-bold mb-2">香港商报网 · 2026-06-25</div>
+        <h3 class="font-serif text-lg md:text-lg font-bold text-ink mb-2 leading-snug">「天地之中·中华优秀传统文化传承发展工程」会议在河南登封成功举办</h3>
+        <p class="text-sm md:text-sm text-gray-600 leading-relaxed line-clamp-3">全景式记录会议主办方、开幕式致辞、主旨报告、专题报告及学术小结，并明确提出“由点成珠…集群成势”的系统观念。</p>
       </div>
       <div class="mt-4">
-        <a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199864.html" target="_blank" class="text-xs md:text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a>
+        <a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199864.html" target="_blank" class="text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a>
       </div>
     </article>
 
     <!-- 2. 第一健康报道 - 综合报道 -->
     <article class="bg-white rounded-2xl p-5 md:p-6 border border-gray-100 hover:shadow-lg transition flex flex-col justify-between">
       <div>
-        <div class="text-[10px] md:text-xs text-shan-600 font-bold mb-2">第一健康报道 · 2026-06-27</div>
-        <h3 class="font-serif text-base md:text-lg font-bold text-ink mb-2 leading-snug">天地之中·中华优秀传统文化传承发展工程会议在登封举办</h3>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed line-clamp-3">侧重健康文旅与OMO模式视角，补充产业转化维度的报道。聚焦嵩山作为中华文明主根主脉的文化价值与面向未来的创造性转化。</p>
+        <div class="text-xs md:text-xs text-shan-600 font-bold mb-2">第一健康报道 · 2026-06-27</div>
+        <h3 class="font-serif text-lg md:text-lg font-bold text-ink mb-2 leading-snug">天地之中·中华优秀传统文化传承发展工程会议在登封举办</h3>
+        <p class="text-sm md:text-sm text-gray-600 leading-relaxed line-clamp-3">侧重健康文旅与OMO模式视角，补充产业转化维度的报道。聚焦嵩山作为中华文明主根主脉的文化价值与面向未来的创造性转化。</p>
       </div>
       <div class="mt-4">
-        <a href="https://www.dyjkbd.cn/brand/2026-06-27/13476.html" target="_blank" class="text-xs md:text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a>
+        <a href="https://www.dyjkbd.cn/brand/2026-06-27/13476.html" target="_blank" class="text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a>
       </div>
     </article>
 
     <!-- 3. 香港商报网 - 吕宏军报告视角 -->
     <article class="bg-white rounded-2xl p-5 md:p-6 border border-gray-100 hover:shadow-lg transition flex flex-col justify-between">
       <div>
-        <div class="text-[10px] md:text-xs text-shan-600 font-bold mb-2">香港商报网 · 深度解读</div>
-        <h3 class="font-serif text-base md:text-lg font-bold text-ink mb-2 leading-snug">吕宏军：嵩山是中华文化的脊梁</h3>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed line-clamp-3">系统阐述“万山之祖、天地之中、人文之宗、河洛之根、神话之源、三代之都”六大维度，论证嵩山作为中华文明核心地标的地位。</p>
+        <div class="text-xs md:text-xs text-shan-600 font-bold mb-2">香港商报网 · 深度解读</div>
+        <h3 class="font-serif text-lg md:text-lg font-bold text-ink mb-2 leading-snug">吕宏军：嵩山是中华文化的脊梁</h3>
+        <p class="text-sm md:text-sm text-gray-600 leading-relaxed line-clamp-3">系统阐述“万山之祖、天地之中、人文之宗、河洛之根、神话之源、三代之都”六大维度，论证嵩山作为中华文明核心地标的地位。</p>
       </div>
       <div class="mt-4">
-        <a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199864.html" target="_blank" class="text-xs md:text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a>
+        <a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199864.html" target="_blank" class="text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a>
       </div>
     </article>
 
     <!-- 4. 香港商报网 - 倪健中报告视角 -->
     <article class="bg-white rounded-2xl p-5 md:p-6 border border-gray-100 hover:shadow-lg transition flex flex-col justify-between">
       <div>
-        <div class="text-[10px] md:text-xs text-shan-600 font-bold mb-2">香港商报网 · 深度解读</div>
-        <h3 class="font-serif text-base md:text-lg font-bold text-ink mb-2 leading-snug">倪健中：上古天文是中华文明的底层源代码</h3>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed line-clamp-3">提出“底层原始码”与“未来运行系统”的核心命题。系统阐述上古天文的三大特质，并给出AI语义破译、算力回溯模拟等当代激活路径。</p>
+        <div class="text-xs md:text-xs text-shan-600 font-bold mb-2">香港商报网 · 深度解读</div>
+        <h3 class="font-serif text-lg md:text-lg font-bold text-ink mb-2 leading-snug">倪健中：上古天文是中华文明的底层源代码</h3>
+        <p class="text-sm md:text-sm text-gray-600 leading-relaxed line-clamp-3">提出“底层原始码”与“未来运行系统”的核心命题。系统阐述上古天文的三大特质，并给出AI语义破译、算力回溯模拟等当代激活路径。</p>
       </div>
       <div class="mt-4">
-        <a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199864.html" target="_blank" class="text-xs md:text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a>
+        <a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199864.html" target="_blank" class="text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a>
       </div>
     </article>
 
     <!-- 5. 香港商报网 - 徐冬冬 -->
     <article class="bg-white rounded-2xl p-5 md:p-6 border border-gray-100 hover:shadow-lg transition flex flex-col justify-between">
       <div>
-        <div class="text-[10px] md:text-xs text-shan-600 font-bold mb-2">香港商报网 · 深度解读</div>
-        <h3 class="font-serif text-base md:text-lg font-bold text-ink mb-2 leading-snug">徐冬冬：以艺术的形式开掘二十四节气的当代价值</h3>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed line-clamp-3">提出建立中国式抽象逻辑思维，并基于《二十四节气·七十二候》组画，提炼中国原创的“动态色彩体系”，为工业与数字新业态提供中国原创色彩标准。</p>
+        <div class="text-xs md:text-xs text-shan-600 font-bold mb-2">香港商报网 · 深度解读</div>
+        <h3 class="font-serif text-lg md:text-lg font-bold text-ink mb-2 leading-snug">徐冬冬：以艺术的形式开掘二十四节气的当代价值</h3>
+        <p class="text-sm md:text-sm text-gray-600 leading-relaxed line-clamp-3">提出建立中国式抽象逻辑思维，并基于《二十四节气·七十二候》组画，提炼中国原创的“动态色彩体系”，为工业与数字新业态提供中国原创色彩标准。</p>
       </div>
       <div class="mt-4">
-        <a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199862.html" target="_blank" class="text-xs md:text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a>
+        <a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199862.html" target="_blank" class="text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a>
       </div>
     </article>
 
     <!-- 6. 香港商报网 - 杨炳忻 -->
     <article class="bg-white rounded-2xl p-5 md:p-6 border border-gray-100 hover:shadow-lg transition flex flex-col justify-between">
       <div>
-        <div class="text-[10px] md:text-xs text-shan-600 font-bold mb-2">香港商报网 · 深度解读</div>
-        <h3 class="font-serif text-base md:text-lg font-bold text-ink mb-2 leading-snug">杨炳忻：重新认识太极图蕴含的精密法则</h3>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed line-clamp-3">展示观星台实测太极图，论证其100%符合现代科学规范。指出阴阳五行源于十月太阳历，并呼吁找回失落的古天文历法源头。</p>
+        <div class="text-xs md:text-xs text-shan-600 font-bold mb-2">香港商报网 · 深度解读</div>
+        <h3 class="font-serif text-lg md:text-lg font-bold text-ink mb-2 leading-snug">杨炳忻：重新认识太极图蕴含的精密法则</h3>
+        <p class="text-sm md:text-sm text-gray-600 leading-relaxed line-clamp-3">展示观星台实测太极图，论证其100%符合现代科学规范。指出阴阳五行源于十月太阳历，并呼吁找回失落的古天文历法源头。</p>
       </div>
       <div class="mt-4">
-        <a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/07/05/content_200194.html" target="_blank" class="text-xs md:text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a>
+        <a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/07/05/content_200194.html" target="_blank" class="text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a>
       </div>
     </article>
   </div>
 
-  <div class="text-center mt-8 text-[10px] text-gray-400">
+  <div class="text-center mt-8 text-xs text-gray-500">
     以上报道综合自 香港商报网、第一健康报道 等权威媒体
   </div>
 </section>
@@ -318,8 +321,8 @@
 <section class="bg-sand py-12 md:py-20 border-t border-gray-100">
   <div class="container-1100">
     <div class="text-center mb-10 md:mb-16">
-      <h2 class="font-serif text-2xl md:text-3xl font-bold text-ink">会议现场图集</h2>
-      <p class="text-xs md:text-sm text-gray-500 mt-2 md:mt-3">光影记录，感受思想碰撞的现场</p>
+      <h2 class="font-serif text-2xl md:text-2xl font-bold text-ink">会议现场图集</h2>
+      <p class="text-sm md:text-sm text-gray-600 mt-2 md:mt-3">光影记录，感受思想碰撞的现场</p>
     </div>
 
     <!-- 图片网格 -->
@@ -329,7 +332,7 @@
         <img src="https://www.dyjkbd.cn/d/file/2026-06-27/1782567619543961.jpg" alt="会议现场" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <div class="absolute bottom-0 left-0 right-0 p-3 md:p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-          <p class="text-white text-xs md:text-sm font-medium drop-shadow-md">会议现场 · 开幕式</p>
+          <p class="text-white text-sm md:text-sm font-medium drop-shadow-md">会议现场 · 开幕式</p>
         </div>
       </div>
 
@@ -338,7 +341,7 @@
         <img src="https://img.hkcd.com/userfiles/20260625/1782351358740181.jpg" alt="主旨报告" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <div class="absolute bottom-0 left-0 right-0 p-3 md:p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-          <p class="text-white text-xs md:text-sm font-medium drop-shadow-md">主旨报告现场</p>
+          <p class="text-white text-sm md:text-sm font-medium drop-shadow-md">主旨报告现场</p>
         </div>
       </div>
 
@@ -347,7 +350,7 @@
         <img src="https://img.hkcd.com/userfiles/20260625/1782351237625168.jpg" alt="嘉宾合影" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <div class="absolute bottom-0 left-0 right-0 p-3 md:p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-          <p class="text-white text-xs md:text-sm font-medium drop-shadow-md">与会专家合影</p>
+          <p class="text-white text-sm md:text-sm font-medium drop-shadow-md">与会专家合影</p>
         </div>
       </div>
 
@@ -356,7 +359,7 @@
         <img src="https://img.hkcd.com/userfiles/20260625/1782351277686905.jpg" alt="嵩阳书院" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <div class="absolute bottom-0 left-0 right-0 p-3 md:p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-          <p class="text-white text-xs md:text-sm font-medium drop-shadow-md">6.22 嵩阳书院会前访谈</p>
+          <p class="text-white text-sm md:text-sm font-medium drop-shadow-md">6.22 嵩阳书院会前访谈</p>
         </div>
       </div>
 
@@ -365,7 +368,7 @@
         <img src="https://img.hkcd.com/userfiles/20260625/1782351318572376.jpg" alt="武术表演" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <div class="absolute bottom-0 left-0 right-0 p-3 md:p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-          <p class="text-white text-xs md:text-sm font-medium drop-shadow-md">小龙武校武术表演</p>
+          <p class="text-white text-sm md:text-sm font-medium drop-shadow-md">小龙武校武术表演</p>
         </div>
       </div>
 
@@ -374,7 +377,7 @@
         <img src="https://img.hkcd.com/hkcd_images/2026/07/05/1783233492191_3kvppe9u.jpg" alt="专题报告" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <div class="absolute bottom-0 left-0 right-0 p-3 md:p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-          <p class="text-white text-xs md:text-sm font-medium drop-shadow-md">专题报告环节</p>
+          <p class="text-white text-sm md:text-sm font-medium drop-shadow-md">专题报告环节</p>
         </div>
       </div>
 
@@ -383,7 +386,7 @@
         <img src="https://img.hkcd.com/hkcd_images/2026/06/25/1782351149998_66ulkhdp.jpg" alt="会议交流" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <div class="absolute bottom-0 left-0 right-0 p-3 md:p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-          <p class="text-white text-xs md:text-sm font-medium drop-shadow-md">会议交流现场</p>
+          <p class="text-white text-sm md:text-sm font-medium drop-shadow-md">会议交流现场</p>
         </div>
       </div>
 
@@ -392,12 +395,12 @@
         <img src="https://bee-reg-ab.imagency.cn/mr/202610/24/6adc5fedabd73.jpg" alt="嵩山风景" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <div class="absolute bottom-0 left-0 right-0 p-3 md:p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-          <p class="text-white text-xs md:text-sm font-medium drop-shadow-md">天地之中 · 登封嵩山</p>
+          <p class="text-white text-sm md:text-sm font-medium drop-shadow-md">天地之中 · 登封嵩山</p>
         </div>
       </div>
     </div>
 
-    <div class="text-center mt-8 text-[10px] text-gray-400">
+    <div class="text-center mt-8 text-xs text-gray-500">
       * 以上为现场实拍图（部分带媒体水印）
     </div>
   </div>
@@ -405,7 +408,7 @@
 
 <!-- 页脚 -->
 <footer class="bg-ink text-gray-300 pt-10 pb-6 border-t border-white/10">
-  <div class="container-1100 text-center text-[10px] md:text-xs text-gray-500">
+  <div class="container-1100 text-center text-xs md:text-xs text-gray-500">
     © 2026 河南嵩玉文化旅游有限公司 · 天地之中 · 嵩山人文志　保留所有权利<br>
     学术支持：嵩山文化研究会
   </div>
