@@ -226,19 +226,21 @@
   </div>
 </section>
 
-<!-- 体验库 (大分类+轻模式) -->
+<!-- 体验库 (大分类+真实数据) -->
 <section id="library" class="container-1100 pb-12 md:pb-16">
   <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-5 md:mb-6">
     <div>
       <h2 class="font-serif text-xl md:text-2xl font-bold text-ink">嵩山生态与人文体验库</h2>
       <p class="text-xs md:text-sm text-gray-500 mt-1.5">汇聚大美嵩山的文化、特产、吃住行全域体验。</p>
     </div>
-    <!-- 前台精简版 Tab -->
+    <!-- 前台 5 大分类 Tab -->
     <div id="filterTabs" class="flex flex-nowrap md:flex-wrap overflow-x-auto hide-scrollbar gap-2 pb-1 -mx-4 px-4 md:mx-0 md:px-0">
       <button class="tab active" data-cat="全部">全部</button>
       <button class="tab" data-cat="人文体验">人文体验</button>
-      <button class="tab" data-cat="文创特产">文创特产</button>
-      <button class="tab" data-cat="吃住行">吃住行游</button>
+      <button class="tab" data-cat="嵩山礼物">嵩山礼物</button>
+      <button class="tab" data-cat="热门景点">热门景点</button>
+      <button class="tab" data-cat="吃住行">吃住行</button>
+      <button class="tab" data-cat="商业服务">商业服务</button>
     </div>
   </div>
 
@@ -496,15 +498,40 @@
   }
   document.addEventListener('visibilitychange', function () { document.hidden ? stopAutoPlay() : startAutoPlay(); });
 
-  /* 体验库 (Mock 兜底数据已适配新结构) */
+  /* 🌟 27 个真实当地填充数据 */
   const MOCK_EXPERIENCES = [
-    { id: 1, category: '非遗', tag: '禅武传承', title: '少林功夫晨课', desc: '随武僧在塔林间习练八段锦与基础桩功，听一段禅武合一的故事，用身体记住这座山。', duration: '3 小时', price: 380, img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=70', keywords: '少林 功夫 武术 禅修 晨课 亲子' },
-    { id: 2, category: '文化', tag: '书院研学', title: '嵩阳书院 · 国学讲坛', desc: '在千年书院里听一堂《中庸》，着汉服行释菜礼，完整体验一次古代书院的开学仪轨。', duration: '半日', price: 260, img: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=900&q=70', keywords: '书院 国学 研学 汉服 礼仪 亲子' },
-    { id: 3, category: '住宿', tag: '精品民宿', title: '照见山居 · 禅意大床房', desc: '坐落在嵩山脚下，推窗即是山景。含双人早餐，可体验晨间禅坐。', duration: '每晚', price: 580, img: 'https://images.unsplash.com/photo-1542314831-c6a4d1424b94?auto=format&fit=crop&w=900&q=70', keywords: '民宿 住宿 大床房 禅意' },
-    { id: 4, category: '餐饮', tag: '特色素斋', title: '少林欢喜地 · 禅意双人餐', desc: '一席时令素斋，配一壶嵩山云雾茶，由寺院厨师讲解每道菜的时节与因由。', duration: '双人套餐', price: 198, img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=70', keywords: '素斋 美食 餐饮 双人餐' },
-    { id: 5, category: '交通', tag: '自驾租车', title: '登封高铁站 · 5座SUV租车', desc: '提供登封高铁站免费取还车服务，含基础保险，适合全家自驾嵩山游。', duration: '日租', price: 299, img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=900&q=70', keywords: '租车 自驾 SUV 交通' },
-    { id: 6, category: '礼物', tag: '当地特产', title: '少林素饼礼盒', desc: '少林寺传统手工素饼，选用嵩山本地核桃、芝麻、花生等原生态食材，低糖少油。', duration: '包邮', price: 88, img: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=900&q=70', keywords: '少林 素饼 特产 伴手礼 礼物' },
-    { id: 7, category: '文化', tag: '图书推荐', title: '《嵩山志》典藏版', desc: '嵩山文化研究会吕宏军会长主编，系统梳理嵩山自然地理、历史沿革与文化传承的集大成之作。', duration: '现货', price: 168, img: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=900&q=70', keywords: '嵩山志 图书 文化' }
+    // 人文体验
+    { id: 1, category: '非遗', tag: '禅武传承', title: '少林功夫晨课', desc: '随武僧在塔林间习练八段锦与基础桩功，听禅武合一的故事。', duration: '3 小时', price: 380, img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=70', keywords: '少林 功夫 武术 禅修 晨课 亲子' },
+    { id: 2, category: '文化', tag: '书院研学', title: '嵩阳书院·木版年画手作', desc: '在千年书院里体验“嵩山登封木版年画”等传统手艺，将非遗带回家。', duration: '半日', price: 260, img: 'https://images.unsplash.com/photo-1599571234909-29ed5d1321d6?auto=format&fit=crop&w=900&q=70', keywords: '书院 国学 研学 年画 非遗' },
+    { id: 3, category: '非遗', tag: '手作工坊', title: '登封窑·拉坯施釉', desc: '非遗传承人现场演示拉坯技艺，亲手烧制钧瓷茶盏，把“入窑一色，出窑万彩”带回家。', duration: '半日', price: 420, img: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=900&q=70', keywords: '登封窑 钧瓷 陶艺 手作 非遗' },
+    { id: 4, category: '文化', tag: '古法技艺', title: '唐碑拓印/活字印刷', desc: '学习上纸、捶拓、上墨，或体验活字印刷，适合亲子研学。', duration: '2 小时', price: 240, img: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=70', keywords: '拓印 唐碑 非遗 古法 手作 文化' },
+    { id: 5, category: '文化', tag: '夜游演艺', title: '《禅宗少林·音乐大典》夜游', desc: '以嵩山为幕的实景演出，65分钟沉浸式感受武术与音乐的融合。', duration: '2.5 小时', price: 320, img: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=70', keywords: '音乐大典 夜游 演出 禅宗 实景' },
+    // 嵩山礼物
+    { id: 6, category: '礼物', tag: '当地特产', title: '少林寺素饼', desc: '源自少林祖传膳食秘方，低糖不含脂肪，香甜酥脆，是经典伴手礼。', duration: '包邮', price: 88, img: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=900&q=70', keywords: '少林 素饼 特产 伴手礼 礼物' },
+    { id: 7, category: '礼物', tag: '非遗文创', title: '登封窑“天地之中”茶具套组', desc: '一壶四杯，手绘“天地之中”与汉代云纹瓦当纹饰，2024年被评为“郑州礼物”。', duration: '顺丰包邮', price: 680, img: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=900&q=70', keywords: '登封窑 茶具 陶瓷 礼物 文创' },
+    { id: 8, category: '礼物', tag: '当地特产', title: '登封芥丝', desc: '以嵩山特有圆叶芥菜腌制，氽鼻浓香、生脆爽口，是当地传统风味。', duration: '现货速发', price: 35, img: 'https://images.unsplash.com/photo-1599571234909-29ed5d1321d6?auto=format&fit=crop&w=900&q=70', keywords: '芥丝 特产 美食 礼物' },
+    { id: 9, category: '礼物', tag: '养生特产', title: '嵩山黄精', desc: '药食同源，依托民宿客源逐渐成为热门特产，适合养生送礼。', duration: '礼盒装', price: 128, img: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=900&q=70', keywords: '黄精 养生 特产 礼物' },
+    { id: 10, category: '礼物', tag: '文创周边', title: '少林文创（戒小宝/冰箱贴）', desc: '软萌小和尚挂件、金属冰箱贴、云芑IP周边，深受年轻游客喜爱。', duration: '现货', price: 45, img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=70', keywords: '少林 文创 冰箱贴 礼物' },
+    // 热门景点
+    { id: 11, category: '景点', tag: '禅宗祖庭', title: '少林寺（常住院+塔林）', desc: '禅宗祖庭与武术发祥地，塔林是国内规模最大的古塔群。', duration: '半日', price: 80, img: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=900&q=70', keywords: '少林寺 塔林 景点 门票' },
+    { id: 12, category: '景点', tag: '道教圣地', title: '中岳庙', desc: '中原最大的道教古建筑群，可观看武术展演与传统礼仪表演。', duration: '2 小时', price: 30, img: 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=900&q=70', keywords: '中岳庙 道教 景点 门票' },
+    { id: 13, category: '景点', tag: '千年书院', title: '嵩阳书院', desc: '古代四大书院之一，世界文化遗产，可逛古建、体验国学。', duration: '2 小时', price: 30, img: 'https://images.unsplash.com/photo-1599571234909-29ed5d1321d6?auto=format&fit=crop&w=900&q=70', keywords: '嵩阳书院 景点 门票 研学' },
+    { id: 14, category: '景点', tag: '天文古迹', title: '观星台（周公测景台）', desc: '元代天文学家郭守敬创建，中国现存最早的天文台之一，是“天地之中”的核心实证。', duration: '1 小时', price: 20, img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=70', keywords: '观星台 天文 景点 门票' },
+    { id: 15, category: '景点', tag: '自然奇观', title: '三皇寨', desc: '以地质奇观著称，奇峰怪石与栈道景观，适合轻徒步与自然观光。', duration: '半日', price: 100, img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=70', keywords: '三皇寨 徒步 景点 门票' },
+    // 吃住行
+    { id: 16, category: '住宿', tag: '精品民宿', title: '嵩山居·麗晶精品民宿', desc: '嵩山旅游民宿协会会长单位，紧邻嵩阳书院，提供租车、茶室与地道嵩山野菜。', duration: '每晚', price: 580, img: 'https://images.unsplash.com/photo-1542314831-c6a4d1424b94?auto=format&fit=crop&w=900&q=70', keywords: '民宿 住宿 精品 嵩阳书院' },
+    { id: 17, category: '住宿', tag: '禅意民宿', title: '陌上藝宿（少林寺店）', desc: '步行5分钟到少林寺，提供免费汉服、禅茶体验、抄经套装，部分房型带观景茶台。', duration: '每晚', price: 399, img: 'https://images.unsplash.com/photo-1542314831-c6a4d1424b94?auto=format&fit=crop&w=900&q=70', keywords: '民宿 住宿 少林寺 汉服' },
+    { id: 18, category: '住宿', tag: '山景民宿', title: '知宿民宿（卢崖瀑布店）', desc: '位于北高庄村，紧邻卢崖瀑布与中岳庙，配备中式餐厅、茶室、会议室与管家服务。', duration: '每晚', price: 450, img: 'https://images.unsplash.com/photo-1542314831-c6a4d1424b94?auto=format&fit=crop&w=900&q=70', keywords: '民宿 住宿 卢崖瀑布 中岳庙' },
+    { id: 19, category: '餐饮', tag: '特色素斋', title: '少林欢喜地素斋', desc: '一席时令素斋配嵩山云雾茶，体验禅意饮食文化。', duration: '双人套餐', price: 198, img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=70', keywords: '素斋 美食 餐饮 少林' },
+    { id: 20, category: '餐饮', tag: '当地小吃', title: '登封特色小吃（烧饼/烩面）', desc: '登封烧饼、河南烩面是当地必吃，可作为餐饮引流入口。', duration: '单人餐', price: 30, img: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=900&q=70', keywords: '烧饼 烩面 小吃 餐饮' },
+    { id: 21, category: '交通', tag: '旅游直通车', title: '郑州—嵩阳景区旅游直通车', desc: '从郑州汽车中心站出发，一站直达嵩阳景区或少林寺入口，免去换乘烦恼。', duration: '单程', price: 28, img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=900&q=70', keywords: '直通车 交通 郑州 接驳' },
+    { id: 22, category: '交通', tag: '包车/租车', title: '登封全域独立包车（含司机）', desc: '提供5座轿车、7座商务车。本地老司机上门接送，行程自定，可自由组合各大景点。', duration: '日租', price: 599, img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=900&q=70', keywords: '包车 租车 交通 自驾' },
+    // 商业服务
+    { id: 23, category: '商业', tag: '国风旅拍', title: '国风旅拍/汉服写真', desc: '提供汉服穿戴与旅拍服务，可对接少林寺红墙、塔林等外景。', duration: '半日', price: 299, img: 'https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&w=900&q=70', keywords: '旅拍 汉服 摄影 商业' },
+    { id: 24, category: '商业', tag: '禅茶体验', title: '宋代点茶/禅茶体验', desc: '在少林寺周边的静心茶寮，体验宋代点茶雅趣。', duration: '2 小时', price: 188, img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=70', keywords: '点茶 禅茶 体验 商业' },
+    { id: 25, category: '商业', tag: '研学教学', title: '武术研学/太极教学', desc: '中岳景区遥参亭提供太极体验与一对一武术教学，适合深度研学。', duration: '按课时', price: 260, img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=70', keywords: '研学 武术 太极 教学 商业' },
+    { id: 26, category: '商业', tag: '静心疗愈', title: '静心抄经', desc: '部分禅意民宿赠送手抄《心经》套装，提供抄经体验，可作为静心疗愈产品。', duration: '1 小时', price: 98, img: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=70', keywords: '抄经 疗愈 静心 商业' },
+    { id: 27, category: '商业', tag: '非遗手作', title: '非遗手作工坊（面塑/传拓）', desc: '登封当地有面塑、高浮雕传拓等非遗项目，可开发为商业手作课程。', duration: '2 小时', price: 120, img: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=900&q=70', keywords: '面塑 传拓 非遗 体验 商业' }
   ];
 
   let allExperiences = MOCK_EXPERIENCES.slice();
@@ -518,19 +545,16 @@
 
     expGrid.innerHTML = list.map(function (item) {
       const priceText = (item.price === 0 || item.price === '0') ? '免费' : '¥ ' + esc(item.price);
-      // 给卡片加上 onclick 跳转
       return '<article onclick="window.location.href=\'detail.html?id=' + item.id + '\'" class="cursor-pointer group bg-white rounded-xl md:rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">' +
           '<div class="relative h-40 overflow-hidden bg-gray-100">' +
             '<img src="' + esc(item.img) + '" alt="' + esc(item.title) + '" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src=\'' + FALLBACK_IMG + '\'">' +
-            '<span class="absolute top-3 left-3 text-[10px] md:text-[11px] px-2 py-1 rounded-md bg-white/95 text-shan-700 font-medium shadow-sm">' + esc(item.category) + '</span>' +
+            '<span class="absolute top-3 left-3 text-[10px] md:text-[11px] px-2 py-1 rounded-md bg-white/95 text-shan-700 font-medium shadow-sm">' + esc(item.tag) + '</span>' +
           '</div>' +
           '<div class="p-4 flex flex-col flex-1">' +
-            '<div class="text-[10px] md:text-[11px] text-shan-600 font-medium mb-1">' + esc(item.tag) + '</div>' +
-            '<h3 class="font-serif text-base md:text-[1rem] font-bold leading-snug text-ink">' + esc(item.title) + '</h3>' +
-            '<p class="text-[11px] md:text-xs text-gray-500 mt-2 leading-relaxed line-clamp-3 flex-1">' + esc(item.desc) + '</p>' +
+            '<h3 class="font-serif text-base md:text-[1rem] font-bold leading-snug text-ink line-clamp-1">' + esc(item.title) + '</h3>' +
+            '<p class="text-[11px] md:text-xs text-gray-500 mt-2 leading-relaxed line-clamp-2 flex-1">' + esc(item.desc) + '</p>' +
             '<div class="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between gap-2">' +
-              '<div class="text-[10px] md:text-[11px] text-gray-400 whitespace-nowrap">' + esc(item.duration) + ' · <span class="text-shan-700 font-semibold">' + priceText + '</span></div>' +
-              // 阻止冒泡，点击按钮不跳转
+              '<div class="text-[10px] md:text-[11px] text-gray-400 whitespace-nowrap">' + esc(item.duration) + ' · <span class="text-shan-700 font-semibold text-sm">' + priceText + '</span></div>' +
               '<button type="button" onclick="event.stopPropagation(); showToast(\'已成功收入行囊\', \'success\')" class="add-btn text-[10px] md:text-[11px] px-3 py-2 md:py-1.5 rounded-lg bg-shan-50 text-shan-700 hover:bg-shan-600 hover:text-white transition whitespace-nowrap">+ 收入行囊</button>' +
             '</div>' +
           '</div>' +
@@ -538,7 +562,7 @@
     }).join('');
   }
 
-  // 🌟 核心过滤逻辑：大分类聚合匹配
+  // 🌟 核心过滤逻辑：5 大分类精准匹配
   function applyFilter() {
     let list = allExperiences.slice();
 
@@ -546,13 +570,19 @@
       list = list.filter(function (item) {
         const cat = String(item.category);
         if (activeCategory === '人文体验') {
-          return cat.includes('文化') || cat.includes('非遗') || cat.includes('自然') || cat.includes('图书');
+          return cat.includes('文化') || cat.includes('非遗') || cat.includes('自然') || cat.includes('体验');
         }
-        if (activeCategory === '文创特产') {
+        if (activeCategory === '嵩山礼物') {
           return cat.includes('礼物') || cat.includes('文创') || cat.includes('特产');
         }
+        if (activeCategory === '热门景点') {
+          return cat.includes('景点');
+        }
         if (activeCategory === '吃住行') {
-          return cat.includes('住宿') || cat.includes('酒店') || cat.includes('餐饮') || cat.includes('交通') || cat.includes('租车') || cat.includes('商业');
+          return cat.includes('住宿') || cat.includes('餐饮') || cat.includes('交通');
+        }
+        if (activeCategory === '商业服务') {
+          return cat.includes('商业') || cat.includes('服务');
         }
         return cat.includes(activeCategory);
       });
