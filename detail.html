@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>详情 - 天地之中 · 嵩山人文志</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        shan: { 50:'#ECFDF5', 100:'#D1FAE5', 200:'#A7F3D0', 300:'#6EE7B7', 400:'#34D399', 500:'#10B981', 600:'#059669', 700:'#047857', 800:'#065F46', 900:'#064E3B' },
+                        ink: '#1F2937', sand: '#FAF9F6'
+                    },
+                    fontFamily: { serif: ['"Noto Serif SC"', '"Songti SC"', 'STSong', 'SimSun', 'serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #FAF9F6; color: #1F2937; -webkit-font-smoothing: antialiased; }
+        .hero-bg { background-size: cover; background-position: center; }
+        .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; transform: translateY(20px); }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="font-sans antialiased pb-20">
+
+    <!-- 顶部返回导航 -->
+    <div class="absolute top-4 left-4 z-50">
+        <a href="index.html#library" class="bg-black/40 hover:bg-black/60 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm flex items-center gap-2 transition border border-white/20">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            返回生态库
+        </a>
+    </div>
+
+    <!-- 首屏大图 -->
+    <header id="detailHeader" class="relative w-full h-[40vh] md:h-[50vh] bg-gray-900 flex items-center justify-center text-center hero-bg">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-shan-900/90"></div>
+        <div class="relative z-10 px-4 fade-in-up w-full max-w-4xl">
+            <div id="detailTag" class="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs mb-3 border border-white/30">加载中...</div>
+            <h1 id="detailTitle" class="text-3xl md:text-5xl font-serif font-bold text-white mb-4 drop-shadow-lg leading-snug">加载中...</h1>
+            <div class="text-white/90 text-lg md:text-xl">
+                <span id="detailDuration" class="mr-4"></span>
+                <span class="text-shan-300 font-bold text-2xl">¥ <span id="detailPrice">-</span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主体内容区 (向上浮动) -->
+    <main class="max-w-4xl mx-auto px-4 -mt-8 relative z-20">
+
+        <!-- 简介卡片 -->
+        <div class="bg-white rounded-2xl shadow-xl p-6 md:p-10 mb-8 border-t-4 border-shan-600 fade-in-up" style="animation-delay: 0.1s;">
+            <h2 class="text-xl font-serif font-bold text-ink mb-4 flex items-center gap-2">
+                <span class="w-1.5 h-5 bg-shan-600 rounded-full"></span> 体验/商品介绍
+            </h2>
+            <p id="detailDesc" class="text-gray-600 leading-loose whitespace-pre-wrap text-justify text-sm md:text-base"></p>
+        </div>
+
+        <!-- 预定/留资转化区 -->
+        <div class="bg-ink rounded-2xl shadow-2xl p-6 md:p-10 text-white fade-in-up" style="animation-delay: 0.2s;">
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <!-- 左侧：直接联系 -->
+                <div>
+                    <h3 class="text-xl font-serif font-bold mb-2 text-shan-400">想了解更多详情？</h3>
+                    <p class="text-xs text-gray-400 mb-6">文化顾问为您1对1解答，定制专属行程。</p>
+                    <div class="space-y-4">
+                        <button id="btnCall" class="w-full flex items-center justify-center gap-2 bg-shan-600 hover:bg-shan-700 text-white font-bold py-3 rounded-xl transition shadow-lg transform hover:scale-[1.02]">
+                            📞 <span>一键拨打电话咨询</span>
+                        </button>
+                        <button id="btnWechat" class="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition shadow-lg transform hover:scale-[1.02]">
+                            💬 <span>复制客服微信号</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 右侧：留资表单 -->
+                <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+                    <h3 class="text-lg font-serif font-bold mb-4 text-white">留言预定 / 咨询</h3>
+                    <form onsubmit="return false;" class="space-y-3">
+                        <input type="text" id="leadName" placeholder="您的称呼" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-gray-400 focus:outline-none focus:border-shan-400 transition text-sm">
+                        <input type="text" id="leadContact" placeholder="手机号 / 微信号" class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-gray-400 focus:outline-none focus:border-shan-400 transition text-sm">
+                        <textarea id="leadMsg" rows="2" placeholder="出行时间 / 预定人数 / 其他需求..." class="w-full bg-white/10 border border-white/20 rounded-lg p-3 text-white placeholder-gray-400 focus:outline-none focus:border-shan-400 transition resize-none text-sm"></textarea>
+                        <button onclick="submitLead()" class="w-full bg-shan-500 hover:bg-shan-400 text-white font-bold py-3 rounded-lg transition shadow-md mt-2">立即提交</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast" class="fixed top-10 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-2xl z-[200] text-sm font-medium transition-opacity duration-300 opacity-0 pointer-events-none"></div>
+
+    <script>
+        // ⚠️ 请确保这里是你的云端地址
+        const API_BASE = 'https://songshan-backend.fastapicloud.dev';
+        const currentId = new URLSearchParams(window.location.search).get('id');
+        let resourceData = {};
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            if(!t) return;
+            t.innerText = msg; t.classList.remove('opacity-0');
+            setTimeout(() => t.classList.add('opacity-0'), 2500);
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (!currentId) { alert("缺少ID参数"); window.location.href = 'index.html'; return; }
+
+            try {
+                // 因为后端暂时没有单独的 /api/resources/{id} 接口，我们从列表中查找
+                const res = await fetch(`${API_BASE}/api/resources`);
+                const data = await res.json();
+                const list = data.resources || data || [];
+
+                resourceData = list.find(item => item.id == currentId);
+                if (!resourceData) throw new Error("未找到该商品");
+
+                // 渲染页面数据
+                document.title = `${resourceData.title} - 天地之中`;
+                document.getElementById('detailTag').innerText = resourceData.tag || resourceData.category || '精选';
+                document.getElementById('detailTitle').innerText = resourceData.title;
+                document.getElementById('detailDuration').innerText = resourceData.duration || '规格详询';
+                document.getElementById('detailPrice').innerText = resourceData.price || '详询';
+                document.getElementById('detailDesc').innerText = resourceData.desc || '暂无详细描述';
+
+                // 渲染背景图
+                if (resourceData.img) {
+                    document.getElementById('detailHeader').style.backgroundImage = `url('${resourceData.img}')`;
+                }
+
+                // 绑定联系电话和微信
+                const btnCall = document.getElementById('btnCall');
+                btnCall.onclick = () => window.location.href = `tel:15515816811`;
+
+                const btnWechat = document.getElementById('btnWechat');
+                btnWechat.onclick = () => {
+                    navigator.clipboard.writeText('15515816811').then(() => showToast('客服微信已复制，请前往微信添加'));
+                };
+
+            } catch (e) {
+                console.error(e);
+                alert("加载失败，即将返回首页");
+                window.location.href = 'index.html';
+            }
+        });
+
+        async function submitLead() {
+            const name = document.getElementById('leadName').value;
+            const contact = document.getElementById('leadContact').value;
+            const msg = document.getElementById('leadMsg').value;
+
+            if (!name || !contact) { showToast("请填写称呼和联系方式"); return; }
+
+            const payload = {
+                resource_name: `咨询商品: ${resourceData.title || '详情页'}`,
+                message: `【姓名】：${name}\n【联系方式】：${contact}\n【留言】：${msg || '无'}`
+            };
+
+            try {
+                const res = await fetch(`${API_BASE}/api/leads`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (res.ok) {
+                    showToast("🎉 提交成功，顾问将尽快联系您！");
+                    document.getElementById('leadName').value = '';
+                    document.getElementById('leadContact').value = '';
+                    document.getElementById('leadMsg').value = '';
+                } else { showToast("提交失败，请重试"); }
+            } catch (e) { showToast("网络异常"); }
+        }
+    </script>
+</body>
+</html>
