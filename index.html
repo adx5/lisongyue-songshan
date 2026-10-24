@@ -309,9 +309,9 @@
         连接历史与未来、大咖与大众、文化与产业的文旅生态平台。把嵩山的历史、技艺与山水，装进一只可定制的行囊。
       </p>
       <div class="mt-4">
-        <a href="#booking" class="inline-block text-xs md:text-sm text-shan-400 border border-shan-600/50 hover:bg-shan-600 hover:text-white px-4 py-2 rounded-lg transition">
+        <button onclick="openPartnerModal()" class="inline-block text-xs md:text-sm text-shan-400 border border-shan-600/50 hover:bg-shan-600 hover:text-white px-4 py-2 rounded-lg transition">
           我是主理人 / 诚邀共建 →
-        </a>
+        </button>
       </div>
     </div>
 
@@ -346,14 +346,53 @@
   </div>
 </footer>
 
-<!-- 全局 Toast -->
+<!-- ============================= 全局组件 ============================= -->
 <div id="toast" class="fixed left-1/2 bottom-8 z-[100] px-5 py-3 rounded-xl text-white text-sm shadow-2xl transition-all duration-300 opacity-0 translate-y-4 -translate-x-1/2 pointer-events-none bg-shan-600"></div>
 
+<!-- 主理人入驻弹窗 -->
+<div id="partnerModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
+        <div class="bg-shan-900 px-6 py-4 flex justify-between items-center text-white">
+            <h3 class="font-serif font-bold text-lg">诚邀主理人入驻</h3>
+            <button onclick="closePartnerModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+        </div>
+        <div class="p-6 space-y-4">
+            <div>
+                <label class="block text-xs text-gray-500 mb-1">商家/主理人名称</label>
+                <input type="text" id="ptName" class="w-full border border-gray-200 rounded-lg p-2.5 text-sm outline-none focus:border-shan-500" placeholder="如：照见山居 / 王老师">
+            </div>
+            <div>
+                <label class="block text-xs text-gray-500 mb-1">联系电话 (微信同号)</label>
+                <input type="text" id="ptPhone" class="w-full border border-gray-200 rounded-lg p-2.5 text-sm outline-none focus:border-shan-500" placeholder="方便我们与您取得联系">
+            </div>
+            <div>
+                <label class="block text-xs text-gray-500 mb-1">所属业态</label>
+                <select id="ptType" class="w-full border border-gray-200 rounded-lg p-2.5 text-sm outline-none focus:border-shan-500 bg-white">
+                    <option value="精品民宿/酒店">精品民宿/酒店</option>
+                    <option value="特色餐饮/饭店">特色餐饮/饭店</option>
+                    <option value="交通租车">交通租车/包车</option>
+                    <option value="非遗体验/手作">非遗体验/手作</option>
+                    <option value="文创特产">文创特产/礼物</option>
+                    <option value="其他商业服务">其他商业服务</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs text-gray-500 mb-1">简单介绍 (选填)</label>
+                <textarea id="ptIntro" rows="2" class="w-full border border-gray-200 rounded-lg p-2.5 text-sm outline-none focus:border-shan-500 resize-none" placeholder="您的优势、特色或希望合作的方式..."></textarea>
+            </div>
+        </div>
+        <div class="p-4 bg-gray-50 flex justify-end gap-3">
+            <button onclick="closePartnerModal()" class="px-4 py-2 text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50">取消</button>
+            <button onclick="submitPartnerForm()" class="px-4 py-2 text-sm bg-shan-600 text-white rounded-lg shadow-md hover:bg-shan-700 transition">提交申请</button>
+        </div>
+    </div>
+</div>
+
+<!-- ============================= 脚本 ============================= -->
 <script>
 (function () {
   'use strict';
 
-  // ⚠️ 请确保这里的后端地址是你云端的地址
   const API_BASE  = 'https://songshan-backend.fastapicloud.dev';
   const API_LEADS = API_BASE + '/api/leads';
   const API_LIST  = API_BASE + '/api/resources';
@@ -604,7 +643,7 @@
   const viewPlanBtn = document.getElementById('viewPlanBtn');
   if (viewPlanBtn) { viewPlanBtn.addEventListener('click', function () { if (aiSearchInput) aiSearchInput.value = '书院'; runAISearch('书院'); }); }
 
-  /* 表单 */
+  /* 表单 - 定制行囊 */
   const bookingForm = document.getElementById('bookingForm'), submitBtn = document.getElementById('submitBtn');
   if (bookingForm) {
     bookingForm.addEventListener('submit', async function (e) {
@@ -622,6 +661,51 @@
       } catch (err) { console.warn('[定制行囊] 提交失败：', err); showToast('提交失败，请稍后重试', 'error'); }
       finally { if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalText; } }
     });
+  }
+
+  /* 主理人入驻弹窗控制 */
+  window.openPartnerModal = function() {
+      document.getElementById('partnerModal').classList.remove('hidden');
+      document.getElementById('partnerModal').classList.add('flex');
+  }
+  window.closePartnerModal = function() {
+      document.getElementById('partnerModal').classList.add('hidden');
+      document.getElementById('partnerModal').classList.remove('flex');
+  }
+
+  window.submitPartnerForm = async function() {
+      const name = document.getElementById('ptName').value.trim();
+      const phone = document.getElementById('ptPhone').value.trim();
+      const type = document.getElementById('ptType').value;
+      const intro = document.getElementById('ptIntro').value.trim();
+
+      if (!name || !phone) {
+          showToast('请填写名称和联系电话', 'warn');
+          return;
+      }
+
+      const payload = {
+          resource_name: '主理人入驻申请',
+          message: `【商家名称】：${name}\n【业态类型】：${type}\n【联系电话】：${phone}\n【介绍】：${intro || '无'}`
+      };
+
+      try {
+          const res = await fetch(API_LEADS, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify(payload)
+          });
+          if (!res.ok) throw new Error('提交失败');
+
+          showToast('申请已提交！我们会尽快与您联系', 'success');
+          closePartnerModal();
+          document.getElementById('ptName').value = '';
+          document.getElementById('ptPhone').value = '';
+          document.getElementById('ptIntro').value = '';
+      } catch (err) {
+          console.warn(err);
+          showToast('网络错误，请稍后再试', 'error');
+      }
   }
 
   /* 3D 渲染 */
