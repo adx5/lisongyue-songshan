@@ -46,6 +46,7 @@
             <nav class="flex-1 py-6 space-y-2">
                 <a href="#" id="nav-dashboard" onclick="switchTab('dashboard')" class="flex items-center px-6 py-3 text-gray-400 hover:text-white hover:bg-white/5 transition">数据仪表盘</a>
                 <a href="#" id="nav-leads" onclick="switchTab('leads')" class="flex items-center px-6 py-3 text-gray-400 hover:text-white hover:bg-white/5 transition">定制行囊线索</a>
+                <a href="#" id="nav-partners" onclick="switchTab('partners')" class="flex items-center px-6 py-3 text-gray-400 hover:text-white hover:bg-white/5 transition">主理人入驻申请</a>
                 <a href="#" id="nav-resources" onclick="switchTab('resources')" class="flex items-center px-6 py-3 bg-brand/10 text-brand border-r-4 border-brand font-medium transition">生态体验库管理</a>
             </nav>
             <div class="mt-auto p-6 border-t border-gray-800 text-xs text-gray-500 text-center">
@@ -66,33 +67,50 @@
 
             <!-- 1. 仪表盘 -->
             <div id="tab-dashboard" class="hidden flex-1 p-8 overflow-auto">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                        <p class="text-sm text-gray-500 mb-1">上架生态体验/商品总数</p><h3 id="stat-resources" class="text-3xl font-bold text-gray-900">0</h3>
+                        <p class="text-sm text-gray-500 mb-1">上架生态内容总数</p><h3 id="stat-resources" class="text-3xl font-bold text-gray-900">0</h3>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                        <p class="text-sm text-gray-500 mb-1">定制行囊留资线索</p><h3 id="stat-leads" class="text-3xl font-bold text-brand">0</h3>
+                        <p class="text-sm text-gray-500 mb-1">游客定制留资</p><h3 id="stat-leads" class="text-3xl font-bold text-blue-600">0</h3>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                        <p class="text-sm text-gray-500 mb-1">主理人入驻申请</p><h3 id="stat-partners" class="text-3xl font-bold text-brand">0</h3>
                     </div>
                 </div>
             </div>
 
-            <!-- 2. 线索池 -->
+            <!-- 2. 定制行囊线索 (游客) -->
             <div id="tab-leads" class="hidden flex-1 p-8 overflow-auto">
                 <div class="mb-4 flex justify-between items-center">
-                    <div><h3 class="text-xl font-bold text-gray-800">定制行囊留资池</h3></div>
-                    <button onclick="exportLeadsToExcel()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm transition">⬇ 导出 Excel</button>
+                    <div><h3 class="text-xl font-bold text-gray-800">游客定制留资池</h3></div>
                 </div>
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                     <table class="w-full text-left border-collapse">
                         <thead><tr class="bg-gray-50 text-gray-500 text-sm border-b">
-                            <th class="py-4 px-6 font-medium">意向主题</th><th class="py-4 px-6 font-medium">客户称呼</th><th class="py-4 px-6 font-medium">联系方式</th><th class="py-4 px-6 font-medium">备注</th><th class="py-4 px-6 text-right font-medium">提交时间</th>
+                            <th class="py-4 px-6 font-medium">主题</th><th class="py-4 px-6 font-medium">备注 / 需求</th><th class="py-4 px-6 text-right font-medium">提交时间</th>
                         </tr></thead>
                         <tbody id="leadsTableBody" class="text-sm divide-y divide-gray-100"></tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- 3. 资源管理 (生态库) -->
+            <!-- 3. 主理人入驻申请 -->
+            <div id="tab-partners" class="hidden flex-1 p-8 overflow-auto">
+                <div class="mb-4 flex justify-between items-center">
+                    <div><h3 class="text-xl font-bold text-gray-800">主理人入驻申请</h3></div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <table class="w-full text-left border-collapse">
+                        <thead><tr class="bg-gray-50 text-gray-500 text-sm border-b">
+                            <th class="py-4 px-6 font-medium">商家/主理人名称</th><th class="py-4 px-6 font-medium">业态类型</th><th class="py-4 px-6 font-medium">联系方式</th><th class="py-4 px-6 font-medium">介绍</th><th class="py-4 px-6 text-right font-medium">提交时间</th>
+                        </tr></thead>
+                        <tbody id="partnersTableBody" class="text-sm divide-y divide-gray-100"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 4. 资源管理 (生态库) -->
             <div id="tab-resources" class="hidden flex-1 p-8 overflow-auto">
                 <div class="mb-6 flex justify-between items-center">
                     <div><h3 class="text-xl font-bold text-gray-800">生态体验库列表</h3></div>
@@ -216,7 +234,7 @@
 
         function switchTab(tabId) {
             currentTab = tabId;
-            ['dashboard','leads','resources'].forEach(id => {
+            ['dashboard','leads','partners','resources'].forEach(id => {
                 const nav = document.getElementById('nav-'+id);
                 if(nav) nav.className = "flex items-center px-6 py-3 text-gray-400 hover:text-white hover:bg-white/5 transition";
                 const tab = document.getElementById('tab-'+id);
@@ -225,11 +243,12 @@
             document.getElementById('nav-'+tabId).className = "flex items-center px-6 py-3 bg-brand/10 text-brand border-r-4 border-brand font-medium transition";
             document.getElementById('tab-'+tabId).classList.remove('hidden');
 
-            const titles = { dashboard: '数据仪表盘', leads: '定制行囊线索', resources: '生态体验库管理' };
+            const titles = { dashboard: '数据仪表盘', leads: '游客定制留资', partners: '主理人入驻申请', resources: '生态体验库管理' };
             document.getElementById('pageTitle').innerText = titles[tabId];
 
             if (tabId === 'dashboard') fetchStats();
             if (tabId === 'leads') fetchLeads();
+            if (tabId === 'partners') fetchLeads(); // 共用拉取逻辑
             if (tabId === 'resources') fetchResources();
         }
 
@@ -241,6 +260,8 @@
                 const data = await response.json();
                 document.getElementById('stat-resources').innerText = data.total_resources || 0;
                 document.getElementById('stat-leads').innerText = data.total_leads || 0;
+                // 暂时用总线索数代替，如果有独立字段可修改
+                document.getElementById('stat-partners').innerText = data.total_leads || 0;
             } catch (error) { console.error(error); }
         }
 
@@ -249,34 +270,49 @@
                 const res = await fetch(`${API_BASE}/api/leads`);
                 const data = await res.json();
                 allLeadsData = data.leads || [];
-                const tbody = document.getElementById('leadsTableBody');
-                if (allLeadsData.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="5" class="py-10 text-center text-gray-400">暂无定制线索</td></tr>';
+
+                // 分流：区分游客和主理人
+                const guestLeads = allLeadsData.filter(l => l.resource_name !== '主理人入驻申请');
+                const partnerLeads = allLeadsData.filter(l => l.resource_name === '主理人入驻申请');
+
+                // 1. 渲染游客定制表
+                const leadsTbody = document.getElementById('leadsTableBody');
+                if (guestLeads.length === 0) {
+                    leadsTbody.innerHTML = '<tr><td colspan="3" class="py-10 text-center text-gray-400">暂无游客定制线索</td></tr>';
                 } else {
-                    tbody.innerHTML = allLeadsData.map(l => `
+                    leadsTbody.innerHTML = guestLeads.map(l => `
                         <tr class="hover:bg-gray-50">
                             <td class="py-4 px-6 font-bold text-brand">${l.resource_name || '定制行囊'}</td>
-                            <td class="py-4 px-6 font-medium">${l.client_name || '-'}</td>
-                            <td class="py-4 px-6 font-mono text-gray-600">${l.contact_info || '-'}</td>
                             <td class="py-4 px-6 text-gray-500">${l.message || '-'}</td>
                             <td class="py-4 px-6 text-right text-gray-400 text-xs">${l.created_at || '刚刚'}</td>
                         </tr>
                     `).join('');
                 }
-            } catch(e) { console.error(e); }
-        }
 
-        function exportLeadsToExcel() {
-            if(allLeadsData.length === 0) return alert("暂无数据");
-            let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
-            csvContent += "意向主题,客户姓名,联系方式,备注\n";
-            allLeadsData.forEach(l => {
-                csvContent += `"${l.resource_name}","${l.client_name||''}","${l.contact_info||''}","${l.message||''}"\n`;
-            });
-            const encodedUri = encodeURI(csvContent);
-            const link = document.createElement("a");
-            link.setAttribute("href", encodedUri); link.setAttribute("download", "嵩山行囊线索.csv");
-            document.body.appendChild(link); link.click(); document.body.removeChild(link);
+                // 2. 渲染主理人入驻表 (利用正则从 message 提取信息)
+                const partnersTbody = document.getElementById('partnersTableBody');
+                if (partnerLeads.length === 0) {
+                    partnersTbody.innerHTML = '<tr><td colspan="5" class="py-10 text-center text-gray-400">暂无商家入驻申请</td></tr>';
+                } else {
+                    partnersTbody.innerHTML = partnerLeads.map(l => {
+                        // 从 message 文本中提取内容，例如：【商家名称】：xxx
+                        const nameMatch = l.message.match(/【商家名称】：(.*?)(\n|$)/);
+                        const typeMatch = l.message.match(/【业态类型】：(.*?)(\n|$)/);
+                        const phoneMatch = l.message.match(/【联系电话】：(.*?)(\n|$)/);
+                        const introMatch = l.message.match(/【介绍】：(.*?)(\n|$)/);
+
+                        return `
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-4 px-6 font-bold text-gray-800">${nameMatch ? nameMatch[1] : '未知'}</td>
+                            <td class="py-4 px-6 text-xs"><span class="bg-brand/10 text-brand px-2 py-1 rounded">${typeMatch ? typeMatch[1] : '-'}</span></td>
+                            <td class="py-4 px-6 font-mono text-brand font-bold">${phoneMatch ? phoneMatch[1] : '-'}</td>
+                            <td class="py-4 px-6 text-gray-500 text-xs max-w-xs truncate" title="${introMatch ? introMatch[1] : ''}">${introMatch ? introMatch[1] : '-'}</td>
+                            <td class="py-4 px-6 text-right text-gray-400 text-xs">${l.created_at || '刚刚'}</td>
+                        </tr>
+                    `}).join('');
+                }
+
+            } catch(e) { console.error(e); }
         }
 
         async function fetchResources() {
