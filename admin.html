@@ -48,7 +48,6 @@
                 <a href="#" id="nav-leads" onclick="switchTab('leads')" class="flex items-center px-6 py-3 text-gray-400 hover:text-white hover:bg-white/5 transition">定制行囊线索</a>
                 <a href="#" id="nav-partners" onclick="switchTab('partners')" class="flex items-center px-6 py-3 text-gray-400 hover:text-white hover:bg-white/5 transition">主理人入驻申请</a>
                 <a href="#" id="nav-resources" onclick="switchTab('resources')" class="flex items-center px-6 py-3 text-gray-400 hover:text-white hover:bg-white/5 transition">生态体验库管理</a>
-                <!-- 🌟 新增：会议管理导航 -->
                 <a href="#" id="nav-events" onclick="switchTab('events')" class="flex items-center px-6 py-3 text-gray-400 hover:text-white hover:bg-white/5 transition">会议与讲座管理</a>
             </nav>
             <div class="mt-auto p-6 border-t border-gray-800 text-xs text-gray-500 text-center">
@@ -79,7 +78,6 @@
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                         <p class="text-sm text-gray-500 mb-1">主理人入驻申请</p><h3 id="stat-partners" class="text-3xl font-bold text-brand">0</h3>
                     </div>
-                    <!-- 🌟 新增会议统计 -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                         <p class="text-sm text-gray-500 mb-1">已发布会议/讲座</p><h3 id="stat-events" class="text-3xl font-bold text-amber-600">0</h3>
                     </div>
@@ -136,7 +134,7 @@
                 </div>
             </div>
 
-            <!-- 🌟 5. 会议管理 -->
+            <!-- 5. 会议管理 -->
             <div id="tab-events" class="hidden flex-1 p-8 overflow-auto">
                 <div class="mb-6 flex justify-between items-center">
                     <div><h3 class="text-xl font-bold text-gray-800">会议与讲座列表</h3></div>
@@ -210,7 +208,7 @@
         </div>
     </div>
 
-    <!-- 🌟 会议编辑弹窗 -->
+    <!-- 🌟 会议编辑弹窗 (已恢复图床及拖拽排序功能) -->
     <div id="eventModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden">
             <div class="bg-inkBlue px-6 py-4 flex justify-between items-center text-white">
@@ -234,18 +232,30 @@
                 <div>
                     <label class="block text-sm font-medium mb-1">正文内容 (支持 HTML 排版)</label>
                     <p class="text-xs text-gray-400 mb-1">可使用 &lt;p&gt;段落&lt;/p&gt;, &lt;h2&gt;标题&lt;/h2&gt;, &lt;ul&gt;&lt;li&gt;列表&lt;/li&gt;&lt;/ul&gt;, &lt;img src="..."&gt; 等标签。</p>
-                    <textarea id="eventContent" rows="8" class="w-full border p-2.5 rounded-lg font-mono text-sm bg-gray-50"></textarea>
+                    <textarea id="eventContent" rows="6" class="w-full border p-2.5 rounded-lg font-mono text-sm bg-gray-50"></textarea>
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium mb-1">正文配图 / 图集链接</label>
-                    <p class="text-xs text-gray-400 mb-1">输入多张图片的链接，用逗号隔开。会展示在正文底部。</p>
-                    <textarea id="eventImages" rows="3" class="w-full border p-2.5 rounded-lg font-mono text-sm bg-gray-50" placeholder="https://img1.jpg, https://img2.jpg"></textarea>
+                <!-- 🌟 恢复的图集上传及可视化排序区域 -->
+                <div class="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                    <label class="block text-sm font-bold text-gray-700 mb-2">正文配图 / 图集</label>
+                    <div class="flex items-center gap-3 mb-3">
+                        <input type="file" id="eventImgsFileInput" accept="image/*" multiple class="hidden" onchange="handleEventImgsUpload(this)">
+                        <button type="button" onclick="document.getElementById('eventImgsFileInput').click()" class="bg-brand hover:bg-brandHover text-white px-4 py-2 rounded-lg text-sm transition shadow-sm">📁 选择多张图片上传</button>
+                        <span id="eventImgsUploadStatus" class="text-sm text-gray-500 truncate flex-1"></span>
+                    </div>
+
+                    <!-- 隐藏域用于存储最终用逗号拼接的URL字符串 -->
+                    <input type="hidden" id="eventImages" value="">
+
+                    <!-- 可视化预览与排序区 -->
+                    <div id="eventImagesPreview" class="grid grid-cols-4 gap-3 mt-2">
+                        <!-- JS 动态渲染图片卡片，带排序和删除按钮 -->
+                    </div>
                 </div>
             </div>
-            <div class="p-4 bg-gray-50 flex justify-end gap-3">
+            <div class="p-4 bg-gray-50 flex justify-end gap-3 border-t">
                 <button onclick="closeEventModal()" class="px-4 py-2 bg-white border rounded-lg">取消</button>
-                <button onclick="saveEvent()" class="px-4 py-2 bg-brand text-white rounded-lg shadow-md">保存</button>
+                <button onclick="saveEvent()" class="px-4 py-2 bg-brand text-white rounded-lg shadow-md">保存发布</button>
             </div>
         </div>
     </div>
@@ -255,6 +265,7 @@
         let currentTab = 'dashboard';
         let adminToken = localStorage.getItem('adminToken') || '';
         let allLeadsData = [];
+        let currentEventImagesArray = []; // 用于存储当前会议图集的数组，方便排序
 
         // ⚠️ 本地测试请换成 http://127.0.0.1:8000，上线请用下面这个云端地址
         const API_BASE = 'https://songshan-backend.fastapicloud.dev';
@@ -318,7 +329,7 @@
                 const data = await response.json();
                 document.getElementById('stat-resources').innerText = data.total_resources || 0;
                 document.getElementById('stat-leads').innerText = data.total_leads || 0;
-                document.getElementById('stat-partners').innerText = data.total_leads || 0; // 暂时代替
+                document.getElementById('stat-partners').innerText = data.total_leads || 0;
                 document.getElementById('stat-events').innerText = data.total_events || 0;
             } catch (error) { console.error(error); }
         }
@@ -384,7 +395,6 @@
                             <td class="py-4 px-4 text-xs"><span class="bg-gray-100 px-2 py-1 rounded">${res.category || '未分类'}</span></td>
                             <td class="py-4 px-4 font-bold text-gray-800">${res.title}</td>
                             <td class="py-4 px-4 text-brand font-bold">¥ ${res.price || '-'}</td>
-                            <td class="py-4 px-4 text-gray-500 text-xs">${res.tag || '-'}</td>
                             <td class="py-4 px-6 text-right space-x-2">
                                 <button onclick='editResource(${JSON.stringify(res).replace(/'/g, "&#39;")})' class="text-xs bg-gray-100 text-gray-700 hover:bg-gray-200 py-1 px-3 rounded transition">编辑</button>
                                 <button onclick="deleteResourceAdmin(${res.id}, '${res.title}')" class="text-xs bg-red-50 text-red-600 hover:bg-red-500 hover:text-white py-1 px-3 rounded transition">删除</button>
@@ -431,7 +441,11 @@
             document.getElementById('eventLocation').value = '';
             document.getElementById('eventSummary').value = '';
             document.getElementById('eventContent').value = '';
-            document.getElementById('eventImages').value = '';
+
+            // 重置图集
+            currentEventImagesArray = [];
+            renderEventImages();
+
             document.getElementById('eventModalTitle').innerText = "发布会议";
             document.getElementById('eventModal').classList.remove('hidden');
             document.getElementById('eventModal').classList.add('flex');
@@ -444,7 +458,11 @@
             document.getElementById('eventLocation').value = e.location || '';
             document.getElementById('eventSummary').value = e.summary || '';
             document.getElementById('eventContent').value = e.content || '';
-            document.getElementById('eventImages').value = e.images || '';
+
+            // 解析图集字符串为数组
+            currentEventImagesArray = (e.images || '').split(',').map(u => u.trim()).filter(u => u);
+            renderEventImages();
+
             document.getElementById('eventModalTitle').innerText = "编辑会议";
             document.getElementById('eventModal').classList.remove('hidden');
             document.getElementById('eventModal').classList.add('flex');
@@ -457,13 +475,18 @@
 
         async function saveEvent() {
             const id = document.getElementById('eventEditId').value;
+
+            // 从数组重新拼装字符串
+            const imagesStr = currentEventImagesArray.join(',');
+            document.getElementById('eventImages').value = imagesStr;
+
             const data = {
                 title: document.getElementById('eventTitle').value,
                 date_str: document.getElementById('eventDate').value,
                 location: document.getElementById('eventLocation').value,
                 summary: document.getElementById('eventSummary').value,
                 content: document.getElementById('eventContent').value,
-                images: document.getElementById('eventImages').value
+                images: imagesStr
             };
             if(!data.title || !data.date_str) { alert("标题和日期不能为空"); return; }
 
@@ -484,6 +507,80 @@
             } catch (e) { alert("网络错误"); }
         }
 
+        // ==========================================
+        // 🌟 会议图集上传与排序逻辑
+        // ==========================================
+        async function handleEventImgsUpload(input) {
+            const files = input.files;
+            if (!files || files.length === 0) return;
+
+            const statusEl = document.getElementById('eventImgsUploadStatus');
+            statusEl.innerText = `正在上传 0/${files.length} 张...`;
+            statusEl.className = 'text-sm text-brand font-medium animate-pulse';
+
+            let successCount = 0;
+            for (let i = 0; i < files.length; i++) {
+                try {
+                    const publicUrl = await uploadFileToR2(files[i]);
+                    currentEventImagesArray.push(publicUrl);
+                    successCount++;
+                    statusEl.innerText = `正在上传 ${i+1}/${files.length} 张...`;
+                } catch (error) {
+                    console.error('单张上传失败', error);
+                }
+            }
+
+            // 清空 input，允许重复选择
+            input.value = '';
+
+            statusEl.innerText = `✅ 成功上传 ${successCount} 张`;
+            statusEl.className = 'text-sm text-green-600 font-medium';
+            setTimeout(() => statusEl.innerText = '', 3000);
+
+            renderEventImages();
+        }
+
+        function renderEventImages() {
+            const container = document.getElementById('eventImagesPreview');
+            if (currentEventImagesArray.length === 0) {
+                container.innerHTML = '<div class="col-span-4 text-center text-xs text-gray-400 py-4 border-2 border-dashed rounded-lg">暂无配图，请点击上方按钮上传</div>';
+                return;
+            }
+
+            container.innerHTML = currentEventImagesArray.map((url, index) => `
+                <div class="relative group rounded-lg overflow-hidden border border-gray-200 bg-white">
+                    <img src="${url}" class="w-full h-20 object-cover">
+                    <!-- 遮罩操作层 -->
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-1">
+                        ${index > 0 ? `<button type="button" onclick="moveEventImage(${index}, -1)" class="w-6 h-6 bg-white/20 hover:bg-white text-black rounded flex items-center justify-center text-xs" title="前移">&lt;</button>` : '<div class="w-6"></div>'}
+                        <button type="button" onclick="removeEventImage(${index})" class="w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded flex items-center justify-center text-xs" title="删除">×</button>
+                        ${index < currentEventImagesArray.length - 1 ? `<button type="button" onclick="moveEventImage(${index}, 1)" class="w-6 h-6 bg-white/20 hover:bg-white text-black rounded flex items-center justify-center text-xs" title="后移">&gt;</button>` : '<div class="w-6"></div>'}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function moveEventImage(index, direction) {
+            const newIndex = index + direction;
+            if (newIndex < 0 || newIndex >= currentEventImagesArray.length) return;
+
+            // 交换位置
+            const temp = currentEventImagesArray[index];
+            currentEventImagesArray[index] = currentEventImagesArray[newIndex];
+            currentEventImagesArray[newIndex] = temp;
+
+            renderEventImages();
+        }
+
+        function removeEventImage(index) {
+            currentEventImagesArray.splice(index, 1);
+            renderEventImages();
+        }
+
+
+        // ==========================================
+        // 🌟 生态库编辑逻辑
+        // ==========================================
         function openResModal() {
             document.getElementById('resEditId').value = '';
             document.getElementById('resEditCategory').value = '文化';
@@ -568,7 +665,7 @@
         }
 
         // ==========================================
-        // 🌟 蜜蜂图床上传逻辑
+        // 🌟 蜜蜂图床上传公共逻辑
         // ==========================================
         async function uploadFileToR2(file) {
             const formData = new FormData();
