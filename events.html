@@ -37,8 +37,29 @@
   /* 弹窗动画 */
   #academicModal, #eventModal, #autumnModal { transition: opacity 0.3s ease; }
   .hidden-modal { opacity: 0; pointer-events: none; }
-  .hide-scrollbar::-webkit-scrollbar { display: none; }
-  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* 🌟 跑马灯样式 */
+  .marquee-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    /* 边缘羽化遮罩，让滚动更自然 */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+  }
+  /* 鼠标悬停时暂停滚动 */
+  .marquee-container:hover .marquee-track {
+    animation-play-state: paused;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* 滚动一半（因为卡片复制了一份） */
+  }
 </style>
 </head>
 
@@ -72,11 +93,11 @@
 </header>
 
 <!-- Hero 区 -->
-<section class="bg-ink text-white py-16 md:py-24 relative overflow-hidden">
+<section class="bg-ink text-white pt-16 pb-12 md:pt-24 md:pb-16 relative overflow-hidden">
   <div class="absolute inset-0 opacity-60 bg-[url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center"></div>
   <div class="absolute inset-0 bg-gradient-to-r from-[#022c22]/95 via-[#064E3B]/80 to-[#059669]/30"></div>
 
-  <div class="container-1100 relative z-10">
+  <div class="container-1100 relative z-10 mb-12">
     <span class="inline-flex items-center gap-2 text-[11px] md:text-[12px] tracking-widest text-shan-300 border border-shan-400/40 bg-shan-900/30 px-3 py-1.5 rounded-full mb-4 md:mb-6 backdrop-blur-sm">
       <span class="w-1.5 h-1.5 rounded-full bg-shan-400"></span>
       学术支持 · 会议专题
@@ -94,42 +115,69 @@
       <span class="bg-white/10 px-3 py-1.5 rounded-md backdrop-blur-sm">🏛️ 中国移动通信联合会 · 北京大学经典与文明研究中心 · 嵩山文化研究会</span>
     </div>
   </div>
-</section>
 
-<!-- 嵩山文化学术矩阵 (历届会议展示区) -->
-<section class="bg-white py-10 md:py-14 border-t border-gray-100">
-  <div class="container-1100">
-    <div class="flex items-end justify-between mb-6">
-      <div>
-        <h2 class="font-serif text-xl md:text-2xl font-bold text-ink">嵩山文化学术矩阵</h2>
-        <p class="text-sm text-gray-500 mt-1">汇聚学术思想，传承嵩山文脉</p>
-      </div>
+  <!-- 🌟 学术矩阵跑马灯 (深色毛玻璃版) -->
+  <div class="relative z-10 w-full mt-4">
+    <div class="container-1100 mb-3">
+      <h2 class="text-sm font-bold text-shan-300 tracking-widest flex items-center gap-2">
+        <span class="w-4 h-px bg-shan-400"></span> 嵩山文化学术矩阵
+      </h2>
     </div>
 
-    <!-- 横向滑动卡片区 -->
-    <div class="flex overflow-x-auto hide-scrollbar gap-4 pb-4 snap-x snap-mandatory">
-      <!-- 卡片1：当前会议 -->
-      <div class="min-w-[280px] md:min-w-[320px] snap-start bg-shan-50 border border-shan-200 rounded-xl p-5 relative overflow-hidden">
-        <span class="absolute top-4 right-4 bg-shan-600 text-white text-[10px] px-2 py-1 rounded-full">当前展示</span>
-        <div class="text-xs text-shan-700 font-bold mb-2">2026年6月23日</div>
-        <h3 class="font-serif text-lg font-bold text-ink mb-2 leading-snug">天地之中·中华优秀传统文化传承发展工程</h3>
-        <p class="text-xs text-gray-600 line-clamp-2">汇聚学界、业界与政界智慧，深入挖掘中华文化核心资源。</p>
-      </div>
+    <div class="marquee-container py-2">
+      <!-- 轨道 -->
+      <div class="marquee-track gap-4 px-4">
 
-      <!-- 卡片2：嵩山文化研究会第三届二次会议 -->
-      <div onclick="openEventModal()" class="cursor-pointer min-w-[280px] md:min-w-[320px] snap-start bg-white border border-gray-200 hover:border-shan-400 rounded-xl p-5 relative overflow-hidden group hover:shadow-md transition">
-        <div class="text-xs text-shan-600 font-bold mb-2">2026年4月4日</div>
-        <h3 class="font-serif text-lg font-bold text-ink mb-2 leading-snug group-hover:text-shan-700 transition">嵩山文化研究会第三届二次会议</h3>
-        <p class="text-xs text-gray-600 line-clamp-2">总结2025，展望2026。发布多部文化著作，推动文旅融合高质量发展。</p>
-        <div class="mt-3 text-xs text-shan-600 font-medium">点击查看纪实 →</div>
-      </div>
+        <!-- ================= 第一组卡片 ================= -->
+        <!-- 卡片1：当前会议 -->
+        <div class="w-[280px] md:w-[320px] shrink-0 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-5 relative overflow-hidden">
+          <span class="absolute top-4 right-4 bg-shan-500 text-white text-[10px] px-2 py-1 rounded-full shadow-sm">当前展示</span>
+          <div class="text-xs text-shan-300 font-bold mb-2">2026年6月23日</div>
+          <h3 class="font-serif text-base md:text-lg font-bold text-white mb-2 leading-snug">天地之中·中华优秀传统文化传承发展工程</h3>
+          <p class="text-xs text-gray-300 line-clamp-2">汇聚学界、业界与政界智慧，深入挖掘中华文化核心资源。</p>
+        </div>
 
-      <!-- 卡片3：秋分与中秋节文化讲座 -->
-      <div onclick="openAutumnModal()" class="cursor-pointer min-w-[280px] md:min-w-[320px] snap-start bg-white border border-gray-200 hover:border-shan-400 rounded-xl p-5 relative overflow-hidden group hover:shadow-md transition">
-        <div class="text-xs text-shan-600 font-bold mb-2">2026年9月23日</div>
-        <h3 class="font-serif text-lg font-bold text-ink mb-2 leading-snug group-hover:text-shan-700 transition">“秋分与中秋节文化”专题讲座</h3>
-        <p class="text-xs text-gray-600 line-clamp-2">吕宏军会长深入剖析秋分与中秋的历法渊源、祭月演变与民俗内涵。</p>
-        <div class="mt-3 text-xs text-shan-600 font-medium">点击查看详情 →</div>
+        <!-- 卡片2：嵩山文化研究会第三届二次会议 -->
+        <div onclick="openEventModal()" class="cursor-pointer w-[280px] md:w-[320px] shrink-0 bg-white/5 hover:bg-white/15 backdrop-blur-md border border-white/10 hover:border-shan-400/50 rounded-xl p-5 relative overflow-hidden group transition">
+          <div class="text-xs text-shan-300 font-bold mb-2">2026年4月4日</div>
+          <h3 class="font-serif text-base md:text-lg font-bold text-white mb-2 leading-snug group-hover:text-shan-300 transition">嵩山文化研究会第三届二次会议</h3>
+          <p class="text-xs text-gray-400 line-clamp-2">总结2025，展望2026。发布多部文化著作，推动文旅融合高质量发展。</p>
+          <div class="mt-3 text-xs text-shan-400 font-medium">点击查看纪实 →</div>
+        </div>
+
+        <!-- 卡片3：秋分与中秋节文化讲座 -->
+        <div onclick="openAutumnModal()" class="cursor-pointer w-[280px] md:w-[320px] shrink-0 bg-white/5 hover:bg-white/15 backdrop-blur-md border border-white/10 hover:border-shan-400/50 rounded-xl p-5 relative overflow-hidden group transition">
+          <div class="text-xs text-shan-300 font-bold mb-2">2026年9月23日</div>
+          <h3 class="font-serif text-base md:text-lg font-bold text-white mb-2 leading-snug group-hover:text-shan-300 transition">“秋分与中秋节文化”专题讲座</h3>
+          <p class="text-xs text-gray-400 line-clamp-2">吕宏军会长深入剖析秋分与中秋的历法渊源、祭月演变与民俗内涵。</p>
+          <div class="mt-3 text-xs text-shan-400 font-medium">点击查看详情 →</div>
+        </div>
+
+        <!-- ================= 第二组卡片（复制一份用于无缝循环） ================= -->
+        <!-- 卡片1 -->
+        <div class="w-[280px] md:w-[320px] shrink-0 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-5 relative overflow-hidden">
+          <span class="absolute top-4 right-4 bg-shan-500 text-white text-[10px] px-2 py-1 rounded-full shadow-sm">当前展示</span>
+          <div class="text-xs text-shan-300 font-bold mb-2">2026年6月23日</div>
+          <h3 class="font-serif text-base md:text-lg font-bold text-white mb-2 leading-snug">天地之中·中华优秀传统文化传承发展工程</h3>
+          <p class="text-xs text-gray-300 line-clamp-2">汇聚学界、业界与政界智慧，深入挖掘中华文化核心资源。</p>
+        </div>
+
+        <!-- 卡片2 -->
+        <div onclick="openEventModal()" class="cursor-pointer w-[280px] md:w-[320px] shrink-0 bg-white/5 hover:bg-white/15 backdrop-blur-md border border-white/10 hover:border-shan-400/50 rounded-xl p-5 relative overflow-hidden group transition">
+          <div class="text-xs text-shan-300 font-bold mb-2">2026年4月4日</div>
+          <h3 class="font-serif text-base md:text-lg font-bold text-white mb-2 leading-snug group-hover:text-shan-300 transition">嵩山文化研究会第三届二次会议</h3>
+          <p class="text-xs text-gray-400 line-clamp-2">总结2025，展望2026。发布多部文化著作，推动文旅融合高质量发展。</p>
+          <div class="mt-3 text-xs text-shan-400 font-medium">点击查看纪实 →</div>
+        </div>
+
+        <!-- 卡片3 -->
+        <div onclick="openAutumnModal()" class="cursor-pointer w-[280px] md:w-[320px] shrink-0 bg-white/5 hover:bg-white/15 backdrop-blur-md border border-white/10 hover:border-shan-400/50 rounded-xl p-5 relative overflow-hidden group transition">
+          <div class="text-xs text-shan-300 font-bold mb-2">2026年9月23日</div>
+          <h3 class="font-serif text-base md:text-lg font-bold text-white mb-2 leading-snug group-hover:text-shan-300 transition">“秋分与中秋节文化”专题讲座</h3>
+          <p class="text-xs text-gray-400 line-clamp-2">吕宏军会长深入剖析秋分与中秋的历法渊源、祭月演变与民俗内涵。</p>
+          <div class="mt-3 text-xs text-shan-400 font-medium">点击查看详情 →</div>
+        </div>
+
       </div>
     </div>
   </div>
