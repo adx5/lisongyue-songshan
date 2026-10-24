@@ -85,7 +85,7 @@
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                     <table class="w-full text-left border-collapse">
                         <thead><tr class="bg-gray-50 text-gray-500 text-sm border-b">
-                            <th class="py-4 px-6 font-medium">主题</th><th class="py-4 px-6 font-medium">时间</th><th class="py-4 px-6 font-medium">备注</th><th class="py-4 px-6 text-right">提交时间</th>
+                            <th class="py-4 px-6 font-medium">意向主题</th><th class="py-4 px-6 font-medium">客户称呼</th><th class="py-4 px-6 font-medium">联系方式</th><th class="py-4 px-6 font-medium">备注</th><th class="py-4 px-6 text-right font-medium">提交时间</th>
                         </tr></thead>
                         <tbody id="leadsTableBody" class="text-sm divide-y divide-gray-100"></tbody>
                     </table>
@@ -133,20 +133,23 @@
                             <option value="礼物">嵩山礼物</option>
                             <option value="非遗">非遗体验</option>
                             <option value="自然">自然徒步</option>
-                            <option value="商业">商业服务</option>
+                            <option value="住宿">住宿（民宿/酒店）</option>
+                            <option value="餐饮">餐饮（饭店/素斋）</option>
+                            <option value="交通">交通出行（租车/包车）</option>
+                            <option value="商业">其他商业服务</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-1">标签 (如：书院研学)</label>
-                        <input type="text" id="resEditTag" class="w-full border p-2.5 rounded-lg">
+                        <label class="block text-sm font-medium mb-1">标签 (如：禅意民宿、日租)</label>
+                        <input type="text" id="resEditTag" class="w-full border p-2.5 rounded-lg" placeholder="例如：大床房、SUV">
                     </div>
                 </div>
 
                 <div><label class="block text-sm font-medium mb-1">标题</label><input type="text" id="resEditTitle" class="w-full border p-2.5 rounded-lg"></div>
 
                 <div class="grid grid-cols-2 gap-4">
-                    <div><label class="block text-sm font-medium mb-1">时长/规格 (如：半日、包邮)</label><input type="text" id="resEditDuration" class="w-full border p-2.5 rounded-lg"></div>
-                    <div><label class="block text-sm font-medium mb-1">价格 (数字)</label><input type="number" id="resEditPrice" class="w-full border p-2.5 rounded-lg"></div>
+                    <div><label class="block text-sm font-medium mb-1">时长/规格 (如：半日、每晚、日租)</label><input type="text" id="resEditDuration" class="w-full border p-2.5 rounded-lg"></div>
+                    <div><label class="block text-sm font-medium mb-1">参考价格 (数字)</label><input type="number" id="resEditPrice" class="w-full border p-2.5 rounded-lg"></div>
                 </div>
 
                 <!-- 图片上传 -->
@@ -161,7 +164,7 @@
                     <input type="hidden" id="resEditImg" value="">
                 </div>
 
-                <div><label class="block text-sm font-medium mb-1">简介描述</label><textarea id="resEditDesc" rows="3" class="w-full border p-2.5 rounded-lg"></textarea></div>
+                <div><label class="block text-sm font-medium mb-1">简介描述</label><textarea id="resEditDesc" rows="3" class="w-full border p-2.5 rounded-lg" placeholder="填写设施、特色、服务内容等..."></textarea></div>
                 <div><label class="block text-sm font-medium mb-1">搜索关键词 (用空格隔开)</label><input type="text" id="resEditKeywords" class="w-full border p-2.5 rounded-lg"></div>
             </div>
             <div class="p-4 bg-gray-50 flex justify-end gap-3">
@@ -177,10 +180,9 @@
         let adminToken = localStorage.getItem('adminToken') || '';
         let allLeadsData = [];
 
-        // ⚠️ 注意：这里需要换成你新部署的 FastAPI Cloud 域名
+        // ⚠️ 本地测试请换成 http://127.0.0.1:8000，上线请用下面这个云端地址
         const API_BASE = 'https://songshan-backend.fastapicloud.dev';
 
-        // 全局拦截器：自动带上 Token
         const originalFetch = window.fetch;
         window.fetch = function() {
             let [resource, config] = arguments;
@@ -249,12 +251,13 @@
                 allLeadsData = data.leads || [];
                 const tbody = document.getElementById('leadsTableBody');
                 if (allLeadsData.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="4" class="py-10 text-center text-gray-400">暂无定制线索</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="5" class="py-10 text-center text-gray-400">暂无定制线索</td></tr>';
                 } else {
                     tbody.innerHTML = allLeadsData.map(l => `
                         <tr class="hover:bg-gray-50">
                             <td class="py-4 px-6 font-bold text-brand">${l.resource_name || '定制行囊'}</td>
                             <td class="py-4 px-6 font-medium">${l.client_name || '-'}</td>
+                            <td class="py-4 px-6 font-mono text-gray-600">${l.contact_info || '-'}</td>
                             <td class="py-4 px-6 text-gray-500">${l.message || '-'}</td>
                             <td class="py-4 px-6 text-right text-gray-400 text-xs">${l.created_at || '刚刚'}</td>
                         </tr>
@@ -266,7 +269,7 @@
         function exportLeadsToExcel() {
             if(allLeadsData.length === 0) return alert("暂无数据");
             let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
-            csvContent += "主题,客户姓名,联系方式,备注\n";
+            csvContent += "意向主题,客户姓名,联系方式,备注\n";
             allLeadsData.forEach(l => {
                 csvContent += `"${l.resource_name}","${l.client_name||''}","${l.contact_info||''}","${l.message||''}"\n`;
             });
@@ -287,15 +290,15 @@
                     tbody.innerHTML = resources.map(res => `
                         <tr class="hover:bg-gray-50 transition">
                             <td class="py-3 px-4 text-center">
-                                <img src="${res.img || res.image || 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05'}" class="w-12 h-8 object-cover rounded mx-auto">
+                                <img src="${res.img || 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05'}" class="w-12 h-8 object-cover rounded mx-auto">
                             </td>
                             <td class="py-4 px-4 text-xs"><span class="bg-gray-100 px-2 py-1 rounded">${res.category || '未分类'}</span></td>
-                            <td class="py-4 px-4 font-bold text-gray-800">${res.title || res.name}</td>
+                            <td class="py-4 px-4 font-bold text-gray-800">${res.title}</td>
                             <td class="py-4 px-4 text-brand font-bold">¥ ${res.price || '-'}</td>
                             <td class="py-4 px-4 text-gray-500 text-xs">${res.tag || '-'}</td>
                             <td class="py-4 px-6 text-right space-x-2">
                                 <button onclick='editResource(${JSON.stringify(res).replace(/'/g, "&#39;")})' class="text-xs bg-gray-100 text-gray-700 hover:bg-gray-200 py-1 px-3 rounded transition">编辑</button>
-                                <button onclick="deleteResourceAdmin(${res.id}, '${res.title || res.name}')" class="text-xs bg-red-50 text-red-600 hover:bg-red-500 hover:text-white py-1 px-3 rounded transition">删除</button>
+                                <button onclick="deleteResourceAdmin(${res.id}, '${res.title}')" class="text-xs bg-red-50 text-red-600 hover:bg-red-500 hover:text-white py-1 px-3 rounded transition">删除</button>
                             </td>
                         </tr>
                     `).join('');
@@ -329,13 +332,13 @@
             document.getElementById('resEditId').value = res.id;
             document.getElementById('resEditCategory').value = res.category || '文化';
             document.getElementById('resEditTag').value = res.tag || '';
-            document.getElementById('resEditTitle').value = res.title || res.name || '';
+            document.getElementById('resEditTitle').value = res.title || '';
             document.getElementById('resEditDuration').value = res.duration || '';
             document.getElementById('resEditPrice').value = res.price || '';
-            document.getElementById('resEditDesc').value = res.desc || res.description || '';
+            document.getElementById('resEditDesc').value = res.desc || '';
             document.getElementById('resEditKeywords').value = res.keywords || '';
 
-            const imgUrl = res.img || res.image || '';
+            const imgUrl = res.img || '';
             document.getElementById('resEditImg').value = imgUrl;
             if (imgUrl) {
                 const preview = document.getElementById('resImgPreview');
@@ -389,7 +392,7 @@
         }
 
         // ==========================================
-        // 🌟 蜜蜂图床上传逻辑 (复用旧版逻辑)
+        // 🌟 蜜蜂图床上传逻辑
         // ==========================================
         async function uploadFileToR2(file) {
             const formData = new FormData();
