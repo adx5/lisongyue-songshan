@@ -42,7 +42,7 @@
   .hero-dot:hover { background: rgba(255, 255, 255, 0.8); }
   .hero-dot.active { width: 26px; background: #10B981; }
 
-  .tab { padding: 8px 16px; border-radius: 9999px; font-size: 13px; line-height: 1.4; border: 1px solid #E5E7EB; background: #FFFFFF; color: #4B5563; transition: all 0.2s ease; cursor: pointer; white-space: nowrap; }
+  .tab { padding: 8px 16px; border-radius: 9999px; font-size: 14px; line-height: 1.4; border: 1px solid #E5E7EB; background: #FFFFFF; color: #4B5563; transition: all 0.2s ease; cursor: pointer; white-space: nowrap; }
   .tab:hover { border-color: #34D399; color: #059669; }
   .tab.active { background: #059669; border-color: #059669; color: #FFFFFF; }
 
@@ -64,7 +64,7 @@
   <div class="container-1100 h-16 flex items-center justify-between">
     <a href="index.html" class="flex items-center gap-2.5">
       <span class="w-9 h-9 rounded-lg bg-shan-600 text-white flex items-center justify-center font-serif text-lg shadow-sm">嵩</span>
-      <span class="font-serif text-base md:text-lg font-bold tracking-wide text-ink">天地之中 · 嵩山人文志</span>
+      <span class="font-serif text-[17px] md:text-lg font-bold tracking-wide text-ink">天地之中 · 嵩山人文志</span>
     </a>
 
     <nav class="hidden md:flex items-center gap-8 text-sm text-gray-600">
@@ -84,11 +84,11 @@
   </div>
 
   <div id="mobileMenu" class="hidden-menu md:hidden absolute top-16 left-0 w-full bg-white border-b border-gray-100 shadow-xl z-40 flex flex-col p-4 space-y-2">
-    <a href="#hero" class="block px-4 py-3 text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">首页</a>
-    <a href="#library" class="block px-4 py-3 text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">生态体验库</a>
-    <a href="#splat" class="block px-4 py-3 text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">3D 景区</a>
-    <a href="#ai-match" class="block px-4 py-3 text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">AI 寻路与定制</a>
-    <a href="events.html" class="block px-4 py-3 text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">会议专题</a>
+    <a href="#hero" class="block px-4 py-3 text-[15px] text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">首页</a>
+    <a href="#library" class="block px-4 py-3 text-[15px] text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">生态体验库</a>
+    <a href="#splat" class="block px-4 py-3 text-[15px] text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">3D 景区</a>
+    <a href="#ai-match" class="block px-4 py-3 text-[15px] text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">AI 寻路与定制</a>
+    <a href="events.html" class="block px-4 py-3 text-[15px] text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">会议专题</a>
   </div>
 </header>
 
@@ -99,34 +99,35 @@
   <div class="absolute inset-0 bg-gradient-to-t from-[#08130F]/90 via-[#08130F]/40 to-transparent"></div>
 
   <div class="relative z-10 container-1100 min-h-[500px] md:min-h-[560px] flex flex-col justify-center py-12 md:py-16">
-    <span class="inline-flex items-center gap-2 w-fit text-[11px] md:text-[12px] tracking-widest text-shan-300 border border-shan-400/40 bg-shan-900/30 px-3 py-1.5 rounded-full backdrop-blur-sm">
+    <span class="inline-flex items-center gap-2 w-fit text-xs md:text-[12px] tracking-widest text-shan-300 border border-shan-400/40 bg-shan-900/30 px-3 py-1.5 rounded-full backdrop-blur-sm">
       <span class="w-1.5 h-1.5 rounded-full bg-shan-400"></span>
       天地之中 · 嵩山人文志
     </span>
 
-    <h1 class="mt-4 md:mt-5 font-serif text-white text-3xl md:text-5xl leading-[1.3] md:leading-[1.25] font-bold drop-shadow-lg">
+    <!-- 🌟 手机端大标题加粗加大，行距放宽 -->
+    <h1 class="mt-4 md:mt-5 font-serif text-white text-[2.2rem] md:text-5xl leading-[1.35] md:leading-[1.25] font-bold drop-shadow-lg tracking-wide">
       连接历史与未来<br class="hidden md:block" />
       大咖与大众、文化与产业
     </h1>
 
-    <p class="mt-3 md:mt-4 text-gray-300 text-sm md:text-base max-w-xl leading-relaxed">
+    <p class="mt-3 md:mt-4 text-gray-300 text-base md:text-base max-w-xl leading-relaxed">
       少林禅武 · 嵩阳书院 · 中岳庙 · 登封窑 —— 从深度研学、国际旅居，到非遗匠人与产业共建，读懂天地之中的大美嵩山。
     </p>
 
     <div class="mt-6 md:mt-8 w-full max-w-2xl">
       <div class="bg-white/95 rounded-2xl p-1.5 md:p-2 flex flex-col sm:flex-row gap-2 shadow-2xl shadow-black/30">
-        <input id="aiSearchInput" type="text" placeholder="试试：少林功夫 / 非遗手作 / 民宿 / 租车"
-               class="flex-1 px-4 py-3 bg-transparent outline-none text-ink text-base placeholder-gray-400 rounded-xl" />
+        <input id="aiSearchInput" type="text" placeholder="试试：少林功夫 / 民宿 / 租车"
+               class="flex-1 px-4 py-3 bg-transparent outline-none text-ink text-base placeholder-gray-500 rounded-xl" />
         <button id="aiSearchBtn" class="bg-shan-600 hover:bg-shan-700 text-white px-6 py-3.5 sm:py-3 rounded-xl text-base sm:text-sm font-medium transition disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap shadow-md">
           AI 寻路
         </button>
       </div>
 
-      <div class="mt-3 flex flex-wrap items-center gap-2 text-[11px] md:text-xs text-gray-300">
+      <div class="mt-4 flex flex-wrap items-center gap-2 text-xs md:text-xs text-gray-300">
         <span class="text-gray-400">热门：</span>
-        <button class="hot-tag px-3 py-1.5 md:py-1 rounded-full border border-white/20 bg-black/20 hover:border-shan-400 hover:text-shan-300 transition" data-kw="少林">少林功夫</button>
-        <button class="hot-tag px-3 py-1.5 md:py-1 rounded-full border border-white/20 bg-black/20 hover:border-shan-400 hover:text-shan-300 transition" data-kw="非遗">非遗手作</button>
-        <button class="hot-tag px-3 py-1.5 md:py-1 rounded-full border border-white/20 bg-black/20 hover:border-shan-400 hover:text-shan-300 transition" data-kw="民宿">特色民宿</button>
+        <button class="hot-tag px-3 py-1.5 rounded-full border border-white/20 bg-black/20 hover:border-shan-400 hover:text-shan-300 transition" data-kw="少林">少林功夫</button>
+        <button class="hot-tag px-3 py-1.5 rounded-full border border-white/20 bg-black/20 hover:border-shan-400 hover:text-shan-300 transition" data-kw="非遗">非遗手作</button>
+        <button class="hot-tag px-3 py-1.5 rounded-full border border-white/20 bg-black/20 hover:border-shan-400 hover:text-shan-300 transition" data-kw="民宿">特色民宿</button>
       </div>
     </div>
   </div>
@@ -135,9 +136,9 @@
 
 <!-- 会议专题入口横幅 -->
 <section class="bg-shan-900 py-3 md:py-3 relative z-20">
-  <div class="container-1100 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs md:text-sm text-shan-100 text-center sm:text-left">
+  <div class="container-1100 flex flex-col sm:flex-row items-center justify-between gap-2 text-[13px] md:text-sm text-shan-100 text-center sm:text-left">
     <span class="flex flex-col sm:flex-row items-center gap-1.5 md:gap-2 w-full sm:w-auto">
-      <span class="inline-block px-2 py-0.5 rounded bg-shan-600 text-white text-[10px] font-bold tracking-wider whitespace-nowrap">最新专题</span>
+      <span class="inline-block px-2 py-0.5 rounded bg-shan-600 text-white text-[11px] font-bold tracking-wider whitespace-nowrap">最新专题</span>
       <span class="truncate">天地之中·中华优秀传统文化传承发展工程会议成功举办</span>
     </span>
     <a href="events.html" class="text-white font-medium hover:underline flex items-center gap-1 whitespace-nowrap shrink-0 mt-1 sm:mt-0">
@@ -152,40 +153,40 @@
     <div class="lg:col-span-7">
       <div class="bg-white rounded-2xl border border-gray-100 p-5 md:p-6 shadow-sm h-full flex flex-col">
         <div class="flex items-center justify-between mb-2">
-          <h2 class="font-serif text-lg md:text-xl font-bold text-ink">AI 寻路演示</h2>
-          <span class="text-[10px] md:text-[11px] text-shan-700 bg-shan-50 border border-shan-100 px-2 py-1 rounded-full">实时</span>
+          <h2 class="font-serif text-xl md:text-xl font-bold text-ink">AI 寻路演示</h2>
+          <span class="text-[11px] md:text-[11px] text-shan-700 bg-shan-50 border border-shan-100 px-2 py-1 rounded-full">实时</span>
         </div>
-        <p class="text-xs md:text-sm text-gray-500 leading-relaxed">
+        <p class="text-sm md:text-sm text-gray-600 leading-relaxed">
           描述你的期待，AI 从 200+ 嵩山人文体验中，为你组合出一条真正走得通的行程。
         </p>
 
-        <div class="mt-4 rounded-xl border border-gray-200 bg-sand p-3 md:p-4">
+        <div class="mt-4 rounded-xl border border-gray-200 bg-sand p-3.5 md:p-4">
           <div class="flex items-center justify-between">
-            <span class="text-[10px] md:text-[11px] tracking-wider text-gray-400">① 需求解析</span>
-            <span class="text-[10px] md:text-[11px] text-gray-400">来自用户输入</span>
+            <span class="text-xs md:text-[11px] tracking-wider text-gray-500">① 需求解析</span>
+            <span class="text-xs md:text-[11px] text-gray-500">来自用户输入</span>
           </div>
-          <div class="mt-2.5 flex flex-wrap gap-1.5 md:gap-2">
-            <span class="text-[10px] md:text-[11px] px-2 py-1 rounded-md bg-white border border-gray-200 text-gray-600">亲子家庭</span>
-            <span class="text-[10px] md:text-[11px] px-2 py-1 rounded-md bg-white border border-gray-200 text-gray-600">2 天 1 夜</span>
-            <span class="text-[10px] md:text-[11px] px-2 py-1 rounded-md bg-white border border-gray-200 text-gray-600">文化研学</span>
+          <div class="mt-2.5 flex flex-wrap gap-2">
+            <span class="text-xs md:text-[11px] px-2 py-1 rounded-md bg-white border border-gray-200 text-gray-700">亲子家庭</span>
+            <span class="text-xs md:text-[11px] px-2 py-1 rounded-md bg-white border border-gray-200 text-gray-700">2 天 1 夜</span>
+            <span class="text-xs md:text-[11px] px-2 py-1 rounded-md bg-white border border-gray-200 text-gray-700">文化研学</span>
           </div>
-          <p class="mt-3 text-xs md:text-sm text-gray-700 leading-relaxed">“想用两天时间，让孩子在行走中真正理解嵩山的文化，别只是拍照打卡。”</p>
+          <p class="mt-3 text-sm md:text-sm text-gray-800 leading-relaxed">“想用两天时间，让孩子在行走中真正理解嵩山的文化，别只是拍照打卡。”</p>
         </div>
 
-        <div class="flex items-center justify-center gap-2 py-3 text-shan-600 text-[10px] md:text-xs">
+        <div class="flex items-center justify-center gap-2 py-3 text-shan-600 text-xs md:text-xs">
           <span class="h-px w-8 md:w-12 bg-shan-200"></span>
           <span>AI 匹配中 · 已比对 47 条体验</span>
           <span class="h-px w-8 md:w-12 bg-shan-200"></span>
         </div>
 
-        <div class="rounded-xl border border-shan-200 bg-shan-50/70 p-3 md:p-4">
+        <div class="rounded-xl border border-shan-200 bg-shan-50/70 p-3.5 md:p-4">
           <div class="flex items-center justify-between">
-            <span class="text-[10px] md:text-[11px] tracking-wider text-shan-700">② 匹配方案</span>
-            <span class="text-[10px] md:text-[11px] font-semibold text-shan-700 bg-white border border-shan-200 px-2 py-0.5 rounded-full">匹配度 96%</span>
+            <span class="text-xs md:text-[11px] tracking-wider text-shan-700">② 匹配方案</span>
+            <span class="text-xs md:text-[11px] font-semibold text-shan-700 bg-white border border-shan-200 px-2 py-0.5 rounded-full">匹配度 96%</span>
           </div>
-          <h3 class="mt-2 font-serif text-base md:text-lg font-bold text-ink leading-snug">嵩阳书院国学讲坛 ＋ 少林功夫晨课</h3>
-          <p class="mt-1 text-xs md:text-sm text-gray-600 leading-relaxed">2 天 1 夜 · 含 1 晚禅意民宿 · 适龄 7 岁以上</p>
-          <button id="viewPlanBtn" class="mt-3 md:mt-4 w-full sm:w-auto text-xs md:text-sm text-white bg-shan-600 hover:bg-shan-700 px-5 py-2.5 rounded-lg transition">
+          <h3 class="mt-2 font-serif text-lg md:text-lg font-bold text-ink leading-snug">嵩阳书院国学讲坛 ＋ 少林功夫晨课</h3>
+          <p class="mt-1 text-sm md:text-sm text-gray-600 leading-relaxed">2 天 1 夜 · 含 1 晚禅意民宿 · 适龄 7 岁以上</p>
+          <button id="viewPlanBtn" class="mt-4 w-full sm:w-auto text-sm text-white bg-shan-600 hover:bg-shan-700 px-5 py-3 md:py-2.5 rounded-lg transition">
             查看完整行程 →
           </button>
         </div>
@@ -194,13 +195,13 @@
 
     <div class="lg:col-span-5" id="booking">
       <div class="bg-white rounded-2xl border border-gray-100 p-5 md:p-6 shadow-sm h-full">
-        <h2 class="font-serif text-lg md:text-xl font-bold text-ink">定制专属行囊</h2>
-        <p class="text-xs md:text-sm text-gray-500 mt-1">留下需求，文化顾问 24 小时内给出方案。</p>
+        <h2 class="font-serif text-xl md:text-xl font-bold text-ink">定制专属行囊</h2>
+        <p class="text-sm md:text-sm text-gray-600 mt-1">留下需求，文化顾问 24 小时内给出方案。</p>
 
-        <form id="bookingForm" class="mt-4 md:mt-5 space-y-3.5" novalidate>
+        <form id="bookingForm" class="mt-5 space-y-4" novalidate>
           <div>
-            <label for="fTheme" class="block text-xs text-gray-500 mb-1.5">旅行主题</label>
-            <select id="fTheme" class="w-full px-3 py-3 md:py-2.5 rounded-lg border border-gray-200 text-base md:text-sm text-ink bg-white outline-none transition focus:border-shan-500 focus:ring-2 focus:ring-shan-100">
+            <label for="fTheme" class="block text-sm text-gray-600 mb-1.5">旅行主题</label>
+            <select id="fTheme" class="w-full px-3 py-3.5 md:py-2.5 rounded-lg border border-gray-200 text-base md:text-sm text-ink bg-white outline-none transition focus:border-shan-500 focus:ring-2 focus:ring-shan-100">
               <option value="文化研学">文化研学</option>
               <option value="非遗手作">非遗手作</option>
               <option value="自然徒步">自然徒步</option>
@@ -209,32 +210,32 @@
             </select>
           </div>
           <div>
-            <label for="fTime" class="block text-xs text-gray-500 mb-1.5">出行时间</label>
-            <input id="fTime" type="text" required placeholder="如：11 月 8 日 - 9 日" class="w-full px-3 py-3 md:py-2.5 rounded-lg border border-gray-200 text-base md:text-sm text-ink outline-none transition placeholder-gray-400 focus:border-shan-500 focus:ring-2 focus:ring-shan-100" />
+            <label for="fTime" class="block text-sm text-gray-600 mb-1.5">出行时间</label>
+            <input id="fTime" type="text" required placeholder="如：11 月 8 日 - 9 日" class="w-full px-3 py-3.5 md:py-2.5 rounded-lg border border-gray-200 text-base md:text-sm text-ink outline-none transition placeholder-gray-400 focus:border-shan-500 focus:ring-2 focus:ring-shan-100" />
           </div>
           <div>
-            <label for="fNote" class="block text-xs text-gray-500 mb-1.5">补充备注</label>
-            <textarea id="fNote" rows="3" placeholder="同行人数 / 预算 / 特殊偏好" class="w-full px-3 py-3 md:py-2.5 rounded-lg border border-gray-200 text-base md:text-sm text-ink outline-none transition resize-none placeholder-gray-400 focus:border-shan-500 focus:ring-2 focus:ring-shan-100"></textarea>
+            <label for="fNote" class="block text-sm text-gray-600 mb-1.5">补充备注</label>
+            <textarea id="fNote" rows="3" placeholder="同行人数 / 预算 / 特殊偏好" class="w-full px-3 py-3.5 md:py-2.5 rounded-lg border border-gray-200 text-base md:text-sm text-ink outline-none transition resize-none placeholder-gray-400 focus:border-shan-500 focus:ring-2 focus:ring-shan-100"></textarea>
           </div>
           <button id="submitBtn" type="submit" class="w-full bg-shan-600 hover:bg-shan-700 text-white py-3.5 md:py-3 rounded-lg text-base md:text-sm font-medium transition disabled:opacity-60 disabled:cursor-not-allowed shadow-md">
             提交需求，定制行囊
           </button>
-          <p class="text-[10px] md:text-[11px] text-gray-400 text-center leading-relaxed">提交即表示同意我们与你联系</p>
+          <p class="text-xs md:text-[11px] text-gray-500 text-center leading-relaxed">提交即表示同意我们与你联系</p>
         </form>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 体验库 (大分类+真实数据) -->
+<!-- 体验库 -->
 <section id="library" class="container-1100 pb-12 md:pb-16">
   <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-5 md:mb-6">
     <div>
-      <h2 class="font-serif text-xl md:text-2xl font-bold text-ink">嵩山生态与人文体验库</h2>
-      <p class="text-xs md:text-sm text-gray-500 mt-1.5">汇聚大美嵩山的文化、特产、吃住行全域体验。</p>
+      <h2 class="font-serif text-2xl md:text-2xl font-bold text-ink">嵩山生态与人文体验库</h2>
+      <p class="text-sm md:text-sm text-gray-600 mt-1.5">汇聚大美嵩山的文化、特产、吃住行全域体验。</p>
     </div>
     <!-- 前台 5 大分类 Tab -->
-    <div id="filterTabs" class="flex flex-nowrap md:flex-wrap overflow-x-auto hide-scrollbar gap-2 pb-1 -mx-4 px-4 md:mx-0 md:px-0">
+    <div id="filterTabs" class="flex flex-nowrap md:flex-wrap overflow-x-auto hide-scrollbar gap-2.5 md:gap-2 pb-1 -mx-4 px-4 md:mx-0 md:px-0">
       <button class="tab active" data-cat="全部">全部</button>
       <button class="tab" data-cat="人文体验">人文体验</button>
       <button class="tab" data-cat="嵩山礼物">嵩山礼物</button>
@@ -244,13 +245,13 @@
     </div>
   </div>
 
-  <div id="resultHint" class="hidden mb-4 text-xs text-shan-700 bg-shan-50 border border-shan-100 rounded-lg px-3 py-2"></div>
+  <div id="resultHint" class="hidden mb-4 text-sm text-shan-700 bg-shan-50 border border-shan-100 rounded-lg px-3 py-2"></div>
   <div id="expGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5"></div>
 
   <div id="emptyState" class="hidden py-20 text-center">
     <div class="text-4xl mb-3">⛰️</div>
-    <p class="text-sm text-gray-500">没有找到匹配的体验，换个关键词试试。</p>
-    <a href="#booking" class="inline-block mt-4 text-sm text-white bg-shan-600 hover:bg-shan-700 px-5 py-2.5 rounded-lg transition">去定制行囊</a>
+    <p class="text-base text-gray-600">没有找到匹配的体验，换个关键词试试。</p>
+    <a href="#booking" class="inline-block mt-4 text-base text-white bg-shan-600 hover:bg-shan-700 px-5 py-2.5 rounded-lg transition">去定制行囊</a>
   </div>
 </section>
 
@@ -259,12 +260,12 @@
   <div class="container-1100">
     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6 md:mb-8">
       <div>
-        <span class="inline-flex items-center gap-2 text-[11px] md:text-[12px] tracking-widest text-shan-700 border border-shan-200 bg-shan-50 px-3 py-1.5 rounded-full">
+        <span class="inline-flex items-center gap-2 text-xs md:text-[12px] tracking-widest text-shan-700 border border-shan-200 bg-shan-50 px-3 py-1.5 rounded-full">
           <span class="w-1.5 h-1.5 rounded-full bg-shan-500 animate-pulse"></span>
           3D Gaussian Splatting
         </span>
-        <h2 class="mt-3 md:mt-4 font-serif text-xl md:text-2xl font-bold text-ink">景区高斯泼溅</h2>
-        <p class="text-xs md:text-sm text-gray-500 mt-1.5 max-w-xl leading-relaxed">
+        <h2 class="mt-3 md:mt-4 font-serif text-2xl md:text-2xl font-bold text-ink">景区高斯泼溅</h2>
+        <p class="text-sm md:text-sm text-gray-600 mt-1.5 max-w-xl leading-relaxed">
           无需下载插件，直接在浏览器中旋转、缩放，观察嵩山历史建筑的三维点云重建。
         </p>
       </div>
@@ -275,15 +276,15 @@
         <div class="relative rounded-xl md:rounded-2xl overflow-hidden border border-gray-200 shadow-sm bg-[#0B1410]">
           <canvas id="splatCanvas" class="w-full h-[280px] md:h-[480px]"></canvas>
           <div class="absolute top-3 left-3 md:top-4 md:left-4 flex items-center gap-2">
-            <span id="splatSceneName" class="text-[11px] md:text-[12px] font-medium text-white bg-black/40 backdrop-blur-sm px-2.5 py-1 md:px-3 md:py-1.5 rounded-md md:rounded-lg border border-white/10">少林塔林</span>
+            <span id="splatSceneName" class="text-[13px] md:text-[12px] font-medium text-white bg-black/40 backdrop-blur-sm px-2.5 py-1 md:px-3 md:py-1.5 rounded-md md:rounded-lg border border-white/10">少林塔林</span>
           </div>
-          <div class="absolute bottom-3 left-3 right-3 md:bottom-4 md:left-4 md:right-4 flex items-center justify-between text-[10px] md:text-[11px] text-white/70">
+          <div class="absolute bottom-3 left-3 right-3 md:bottom-4 md:left-4 md:right-4 flex items-center justify-between text-xs md:text-[11px] text-white/80">
             <span class="bg-black/40 backdrop-blur-sm px-2 py-1 rounded-md">拖动旋转 · 滚轮缩放</span>
           </div>
           <div id="splatLoading" class="absolute inset-0 flex items-center justify-center bg-[#0B1410]/85 backdrop-blur-sm transition-opacity duration-300 opacity-0 pointer-events-none">
             <div class="flex flex-col items-center gap-3">
               <div class="w-8 h-8 rounded-full border-2 border-shan-400/30 border-t-shan-400 animate-spin"></div>
-              <span class="text-[11px] text-shan-200">正在重建点云…</span>
+              <span class="text-[13px] text-shan-200">正在重建点云…</span>
             </div>
           </div>
         </div>
@@ -291,7 +292,7 @@
 
       <div class="lg:col-span-4">
         <div id="splatScenes" class="flex lg:flex-col overflow-x-auto lg:overflow-visible hide-scrollbar gap-3 pb-2 lg:pb-0 scroll-smooth snap-x snap-mandatory"></div>
-        <p class="mt-3 md:mt-4 text-[10px] md:text-[11px] text-gray-400 leading-relaxed">
+        <p class="mt-3 md:mt-4 text-xs md:text-[11px] text-gray-500 leading-relaxed">
           点云为公开资料的视觉模拟；实际景区数字孪生需现场采集后重建。
         </p>
       </div>
@@ -305,21 +306,21 @@
     <div>
       <div class="flex items-center gap-2.5">
         <span class="w-9 h-9 rounded-lg bg-shan-600 text-white flex items-center justify-center font-serif text-lg">嵩</span>
-        <span class="font-serif text-base md:text-lg font-bold text-white">天地之中 · 嵩山人文志</span>
+        <span class="font-serif text-lg md:text-lg font-bold text-white">天地之中 · 嵩山人文志</span>
       </div>
-      <p class="mt-3 text-xs md:text-sm text-gray-400 leading-relaxed">
+      <p class="mt-3 text-sm md:text-sm text-gray-400 leading-relaxed">
         连接历史与未来、大咖与大众、文化与产业的文旅生态平台。把嵩山的历史、技艺与山水，装进一只可定制的行囊。
       </p>
       <div class="mt-4">
-        <button onclick="openPartnerModal()" class="inline-block text-xs md:text-sm text-shan-400 border border-shan-600/50 hover:bg-shan-600 hover:text-white px-4 py-2 rounded-lg transition">
+        <button onclick="openPartnerModal()" class="inline-block text-sm md:text-sm text-shan-400 border border-shan-600/50 hover:bg-shan-600 hover:text-white px-4 py-2.5 rounded-lg transition">
           我是主理人 / 诚邀共建 →
         </button>
       </div>
     </div>
 
     <div>
-      <h3 class="text-white text-sm font-semibold mb-3 md:mb-4">快速导航</h3>
-      <ul class="space-y-2 text-xs md:text-sm text-gray-400">
+      <h3 class="text-white text-base font-semibold mb-3 md:mb-4">快速导航</h3>
+      <ul class="space-y-2.5 text-sm md:text-sm text-gray-400">
         <li><a href="#hero" class="hover:text-shan-400 transition">首页</a></li>
         <li><a href="#library" class="hover:text-shan-400 transition">生态体验库</a></li>
         <li><a href="#splat" class="hover:text-shan-400 transition">3D 景区</a></li>
@@ -330,19 +331,19 @@
     </div>
 
     <div>
-      <h3 class="text-white text-sm font-semibold mb-3 md:mb-4">联系我们</h3>
-      <ul class="space-y-2 text-xs md:text-sm text-gray-400">
+      <h3 class="text-white text-base font-semibold mb-3 md:mb-4">联系我们</h3>
+      <ul class="space-y-2.5 text-sm md:text-sm text-gray-400">
         <li>服务时间：每日 09:00 - 21:00</li>
         <li>邮箱：zysongshan@163.com</li>
         <li>电话：15515816811</li>
         <li>地址：中国 天地之中 登封嵩山</li>
-        <li class="pt-2">学术支持：嵩山文化研究会</li>
+        <li class="pt-2 text-sm">学术支持：嵩山文化研究会</li>
       </ul>
     </div>
   </div>
 
   <div class="border-t border-white/10 mt-8 md:mt-12">
-    <div class="container-1100 pt-4 text-center text-[10px] md:text-xs text-gray-500">
+    <div class="container-1100 pt-4 text-center text-xs md:text-xs text-gray-500">
       © 2026 河南嵩玉文化旅游有限公司 · 天地之中 · 嵩山人文志　保留所有权利
     </div>
   </div>
@@ -360,16 +361,16 @@
         </div>
         <div class="p-6 space-y-4">
             <div>
-                <label class="block text-xs text-gray-500 mb-1">商家/主理人名称</label>
-                <input type="text" id="ptName" class="w-full border border-gray-200 rounded-lg p-2.5 text-sm outline-none focus:border-shan-500" placeholder="如：照见山居 / 王老师">
+                <label class="block text-sm text-gray-600 mb-1">商家/主理人名称</label>
+                <input type="text" id="ptName" class="w-full border border-gray-200 rounded-lg p-3 text-base outline-none focus:border-shan-500" placeholder="如：照见山居 / 王老师">
             </div>
             <div>
-                <label class="block text-xs text-gray-500 mb-1">联系电话 (微信同号)</label>
-                <input type="text" id="ptPhone" class="w-full border border-gray-200 rounded-lg p-2.5 text-sm outline-none focus:border-shan-500" placeholder="方便我们与您取得联系">
+                <label class="block text-sm text-gray-600 mb-1">联系电话 (微信同号)</label>
+                <input type="text" id="ptPhone" class="w-full border border-gray-200 rounded-lg p-3 text-base outline-none focus:border-shan-500" placeholder="方便我们与您取得联系">
             </div>
             <div>
-                <label class="block text-xs text-gray-500 mb-1">所属业态</label>
-                <select id="ptType" class="w-full border border-gray-200 rounded-lg p-2.5 text-sm outline-none focus:border-shan-500 bg-white">
+                <label class="block text-sm text-gray-600 mb-1">所属业态</label>
+                <select id="ptType" class="w-full border border-gray-200 rounded-lg p-3 text-base outline-none focus:border-shan-500 bg-white">
                     <option value="精品民宿/酒店">精品民宿/酒店</option>
                     <option value="特色餐饮/饭店">特色餐饮/饭店</option>
                     <option value="交通租车">交通租车/包车</option>
@@ -379,13 +380,13 @@
                 </select>
             </div>
             <div>
-                <label class="block text-xs text-gray-500 mb-1">简单介绍 (选填)</label>
-                <textarea id="ptIntro" rows="2" class="w-full border border-gray-200 rounded-lg p-2.5 text-sm outline-none focus:border-shan-500 resize-none" placeholder="您的优势、特色或希望合作的方式..."></textarea>
+                <label class="block text-sm text-gray-600 mb-1">简单介绍 (选填)</label>
+                <textarea id="ptIntro" rows="2" class="w-full border border-gray-200 rounded-lg p-3 text-base outline-none focus:border-shan-500 resize-none" placeholder="您的优势、特色或希望合作的方式..."></textarea>
             </div>
         </div>
         <div class="p-4 bg-gray-50 flex justify-end gap-3">
-            <button onclick="closePartnerModal()" class="px-4 py-2 text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50">取消</button>
-            <button onclick="submitPartnerForm()" class="px-4 py-2 text-sm bg-shan-600 text-white rounded-lg shadow-md hover:bg-shan-700 transition">提交申请</button>
+            <button onclick="closePartnerModal()" class="px-4 py-2.5 text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50">取消</button>
+            <button onclick="submitPartnerForm()" class="px-4 py-2.5 text-sm bg-shan-600 text-white rounded-lg shadow-md hover:bg-shan-700 transition">提交申请</button>
         </div>
     </div>
 </div>
@@ -415,7 +416,7 @@
     const icon = type === 'error' ? '✕' : type === 'warn' ? '!' : '✓';
     clearTimeout(toastTimer);
     el.className = 'fixed left-1/2 bottom-8 z-[100] px-5 py-3 rounded-xl text-white text-sm shadow-2xl transition-all duration-300 -translate-x-1/2 pointer-events-none opacity-0 translate-y-4 ' + bgClass;
-    el.innerHTML = '<span class="inline-flex items-center gap-2"><span class="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-[11px] font-bold">' + icon + '</span><span>' + esc(message) + '</span></span>';
+    el.innerHTML = '<span class="inline-flex items-center gap-2"><span class="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold">' + icon + '</span><span>' + esc(message) + '</span></span>';
     void el.offsetWidth;
     el.classList.remove('opacity-0', 'translate-y-4');
     toastTimer = setTimeout(function () { el.classList.add('opacity-0', 'translate-y-4'); }, 2600);
@@ -545,17 +546,18 @@
 
     expGrid.innerHTML = list.map(function (item) {
       const priceText = (item.price === 0 || item.price === '0') ? '免费' : '¥ ' + esc(item.price);
+      // 手机端字号放大：标题 text-[17px]，描述 text-sm，标签 text-xs
       return '<article onclick="window.location.href=\'detail.html?id=' + item.id + '\'" class="cursor-pointer group bg-white rounded-xl md:rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">' +
           '<div class="relative h-40 overflow-hidden bg-gray-100">' +
             '<img src="' + esc(item.img) + '" alt="' + esc(item.title) + '" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src=\'' + FALLBACK_IMG + '\'">' +
-            '<span class="absolute top-3 left-3 text-[10px] md:text-[11px] px-2 py-1 rounded-md bg-white/95 text-shan-700 font-medium shadow-sm">' + esc(item.tag) + '</span>' +
+            '<span class="absolute top-3 left-3 text-xs md:text-[11px] px-2 py-1 rounded-md bg-white/95 text-shan-700 font-medium shadow-sm">' + esc(item.tag) + '</span>' +
           '</div>' +
           '<div class="p-4 flex flex-col flex-1">' +
-            '<h3 class="font-serif text-base md:text-[1rem] font-bold leading-snug text-ink line-clamp-1">' + esc(item.title) + '</h3>' +
-            '<p class="text-[11px] md:text-xs text-gray-500 mt-2 leading-relaxed line-clamp-2 flex-1">' + esc(item.desc) + '</p>' +
+            '<h3 class="font-serif text-[17px] md:text-[1rem] font-bold leading-snug text-ink line-clamp-1">' + esc(item.title) + '</h3>' +
+            '<p class="text-sm md:text-xs text-gray-600 mt-2 leading-relaxed line-clamp-2 flex-1">' + esc(item.desc) + '</p>' +
             '<div class="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between gap-2">' +
-              '<div class="text-[10px] md:text-[11px] text-gray-400 whitespace-nowrap">' + esc(item.duration) + ' · <span class="text-shan-700 font-semibold text-sm">' + priceText + '</span></div>' +
-              '<button type="button" onclick="event.stopPropagation(); showToast(\'已成功收入行囊\', \'success\')" class="add-btn text-[10px] md:text-[11px] px-3 py-2 md:py-1.5 rounded-lg bg-shan-50 text-shan-700 hover:bg-shan-600 hover:text-white transition whitespace-nowrap">+ 收入行囊</button>' +
+              '<div class="text-sm md:text-[11px] text-gray-500 whitespace-nowrap">' + esc(item.duration) + ' · <span class="text-shan-700 font-semibold">' + priceText + '</span></div>' +
+              '<button type="button" onclick="event.stopPropagation(); showToast(\'已成功收入行囊\', \'success\')" class="add-btn text-xs md:text-[11px] px-3 py-2 md:py-1.5 rounded-lg bg-shan-50 text-shan-700 hover:bg-shan-600 hover:text-white transition whitespace-nowrap">+ 收入行囊</button>' +
             '</div>' +
           '</div>' +
         '</article>';
@@ -834,8 +836,8 @@
     splatScenesEl.innerHTML = SPLAT_SCENES.map(function (s, i) {
       return '<button type="button" class="scene-btn w-full text-left rounded-xl border border-gray-200 bg-white p-3.5 flex items-center gap-3" data-idx="' + i + '">' +
           '<span class="w-10 h-10 rounded-lg bg-shan-50 border border-shan-100 flex items-center justify-center text-shan-700 font-serif text-sm shrink-0">' + String(i + 1).padStart(2, '0') + '</span>' +
-          '<span class="min-w-0 flex-1"><span class="block text-sm font-semibold text-ink truncate">' + esc(s.name) + '</span><span class="block text-[11px] text-gray-500 truncate">' + esc(s.sub) + '</span></span>' +
-          '<span class="text-[10px] text-gray-400 whitespace-nowrap">' + (s.id === 'songshan' ? '4.2k' : '3k+') + ' 点</span>' +
+          '<span class="min-w-0 flex-1"><span class="block text-sm font-semibold text-ink truncate">' + esc(s.name) + '</span><span class="block text-xs text-gray-500 truncate">' + esc(s.sub) + '</span></span>' +
+          '<span class="text-xs text-gray-400 whitespace-nowrap">' + (s.id === 'songshan' ? '4.2k' : '3k+') + ' 点</span>' +
         '</button>';
     }).join('');
     splatScenesEl.addEventListener('click', function (e) { const btn = e.target.closest('.scene-btn'); if (!btn) return; const idx = parseInt(btn.getAttribute('data-idx'), 10); if (!isNaN(idx)) selectSplatScene(idx); });
