@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>天地之中 · 嵩山人文志 | 文旅生态平台</title>
 <meta name="description" content="连接历史与未来、大咖与大众、文化与产业的文旅生态平台。少林禅武、嵩阳书院、中岳庙、登封窑——AI 为你匹配真正值得走一走、看一看的嵩山人文体验。" />
 
@@ -35,35 +35,41 @@
   .container-1100 { max-width: 1100px; margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px; }
   section[id] { scroll-margin-top: 80px; }
 
+  /* 隐藏移动端横向滚动条 */
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
   .hero-dot { width: 8px; height: 8px; border-radius: 9999px; background: rgba(255, 255, 255, 0.45); transition: all 0.3s ease; }
   .hero-dot:hover { background: rgba(255, 255, 255, 0.8); }
   .hero-dot.active { width: 26px; background: #10B981; }
 
-  .tab { padding: 6px 16px; border-radius: 9999px; font-size: 13px; line-height: 1.4; border: 1px solid #E5E7EB; background: #FFFFFF; color: #4B5563; transition: all 0.2s ease; cursor: pointer; white-space: nowrap; }
+  .tab { padding: 8px 16px; border-radius: 9999px; font-size: 13px; line-height: 1.4; border: 1px solid #E5E7EB; background: #FFFFFF; color: #4B5563; transition: all 0.2s ease; cursor: pointer; white-space: nowrap; }
   .tab:hover { border-color: #34D399; color: #059669; }
   .tab.active { background: #059669; border-color: #059669; color: #FFFFFF; }
 
-  .scene-btn { transition: all 0.2s ease; cursor: pointer; }
+  .scene-btn { transition: all 0.2s ease; cursor: pointer; min-width: 240px; scroll-snap-align: start; }
   .scene-btn:hover { border-color: #6EE7B7; }
   .scene-btn.active { border-color: #059669; background: #ECFDF5; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12); }
 
   #splatCanvas { touch-action: none; display: block; }
-  ::-webkit-scrollbar { width: 8px; height: 8px; }
-  ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 9999px; }
-  ::-webkit-scrollbar-track { background: transparent; }
+
+  /* 移动端菜单动画 */
+  #mobileMenu { transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; }
+  #mobileMenu.hidden-menu { transform: translateY(-100%); opacity: 0; pointer-events: none; }
 </style>
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased overflow-x-hidden">
 
 <!-- ============================= 顶部导航 ============================= -->
-<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
   <div class="container-1100 h-16 flex items-center justify-between">
     <a href="index.html" class="flex items-center gap-2.5">
       <span class="w-9 h-9 rounded-lg bg-shan-600 text-white flex items-center justify-center font-serif text-lg shadow-sm">嵩</span>
-      <span class="font-serif text-lg font-bold tracking-wide text-ink">天地之中 · 嵩山人文志</span>
+      <span class="font-serif text-base md:text-lg font-bold tracking-wide text-ink">天地之中 · 嵩山人文志</span>
     </a>
 
+    <!-- PC 导航 -->
     <nav class="hidden md:flex items-center gap-8 text-sm text-gray-600">
       <a href="#hero" class="text-shan-600 font-bold border-b-2 border-shan-600 pb-1">首页</a>
       <a href="#library" class="hover:text-shan-600 transition">生态体验库</a>
@@ -72,114 +78,122 @@
       <a href="events.html" class="hover:text-shan-600 transition">会议专题</a>
     </nav>
 
-    <a href="#booking" class="bg-shan-600 hover:bg-shan-700 text-white text-sm px-4 py-2 rounded-lg transition shadow-sm">
-      定制行囊
-    </a>
+    <!-- PC 定制按钮 / 移动端菜单按钮 -->
+    <div class="flex items-center gap-3">
+      <a href="#booking" class="hidden sm:inline-block bg-shan-600 hover:bg-shan-700 text-white text-sm px-5 py-2 rounded-lg transition shadow-sm">
+        定制行囊
+      </a>
+      <button id="menuBtn" class="md:hidden p-2 text-gray-600 hover:text-shan-600 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 移动端全屏导航 -->
+  <div id="mobileMenu" class="hidden-menu md:hidden absolute top-16 left-0 w-full bg-white border-b border-gray-100 shadow-xl z-40 flex flex-col p-4 space-y-2">
+    <a href="#hero" class="block px-4 py-3 text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">首页</a>
+    <a href="#library" class="block px-4 py-3 text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">生态体验库</a>
+    <a href="#splat" class="block px-4 py-3 text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">3D 景区</a>
+    <a href="#ai-match" class="block px-4 py-3 text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">AI 寻路与定制</a>
+    <a href="events.html" class="block px-4 py-3 text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">会议专题</a>
   </div>
 </header>
 
 <!-- ============================= 首屏 Hero ============================= -->
-<section id="hero" class="relative min-h-[560px] overflow-hidden bg-ink">
+<section id="hero" class="relative min-h-[500px] md:min-h-[560px] overflow-hidden bg-ink">
   <div id="heroTrack" class="absolute inset-0 flex will-change-transform"></div>
   <div class="absolute inset-0 bg-gradient-to-r from-[#08130F]/95 via-[#08130F]/75 to-[#08130F]/25"></div>
-  <div class="absolute inset-0 bg-gradient-to-t from-[#08130F]/80 via-transparent to-transparent"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-[#08130F]/90 via-[#08130F]/40 to-transparent"></div>
 
-  <div class="relative z-10 container-1100 min-h-[560px] flex flex-col justify-center py-16">
-    <span class="inline-flex items-center gap-2 w-fit text-[12px] tracking-widest text-shan-300 border border-shan-400/40 bg-shan-900/20 px-3 py-1.5 rounded-full">
+  <div class="relative z-10 container-1100 min-h-[500px] md:min-h-[560px] flex flex-col justify-center py-12 md:py-16">
+    <span class="inline-flex items-center gap-2 w-fit text-[11px] md:text-[12px] tracking-widest text-shan-300 border border-shan-400/40 bg-shan-900/30 px-3 py-1.5 rounded-full backdrop-blur-sm">
       <span class="w-1.5 h-1.5 rounded-full bg-shan-400"></span>
       天地之中 · 嵩山人文志
     </span>
 
-    <h1 class="mt-5 font-serif text-white text-3xl md:text-5xl leading-[1.25] font-bold drop-shadow-lg">
+    <h1 class="mt-4 md:mt-5 font-serif text-white text-3xl md:text-5xl leading-[1.3] md:leading-[1.25] font-bold drop-shadow-lg">
       连接历史与未来<br class="hidden md:block" />
-      大咖与大众、文化与产业的文旅生态
+      大咖与大众、文化与产业
     </h1>
 
-    <p class="mt-4 text-gray-200 text-sm md:text-base max-w-xl leading-relaxed">
+    <p class="mt-3 md:mt-4 text-gray-300 text-sm md:text-base max-w-xl leading-relaxed">
       少林禅武 · 嵩阳书院 · 中岳庙 · 登封窑 —— 从深度研学、国际旅居，到非遗匠人与产业共建，读懂天地之中的大美嵩山。
     </p>
 
-    <div class="mt-8 w-full max-w-2xl">
-      <div class="bg-white/95 rounded-2xl p-2 flex flex-col sm:flex-row gap-2 shadow-2xl shadow-black/30">
-        <input id="aiSearchInput" type="text" placeholder="试试：少林功夫 / 非遗手作 / 北大学子研学 / 深度旅居"
-               class="flex-1 px-4 py-3 bg-transparent outline-none text-ink text-sm placeholder-gray-400 rounded-xl" />
-        <button id="aiSearchBtn" class="bg-shan-600 hover:bg-shan-700 text-white px-6 py-3 rounded-xl text-sm font-medium transition disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap">
+    <!-- AI 搜索框（移动端上下堆叠） -->
+    <div class="mt-6 md:mt-8 w-full max-w-2xl">
+      <div class="bg-white/95 rounded-2xl p-1.5 md:p-2 flex flex-col sm:flex-row gap-2 shadow-2xl shadow-black/30">
+        <input id="aiSearchInput" type="text" placeholder="试试：少林功夫 / 非遗手作 / 研学 / 旅居"
+               class="flex-1 px-4 py-3 bg-transparent outline-none text-ink text-base placeholder-gray-400 rounded-xl" />
+        <button id="aiSearchBtn" class="bg-shan-600 hover:bg-shan-700 text-white px-6 py-3.5 sm:py-3 rounded-xl text-base sm:text-sm font-medium transition disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap shadow-md">
           AI 寻路
         </button>
       </div>
 
-      <div class="mt-3 flex flex-wrap items-center gap-2 text-xs text-gray-300">
+      <div class="mt-3 flex flex-wrap items-center gap-2 text-[11px] md:text-xs text-gray-300">
         <span class="text-gray-400">热门：</span>
-        <button class="hot-tag px-3 py-1 rounded-full border border-white/25 hover:border-shan-400 hover:text-shan-300 transition" data-kw="少林">少林功夫</button>
-        <button class="hot-tag px-3 py-1 rounded-full border border-white/25 hover:border-shan-400 hover:text-shan-300 transition" data-kw="非遗">非遗手作</button>
-        <button class="hot-tag px-3 py-1 rounded-full border border-white/25 hover:border-shan-400 hover:text-shan-300 transition" data-kw="书院">书院研学</button>
-        <button class="hot-tag px-3 py-1 rounded-full border border-white/25 hover:border-shan-400 hover:text-shan-300 transition" data-kw="徒步">地质徒步</button>
+        <button class="hot-tag px-3 py-1.5 md:py-1 rounded-full border border-white/20 bg-black/20 hover:border-shan-400 hover:text-shan-300 transition" data-kw="少林">少林功夫</button>
+        <button class="hot-tag px-3 py-1.5 md:py-1 rounded-full border border-white/20 bg-black/20 hover:border-shan-400 hover:text-shan-300 transition" data-kw="非遗">非遗手作</button>
+        <button class="hot-tag px-3 py-1.5 md:py-1 rounded-full border border-white/20 bg-black/20 hover:border-shan-400 hover:text-shan-300 transition" data-kw="研学">研学之旅</button>
       </div>
     </div>
   </div>
-  <div id="heroDots" class="absolute z-10 bottom-6 right-8 flex items-center gap-2"></div>
+  <div id="heroDots" class="absolute z-10 bottom-4 md:bottom-6 right-4 md:right-8 flex items-center gap-2"></div>
 </section>
 
 <!-- ============================= 会议专题入口横幅 ============================= -->
-<section class="bg-shan-900 py-3 relative z-20">
-  <div class="container-1100 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-shan-100">
-    <span class="flex items-center gap-2">
-      <span class="inline-block px-2 py-0.5 rounded bg-shan-600 text-white text-[10px] font-bold tracking-wider">最新专题</span>
-      <span class="truncate">天地之中·中华优秀传统文化传承发展工程会议（2026.6.23）成功举办</span>
+<section class="bg-shan-900 py-3 md:py-3 relative z-20">
+  <div class="container-1100 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs md:text-sm text-shan-100 text-center sm:text-left">
+    <span class="flex flex-col sm:flex-row items-center gap-1.5 md:gap-2 w-full sm:w-auto">
+      <span class="inline-block px-2 py-0.5 rounded bg-shan-600 text-white text-[10px] font-bold tracking-wider whitespace-nowrap">最新专题</span>
+      <span class="truncate">天地之中·中华优秀传统文化传承发展工程会议成功举办</span>
     </span>
-    <a href="events.html" class="text-white font-medium hover:underline flex items-center gap-1 whitespace-nowrap shrink-0">
-      查看会议全记录 <span>→</span>
+    <a href="events.html" class="text-white font-medium hover:underline flex items-center gap-1 whitespace-nowrap shrink-0 mt-1 sm:mt-0">
+      查看全记录 <span>→</span>
     </a>
   </div>
 </section>
 
-<!-- ============================= 上半部分：AI 撮合 + 定制行囊 ============================= -->
-<section id="ai-match" class="container-1100 py-14">
+<!-- ============================= AI 撮合 + 定制行囊 ============================= -->
+<section id="ai-match" class="container-1100 py-10 md:py-14">
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
     <div class="lg:col-span-7">
-      <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm h-full flex flex-col">
+      <div class="bg-white rounded-2xl border border-gray-100 p-5 md:p-6 shadow-sm h-full flex flex-col">
         <div class="flex items-center justify-between mb-2">
-          <h2 class="font-serif text-xl font-bold text-ink">AI 寻路演示</h2>
-          <span class="text-[11px] text-shan-700 bg-shan-50 border border-shan-100 px-2.5 py-1 rounded-full">实时演示</span>
+          <h2 class="font-serif text-lg md:text-xl font-bold text-ink">AI 寻路演示</h2>
+          <span class="text-[10px] md:text-[11px] text-shan-700 bg-shan-50 border border-shan-100 px-2 py-1 rounded-full">实时</span>
         </div>
-        <p class="text-sm text-gray-500 leading-relaxed">
-          用一句话描述你的期待，AI 从 200+ 嵩山人文体验中，为你组合出一条真正走得通的行程。
+        <p class="text-xs md:text-sm text-gray-500 leading-relaxed">
+          描述你的期待，AI 从 200+ 嵩山人文体验中，为你组合出一条真正走得通的行程。
         </p>
 
-        <div class="mt-5 rounded-xl border border-gray-200 bg-sand p-4">
+        <div class="mt-4 rounded-xl border border-gray-200 bg-sand p-3 md:p-4">
           <div class="flex items-center justify-between">
-            <span class="text-[11px] tracking-wider text-gray-400">① 需求解析</span>
-            <span class="text-[11px] text-gray-400">来自用户输入</span>
+            <span class="text-[10px] md:text-[11px] tracking-wider text-gray-400">① 需求解析</span>
+            <span class="text-[10px] md:text-[11px] text-gray-400">来自用户输入</span>
           </div>
-          <div class="mt-2.5 flex flex-wrap gap-2">
-            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white border border-gray-200 text-gray-600">亲子家庭</span>
-            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white border border-gray-200 text-gray-600">2 天 1 夜</span>
-            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white border border-gray-200 text-gray-600">文化研学</span>
-            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white border border-gray-200 text-gray-600">轻徒步</span>
-            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white border border-gray-200 text-gray-600">预算 2k 以内</span>
+          <div class="mt-2.5 flex flex-wrap gap-1.5 md:gap-2">
+            <span class="text-[10px] md:text-[11px] px-2 py-1 rounded-md bg-white border border-gray-200 text-gray-600">亲子家庭</span>
+            <span class="text-[10px] md:text-[11px] px-2 py-1 rounded-md bg-white border border-gray-200 text-gray-600">2 天 1 夜</span>
+            <span class="text-[10px] md:text-[11px] px-2 py-1 rounded-md bg-white border border-gray-200 text-gray-600">文化研学</span>
           </div>
-          <p class="mt-3 text-sm text-gray-700 leading-relaxed">“想用两天时间，让孩子在行走中真正理解嵩山的文化，别只是拍照打卡。”</p>
+          <p class="mt-3 text-xs md:text-sm text-gray-700 leading-relaxed">“想用两天时间，让孩子在行走中真正理解嵩山的文化，别只是拍照打卡。”</p>
         </div>
 
-        <div class="flex items-center justify-center gap-2 py-3 text-shan-600 text-xs">
-          <span class="h-px w-12 bg-shan-200"></span>
+        <div class="flex items-center justify-center gap-2 py-3 text-shan-600 text-[10px] md:text-xs">
+          <span class="h-px w-8 md:w-12 bg-shan-200"></span>
           <span>AI 匹配中 · 已比对 47 条体验</span>
-          <span class="h-px w-12 bg-shan-200"></span>
+          <span class="h-px w-8 md:w-12 bg-shan-200"></span>
         </div>
 
-        <div class="rounded-xl border border-shan-200 bg-shan-50/70 p-4">
+        <div class="rounded-xl border border-shan-200 bg-shan-50/70 p-3 md:p-4">
           <div class="flex items-center justify-between">
-            <span class="text-[11px] tracking-wider text-shan-700">② 匹配方案</span>
-            <span class="text-[11px] font-semibold text-shan-700 bg-white border border-shan-200 px-2 py-0.5 rounded-full">匹配度 96%</span>
+            <span class="text-[10px] md:text-[11px] tracking-wider text-shan-700">② 匹配方案</span>
+            <span class="text-[10px] md:text-[11px] font-semibold text-shan-700 bg-white border border-shan-200 px-2 py-0.5 rounded-full">匹配度 96%</span>
           </div>
-          <h3 class="mt-2 font-serif text-lg font-bold text-ink leading-snug">嵩阳书院国学讲坛 ＋ 少林功夫晨课</h3>
-          <p class="mt-1.5 text-sm text-gray-600 leading-relaxed">2 天 1 夜 · 含 1 晚禅意民宿 · 全程专业文化讲解 · 适龄 7 岁以上</p>
-          <div class="mt-3 flex flex-wrap gap-2">
-            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white border border-shan-200 text-shan-700">Day1 书院释菜礼</span>
-            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white border border-shan-200 text-shan-700">Day1 塔林夜话</span>
-            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white border border-shan-200 text-shan-700">Day2 晨课八段锦</span>
-          </div>
-          <button id="viewPlanBtn" class="mt-4 w-full sm:w-auto text-sm text-white bg-shan-600 hover:bg-shan-700 px-5 py-2.5 rounded-lg transition">
+          <h3 class="mt-2 font-serif text-base md:text-lg font-bold text-ink leading-snug">嵩阳书院国学讲坛 ＋ 少林功夫晨课</h3>
+          <p class="mt-1 text-xs md:text-sm text-gray-600 leading-relaxed">2 天 1 夜 · 含 1 晚禅意民宿 · 适龄 7 岁以上</p>
+          <button id="viewPlanBtn" class="mt-3 md:mt-4 w-full sm:w-auto text-xs md:text-sm text-white bg-shan-600 hover:bg-shan-700 px-5 py-2.5 rounded-lg transition">
             查看完整行程 →
           </button>
         </div>
@@ -187,14 +201,14 @@
     </div>
 
     <div class="lg:col-span-5" id="booking">
-      <div class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm h-full">
-        <h2 class="font-serif text-xl font-bold text-ink">定制专属行囊</h2>
-        <p class="text-sm text-gray-500 mt-1">留下你的需求，文化顾问 24 小时内给出方案。</p>
+      <div class="bg-white rounded-2xl border border-gray-100 p-5 md:p-6 shadow-sm h-full">
+        <h2 class="font-serif text-lg md:text-xl font-bold text-ink">定制专属行囊</h2>
+        <p class="text-xs md:text-sm text-gray-500 mt-1">留下需求，文化顾问 24 小时内给出方案。</p>
 
-        <form id="bookingForm" class="mt-5 space-y-3.5" novalidate>
+        <form id="bookingForm" class="mt-4 md:mt-5 space-y-3.5" novalidate>
           <div>
             <label for="fTheme" class="block text-xs text-gray-500 mb-1.5">旅行主题</label>
-            <select id="fTheme" class="w-full px-3 py-2.5 rounded-lg border border-gray-200 text-sm text-ink bg-white outline-none transition focus:border-shan-500 focus:ring-2 focus:ring-shan-100">
+            <select id="fTheme" class="w-full px-3 py-3 md:py-2.5 rounded-lg border border-gray-200 text-base md:text-sm text-ink bg-white outline-none transition focus:border-shan-500 focus:ring-2 focus:ring-shan-100">
               <option value="文化研学">文化研学</option>
               <option value="非遗手作">非遗手作</option>
               <option value="自然徒步">自然徒步</option>
@@ -204,30 +218,31 @@
           </div>
           <div>
             <label for="fTime" class="block text-xs text-gray-500 mb-1.5">出行时间</label>
-            <input id="fTime" type="text" required placeholder="如：11 月 8 日 - 9 日 · 周末两日" class="w-full px-3 py-2.5 rounded-lg border border-gray-200 text-sm text-ink outline-none transition placeholder-gray-400 focus:border-shan-500 focus:ring-2 focus:ring-shan-100" />
+            <input id="fTime" type="text" required placeholder="如：11 月 8 日 - 9 日" class="w-full px-3 py-3 md:py-2.5 rounded-lg border border-gray-200 text-base md:text-sm text-ink outline-none transition placeholder-gray-400 focus:border-shan-500 focus:ring-2 focus:ring-shan-100" />
           </div>
           <div>
             <label for="fNote" class="block text-xs text-gray-500 mb-1.5">补充备注</label>
-            <textarea id="fNote" rows="3" placeholder="同行人数 / 预算范围 / 特殊偏好（如忌口、体力情况）" class="w-full px-3 py-2.5 rounded-lg border border-gray-200 text-sm text-ink outline-none transition resize-none placeholder-gray-400 focus:border-shan-500 focus:ring-2 focus:ring-shan-100"></textarea>
+            <textarea id="fNote" rows="3" placeholder="同行人数 / 预算 / 特殊偏好" class="w-full px-3 py-3 md:py-2.5 rounded-lg border border-gray-200 text-base md:text-sm text-ink outline-none transition resize-none placeholder-gray-400 focus:border-shan-500 focus:ring-2 focus:ring-shan-100"></textarea>
           </div>
-          <button id="submitBtn" type="submit" class="w-full bg-shan-600 hover:bg-shan-700 text-white py-3 rounded-lg text-sm font-medium transition disabled:opacity-60 disabled:cursor-not-allowed">
-            提交需求，定制专属行囊
+          <button id="submitBtn" type="submit" class="w-full bg-shan-600 hover:bg-shan-700 text-white py-3.5 md:py-3 rounded-lg text-base md:text-sm font-medium transition disabled:opacity-60 disabled:cursor-not-allowed shadow-md">
+            提交需求，定制行囊
           </button>
-          <p class="text-[11px] text-gray-400 text-center leading-relaxed">提交即表示同意我们与你联系 · 信息仅用于行程沟通</p>
+          <p class="text-[10px] md:text-[11px] text-gray-400 text-center leading-relaxed">提交即表示同意我们与你联系</p>
         </form>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================= 下半部分：嵩山体验库 ============================= -->
-<section id="library" class="container-1100 pb-16">
-  <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+<!-- ============================= 体验库 ============================= -->
+<section id="library" class="container-1100 pb-12 md:pb-16">
+  <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-5 md:mb-6">
     <div>
-      <h2 class="font-serif text-2xl font-bold text-ink">嵩山生态体验库</h2>
-      <p class="text-sm text-gray-500 mt-1.5">经本地文化顾问与 AI 双重筛选的人文体验，可按主题自由组合进行囊。</p>
+      <h2 class="font-serif text-xl md:text-2xl font-bold text-ink">嵩山生态体验库</h2>
+      <p class="text-xs md:text-sm text-gray-500 mt-1.5">经文化顾问与 AI 双重筛选的人文体验，按主题自由组合。</p>
     </div>
-    <div id="filterTabs" class="flex flex-wrap gap-2">
+    <!-- 移动端横向滑动 Tab -->
+    <div id="filterTabs" class="flex flex-nowrap md:flex-wrap overflow-x-auto hide-scrollbar gap-2 pb-1 -mx-4 px-4 md:mx-0 md:px-0">
       <button class="tab active" data-cat="全部">全部</button>
       <button class="tab" data-cat="文化">文化</button>
       <button class="tab" data-cat="非遗">非遗</button>
@@ -237,62 +252,56 @@
   </div>
 
   <div id="resultHint" class="hidden mb-4 text-xs text-shan-700 bg-shan-50 border border-shan-100 rounded-lg px-3 py-2"></div>
-  <div id="expGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+  <div id="expGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5"></div>
 
   <div id="emptyState" class="hidden py-20 text-center">
     <div class="text-4xl mb-3">⛰️</div>
-    <p class="text-sm text-gray-500">没有找到匹配的体验，换个关键词试试，或直接提交定制需求。</p>
+    <p class="text-sm text-gray-500">没有找到匹配的体验，换个关键词试试。</p>
     <a href="#booking" class="inline-block mt-4 text-sm text-white bg-shan-600 hover:bg-shan-700 px-5 py-2.5 rounded-lg transition">去定制行囊</a>
   </div>
 </section>
 
-<!-- ============================= 景区高斯泼溅 ============================= -->
-<section id="splat" class="bg-white py-16 border-t border-gray-100">
+<!-- ============================= 3D 景区 ============================= -->
+<section id="splat" class="bg-white py-12 md:py-16 border-t border-gray-100">
   <div class="container-1100">
-    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6 md:mb-8">
       <div>
-        <span class="inline-flex items-center gap-2 text-[12px] tracking-widest text-shan-700 border border-shan-200 bg-shan-50 px-3 py-1.5 rounded-full">
+        <span class="inline-flex items-center gap-2 text-[11px] md:text-[12px] tracking-widest text-shan-700 border border-shan-200 bg-shan-50 px-3 py-1.5 rounded-full">
           <span class="w-1.5 h-1.5 rounded-full bg-shan-500 animate-pulse"></span>
-          3D Gaussian Splatting · 数字孪生
+          3D Gaussian Splatting
         </span>
-        <h2 class="mt-4 font-serif text-2xl font-bold text-ink">景区高斯泼溅</h2>
-        <p class="text-sm text-gray-500 mt-1.5 max-w-xl leading-relaxed">
-          无需下载插件，直接在浏览器中旋转、缩放，从任意角度观察嵩山历史建筑的三维点云重建。
+        <h2 class="mt-3 md:mt-4 font-serif text-xl md:text-2xl font-bold text-ink">景区高斯泼溅</h2>
+        <p class="text-xs md:text-sm text-gray-500 mt-1.5 max-w-xl leading-relaxed">
+          无需下载插件，直接在浏览器中旋转、缩放，观察嵩山历史建筑的三维点云重建。
         </p>
-      </div>
-      <div class="flex items-center gap-4 text-xs text-gray-400 whitespace-nowrap">
-        <span class="inline-flex items-center gap-1.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-shan-400"></span>
-          <span id="splatPointCount">—</span>
-        </span>
-        <span class="hidden sm:inline">· 浏览器端实时渲染</span>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
       <div class="lg:col-span-8">
-        <div class="relative rounded-2xl overflow-hidden border border-gray-200 shadow-sm bg-[#0B1410]">
-          <canvas id="splatCanvas" class="w-full h-[360px] md:h-[480px]"></canvas>
-          <div class="absolute top-4 left-4 flex items-center gap-2">
-            <span id="splatSceneName" class="text-[12px] font-medium text-white bg-black/35 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/10">少林塔林</span>
+        <div class="relative rounded-xl md:rounded-2xl overflow-hidden border border-gray-200 shadow-sm bg-[#0B1410]">
+          <!-- 移动端降低画布高度，防止占满屏幕 -->
+          <canvas id="splatCanvas" class="w-full h-[280px] md:h-[480px]"></canvas>
+          <div class="absolute top-3 left-3 md:top-4 md:left-4 flex items-center gap-2">
+            <span id="splatSceneName" class="text-[11px] md:text-[12px] font-medium text-white bg-black/40 backdrop-blur-sm px-2.5 py-1 md:px-3 md:py-1.5 rounded-md md:rounded-lg border border-white/10">少林塔林</span>
           </div>
-          <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-[11px] text-white/70">
-            <span class="bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-md">拖动旋转 · 滚轮缩放</span>
-            <span class="hidden sm:inline bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-md">模拟点云 · 非实时扫描数据</span>
+          <div class="absolute bottom-3 left-3 right-3 md:bottom-4 md:left-4 md:right-4 flex items-center justify-between text-[10px] md:text-[11px] text-white/70">
+            <span class="bg-black/40 backdrop-blur-sm px-2 py-1 rounded-md">拖动旋转 · 滚轮缩放</span>
           </div>
           <div id="splatLoading" class="absolute inset-0 flex items-center justify-center bg-[#0B1410]/85 backdrop-blur-sm transition-opacity duration-300 opacity-0 pointer-events-none">
             <div class="flex flex-col items-center gap-3">
-              <div class="w-9 h-9 rounded-full border-2 border-shan-400/30 border-t-shan-400 animate-spin"></div>
-              <span class="text-xs text-shan-200">正在重建点云…</span>
+              <div class="w-8 h-8 rounded-full border-2 border-shan-400/30 border-t-shan-400 animate-spin"></div>
+              <span class="text-[11px] text-shan-200">正在重建点云…</span>
             </div>
           </div>
         </div>
       </div>
 
       <div class="lg:col-span-4">
-        <div id="splatScenes" class="space-y-3"></div>
-        <p class="mt-4 text-[11px] text-gray-400 leading-relaxed">
-          点云为基于公开资料的视觉模拟，用于展示高斯泼溅渲染思路；实际景区数字孪生需现场多视角采集后重建。
+        <!-- 移动端横向滚动，PC端垂直排列 -->
+        <div id="splatScenes" class="flex lg:flex-col overflow-x-auto lg:overflow-visible hide-scrollbar gap-3 pb-2 lg:pb-0 scroll-smooth snap-x snap-mandatory"></div>
+        <p class="mt-3 md:mt-4 text-[10px] md:text-[11px] text-gray-400 leading-relaxed">
+          点云为公开资料的视觉模拟；实际景区数字孪生需现场采集后重建。
         </p>
       </div>
     </div>
@@ -300,50 +309,50 @@
 </section>
 
 <!-- ============================= 页脚 ============================= -->
-<footer id="footer" class="bg-ink text-gray-300">
-  <div class="container-1100 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+<footer id="footer" class="bg-ink text-gray-300 pt-10 md:pt-12 pb-6 md:pb-8">
+  <div class="container-1100 grid grid-cols-1 md:grid-cols-3 gap-8">
     <div>
       <div class="flex items-center gap-2.5">
         <span class="w-9 h-9 rounded-lg bg-shan-600 text-white flex items-center justify-center font-serif text-lg">嵩</span>
-        <span class="font-serif text-lg font-bold text-white">天地之中 · 嵩山人文志</span>
+        <span class="font-serif text-base md:text-lg font-bold text-white">天地之中 · 嵩山人文志</span>
       </div>
-      <p class="mt-4 text-sm text-gray-400 leading-relaxed">
+      <p class="mt-3 text-xs md:text-sm text-gray-400 leading-relaxed">
         连接历史与未来、大咖与大众、文化与产业的文旅生态平台。把嵩山的历史、技艺与山水，装进一只可定制的行囊。
       </p>
       <div class="mt-4">
-        <a href="#booking" class="inline-block text-sm text-shan-400 border border-shan-600/50 hover:bg-shan-600 hover:text-white px-4 py-2 rounded-lg transition">
+        <a href="#booking" class="inline-block text-xs md:text-sm text-shan-400 border border-shan-600/50 hover:bg-shan-600 hover:text-white px-4 py-2 rounded-lg transition">
           我是主理人 / 诚邀共建 →
         </a>
       </div>
     </div>
 
     <div>
-      <h3 class="text-white text-sm font-semibold mb-4">快速导航</h3>
-      <ul class="space-y-2.5 text-sm text-gray-400">
+      <h3 class="text-white text-sm font-semibold mb-3 md:mb-4">快速导航</h3>
+      <ul class="space-y-2 text-xs md:text-sm text-gray-400">
         <li><a href="#hero" class="hover:text-shan-400 transition">首页</a></li>
-        <li><a href="#library" class="hover:text-shan-400 transition">嵩山生态体验库</a></li>
-        <li><a href="#splat" class="hover:text-shan-400 transition">景区高斯泼溅</a></li>
+        <li><a href="#library" class="hover:text-shan-400 transition">生态体验库</a></li>
+        <li><a href="#splat" class="hover:text-shan-400 transition">3D 景区</a></li>
         <li><a href="#ai-match" class="hover:text-shan-400 transition">AI 寻路</a></li>
-        <li><a href="#booking" class="hover:text-shan-400 transition">定制专属行囊</a></li>
+        <li><a href="#booking" class="hover:text-shan-400 transition">定制行囊</a></li>
         <li><a href="events.html" class="hover:text-shan-400 transition">会议专题</a></li>
       </ul>
     </div>
 
     <div>
-      <h3 class="text-white text-sm font-semibold mb-4">联系我们</h3>
-      <ul class="space-y-2 text-sm text-gray-400">
+      <h3 class="text-white text-sm font-semibold mb-3 md:mb-4">联系我们</h3>
+      <ul class="space-y-2 text-xs md:text-sm text-gray-400">
         <li>服务时间：每日 09:00 - 21:00</li>
         <li>邮箱：zysongshan@163.com</li>
         <li>电话：15515816811</li>
         <li>地址：中国 天地之中 登封嵩山</li>
-        <li class="pt-2 text-xs text-gray-500">学术支持：嵩山文化研究会</li>
-        <li class="text-xs text-gray-500">主办单位：河南嵩玉文化旅游有限公司</li>
+        <li class="pt-2 text-[10px] md:text-xs text-gray-500">学术支持：嵩山文化研究会</li>
+        <li class="text-[10px] md:text-xs text-gray-500">主办单位：河南嵩玉文化旅游有限公司</li>
       </ul>
     </div>
   </div>
 
-  <div class="border-t border-white/10">
-    <div class="container-1100 py-4 text-center text-xs text-gray-500">
+  <div class="border-t border-white/10 mt-8 md:mt-12">
+    <div class="container-1100 pt-4 text-center text-[10px] md:text-xs text-gray-500">
       © 2026 河南嵩玉文化旅游有限公司 · 天地之中 · 嵩山人文志　保留所有权利
     </div>
   </div>
@@ -352,10 +361,24 @@
 <!-- ============================= 全局 Toast ============================= -->
 <div id="toast" class="fixed left-1/2 bottom-8 z-[100] px-5 py-3 rounded-xl text-white text-sm shadow-2xl transition-all duration-300 opacity-0 translate-y-4 -translate-x-1/2 pointer-events-none bg-shan-600"></div>
 
-<!-- ============================= 脚本 ============================= -->
 <script>
 (function () {
   'use strict';
+
+  // 移动端菜单逻辑
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener('click', function() {
+      mobileMenu.classList.toggle('hidden-menu');
+    });
+    // 点击菜单项后自动关闭
+    Array.prototype.forEach.call(mobileMenu.querySelectorAll('a'), function(link) {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.add('hidden-menu');
+      });
+    });
+  }
 
   const API_BASE  = 'https://songshan-backend.fastapicloud.dev';
   const API_LEADS = API_BASE + '/api/leads';
@@ -481,18 +504,18 @@
     if (emptyState) emptyState.classList.add('hidden');
     expGrid.innerHTML = list.map(function (item) {
       const priceText = (item.price === 0 || item.price === '0') ? '免费' : '¥ ' + esc(item.price);
-      return '<article class="group bg-white rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">' +
+      return '<article class="group bg-white rounded-xl md:rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">' +
           '<div class="relative h-40 overflow-hidden bg-gray-100">' +
             '<img src="' + esc(item.img) + '" alt="' + esc(item.title) + '" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src=\'' + FALLBACK_IMG + '\'">' +
-            '<span class="absolute top-3 left-3 text-[11px] px-2 py-1 rounded-md bg-white/95 text-shan-700 font-medium shadow-sm">' + esc(item.category) + '</span>' +
+            '<span class="absolute top-3 left-3 text-[10px] md:text-[11px] px-2 py-1 rounded-md bg-white/95 text-shan-700 font-medium shadow-sm">' + esc(item.category) + '</span>' +
           '</div>' +
           '<div class="p-4 flex flex-col flex-1">' +
-            '<div class="text-[11px] text-shan-600 font-medium mb-1">' + esc(item.tag) + '</div>' +
-            '<h3 class="font-serif text-base font-bold leading-snug text-ink">' + esc(item.title) + '</h3>' +
-            '<p class="text-xs text-gray-500 mt-2 leading-relaxed line-clamp-3 flex-1">' + esc(item.desc) + '</p>' +
+            '<div class="text-[10px] md:text-[11px] text-shan-600 font-medium mb-1">' + esc(item.tag) + '</div>' +
+            '<h3 class="font-serif text-base md:text-[1rem] font-bold leading-snug text-ink">' + esc(item.title) + '</h3>' +
+            '<p class="text-[11px] md:text-xs text-gray-500 mt-2 leading-relaxed line-clamp-3 flex-1">' + esc(item.desc) + '</p>' +
             '<div class="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between gap-2">' +
-              '<div class="text-[11px] text-gray-400 whitespace-nowrap">' + esc(item.duration) + ' · <span class="text-shan-700 font-semibold">' + priceText + '</span></div>' +
-              '<button type="button" class="add-btn text-[11px] px-3 py-1.5 rounded-lg bg-shan-50 text-shan-700 hover:bg-shan-600 hover:text-white transition whitespace-nowrap" data-title="' + esc(item.title) + '">+ 收入行囊</button>' +
+              '<div class="text-[10px] md:text-[11px] text-gray-400 whitespace-nowrap">' + esc(item.duration) + ' · <span class="text-shan-700 font-semibold">' + priceText + '</span></div>' +
+              '<button type="button" class="add-btn text-[10px] md:text-[11px] px-3 py-2 md:py-1.5 rounded-lg bg-shan-50 text-shan-700 hover:bg-shan-600 hover:text-white transition whitespace-nowrap" data-title="' + esc(item.title) + '">+ 收入行囊</button>' +
             '</div>' +
           '</div>' +
         '</article>';
@@ -604,11 +627,7 @@
     });
   }
 
-  /* 3D 高斯泼溅 (保留原有逻辑，代码略缩，直接使用完整版) */
-  // ... (此处保留你之前的 3D 渲染逻辑 JS 代码，未做任何删减) ...
-  // 为了节省篇幅，在你的实际代码中请保留之前 index.html 中 `const splatCanvas = ...` 到 `initSplat();` 的所有代码。
-
-  // ========== 3D 渲染完整代码块 ==========
+  /* ========== 3D 渲染完整代码块 ========== */
   const splatCanvas = document.getElementById('splatCanvas'), splatCtx = splatCanvas ? splatCanvas.getContext('2d') : null;
   const splatScenesEl = document.getElementById('splatScenes'), splatPointCountEl = document.getElementById('splatPointCount');
   const splatLoadingEl = document.getElementById('splatLoading'), splatSceneNameEl = document.getElementById('splatSceneName');
