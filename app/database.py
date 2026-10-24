@@ -78,17 +78,7 @@ class VipClient(Base):
     theme = Column(String(20), default='warm', comment="主题风格")
 
 
-# 自动建表
-try:
-    Base.metadata.create_all(bind=engine)
-    print("✅ 数据库表初始化完成")
-except Exception as e:
-    print(f"❌ 数据库初始化失败: {e}")
-
-# 删除了旧的 get_prefix 和 seed_initial_data 播种函数，避免旧数据污染
-
-# ... 原有代码保留 ...
-
+# 🌟 新增的会议表 (必须放在 create_all 之前)
 class Event(Base):
     __tablename__ = "events"
     id = Column(Integer, primary_key=True, index=True)
@@ -99,3 +89,11 @@ class Event(Base):
     content = Column(Text, comment="正文内容（支持HTML）")
     images = Column(Text, comment="图集（逗号分隔的URL）")
     created_at = Column(DateTime, default=datetime.utcnow)
+
+
+# 🌟 自动建表 (必须放在所有模型定义的后面)
+try:
+    Base.metadata.create_all(bind=engine)
+    print("✅ 数据库表初始化完成")
+except Exception as e:
+    print(f"❌ 数据库初始化失败: {e}")
