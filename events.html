@@ -88,14 +88,13 @@
   </div>
 </header>
 
-<!-- 顶部深色区域：展示大标题、简介、紧凑型轮播 -->
+<!-- 顶部深色区域 -->
 <section class="bg-ink text-white pt-10 pb-6 md:pt-14 md:pb-8 relative overflow-hidden">
   <div class="absolute inset-0 opacity-50 bg-[url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center"></div>
   <div class="absolute inset-0 bg-gradient-to-r from-[#022c22]/95 via-[#064E3B]/90 to-[#059669]/40"></div>
 
   <div class="container-1100 relative z-10">
 
-    <!-- 标题、简介 与 右上角时间地点标签 -->
     <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 md:gap-8 mb-6">
 
       <!-- 左侧：动态文本 -->
@@ -104,36 +103,43 @@
           <span class="w-1.5 h-1.5 rounded-full bg-shan-400"></span> 学术支持 · 会议专题
         </span>
         <h1 id="hero-title" class="mt-2 font-sans text-white text-[1.8rem] md:text-4xl leading-[1.3] font-black drop-shadow-xl tracking-wider">
-          连接历史与未来<br class="hidden md:block" />大咖与大众、文化与产业
+          天地之中·中华优秀传统文化<br class="hidden md:block" />传承发展工程
         </h1>
         <p id="hero-desc" class="text-gray-200 text-sm md:text-base max-w-2xl leading-relaxed mt-3">
           2026年6月23日，河南登封。汇聚学界、业界与政界智慧，深入挖掘中华文化核心资源，探讨在中华文明主根主脉上推进中华文化自主知识体系建设。
         </p>
       </div>
 
-      <!-- 右侧：时间与地点标签 -->
-      <div id="hero-tags" class="flex flex-wrap md:flex-col gap-2 shrink-0 md:mt-2 md:w-44">
-        <span class="bg-white/10 px-3 py-1.5 rounded-md backdrop-blur-sm text-[11px] md:text-sm border border-white/5 whitespace-nowrap text-center">📅 2026年6月23日</span>
-        <span class="bg-white/10 px-3 py-1.5 rounded-md backdrop-blur-sm text-[11px] md:text-sm border border-white/5 whitespace-nowrap text-center">📍 河南 · 登封</span>
+      <!-- 右侧：时间与地点标签 (高级质感版) -->
+      <div id="hero-tags" class="flex flex-col gap-2.5 shrink-0 md:mt-2 w-fit">
+        <div class="flex items-center gap-2.5 bg-black/20 backdrop-blur-md border border-white/15 px-4 py-2 rounded-lg shadow-sm">
+          <svg class="w-4 h-4 text-shan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          <span class="text-sm font-medium tracking-wider text-gray-100">2026年6月23日</span>
+        </div>
+        <div class="flex items-center gap-2.5 bg-black/20 backdrop-blur-md border border-white/15 px-4 py-2 rounded-lg shadow-sm">
+          <svg class="w-4 h-4 text-shan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          <span class="text-sm font-medium tracking-wider text-gray-100">河南 · 登封</span>
+        </div>
       </div>
     </div>
 
-    <!-- 轮播卡片区 (带左右箭头) -->
+    <!-- 轮播卡片区 -->
     <div class="mt-2">
       <div class="flex items-center gap-3">
-        <!-- 左侧：历届会议标题 -->
-        <h3 class="text-[11px] md:text-xs font-bold text-shan-300 tracking-widest shrink-0 w-[48px] md:w-auto leading-tight">
-          历届<br class="md:hidden">会议与讲座
-        </h3>
 
-        <!-- 右侧：卡片及箭头 -->
+        <!-- 左侧：竖排标题与分隔线 -->
+        <div class="shrink-0 flex items-center justify-center pr-3 md:pr-5 border-r border-white/20">
+          <h3 class="text-[13px] md:text-sm font-bold text-shan-300 tracking-[0.3em] leading-[1.8] text-center flex flex-col items-center">
+            <span>历届会议</span>
+            <span class="text-[11px] md:text-xs text-gray-300 font-normal mt-1 tracking-[0.2em]">与讲座</span>
+          </h3>
+        </div>
+
         <div class="relative flex-1 flex items-center group">
-          <!-- 左箭头 -->
           <button id="prevBtn" class="absolute left-0 z-20 -translate-x-2 md:-translate-x-1/2 w-7 h-7 md:w-8 md:h-8 flex items-center justify-center bg-black/40 hover:bg-black/60 border border-white/20 text-white rounded-full backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0">
             <svg class="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
           </button>
 
-          <!-- 滚动容器 -->
           <div id="carousel-container" class="w-full flex overflow-x-auto hide-scrollbar snap-x snap-mandatory gap-3 pb-1">
             <div onclick="switchEvent('event1', this)" class="tab-card active cursor-pointer w-[200px] md:w-[240px] shrink-0 bg-white/5 backdrop-blur-md border border-white/10 rounded-lg p-3 relative overflow-hidden">
               <div class="text-[10px] text-shan-300 font-bold mb-1">2026年6月23日</div>
@@ -150,13 +156,11 @@
               <h4 class="font-serif text-sm font-bold text-white leading-snug line-clamp-2">“秋分与中秋节文化”专题讲座</h4>
             </div>
 
-            <!-- 占位卡片 -->
             <div class="tab-card w-[200px] md:w-[240px] shrink-0 bg-white/5 backdrop-blur-md border border-white/10 rounded-lg p-3 relative overflow-hidden flex items-center justify-center text-gray-400 text-xs italic">
               更多精彩会议整理中...
             </div>
           </div>
 
-          <!-- 右箭头 -->
           <button id="nextBtn" class="absolute right-0 z-20 translate-x-2 md:translate-x-1/2 w-7 h-7 md:w-8 md:h-8 flex items-center justify-center bg-black/40 hover:bg-black/60 border border-white/20 text-white rounded-full backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity">
             <svg class="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
           </button>
@@ -171,7 +175,7 @@
 <section id="content-section" class="bg-white py-10 md:py-16">
   <div class="container-1100">
 
-    <!-- 1. 天地之中 详情 (默认展示) -->
+    <!-- 1. 天地之中 详情 -->
     <div id="event1" class="event-content fade-in block">
       <!-- 会议定位 -->
       <div class="max-w-3xl mx-auto mb-10">
@@ -271,57 +275,9 @@
           <div class="mt-auto pt-2"><span onclick="openAcademicModal('mo')" class="text-sm text-shan-600 font-medium hover:underline cursor-pointer">阅读详细学术精要 →</span></div>
         </div>
       </div>
+    </div> <!-- event1 end -->
 
-      <!-- 媒体矩阵 -->
-      <div class="text-center mb-10">
-        <h2 class="font-serif text-2xl font-bold text-ink">深度报道 · 权威媒体矩阵</h2>
-        <p class="text-sm text-gray-600 mt-2">全方位、多角度读懂“天地之中”</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-16">
-        <article class="bg-white rounded-2xl p-5 md:p-6 border border-gray-100 hover:shadow-lg transition flex flex-col justify-between">
-          <div>
-            <div class="text-xs text-shan-600 font-bold mb-2">香港商报网 · 2026-06-25</div>
-            <h3 class="font-serif text-lg font-bold text-ink mb-2 leading-snug">「天地之中·中华优秀传统文化传承发展工程」会议在河南登封成功举办</h3>
-            <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">全景式记录会议主办方、开幕式致辞、主旨报告、专题报告及学术小结。</p>
-          </div>
-          <div class="mt-4"><a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199864.html" target="_blank" class="text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a></div>
-        </article>
-        <article class="bg-white rounded-2xl p-5 md:p-6 border border-gray-100 hover:shadow-lg transition flex flex-col justify-between">
-          <div>
-            <div class="text-xs text-shan-600 font-bold mb-2">香港商报网 · 深度解读</div>
-            <h3 class="font-serif text-lg font-bold text-ink mb-2 leading-snug">吕宏军：嵩山是中华文化的脊梁</h3>
-            <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">系统阐述“万山之祖、天地之中、人文之宗”等六大维度，论证嵩山作为核心地标的地位。</p>
-          </div>
-          <div class="mt-4"><a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199861.html" target="_blank" class="text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a></div>
-        </article>
-      </div>
-
-      <!-- 现场图集 -->
-      <div class="text-center mb-10">
-        <h2 class="font-serif text-2xl font-bold text-ink">会议现场图集</h2>
-        <p class="text-sm text-gray-600 mt-2">光影记录，感受思想碰撞的现场</p>
-      </div>
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-        <div class="group relative aspect-square md:aspect-[4/3] rounded-xl overflow-hidden bg-gray-200 cursor-pointer">
-          <img src="https://www.dyjkbd.cn/d/file/2026-06-27/1782567619543961.jpg" alt="会议现场" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-          <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent"><p class="text-white text-sm font-medium">会议现场</p></div>
-        </div>
-        <div class="group relative aspect-square md:aspect-[4/3] rounded-xl overflow-hidden bg-gray-200 cursor-pointer">
-          <img src="https://img.hkcd.com/userfiles/20260625/1782351358740181.jpg" alt="主旨报告" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-          <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent"><p class="text-white text-sm font-medium">主旨报告现场</p></div>
-        </div>
-        <div class="group relative aspect-square md:aspect-[4/3] rounded-xl overflow-hidden bg-gray-200 cursor-pointer">
-          <img src="https://img.hkcd.com/userfiles/20260625/1782351237625168.jpg" alt="武术表演" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-          <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent"><p class="text-white text-sm font-medium">小龙武校武术表演</p></div>
-        </div>
-        <div class="group relative aspect-square md:aspect-[4/3] rounded-xl overflow-hidden bg-gray-200 cursor-pointer">
-          <img src="https://img.hkcd.com/hkcd_images/2026/06/25/1782351149998_66ulkhdp.jpg" alt="交流" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-          <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent"><p class="text-white text-sm font-medium">会议交流现场</p></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2. 嵩山文化研究会第三届二次会议 详情 (隐藏) -->
+    <!-- 2. 嵩山文化研究会第三届二次会议 详情 -->
     <div id="event2" class="event-content hidden">
       <div class="max-w-3xl mx-auto">
         <div class="bg-sand rounded-2xl p-6 md:p-10 border border-gray-100 mb-8">
@@ -351,9 +307,9 @@
           <div class="text-right text-base text-shan-700 font-bold mt-8">春山可望，文脉长青。</div>
         </div>
       </div>
-    </div>
+    </div> <!-- event2 end -->
 
-    <!-- 3. 秋分与中秋节文化 详情 (隐藏) -->
+    <!-- 3. 秋分与中秋节文化 详情 -->
     <div id="event3" class="event-content hidden">
       <div class="max-w-3xl mx-auto">
         <div class="bg-sand rounded-2xl p-6 md:p-10 border border-gray-100 mb-8">
@@ -386,6 +342,128 @@
             <img src="https://www.cdcn.org.cn/upfiles/9b/01435d497f1f02eded3a67458f6115.png" alt="讲座现场" class="w-full rounded-lg shadow-sm border border-gray-200">
           </div>
         </div>
+      </div>
+    </div> <!-- event3 end -->
+
+    <!-- ========================================== -->
+    <!-- 🌟 提取出来的固定板块：深度报道 & 现场图集 -->
+    <!-- 无论上方如何切换，这里都保留不动 -->
+    <!-- ========================================== -->
+
+    <!-- 媒体矩阵 (固定) -->
+    <div class="mt-16 pt-10 border-t border-gray-100">
+      <div class="text-center mb-10">
+        <h2 class="font-serif text-2xl font-bold text-ink">深度报道 · 权威媒体矩阵</h2>
+        <p class="text-sm text-gray-600 mt-2">全方位、多角度读懂“天地之中”</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-16">
+        <!-- 1 -->
+        <article class="bg-white rounded-2xl p-5 md:p-6 border border-gray-100 hover:shadow-lg transition flex flex-col justify-between">
+          <div>
+            <div class="text-xs text-shan-600 font-bold mb-2">香港商报网 · 2026-06-25</div>
+            <h3 class="font-serif text-lg font-bold text-ink mb-2 leading-snug">「天地之中·中华优秀传统文化传承发展工程」会议在河南登封成功举办</h3>
+            <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">全景式记录会议主办方、开幕式致辞、主旨报告、专题报告及学术小结。</p>
+          </div>
+          <div class="mt-4"><a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199864.html" target="_blank" class="text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a></div>
+        </article>
+        <!-- 2 -->
+        <article class="bg-white rounded-2xl p-5 md:p-6 border border-gray-100 hover:shadow-lg transition flex flex-col justify-between">
+          <div>
+            <div class="text-xs text-shan-600 font-bold mb-2">第一健康报道 · 2026-06-27</div>
+            <h3 class="font-serif text-lg font-bold text-ink mb-2 leading-snug">天地之中·中华优秀传统文化传承发展工程会议在登封举办</h3>
+            <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">侧重健康文旅与OMO模式视角，补充产业转化维度的报道。聚焦嵩山作为中华文明主根主脉的文化价值。</p>
+          </div>
+          <div class="mt-4"><a href="https://www.dyjkbd.cn/brand/2026-06-27/13476.html" target="_blank" class="text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a></div>
+        </article>
+        <!-- 3 -->
+        <article class="bg-white rounded-2xl p-5 md:p-6 border border-gray-100 hover:shadow-lg transition flex flex-col justify-between">
+          <div>
+            <div class="text-xs text-shan-600 font-bold mb-2">香港商报网 · 深度解读</div>
+            <h3 class="font-serif text-lg font-bold text-ink mb-2 leading-snug">吕宏军：嵩山是中华文化的脊梁</h3>
+            <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">系统阐述“万山之祖、天地之中、人文之宗”等六大维度，论证嵩山作为核心地标的地位。</p>
+          </div>
+          <div class="mt-4"><a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199861.html" target="_blank" class="text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a></div>
+        </article>
+        <!-- 4 -->
+        <article class="bg-white rounded-2xl p-5 md:p-6 border border-gray-100 hover:shadow-lg transition flex flex-col justify-between">
+          <div>
+            <div class="text-xs text-shan-600 font-bold mb-2">香港商报网 · 深度解读</div>
+            <h3 class="font-serif text-lg font-bold text-ink mb-2 leading-snug">倪健中：上古天文是中华文明的底层源代码</h3>
+            <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">提出“底层原始码”与“未来运行系统”的核心命题。系统阐述上古天文的三大特质，并给出AI语义破译等路径。</p>
+          </div>
+          <div class="mt-4"><a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199865.html" target="_blank" class="text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a></div>
+        </article>
+        <!-- 5 -->
+        <article class="bg-white rounded-2xl p-5 md:p-6 border border-gray-100 hover:shadow-lg transition flex flex-col justify-between">
+          <div>
+            <div class="text-xs text-shan-600 font-bold mb-2">香港商报网 · 深度解读</div>
+            <h3 class="font-serif text-lg font-bold text-ink mb-2 leading-snug">徐冬冬：以艺术的形式开掘二十四节气的当代价值</h3>
+            <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">提出建立中国式抽象逻辑思维，并基于《二十四节气·七十二候》组画，提炼中国原创的“动态色彩体系”。</p>
+          </div>
+          <div class="mt-4"><a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199862.html" target="_blank" class="text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a></div>
+        </article>
+        <!-- 6 -->
+        <article class="bg-white rounded-2xl p-5 md:p-6 border border-gray-100 hover:shadow-lg transition flex flex-col justify-between">
+          <div>
+            <div class="text-xs text-shan-600 font-bold mb-2">香港商报网 · 深度解读</div>
+            <h3 class="font-serif text-lg font-bold text-ink mb-2 leading-snug">杨炳忻：重新认识太极图蕴含的精密法则</h3>
+            <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">展示观星台实测太极图，论证其100%符合现代科学规范。指出阴阳五行源于十月太阳历，并呼吁找回失落的古天文历法源头。</p>
+          </div>
+          <div class="mt-4"><a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/07/05/content_200194.html" target="_blank" class="text-sm text-shan-600 font-medium hover:underline">阅读全文 →</a></div>
+        </article>
+      </div>
+    </div>
+
+    <!-- 现场图集 (固定) -->
+    <div class="mt-8 pt-10 border-t border-gray-100">
+      <div class="text-center mb-10">
+        <h2 class="font-serif text-2xl font-bold text-ink">会议现场图集</h2>
+        <p class="text-sm text-gray-600 mt-2">光影记录，感受思想碰撞的现场</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+        <!-- 图1 -->
+        <div class="group relative aspect-square md:aspect-[4/3] rounded-xl overflow-hidden bg-gray-200 cursor-pointer">
+          <img src="https://www.dyjkbd.cn/d/file/2026-06-27/1782567619543961.jpg" alt="会议现场" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent"><p class="text-white text-sm font-medium">会议现场</p></div>
+        </div>
+        <!-- 图2 -->
+        <div class="group relative aspect-square md:aspect-[4/3] rounded-xl overflow-hidden bg-gray-200 cursor-pointer">
+          <img src="https://img.hkcd.com/userfiles/20260625/1782351358740181.jpg" alt="主旨报告" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent"><p class="text-white text-sm font-medium">主旨报告现场</p></div>
+        </div>
+        <!-- 图3 -->
+        <div class="group relative aspect-square md:aspect-[4/3] rounded-xl overflow-hidden bg-gray-200 cursor-pointer">
+          <img src="https://img.hkcd.com/userfiles/20260625/1782351237625168.jpg" alt="武术表演" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent"><p class="text-white text-sm font-medium">小龙武校武术表演</p></div>
+        </div>
+        <!-- 图4 -->
+        <div class="group relative aspect-square md:aspect-[4/3] rounded-xl overflow-hidden bg-gray-200 cursor-pointer">
+          <img src="https://img.hkcd.com/userfiles/20260625/1782351277686905.jpg" alt="主旨报告" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent"><p class="text-white text-sm font-medium">主旨报告环节</p></div>
+        </div>
+        <!-- 图5 -->
+        <div class="group relative aspect-square md:aspect-[4/3] rounded-xl overflow-hidden bg-gray-200 cursor-pointer">
+          <img src="https://img.hkcd.com/userfiles/20260625/1782351318572376.jpg" alt="专家合影" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent"><p class="text-white text-sm font-medium">与会专家嵩阳书院合影</p></div>
+        </div>
+        <!-- 图6 -->
+        <div class="group relative aspect-square md:aspect-[4/3] rounded-xl overflow-hidden bg-gray-200 cursor-pointer">
+          <img src="https://img.hkcd.com/hkcd_images/2026/07/05/1783233492191_3kvppe9u.jpg" alt="会前访谈" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent"><p class="text-white text-sm font-medium">嵩阳书院会前访谈</p></div>
+        </div>
+        <!-- 图7 -->
+        <div class="group relative aspect-square md:aspect-[4/3] rounded-xl overflow-hidden bg-gray-200 cursor-pointer">
+          <img src="https://img.hkcd.com/hkcd_images/2026/06/25/1782351149998_66ulkhdp.jpg" alt="交流" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent"><p class="text-white text-sm font-medium">会议交流现场</p></div>
+        </div>
+        <!-- 图8 -->
+        <div class="group relative aspect-square md:aspect-[4/3] rounded-xl overflow-hidden bg-gray-200 cursor-pointer">
+          <img src="https://bee-reg-ab.imagency.cn/mr/202610/24/6adc5fedabd73.jpg" alt="嵩山风景" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent"><p class="text-white text-sm font-medium">天地之中 · 登封嵩山</p></div>
+        </div>
+      </div>
+      <div class="text-center mt-8 text-xs text-gray-500">
+        * 以上为现场实拍图（部分带媒体水印）
       </div>
     </div>
 
@@ -426,7 +504,7 @@
   }
 
   // ==========================================
-  // 🌟 轮播图控制逻辑 (基于 scrollBy 的一卡一卡平滑滚动)
+  // 🌟 轮播图控制逻辑
   // ==========================================
   const container = document.getElementById('carousel-container');
   const prevBtn = document.getElementById('prevBtn');
@@ -434,10 +512,9 @@
   let autoPlayInterval;
 
   function getScrollAmount() {
-    // 获取第一个卡片的宽度 + gap，作为滚动的步长
     const firstCard = container.querySelector('.tab-card');
     if (!firstCard) return 220;
-    return firstCard.offsetWidth + 12; // 12 是 gap-3 的大小
+    return firstCard.offsetWidth + 12;
   }
 
   prevBtn.addEventListener('click', () => {
@@ -446,36 +523,22 @@
   });
 
   nextBtn.addEventListener('click', () => {
-    // 检查是否滚到了最右侧
     if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
-      container.scrollTo({ left: 0, behavior: 'smooth' }); // 回到起点
+      container.scrollTo({ left: 0, behavior: 'smooth' });
     } else {
       container.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
     }
     resetAutoPlay();
   });
 
-  // 自动播放逻辑 (每隔 3.5 秒切换一次)
   function startAutoPlay() {
-    autoPlayInterval = setInterval(() => {
-      nextBtn.click();
-    }, 3500);
+    autoPlayInterval = setInterval(() => { nextBtn.click(); }, 3500);
   }
+  function stopAutoPlay() { clearInterval(autoPlayInterval); }
+  function resetAutoPlay() { stopAutoPlay(); startAutoPlay(); }
 
-  function stopAutoPlay() {
-    clearInterval(autoPlayInterval);
-  }
-
-  function resetAutoPlay() {
-    stopAutoPlay();
-    startAutoPlay();
-  }
-
-  // 鼠标移入移出暂停/恢复
   container.addEventListener('mouseenter', stopAutoPlay);
   container.addEventListener('mouseleave', startAutoPlay);
-
-  // 初始化自动播放
   startAutoPlay();
 
 
@@ -483,41 +546,58 @@
   // 🌟 核心内容切换逻辑
   // ==========================================
   window.switchEvent = function(eventId, cardElement) {
-    // 1. 更新上方 Hero 区域文字
     const heroInfo = document.getElementById('hero-info');
     const heroTitle = document.getElementById('hero-title');
     const heroDesc = document.getElementById('hero-desc');
     const heroTags = document.getElementById('hero-tags');
 
+    // 替换标签的高级样式
     if (eventId === 'event1') {
-      heroTitle.innerHTML = '连接历史与未来<br class="hidden md:block" />大咖与大众、文化与产业';
+      heroTitle.innerHTML = '天地之中·中华优秀传统文化<br class="hidden md:block" />传承发展工程';
       heroDesc.innerText = '2026年6月23日，河南登封。汇聚学界、业界与政界智慧，深入挖掘中华文化核心资源，探讨在中华文明主根主脉上推进中华文化自主知识体系建设。';
       heroTags.innerHTML = `
-        <span class="bg-white/10 px-3 py-1.5 rounded-md backdrop-blur-sm text-[11px] md:text-sm border border-white/5 whitespace-nowrap text-center">📅 2026年6月23日</span>
-        <span class="bg-white/10 px-3 py-1.5 rounded-md backdrop-blur-sm text-[11px] md:text-sm border border-white/5 whitespace-nowrap text-center">📍 河南 · 登封</span>
+        <div class="flex items-center gap-2.5 bg-black/20 backdrop-blur-md border border-white/15 px-4 py-2 rounded-lg shadow-sm">
+          <svg class="w-4 h-4 text-shan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          <span class="text-sm font-medium tracking-wider text-gray-100">2026年6月23日</span>
+        </div>
+        <div class="flex items-center gap-2.5 bg-black/20 backdrop-blur-md border border-white/15 px-4 py-2 rounded-lg shadow-sm">
+          <svg class="w-4 h-4 text-shan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          <span class="text-sm font-medium tracking-wider text-gray-100">河南 · 登封</span>
+        </div>
       `;
     } else if (eventId === 'event2') {
       heroTitle.innerText = '嵩山文化研究会第三届二次会议';
       heroDesc.innerText = '总结2025，展望2026。发布多部文化著作，推动文旅融合高质量发展。';
       heroTags.innerHTML = `
-        <span class="bg-white/10 px-3 py-1.5 rounded-md backdrop-blur-sm text-[11px] md:text-sm border border-white/5 whitespace-nowrap text-center">📅 2026年4月4日</span>
-        <span class="bg-white/10 px-3 py-1.5 rounded-md backdrop-blur-sm text-[11px] md:text-sm border border-white/5 whitespace-nowrap text-center">📍 登封市中梁大酒店</span>
+        <div class="flex items-center gap-2.5 bg-black/20 backdrop-blur-md border border-white/15 px-4 py-2 rounded-lg shadow-sm">
+          <svg class="w-4 h-4 text-shan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          <span class="text-sm font-medium tracking-wider text-gray-100">2026年4月4日</span>
+        </div>
+        <div class="flex items-center gap-2.5 bg-black/20 backdrop-blur-md border border-white/15 px-4 py-2 rounded-lg shadow-sm">
+          <svg class="w-4 h-4 text-shan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          <span class="text-sm font-medium tracking-wider text-gray-100">登封市中梁大酒店</span>
+        </div>
       `;
     } else if (eventId === 'event3') {
       heroTitle.innerText = '“秋分与中秋节文化”专题讲座';
       heroDesc.innerText = '吕宏军会长深入剖析秋分与中秋的历法渊源、祭月演变与民俗内涵。';
       heroTags.innerHTML = `
-        <span class="bg-white/10 px-3 py-1.5 rounded-md backdrop-blur-sm text-[11px] md:text-sm border border-white/5 whitespace-nowrap text-center">📅 2026年9月23日</span>
-        <span class="bg-white/10 px-3 py-1.5 rounded-md backdrop-blur-sm text-[11px] md:text-sm border border-white/5 whitespace-nowrap text-center">📍 河南 · 登封</span>
+        <div class="flex items-center gap-2.5 bg-black/20 backdrop-blur-md border border-white/15 px-4 py-2 rounded-lg shadow-sm">
+          <svg class="w-4 h-4 text-shan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          <span class="text-sm font-medium tracking-wider text-gray-100">2026年9月23日</span>
+        </div>
+        <div class="flex items-center gap-2.5 bg-black/20 backdrop-blur-md border border-white/15 px-4 py-2 rounded-lg shadow-sm">
+          <svg class="w-4 h-4 text-shan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          <span class="text-sm font-medium tracking-wider text-gray-100">河南 · 登封</span>
+        </div>
       `;
     }
 
-    // 重置淡入动画
     heroInfo.classList.remove('fade-in');
     void heroInfo.offsetWidth;
     heroInfo.classList.add('fade-in');
 
-    // 2. 切换下方白色内容区
+    // 切换下方正文
     document.querySelectorAll('.event-content').forEach(el => {
       el.classList.add('hidden');
       el.classList.remove('block', 'fade-in');
@@ -526,7 +606,6 @@
     targetContent.classList.remove('hidden');
     targetContent.classList.add('block', 'fade-in');
 
-    // 3. 更新卡片选中状态
     document.querySelectorAll('.tab-card').forEach(card => {
       card.classList.remove('active');
     });
