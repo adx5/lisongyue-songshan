@@ -47,7 +47,9 @@
                 <a href="#" id="nav-dashboard" onclick="switchTab('dashboard')" class="flex items-center px-6 py-3 text-gray-400 hover:text-white hover:bg-white/5 transition">数据仪表盘</a>
                 <a href="#" id="nav-leads" onclick="switchTab('leads')" class="flex items-center px-6 py-3 text-gray-400 hover:text-white hover:bg-white/5 transition">定制行囊线索</a>
                 <a href="#" id="nav-partners" onclick="switchTab('partners')" class="flex items-center px-6 py-3 text-gray-400 hover:text-white hover:bg-white/5 transition">主理人入驻申请</a>
-                <a href="#" id="nav-resources" onclick="switchTab('resources')" class="flex items-center px-6 py-3 bg-brand/10 text-brand border-r-4 border-brand font-medium transition">生态体验库管理</a>
+                <a href="#" id="nav-resources" onclick="switchTab('resources')" class="flex items-center px-6 py-3 text-gray-400 hover:text-white hover:bg-white/5 transition">生态体验库管理</a>
+                <!-- 🌟 新增：会议管理导航 -->
+                <a href="#" id="nav-events" onclick="switchTab('events')" class="flex items-center px-6 py-3 text-gray-400 hover:text-white hover:bg-white/5 transition">会议与讲座管理</a>
             </nav>
             <div class="mt-auto p-6 border-t border-gray-800 text-xs text-gray-500 text-center">
                 河南嵩玉文化旅游有限公司<br>© 2026 天地之中
@@ -67,9 +69,9 @@
 
             <!-- 1. 仪表盘 -->
             <div id="tab-dashboard" class="hidden flex-1 p-8 overflow-auto">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                        <p class="text-sm text-gray-500 mb-1">上架生态内容总数</p><h3 id="stat-resources" class="text-3xl font-bold text-gray-900">0</h3>
+                        <p class="text-sm text-gray-500 mb-1">生态库内容总数</p><h3 id="stat-resources" class="text-3xl font-bold text-gray-900">0</h3>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                         <p class="text-sm text-gray-500 mb-1">游客定制留资</p><h3 id="stat-leads" class="text-3xl font-bold text-blue-600">0</h3>
@@ -77,10 +79,14 @@
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                         <p class="text-sm text-gray-500 mb-1">主理人入驻申请</p><h3 id="stat-partners" class="text-3xl font-bold text-brand">0</h3>
                     </div>
+                    <!-- 🌟 新增会议统计 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                        <p class="text-sm text-gray-500 mb-1">已发布会议/讲座</p><h3 id="stat-events" class="text-3xl font-bold text-amber-600">0</h3>
+                    </div>
                 </div>
             </div>
 
-            <!-- 2. 定制行囊线索 (游客) -->
+            <!-- 2. 定制行囊线索 -->
             <div id="tab-leads" class="hidden flex-1 p-8 overflow-auto">
                 <div class="mb-4 flex justify-between items-center">
                     <div><h3 class="text-xl font-bold text-gray-800">游客定制留资池</h3></div>
@@ -123,17 +129,35 @@
                             <th class="py-4 px-4 font-medium">分类</th>
                             <th class="py-4 px-4 font-medium">标题</th>
                             <th class="py-4 px-4 font-medium">价格</th>
-                            <th class="py-4 px-4 font-medium">标签</th>
                             <th class="py-4 px-6 text-right font-medium">操作</th>
                         </tr></thead>
                         <tbody id="resourcesTableBody" class="text-sm divide-y divide-gray-100"></tbody>
                     </table>
                 </div>
             </div>
+
+            <!-- 🌟 5. 会议管理 -->
+            <div id="tab-events" class="hidden flex-1 p-8 overflow-auto">
+                <div class="mb-6 flex justify-between items-center">
+                    <div><h3 class="text-xl font-bold text-gray-800">会议与讲座列表</h3></div>
+                    <button onclick="openEventModal()" class="bg-brand hover:bg-brandHover text-white px-4 py-2 rounded-lg text-sm transition">+ 发布新会议</button>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <table class="w-full text-left border-collapse">
+                        <thead><tr class="bg-gray-50 text-gray-500 text-sm border-b">
+                            <th class="py-4 px-6 font-medium">日期</th>
+                            <th class="py-4 px-6 font-medium">会议标题</th>
+                            <th class="py-4 px-6 font-medium">地点</th>
+                            <th class="py-4 px-6 text-right font-medium">操作</th>
+                        </tr></thead>
+                        <tbody id="eventsTableBody" class="text-sm divide-y divide-gray-100"></tbody>
+                    </table>
+                </div>
+            </div>
         </main>
     </div>
 
-    <!-- 资源编辑弹窗 -->
+    <!-- 生态资源编辑弹窗 -->
     <div id="resModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden">
             <div class="bg-inkBlue px-6 py-4 flex justify-between items-center text-white">
@@ -142,7 +166,6 @@
             </div>
             <div class="p-6 max-h-[70vh] overflow-y-auto space-y-4">
                 <input type="hidden" id="resEditId">
-
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium mb-1">分类</label>
@@ -158,36 +181,71 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-1">标签 (如：禅意民宿、日租)</label>
+                        <label class="block text-sm font-medium mb-1">标签</label>
                         <input type="text" id="resEditTag" class="w-full border p-2.5 rounded-lg" placeholder="例如：大床房、SUV">
                     </div>
                 </div>
-
                 <div><label class="block text-sm font-medium mb-1">标题</label><input type="text" id="resEditTitle" class="w-full border p-2.5 rounded-lg"></div>
-
                 <div class="grid grid-cols-2 gap-4">
-                    <div><label class="block text-sm font-medium mb-1">时长/规格 (如：半日、每晚、日租)</label><input type="text" id="resEditDuration" class="w-full border p-2.5 rounded-lg"></div>
-                    <div><label class="block text-sm font-medium mb-1">参考价格 (数字)</label><input type="number" id="resEditPrice" class="w-full border p-2.5 rounded-lg"></div>
+                    <div><label class="block text-sm font-medium mb-1">规格/时长</label><input type="text" id="resEditDuration" class="w-full border p-2.5 rounded-lg"></div>
+                    <div><label class="block text-sm font-medium mb-1">参考价格</label><input type="number" id="resEditPrice" class="w-full border p-2.5 rounded-lg"></div>
                 </div>
-
-                <!-- 图片上传 -->
                 <div>
                     <label class="block text-sm font-medium mb-1">封面图片</label>
                     <div class="flex items-center gap-3 mt-1">
                         <input type="file" id="resImgFileInput" accept="image/*" class="hidden" onchange="handleResImgUpload(this)">
-                        <button type="button" onclick="document.getElementById('resImgFileInput').click()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm transition">📁 选择图片上传</button>
+                        <button type="button" onclick="document.getElementById('resImgFileInput').click()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm transition">📁 选择图片</button>
                         <span id="resImgFileName" class="text-sm text-gray-500 truncate flex-1">未选择文件</span>
                     </div>
                     <img id="resImgPreview" src="" class="mt-3 w-full h-32 object-cover rounded-lg border hidden">
                     <input type="hidden" id="resEditImg" value="">
                 </div>
-
-                <div><label class="block text-sm font-medium mb-1">简介描述</label><textarea id="resEditDesc" rows="3" class="w-full border p-2.5 rounded-lg" placeholder="填写设施、特色、服务内容等..."></textarea></div>
-                <div><label class="block text-sm font-medium mb-1">搜索关键词 (用空格隔开)</label><input type="text" id="resEditKeywords" class="w-full border p-2.5 rounded-lg"></div>
+                <div><label class="block text-sm font-medium mb-1">简介</label><textarea id="resEditDesc" rows="3" class="w-full border p-2.5 rounded-lg"></textarea></div>
+                <div><label class="block text-sm font-medium mb-1">关键词</label><input type="text" id="resEditKeywords" class="w-full border p-2.5 rounded-lg"></div>
             </div>
             <div class="p-4 bg-gray-50 flex justify-end gap-3">
                 <button onclick="closeResModal()" class="px-4 py-2 bg-white border rounded-lg">取消</button>
-                <button onclick="saveResource()" class="px-4 py-2 bg-brand text-white rounded-lg shadow-md">保存发布</button>
+                <button onclick="saveResource()" class="px-4 py-2 bg-brand text-white rounded-lg shadow-md">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🌟 会议编辑弹窗 -->
+    <div id="eventModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden">
+            <div class="bg-inkBlue px-6 py-4 flex justify-between items-center text-white">
+                <h3 id="eventModalTitle" class="font-bold text-lg">发布会议</h3>
+                <button onclick="closeEventModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+            </div>
+            <div class="p-6 max-h-[75vh] overflow-y-auto space-y-4">
+                <input type="hidden" id="eventEditId">
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div><label class="block text-sm font-medium mb-1">会议标题 (主标题)</label><input type="text" id="eventTitle" class="w-full border p-2.5 rounded-lg" placeholder="如：天地之中·中华优秀传统文化传承发展工程"></div>
+                    <div><label class="block text-sm font-medium mb-1">日期</label><input type="text" id="eventDate" class="w-full border p-2.5 rounded-lg" placeholder="如：2026年6月23日"></div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div><label class="block text-sm font-medium mb-1">地点</label><input type="text" id="eventLocation" class="w-full border p-2.5 rounded-lg" placeholder="如：河南 · 登封"></div>
+                </div>
+
+                <div><label class="block text-sm font-medium mb-1">摘要 / 简介 (显示在顶部标签下方)</label><textarea id="eventSummary" rows="2" class="w-full border p-2.5 rounded-lg"></textarea></div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-1">正文内容 (支持 HTML 排版)</label>
+                    <p class="text-xs text-gray-400 mb-1">可使用 &lt;p&gt;段落&lt;/p&gt;, &lt;h2&gt;标题&lt;/h2&gt;, &lt;ul&gt;&lt;li&gt;列表&lt;/li&gt;&lt;/ul&gt;, &lt;img src="..."&gt; 等标签。</p>
+                    <textarea id="eventContent" rows="8" class="w-full border p-2.5 rounded-lg font-mono text-sm bg-gray-50"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-1">正文配图 / 图集链接</label>
+                    <p class="text-xs text-gray-400 mb-1">输入多张图片的链接，用逗号隔开。会展示在正文底部。</p>
+                    <textarea id="eventImages" rows="3" class="w-full border p-2.5 rounded-lg font-mono text-sm bg-gray-50" placeholder="https://img1.jpg, https://img2.jpg"></textarea>
+                </div>
+            </div>
+            <div class="p-4 bg-gray-50 flex justify-end gap-3">
+                <button onclick="closeEventModal()" class="px-4 py-2 bg-white border rounded-lg">取消</button>
+                <button onclick="saveEvent()" class="px-4 py-2 bg-brand text-white rounded-lg shadow-md">保存</button>
             </div>
         </div>
     </div>
@@ -234,7 +292,7 @@
 
         function switchTab(tabId) {
             currentTab = tabId;
-            ['dashboard','leads','partners','resources'].forEach(id => {
+            ['dashboard','leads','partners','resources','events'].forEach(id => {
                 const nav = document.getElementById('nav-'+id);
                 if(nav) nav.className = "flex items-center px-6 py-3 text-gray-400 hover:text-white hover:bg-white/5 transition";
                 const tab = document.getElementById('tab-'+id);
@@ -243,13 +301,13 @@
             document.getElementById('nav-'+tabId).className = "flex items-center px-6 py-3 bg-brand/10 text-brand border-r-4 border-brand font-medium transition";
             document.getElementById('tab-'+tabId).classList.remove('hidden');
 
-            const titles = { dashboard: '数据仪表盘', leads: '游客定制留资', partners: '主理人入驻申请', resources: '生态体验库管理' };
+            const titles = { dashboard: '数据仪表盘', leads: '定制行囊线索', partners: '主理人入驻申请', resources: '生态体验库管理', events: '会议与讲座管理' };
             document.getElementById('pageTitle').innerText = titles[tabId];
 
             if (tabId === 'dashboard') fetchStats();
-            if (tabId === 'leads') fetchLeads();
-            if (tabId === 'partners') fetchLeads(); // 共用拉取逻辑
+            if (tabId === 'leads' || tabId === 'partners') fetchLeads();
             if (tabId === 'resources') fetchResources();
+            if (tabId === 'events') fetchEvents();
         }
 
         function refreshCurrentTab() { switchTab(currentTab); }
@@ -260,8 +318,8 @@
                 const data = await response.json();
                 document.getElementById('stat-resources').innerText = data.total_resources || 0;
                 document.getElementById('stat-leads').innerText = data.total_leads || 0;
-                // 暂时用总线索数代替，如果有独立字段可修改
-                document.getElementById('stat-partners').innerText = data.total_leads || 0;
+                document.getElementById('stat-partners').innerText = data.total_leads || 0; // 暂时代替
+                document.getElementById('stat-events').innerText = data.total_events || 0;
             } catch (error) { console.error(error); }
         }
 
@@ -271,11 +329,9 @@
                 const data = await res.json();
                 allLeadsData = data.leads || [];
 
-                // 分流：区分游客和主理人
                 const guestLeads = allLeadsData.filter(l => l.resource_name !== '主理人入驻申请');
                 const partnerLeads = allLeadsData.filter(l => l.resource_name === '主理人入驻申请');
 
-                // 1. 渲染游客定制表
                 const leadsTbody = document.getElementById('leadsTableBody');
                 if (guestLeads.length === 0) {
                     leadsTbody.innerHTML = '<tr><td colspan="3" class="py-10 text-center text-gray-400">暂无游客定制线索</td></tr>';
@@ -289,13 +345,11 @@
                     `).join('');
                 }
 
-                // 2. 渲染主理人入驻表 (利用正则从 message 提取信息)
                 const partnersTbody = document.getElementById('partnersTableBody');
                 if (partnerLeads.length === 0) {
                     partnersTbody.innerHTML = '<tr><td colspan="5" class="py-10 text-center text-gray-400">暂无商家入驻申请</td></tr>';
                 } else {
                     partnersTbody.innerHTML = partnerLeads.map(l => {
-                        // 从 message 文本中提取内容，例如：【商家名称】：xxx
                         const nameMatch = l.message.match(/【商家名称】：(.*?)(\n|$)/);
                         const typeMatch = l.message.match(/【业态类型】：(.*?)(\n|$)/);
                         const phoneMatch = l.message.match(/【联系电话】：(.*?)(\n|$)/);
@@ -311,7 +365,6 @@
                         </tr>
                     `}).join('');
                 }
-
             } catch(e) { console.error(e); }
         }
 
@@ -342,6 +395,93 @@
                     tbody.innerHTML = '<tr><td colspan="6" class="py-12 text-center text-gray-400">暂无发布内容</td></tr>';
                 }
             } catch (error) { tbody.innerHTML = '<tr><td colspan="6" class="py-12 text-center text-red-500">接口未连接或加载失败</td></tr>'; }
+        }
+
+        // ==========================================
+        // 🌟 会议管理逻辑
+        // ==========================================
+        async function fetchEvents() {
+            const tbody = document.getElementById('eventsTableBody');
+            tbody.innerHTML = '<tr><td colspan="4" class="text-center py-4">加载中...</td></tr>';
+            try {
+                const res = await fetch(`${API_BASE}/api/events`);
+                const events = await res.json();
+                if (events.length > 0) {
+                    tbody.innerHTML = events.map(e => `
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="py-4 px-6 text-gray-500 text-sm">${e.date_str}</td>
+                            <td class="py-4 px-6 font-bold text-gray-800">${e.title}</td>
+                            <td class="py-4 px-6 text-gray-600 text-sm">${e.location}</td>
+                            <td class="py-4 px-6 text-right space-x-2">
+                                <button onclick='editEvent(${JSON.stringify(e).replace(/'/g, "&#39;")})' class="text-xs bg-gray-100 text-gray-700 hover:bg-gray-200 py-1 px-3 rounded transition">编辑</button>
+                                <button onclick="deleteEventAdmin(${e.id}, '${e.title}')" class="text-xs bg-red-50 text-red-600 hover:bg-red-500 hover:text-white py-1 px-3 rounded transition">删除</button>
+                            </td>
+                        </tr>
+                    `).join('');
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="4" class="py-12 text-center text-gray-400">暂无会议记录</td></tr>';
+                }
+            } catch (e) { tbody.innerHTML = '<tr><td colspan="4" class="py-12 text-center text-red-500">加载失败</td></tr>'; }
+        }
+
+        function openEventModal() {
+            document.getElementById('eventEditId').value = '';
+            document.getElementById('eventTitle').value = '';
+            document.getElementById('eventDate').value = '';
+            document.getElementById('eventLocation').value = '';
+            document.getElementById('eventSummary').value = '';
+            document.getElementById('eventContent').value = '';
+            document.getElementById('eventImages').value = '';
+            document.getElementById('eventModalTitle').innerText = "发布会议";
+            document.getElementById('eventModal').classList.remove('hidden');
+            document.getElementById('eventModal').classList.add('flex');
+        }
+
+        function editEvent(e) {
+            document.getElementById('eventEditId').value = e.id;
+            document.getElementById('eventTitle').value = e.title || '';
+            document.getElementById('eventDate').value = e.date_str || '';
+            document.getElementById('eventLocation').value = e.location || '';
+            document.getElementById('eventSummary').value = e.summary || '';
+            document.getElementById('eventContent').value = e.content || '';
+            document.getElementById('eventImages').value = e.images || '';
+            document.getElementById('eventModalTitle').innerText = "编辑会议";
+            document.getElementById('eventModal').classList.remove('hidden');
+            document.getElementById('eventModal').classList.add('flex');
+        }
+
+        function closeEventModal() {
+            document.getElementById('eventModal').classList.add('hidden');
+            document.getElementById('eventModal').classList.remove('flex');
+        }
+
+        async function saveEvent() {
+            const id = document.getElementById('eventEditId').value;
+            const data = {
+                title: document.getElementById('eventTitle').value,
+                date_str: document.getElementById('eventDate').value,
+                location: document.getElementById('eventLocation').value,
+                summary: document.getElementById('eventSummary').value,
+                content: document.getElementById('eventContent').value,
+                images: document.getElementById('eventImages').value
+            };
+            if(!data.title || !data.date_str) { alert("标题和日期不能为空"); return; }
+
+            const url = id ? `${API_BASE}/api/events/${id}` : `${API_BASE}/api/events`;
+            const method = id ? 'PUT' : 'POST';
+
+            try {
+                const res = await fetch(url, { method: method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+                if(res.ok) { closeEventModal(); fetchEvents(); } else { alert("保存失败，请检查后端"); }
+            } catch(e) { alert("网络错误"); }
+        }
+
+        async function deleteEventAdmin(id, title) {
+            if (!confirm(`⚠️ 确定要删除会议【${title}】吗？`)) return;
+            try {
+                const res = await fetch(`${API_BASE}/api/events/${id}`, { method: 'DELETE' });
+                if (res.ok) { alert("✅ 已删除"); fetchEvents(); }
+            } catch (e) { alert("网络错误"); }
         }
 
         function openResModal() {

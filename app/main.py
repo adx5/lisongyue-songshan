@@ -11,13 +11,8 @@ from typing import List, Optional
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-# 注意：这里去掉了旧的 get_prefix，去掉了旧的 region_data
-from app.database import SessionLocal, Resource, Lead, VipClient
-
-# ⚠️ 如果这两个文件里有旧字段，暂时可能报错，我建议先注释掉，
-# 等基础增删改查跑通了，再去改 AI 匹配的逻辑
-# from app.graph import build_graph
-# from app.vector_store import sync_resources_to_vector_db
+# 🌟 增加了 Event 的导入
+from app.database import SessionLocal, Resource, Lead, VipClient, Event
 
 app = FastAPI(
     title="天地之中 · 嵩山人文志 API",
@@ -33,8 +28,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# workflow_app = build_graph() # 暂时注释掉
 
 ADMIN_PASSWORD = "xinghuo2026" # 后台登录密码
 
@@ -98,6 +91,23 @@ class MatchRequest(BaseModel):
 class BatchIds(BaseModel):
     ids: List[int]
 
+# 🌟 新增：会议模型定义
+class EventCreate(BaseModel):
+    title: str
+    date_str: str
+    location: str
+    summary: Optional[str] = ""
+    content: Optional[str] = ""
+    images: Optional[str] = ""
+
+class EventUpdate(BaseModel):
+    title: str
+    date_str: str
+    location: str
+    summary: Optional[str] = ""
+    content: Optional[str] = ""
+    images: Optional[str] = ""
+
 
 # ================= 后台登录 =================
 @app.post("/api/admin/login")
@@ -112,13 +122,11 @@ def create_resource(resource: ResourceCreate, db: Session = Depends(get_db)):
     db.add(db_resource)
     db.commit()
     db.refresh(db_resource)
-    # sync_resources_to_vector_db() # 暂时注释
     return {"message": "发布成功", "id": db_resource.id}
 
 @app.get("/api/resources")
 def get_resources(db: Session = Depends(get_db)):
     resources = db.query(Resource).order_by(Resource.id.desc()).all()
-    # 直接返回新字段
     return {"resources": [
         {"id": r.id, "title": r.title, "category": r.category, "tag": r.tag,
          "duration": r.duration, "price": r.price, "img": r.img,
@@ -130,15 +138,45 @@ def update_resource(resource_id: int, resource: ResourceUpdate, db: Session = De
     if not db_resource: raise HTTPException(status_code=404, detail="资源不存在")
     for k, v in resource.model_dump().items(): setattr(db_resource, k, v)
     db.commit()
-    # sync_resources_to_vector_db()
     return {"message": "更新成功"}
 
 @app.delete("/api/resources/{resource_id}")
 def delete_resource(resource_id: int, db: Session = Depends(get_db)):
     db.query(Resource).filter(Resource.id == resource_id).delete()
     db.commit()
-    # sync_resources_to_vector_db()
     return {"message": "删除成功"}
+
+# ================= 🌟 会议管理接口 =================
+@app.get("/api/events")
+def get_events(db: Session = Depends(get_db)):
+    # 按创建时间倒序排列，最新会议在最前
+    events = db.query(Event).order_by(Event.created_at.desc()).all()
+    return events
+
+@app.post("/api/events")
+def create_event(event: EventCreate, db: Session = Depends(get_db)):
+    db_event = Event(**event.model_dump())
+    db.add(db_event)
+    db.commit()
+    db.refresh(db_event)
+    return {"message": "发布成功", "id": db_event.id}
+
+@app.put("/api/events/{event_id}")
+def update_event(event_id: int, event: EventUpdate, db: Session = Depends(get_db)):
+    db_event = db.query(Event).filter(Event.id == event_id).first()
+    if not db_event: raise HTTPException(status_code=404, detail="会议不存在")
+    for k, v in event.model_dump().items(): setattr(db_event, k, v)
+    db.commit()
+    return {"message": "更新成功"}
+
+@app.delete("/api/events/{event_id}")
+def delete_event(event_id: int, db: Session = Depends(get_db)):
+    db_event = db.query(Event).filter(Event.id == event_id).first()
+    if not db_event: raise HTTPException(status_code=404, detail="会议不存在")
+    db.delete(db_event)
+    db.commit()
+    return {"message": "删除成功"}
+
 
 # ================= 线索与行囊接口 =================
 @app.post("/api/leads")
@@ -169,13 +207,12 @@ def get_admin_stats(db: Session = Depends(get_db)):
     return {
         "total_resources": db.query(Resource).count(),
         "total_leads": db.query(Lead).count(),
-        "total_vip": db.query(Resource).count() # 暂时代替
+        "total_events": db.query(Event).count() # 改为统计会议数
     }
 
 # ================= AI 匹配（暂时留空壳防报错） =================
 @app.post("/api/match")
 def match_requirement(req: MatchRequest):
-    # 占位接口，等 graph.py 改造好后恢复
     return {"status": "success", "message": "AI模块升级中", "data": {}}
 
 # ================= 图床上传 =================

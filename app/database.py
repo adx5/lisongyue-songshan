@@ -86,3 +86,16 @@ except Exception as e:
     print(f"❌ 数据库初始化失败: {e}")
 
 # 删除了旧的 get_prefix 和 seed_initial_data 播种函数，避免旧数据污染
+
+# ... 原有代码保留 ...
+
+class Event(Base):
+    __tablename__ = "events"
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String(200), comment="会议标题")
+    date_str = Column(String(50), comment="日期（如：2026年6月23日）")
+    location = Column(String(50), comment="地点（如：河南·登封）")
+    summary = Column(Text, comment="简介/摘要")
+    content = Column(Text, comment="正文内容（支持HTML）")
+    images = Column(Text, comment="图集（逗号分隔的URL）")
+    created_at = Column(DateTime, default=datetime.utcnow)
