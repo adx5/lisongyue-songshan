@@ -33,6 +33,10 @@
 
   #mobileMenu { transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; }
   #mobileMenu.hidden-menu { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+
+  /* 弹窗动画 */
+  #academicModal { transition: opacity 0.3s ease; }
+  #academicModal.hidden { opacity: 0; pointer-events: none; }
 </style>
 </head>
 
@@ -65,7 +69,7 @@
   </div>
 </header>
 
-<!-- Hero 区 -->
+<!-- Hero 区 (优化色彩版) -->
 <section class="bg-ink text-white py-16 md:py-24 relative overflow-hidden">
   <div class="absolute inset-0 opacity-60 bg-[url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center"></div>
   <div class="absolute inset-0 bg-gradient-to-r from-[#022c22]/95 via-[#064E3B]/80 to-[#059669]/30"></div>
@@ -166,7 +170,7 @@
   </div>
 </section>
 
-<!-- 核心学术精要 (深度提炼版) -->
+<!-- 核心学术精要 (带弹窗交互) -->
 <section class="bg-white py-12 md:py-20 border-t border-gray-100">
   <div class="container-1100">
     <div class="text-center mb-10 md:mb-16">
@@ -181,10 +185,10 @@
         <div class="text-sm text-shan-600 font-bold mb-2">吕宏军 · 嵩山文化研究会会长</div>
         <h3 class="font-serif text-lg md:text-xl font-bold text-ink mb-3">中岳嵩山——中华文化的脊梁</h3>
         <p class="text-sm md:text-sm text-gray-600 leading-relaxed mb-4 flex-1">
-          系统提出支撑嵩山文化地位的六大维度：<strong>万山之祖</strong>（36亿年地质史）、<strong>天地之中</strong>（周公测影定地中）、<strong>人文之宗</strong>（黄帝与华夏民族）、<strong>河洛之根</strong>（河图洛书）、<strong>神话之源</strong>（盘古女娲）、<strong>三代之都</strong>（夏商周核心）。
+          系统提出支撑嵩山文化地位的六大维度：<strong>万山之祖</strong>（36亿年地质史）、<strong>天地之中</strong>（周公测影定地中）、<strong>人文之宗</strong>（黄帝与华夏民族）、<strong>河洛之根</strong>（河图洛书）、<strong>神话之源</strong>、<strong>三代之都</strong>。
         </p>
         <div class="mt-auto pt-2">
-          <a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199864.html" target="_blank" class="text-sm text-shan-600 font-medium hover:underline">详见香港商报网报道 →</a>
+          <span onclick="openAcademicModal('lv')" class="text-sm text-shan-600 font-medium hover:underline cursor-pointer">阅读详细学术精要 →</span>
         </div>
       </div>
 
@@ -197,7 +201,7 @@
           论证太极图是中华古天文实验观测科学的伟大研究成果，100%符合现代科学规范。指出“阴阳五行”源于“十月太阳历”，绝非玄学；并呼吁找回失落的古天文历法源头。
         </p>
         <div class="mt-auto pt-2">
-          <a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199864.html" target="_blank" class="text-sm text-shan-600 font-medium hover:underline">详见香港商报网报道 →</a>
+          <span onclick="openAcademicModal('yang')" class="text-sm text-shan-600 font-medium hover:underline cursor-pointer">阅读详细学术精要 →</span>
         </div>
       </div>
 
@@ -210,7 +214,7 @@
           核心命题：“上古天文是中华文明的底层原始码，数智科技是人类文明的未来运行系统。”提出AI语义破译、算力回溯模拟、数字建模复刻三条当代激活路径。
         </p>
         <div class="mt-auto pt-2">
-          <a href="https://www.hkcd.com.hk/hkcdweb/content_p/2026/06/25/content_199864.html" target="_blank" class="text-sm text-shan-600 font-medium hover:underline">详见香港商报网报道 →</a>
+          <span onclick="openAcademicModal('ni')" class="text-sm text-shan-600 font-medium hover:underline cursor-pointer">阅读详细学术精要 →</span>
         </div>
       </div>
 
@@ -223,7 +227,7 @@
           提出“冬至（时间起点）—黄钟（音律基准）—地中（空间定位）”三位一体的基准。指出“天效以影，地效以响”，论证《后汉书》候气之法本质是一套可持续、可重复的国家级声学计量校准实验。
         </p>
         <div class="mt-auto pt-2">
-          <span class="text-sm text-gray-500 font-medium">会议专题报告 · 2026.06.23</span>
+          <span onclick="openAcademicModal('mo')" class="text-sm text-shan-600 font-medium hover:underline cursor-pointer">阅读详细学术精要 →</span>
         </div>
       </div>
     </div>
@@ -412,7 +416,29 @@
   </div>
 </footer>
 
+<!-- ========================================== -->
+<!-- 🌟 学术精要详情弹窗 (Modal) -->
+<!-- ========================================== -->
+<div id="academicModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[200] hidden items-center justify-center p-4">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col overflow-hidden relative">
+    <!-- 弹窗头部 -->
+    <div class="bg-shan-900 px-6 py-4 flex justify-between items-center text-white shrink-0">
+      <h3 id="modalTitle" class="font-serif font-bold text-lg md:text-xl">学术精要详情</h3>
+      <button onclick="closeAcademicModal()" class="text-gray-400 hover:text-white text-2xl leading-none">&times;</button>
+    </div>
+    <!-- 弹窗内容 (滚动区) -->
+    <div id="modalContent" class="p-6 md:p-8 overflow-y-auto text-sm md:text-base text-gray-700 leading-loose space-y-4">
+      <!-- 动态填充 -->
+    </div>
+    <!-- 弹窗底部 -->
+    <div class="p-4 bg-gray-50 border-t border-gray-100 text-right shrink-0">
+      <button onclick="closeAcademicModal()" class="px-6 py-2 bg-shan-600 text-white rounded-lg hover:bg-shan-700 transition text-sm">我知道了</button>
+    </div>
+  </div>
+</div>
+
 <script>
+  // 移动端菜单
   const menuBtn = document.getElementById('menuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
   if (menuBtn && mobileMenu) {
@@ -421,6 +447,83 @@
       link.addEventListener('click', function() { mobileMenu.classList.add('hidden-menu'); });
     });
   }
+
+  // 🌟 学术弹窗数据
+  const academicData = {
+    'lv': {
+      title: '吕宏军：中岳嵩山——中华文化的脊梁',
+      content: `
+        <p class="font-bold text-ink">系统提出支撑嵩山文化地位的六大维度：</p>
+        <ul class="list-disc list-inside space-y-2 text-gray-600 pl-2">
+          <li><strong class="text-shan-700">万山之祖：</strong>嵩山拥有36亿年地质历史，25亿年“嵩阳运动”、18亿年“中岳运动”、5.45亿年“少林运动”均以嵩山命名。太古宙至新生代五个地质年代的地层在不足20平方公里内同时出露，被誉为“五代同堂”天然地质博物馆。</li>
+          <li><strong class="text-shan-700">天地之中：</strong>八千年前先民已形成“天圆地方”认知。西周初年周公在嵩山脚下测日影、定地中。围绕“中”形成的中和、中庸哲学观，成为中国哲学思想的基石。</li>
+          <li><strong class="text-shan-700">人文之宗：</strong>旧石器时代遗址170余处，新石器时代遗址超过500处。黄帝诞生于嵩山东麓轩辕丘，在此融合炎黄、形成华夏民族主体。</li>
+          <li><strong class="text-shan-700">河洛之根：</strong>黄河与伊洛河在嵩山下交汇，《河图》《洛书》诞生于此。</li>
+          <li><strong class="text-shan-700">神话之源：</strong>盘古开天地、女娲补天、大禹治水等创世神话均发生于嵩山地区。</li>
+          <li><strong class="text-shan-700">三代之都：</strong>夏商周三代建都核心均在嵩山地区，《史记·封禅书》明确“昔三代之居，皆在河洛之间”。</li>
+        </ul>
+      `
+    },
+    'yang': {
+      title: '杨炳忻：追溯太极图的由来',
+      content: `
+        <p><strong class="text-shan-700">太极图是中华古天文实验观测科学的伟大研究成果。</strong></p>
+        <p>它100%符合现代还原论科学（Science）定义规定要求，同时又符合整体论复杂性科学的一切特征。古代祖先用立杆测影的方法，从每天正中午测量太阳影子长短值中，发现了冬至、夏至等太阳周而复始的视运动规律，于是创建了太极图。</p>
+        <p>随后创立了“十月太阳历”，定一年为十个月，每月36天。阴阳五行由此而生。太极图是精确、精密的大自然规律、法则的古代表达图，是中华古代科学的典型标识。阴阳五行、天干地支等概念，全部都是从实证中来，绝非玄学。</p>
+      `
+    },
+    'ni': {
+      title: '倪健中：上古天文与数智时代',
+      content: `
+        <p class="font-bold text-ink">核心主旨：上古天文是中华文明的底层源代码；数智科技是人类文明的未来运行系统。</p>
+        <ul class="list-disc list-inside space-y-2 text-gray-600 pl-2">
+          <li><strong class="text-shan-700">三大特质：</strong>整体宇宙观、节律宇宙观、数理宇宙观。</li>
+          <li><strong class="text-shan-700">当代激活路径：</strong>AI 语义破译（让文献活起来）、算力回溯模拟（让千年星象看得见）、数字建模复刻（让上古天文体系用起来）。</li>
+        </ul>
+        <p>当代最大的创新，不是彻底颠覆传统，而是让万年东方天道智慧，与当代顶级数理算力，重新同频、重新共振、重新新生。</p>
+      `
+    },
+    'mo': {
+      title: '莫飞智：古代律历同源的时空与数理同构',
+      content: `
+        <p><strong class="text-shan-700">核心基准：</strong>揭示了古代以“天地之中”为空间基准、“天数五、地数六”为天地中数、“三分损益”为生成法则的宇宙模型。</p>
+        <p>阐明历始冬至、音首宫音、律本黄钟三元合一的时空基准。</p>
+        <p>指出《后汉书·律历志》所载“候气之法”是以天文观测为基准、以律准为主动音源的声学校准实验，本质上是一套可持续、可重复的国家级计量校准体系，而非“埋管候气”的荒诞传说。</p>
+      `
+    }
+  };
+
+  // 弹窗控制函数
+  window.openAcademicModal = function(key) {
+    const data = academicData[key];
+    if (!data) return;
+
+    document.getElementById('modalTitle').innerText = data.title;
+    document.getElementById('modalContent').innerHTML = data.content;
+
+    const modal = document.getElementById('academicModal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+
+    // 阻止背景滚动
+    document.body.style.overflow = 'hidden';
+  }
+
+  window.closeAcademicModal = function() {
+    const modal = document.getElementById('academicModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+
+    // 恢复背景滚动
+    document.body.style.overflow = '';
+  }
+
+  // 点击遮罩层关闭
+  document.getElementById('academicModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeAcademicModal();
+    }
+  });
 </script>
 
 </body>
