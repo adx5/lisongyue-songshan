@@ -15,7 +15,7 @@ if SQLALCHEMY_DATABASE_URL:
         SQLALCHEMY_DATABASE_URL = SQLALCHEMY_DATABASE_URL.replace("postgres://", "postgresql+psycopg2://", 1)
     elif SQLALCHEMY_DATABASE_URL.startswith("postgresql://"):
         SQLALCHEMY_DATABASE_URL = SQLALCHEMY_DATABASE_URL.replace("postgresql://", "postgresql+psycopg2://", 1)
-    print(f"DEBUG: 准备连接的数据库是: {SQLALCHEMY_DATABASE_URL.split('@')[-1]}")
+    print(f"DEBUG: 正在连接的数据库: {SQLALCHEMY_DATABASE_URL.split('@')[-1]}")
     engine = create_engine(SQLALCHEMY_DATABASE_URL, pool_pre_ping=True)
 else:
     print("⚠️ 未检测到 DATABASE_URL，回退到本地 SQLite 数据库")
@@ -26,6 +26,7 @@ else:
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
+# 资源表
 class Resource(Base):
     __tablename__ = "resources"
     id = Column(Integer, primary_key=True, index=True)
@@ -39,6 +40,7 @@ class Resource(Base):
     keywords = Column(Text, comment="搜索关键词")
     created_at = Column(DateTime, default=datetime.utcnow)
 
+# 线索表
 class Lead(Base):
     __tablename__ = "leads"
     id = Column(Integer, primary_key=True, index=True)
@@ -50,6 +52,7 @@ class Lead(Base):
     message = Column(Text)
     created_at = Column(DateTime, default=datetime.utcnow)
 
+# 会议表
 class Event(Base):
     __tablename__ = "events"
     id = Column(Integer, primary_key=True, index=True)
@@ -59,10 +62,10 @@ class Event(Base):
     summary = Column(Text, comment="简介")
     content = Column(Text, comment="正文")
     images = Column(Text, comment="图集")
-    media_links = Column(Text, comment="媒体链接")  # 已经补上
+    media_links = Column(Text, comment="媒体链接")
     created_at = Column(DateTime, default=datetime.utcnow)
 
-# 自动建表 (必须在所有 Model 定义之后)
+# 自动建表
 try:
     Base.metadata.create_all(bind=engine)
     print("✅ 数据库表初始化完成")

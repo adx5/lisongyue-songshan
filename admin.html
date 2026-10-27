@@ -14,7 +14,6 @@
 </head>
 <body class="bg-gray-100 font-sans text-gray-800 antialiased flex h-screen overflow-hidden">
 
-    <!-- 登录层 -->
     <div id="loginScreen" class="fixed inset-0 bg-inkBlue flex items-center justify-center z-[999]">
         <div class="bg-white p-8 rounded-2xl shadow-2xl w-96 text-center">
             <div class="w-16 h-16 bg-brand rounded-full flex items-center justify-center text-3xl text-white font-serif font-bold mx-auto mb-6">嵩</div>
@@ -25,7 +24,6 @@
         </div>
     </div>
 
-    <!-- 主内容 -->
     <div id="mainApp" class="flex w-full h-full hidden">
         <aside class="w-64 bg-inkBlue text-white flex flex-col shadow-xl z-20">
             <div class="h-16 flex flex-col justify-center px-6 border-b border-gray-800">
@@ -57,7 +55,6 @@
                 </div>
             </header>
 
-            <!-- 仪表盘 -->
             <div id="tab-dashboard" class="hidden flex-1 p-8 overflow-auto">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6"><p class="text-sm text-gray-500 mb-1">生态库总数</p><h3 id="stat-resources" class="text-3xl font-bold text-gray-900">0</h3></div>
@@ -67,7 +64,6 @@
                 </div>
             </div>
 
-            <!-- 线索 -->
             <div id="tab-leads" class="hidden flex-1 p-8 overflow-auto">
                 <div class="mb-4 flex justify-between items-center">
                     <h3 class="text-xl font-bold text-gray-800">游客定制留资池</h3>
@@ -81,7 +77,6 @@
                 </div>
             </div>
 
-            <!-- 主理人 -->
             <div id="tab-partners" class="hidden flex-1 p-8 overflow-auto">
                 <div class="mb-4 flex justify-between items-center">
                     <h3 class="text-xl font-bold text-gray-800">主理人入驻申请</h3>
@@ -95,7 +90,6 @@
                 </div>
             </div>
 
-            <!-- 生态库 -->
             <div id="tab-resources" class="hidden flex-1 p-8 overflow-auto">
                 <div class="mb-6 flex justify-between items-center">
                     <h3 class="text-xl font-bold text-gray-800">生态体验库列表</h3>
@@ -109,7 +103,6 @@
                 </div>
             </div>
 
-            <!-- 会议管理 -->
             <div id="tab-events" class="hidden flex-1 p-8 overflow-auto">
                 <div class="mb-6 flex justify-between items-center">
                     <h3 class="text-xl font-bold text-gray-800">会议与讲座列表</h3>
@@ -213,7 +206,6 @@
         let currentEventImagesArray = [];
         const API_BASE = 'https://songshan-backend.fastapicloud.dev';
 
-        // 封装统一请求头
         const originalFetch = window.fetch;
         window.fetch = function() {
             let [resource, config] = arguments;
@@ -298,14 +290,13 @@
             } catch(e) { console.error(e); }
         }
 
-        // 导出 CSV 函数
         function exportTableToCSV(tableId, filename) {
             let table = document.getElementById(tableId);
             if (!table) return;
             let rows = table.querySelectorAll('tr');
             if (rows.length <= 1) { alert("暂无数据可导出"); return; }
 
-            let csvContent = "\uFEFF"; // 解决 Excel 中文乱码
+            let csvContent = "\uFEFF";
             rows.forEach(row => {
                 let cols = row.querySelectorAll('td, th');
                 let rowData = [];
@@ -347,7 +338,6 @@
             } catch (e) { tbody.innerHTML = '<tr><td colspan="4" class="py-12 text-center text-red-500">加载失败</td></tr>'; }
         }
 
-        // --- 会议操作 ---
         function openEventModal() {
             document.getElementById('eventEditId').value = '';
             document.getElementById('eventTitle').value = '';
@@ -407,7 +397,6 @@
             } catch (e) { alert("网络错误"); }
         }
 
-        // --- 图集上传与排序 ---
         async function handleEventImgsUpload(input) {
             const files = input.files;
             if (!files || files.length === 0) return;
@@ -417,7 +406,7 @@
                 try {
                     const url = await uploadFileToR2(files[i]);
                     currentEventImagesArray.push(url);
-                } catch (error) { console.error('上传失败', error); alert("部分图片上传失败，请检查云端 BEEIMG_TOKEN 配置"); break; }
+                } catch (error) { alert("部分图片上传失败，请检查云端 BEEIMG_TOKEN 配置"); break; }
             }
             input.value = '';
             statusEl.innerText = `上传完成`;
@@ -452,7 +441,6 @@
         }
         function removeEventImage(index) { currentEventImagesArray.splice(index, 1); renderEventImages(); }
 
-        // --- 生态库操作 ---
         function openResModal() {
             document.getElementById('resEditId').value = '';
             document.getElementById('resEditCategory').value = '文化';

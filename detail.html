@@ -7,15 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        shan: { 50:'#ECFDF5', 100:'#D1FAE5', 200:'#A7F3D0', 300:'#6EE7B7', 400:'#34D399', 500:'#10B981', 600:'#059669', 700:'#047857', 800:'#065F46', 900:'#064E3B' },
-                        ink: '#1F2937', sand: '#FAF9F6'
-                    },
-                    fontFamily: { serif: ['"Noto Serif SC"', '"Songti SC"', 'STSong', 'SimSun', 'serif'] }
-                }
-            }
+            theme: { extend: { colors: { shan: { 50:'#ECFDF5', 100:'#D1FAE5', 200:'#A7F3D0', 300:'#6EE7B7', 400:'#34D399', 500:'#10B981', 600:'#059669', 700:'#047857', 800:'#065F46', 900:'#064E3B' }, ink: '#1F2937', sand: '#FAF9F6' }, fontFamily: { serif: ['"Noto Serif SC"', '"Songti SC"', 'STSong', 'SimSun', 'serif'] } } }
         }
     </script>
     <style>
@@ -27,7 +19,6 @@
 </head>
 <body class="font-sans antialiased pb-20">
 
-    <!-- 顶部返回导航 -->
     <div class="absolute top-4 left-4 z-50">
         <a href="index.html#library" class="bg-black/40 hover:bg-black/60 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm flex items-center gap-2 transition border border-white/20">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
@@ -35,7 +26,6 @@
         </a>
     </div>
 
-    <!-- 首屏大图 -->
     <header id="detailHeader" class="relative w-full h-[40vh] md:h-[50vh] bg-gray-900 flex items-center justify-center text-center hero-bg">
         <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-shan-900/90"></div>
         <div class="relative z-10 px-4 fade-in-up w-full max-w-4xl">
@@ -48,10 +38,7 @@
         </div>
     </header>
 
-    <!-- 主体内容区 (向上浮动) -->
     <main class="max-w-4xl mx-auto px-4 -mt-8 relative z-20">
-
-        <!-- 简介卡片 -->
         <div class="bg-white rounded-2xl shadow-xl p-6 md:p-10 mb-8 border-t-4 border-shan-600 fade-in-up" style="animation-delay: 0.1s;">
             <h2 class="text-xl font-serif font-bold text-ink mb-4 flex items-center gap-2">
                 <span class="w-1.5 h-5 bg-shan-600 rounded-full"></span> 体验/商品介绍
@@ -59,25 +46,16 @@
             <p id="detailDesc" class="text-gray-600 leading-loose whitespace-pre-wrap text-justify text-sm md:text-base"></p>
         </div>
 
-        <!-- 预定/留资转化区 -->
         <div class="bg-ink rounded-2xl shadow-2xl p-6 md:p-10 text-white fade-in-up" style="animation-delay: 0.2s;">
             <div class="grid md:grid-cols-2 gap-8">
-
-                <!-- 左侧：直接联系 -->
                 <div>
                     <h3 class="text-xl font-serif font-bold mb-2 text-shan-400">想了解更多详情？</h3>
                     <p class="text-xs text-gray-400 mb-6">文化顾问为您1对1解答，定制专属行程。</p>
                     <div class="space-y-4">
-                        <button id="btnCall" class="w-full flex items-center justify-center gap-2 bg-shan-600 hover:bg-shan-700 text-white font-bold py-3 rounded-xl transition shadow-lg transform hover:scale-[1.02]">
-                            📞 <span>一键拨打电话咨询</span>
-                        </button>
-                        <button id="btnWechat" class="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition shadow-lg transform hover:scale-[1.02]">
-                            💬 <span>复制客服微信号</span>
-                        </button>
+                        <button id="btnCall" class="w-full flex items-center justify-center gap-2 bg-shan-600 hover:bg-shan-700 text-white font-bold py-3 rounded-xl transition shadow-lg transform hover:scale-[1.02]">📞 <span>一键拨打电话咨询</span></button>
+                        <button id="btnWechat" class="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition shadow-lg transform hover:scale-[1.02]">💬 <span>复制客服微信号</span></button>
                     </div>
                 </div>
-
-                <!-- 右侧：留资表单 -->
                 <div class="bg-white/5 p-6 rounded-xl border border-white/10">
                     <h3 class="text-lg font-serif font-bold mb-4 text-white">留言预定 / 咨询</h3>
                     <form onsubmit="return false;" class="space-y-3">
@@ -94,7 +72,6 @@
     <div id="toast" class="fixed top-10 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-2xl z-[200] text-sm font-medium transition-opacity duration-300 opacity-0 pointer-events-none"></div>
 
     <script>
-        // ⚠️ 请确保这里是你的云端地址
         const API_BASE = 'https://songshan-backend.fastapicloud.dev';
         const currentId = new URLSearchParams(window.location.search).get('id');
         let resourceData = {};
@@ -110,15 +87,11 @@
             if (!currentId) { alert("缺少ID参数"); window.location.href = 'index.html'; return; }
 
             try {
-                // 因为后端暂时没有单独的 /api/resources/{id} 接口，我们从列表中查找
-                const res = await fetch(`${API_BASE}/api/resources`);
-                const data = await res.json();
-                const list = data.resources || data || [];
+                // 请求单条数据接口
+                const res = await fetch(`${API_BASE}/api/resources/${currentId}`);
+                if (!res.ok) throw new Error("未找到该商品");
+                resourceData = await res.json();
 
-                resourceData = list.find(item => item.id == currentId);
-                if (!resourceData) throw new Error("未找到该商品");
-
-                // 渲染页面数据
                 document.title = `${resourceData.title} - 天地之中`;
                 document.getElementById('detailTag').innerText = resourceData.tag || resourceData.category || '精选';
                 document.getElementById('detailTitle').innerText = resourceData.title;
@@ -126,12 +99,10 @@
                 document.getElementById('detailPrice').innerText = resourceData.price || '详询';
                 document.getElementById('detailDesc').innerText = resourceData.desc || '暂无详细描述';
 
-                // 渲染背景图
                 if (resourceData.img) {
                     document.getElementById('detailHeader').style.backgroundImage = `url('${resourceData.img}')`;
                 }
 
-                // 绑定联系电话和微信
                 const btnCall = document.getElementById('btnCall');
                 btnCall.onclick = () => window.location.href = `tel:15515816811`;
 

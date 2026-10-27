@@ -70,6 +70,7 @@ def admin_login(req: LoginRequest):
     raise HTTPException(status_code=401, detail="密码错误")
 
 
+# 资源接口 (新增了单条查询接口，供详情页使用)
 @app.post("/api/resources")
 def create_resource(resource: ResourceCreate, db: Session = Depends(get_db)):
     db_resource = Resource(**resource.model_dump())
@@ -85,6 +86,14 @@ def get_resources(db: Session = Depends(get_db)):
     return {"resources": [
         {"id": r.id, "title": r.title, "category": r.category, "tag": r.tag, "duration": r.duration, "price": r.price,
          "img": r.img, "desc": r.desc, "keywords": r.keywords} for r in res]}
+
+
+@app.get("/api/resources/{resource_id}")
+def get_resource(resource_id: int, db: Session = Depends(get_db)):
+    res = db.query(Resource).filter(Resource.id == resource_id).first()
+    if not res: raise HTTPException(status_code=404, detail="资源不存在")
+    return {"id": res.id, "title": res.title, "category": res.category, "tag": res.tag, "duration": res.duration,
+            "price": res.price, "img": res.img, "desc": res.desc, "keywords": res.keywords}
 
 
 @app.put("/api/resources/{id}")
@@ -103,6 +112,7 @@ def delete_resource(id: int, db: Session = Depends(get_db)):
     return {"message": "删除成功"}
 
 
+# 会议接口
 @app.get("/api/events")
 def get_events(db: Session = Depends(get_db)):
     return db.query(Event).order_by(Event.created_at.desc()).all()
@@ -133,6 +143,7 @@ def delete_event(id: int, db: Session = Depends(get_db)):
     return {"message": "删除成功"}
 
 
+# 线索接口
 @app.post("/api/leads")
 def create_lead(lead: LeadCreate, db: Session = Depends(get_db)):
     db_lead = Lead(**lead.model_dump())
