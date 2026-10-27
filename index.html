@@ -179,7 +179,7 @@
             <textarea id="fNote" rows="2" placeholder="同行人数 / 预算 / 特殊偏好" class="w-full px-3 py-3.5 md:py-2.5 rounded-lg border border-gray-200 text-base md:text-sm text-ink outline-none transition resize-none focus:border-shan-500 focus:ring-2 focus:ring-shan-100"></textarea>
           </div>
           <button id="submitBtn" type="submit" class="w-full bg-shan-600 hover:bg-shan-700 text-white py-3.5 md:py-3 rounded-lg text-base md:text-sm font-medium transition shadow-md">提交需求，定制行囊</button>
-          <p class="text-xs text-gray-500 text-center">提交即表示同意我们与你联系</p>
+          <p class="text-xs text-gray-500 text-center mt-2">提交后，文化顾问将在 <strong class="text-shan-600">2 小时</strong> 内与你联系</p>
         </form>
       </div>
     </div>
@@ -213,7 +213,7 @@
   </div>
 </section>
 
-<!-- 3D 景区 (已将卡片移入内部) -->
+<!-- 3D 景区 -->
 <section id="splat" class="bg-white py-12 md:py-16 border-t border-gray-100">
   <div class="container-1100">
     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6 md:mb-8">
@@ -231,7 +231,7 @@
         <span id="splatSceneName" class="text-[11px] md:text-[12px] font-medium text-white bg-black/40 backdrop-blur-sm px-2.5 py-1 md:px-3 md:py-1.5 rounded-md border border-white/10">少林塔林</span>
       </div>
       <div class="absolute bottom-3 left-3 right-3 md:bottom-4 md:left-4 md:right-4 flex items-center justify-between text-[10px] md:text-[11px] text-white/70 pointer-events-none">
-        <span class="bg-black/40 backdrop-blur-sm px-2 py-1 rounded-md">拖动旋转 · 滚轮缩放</span>
+        <span id="splatHint" class="bg-black/40 backdrop-blur-sm px-2 py-1 rounded-md">拖动旋转 · 滚轮缩放</span>
         <span class="hidden sm:inline bg-black/40 backdrop-blur-sm px-2 py-1 rounded-md">模拟点云 · 非真实扫描数据</span>
       </div>
       <div id="splatLoading" class="absolute inset-0 flex items-center justify-center bg-[#0B1410]/85 backdrop-blur-sm transition-opacity duration-300 opacity-0 pointer-events-none z-10">
@@ -400,6 +400,18 @@
     heroSection.addEventListener('mouseleave', startAutoPlay);
   }
 
+  // 收入行囊逻辑
+  window.addToBag = function(item) {
+      let bag = JSON.parse(localStorage.getItem('songshan_bag') || '[]');
+      if (!bag.find(i => i.id === item.id)) {
+          bag.push({ id: item.id, title: item.title, price: item.price });
+          localStorage.setItem('songshan_bag', JSON.stringify(bag));
+          showToast('已成功收入行囊', 'success');
+      } else {
+          showToast('该体验已在行囊中', 'warn');
+      }
+  }
+
   // 表单提交
   const bookingForm = document.getElementById('bookingForm');
   const submitBtn = document.getElementById('submitBtn');
@@ -418,12 +430,19 @@
       const originalText = submitBtn ? submitBtn.textContent : '提交';
       if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '正在提交…'; }
 
-      const payload = { resource_name: '定制行囊需求', message: `主题：${theme}，时间：${time}，客户：${name}，联系方式：${contact}，备注：${note || '无'}` };
+      // 读取行囊内容并拼接到备注
+      let bagItems = JSON.parse(localStorage.getItem('songshan_bag') || '[]');
+      let bagText = bagItems.length > 0 ? `，已选行囊：[${bagItems.map(i => i.title).join(', ')}]` : '';
+      let finalNote = (note || '无') + bagText;
+
+      const payload = { resource_name: '定制行囊需求', message: `主题：${theme}，时间：${time}，客户：${name}，联系方式：${contact}，备注：${finalNote}` };
 
       try {
         const res = await fetch(API_LEADS, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) });
         if (!res.ok) throw new Error('HTTP ' + res.status);
-        showToast('提交成功！文化顾问将尽快联系你', 'success'); bookingForm.reset();
+        showToast('提交成功！顾问将在 2 小时内联系你', 'success');
+        bookingForm.reset();
+        // 提交后可以选择清空行囊（这里暂不清空，保留用户偏好）
       } catch (err) { showToast('提交失败，请稍后重试', 'error'); }
       finally { if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalText; } }
     });
@@ -476,7 +495,7 @@
             '<p class="text-sm text-gray-600 mt-2 leading-relaxed line-clamp-2 flex-1">' + esc(item.desc) + '</p>' +
             '<div class="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between gap-2">' +
               '<div class="text-sm text-gray-500 whitespace-nowrap">' + esc(item.duration) + ' · <span class="text-shan-700 font-semibold">' + priceText + '</span></div>' +
-              '<button type="button" onclick="event.stopPropagation(); showToast(\'已成功收入行囊\', \'success\')" class="add-btn text-xs px-3 py-2 md:py-1.5 rounded-lg bg-shan-50 text-shan-700 hover:bg-shan-600 hover:text-white transition whitespace-nowrap">+ 收入行囊</button>' +
+              '<button type="button" onclick="event.stopPropagation(); addToBag({id:' + item.id + ', title:\'' + esc(item.title) + '\', price:\'' + item.price + '\'})" class="add-btn text-xs px-3 py-2 md:py-1.5 rounded-lg bg-shan-50 text-shan-700 hover:bg-shan-600 hover:text-white transition whitespace-nowrap">+ 加入行囊</button>' +
             '</div>' +
           '</div>' +
         '</article>';
@@ -574,6 +593,13 @@
   // 3D 景区
   const splatCanvas = document.getElementById('splatCanvas'), splatCtx = splatCanvas ? splatCanvas.getContext('2d') : null;
   const splatScenesEl = document.getElementById('splatScenes'), splatLoadingEl = document.getElementById('splatLoading'), splatSceneNameEl = document.getElementById('splatSceneName');
+
+  // 移动端提示自适应
+  if (window.innerWidth < 768) {
+      const hintEl = document.getElementById('splatHint');
+      if (hintEl) hintEl.innerText = '单指旋转 · 双指缩放';
+  }
+
   const SPLAT_PALETTES = { stone: ['#2E3A34', '#3C4A42', '#4C5C52', '#5E6E62', '#728275', '#8A9A8C', '#A2B2A4', '#BACABC'], wood: ['#2C342E', '#3A4840', '#485A50', '#586E60', '#6C8272', '#869C8C', '#A4B8A8', '#C2D2C4'], temple: ['#332C28', '#463C32', '#584C3E', '#6A6450', '#7C8A6E', '#8EA08A', '#A2B2A2', '#B8C8B8'], mountain: ['#1B2A22', '#263B31', '#334E42', '#436257', '#587A6B', '#6F9483', '#8AB09C', '#A8CCB8'] };
 
   function genMockPoints(num, spread) { let pts=[]; for(let i=0;i<num;i++) pts.push({x:(Math.random()-0.5)*spread, y:Math.random()*4, z:(Math.random()-0.5)*spread, b:Math.floor(Math.random()*8)}); return pts; }
