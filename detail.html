@@ -91,7 +91,28 @@
                 const res = await fetch(`${API_BASE}/api/resources/${currentId}`);
                 if (!res.ok) throw new Error("未找到该商品");
                 resourceData = await res.json();
-
+                // 🌟 动态注入结构化数据（SEO）
+                const ldJson = {
+                    "@context": "https://schema.org",
+                    "@type": "Product",
+                    "name": resourceData.title,
+                    "image": resourceData.img,
+                    "description": resourceData.desc,
+                    "offers": {
+                        "@type": "Offer",
+                        "priceCurrency": "CNY",
+                        "price": resourceData.price
+                    },
+                    "provider": {
+                        "@type": "LocalBusiness",
+                        "name": "河南嵩玉文化旅游有限公司",
+                        "address": "中国 天地之中 登封嵩山"
+                    }
+                };
+                const script = document.createElement('script');
+                script.type = 'application/ld+json';
+                script.text = JSON.stringify(ldJson);
+                document.head.appendChild(script);
                 document.title = `${resourceData.title} - 天地之中`;
                 document.getElementById('detailTag').innerText = resourceData.tag || resourceData.category || '精选';
                 document.getElementById('detailTitle').innerText = resourceData.title;
