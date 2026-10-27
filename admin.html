@@ -62,6 +62,7 @@
                 </div>
             </header>
 
+            <!-- 数据仪表盘 -->
             <div id="tab-dashboard" class="hidden flex-1 p-8 overflow-auto">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6"><p class="text-sm text-gray-500 mb-1">生态库总数</p><h3 id="stat-resources" class="text-3xl font-bold text-gray-900">0</h3></div>
@@ -71,19 +72,37 @@
                 </div>
             </div>
 
+            <!-- 定制行囊线索 -->
             <div id="tab-leads" class="hidden flex-1 p-8 overflow-auto">
                 <div class="mb-4 flex justify-between items-center">
                     <h3 class="text-xl font-bold text-gray-800">游客定制留资池</h3>
-                    <button onclick="exportTableToCSV('leadsTable', '游客留资')" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm transition">⬇ 导出 Excel</button>
+                    <div class="flex items-center gap-4">
+                        <!-- 筛选 Tab -->
+                        <div class="flex bg-gray-100 rounded-lg p-1 text-sm border border-gray-200">
+                            <button onclick="filterLeads('all')" id="tab-lead-all" class="px-3 py-1 rounded-md bg-white shadow-sm font-medium transition text-gray-800">全部</button>
+                            <button onclick="filterLeads('pending')" id="tab-lead-pending" class="px-3 py-1 rounded-md text-gray-500 hover:text-gray-700 transition">待响应</button>
+                            <button onclick="filterLeads('responded')" id="tab-lead-responded" class="px-3 py-1 rounded-md text-gray-500 hover:text-gray-700 transition">已响应</button>
+                        </div>
+                        <button onclick="exportTableToCSV('leadsTable', '游客留资')" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm transition">⬇ 导出 Excel</button>
+                    </div>
                 </div>
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                     <table id="leadsTable" class="w-full text-left border-collapse">
-                        <thead><tr class="bg-gray-50 text-gray-500 text-sm border-b"><th class="py-4 px-6 font-medium">主题</th><th class="py-4 px-6 font-medium">备注</th><th class="py-4 px-6 text-right font-medium">时间</th></tr></thead>
+                        <thead>
+                            <tr class="bg-gray-50 text-gray-500 text-sm border-b">
+                                <th class="py-4 px-6 font-medium">主题</th>
+                                <th class="py-4 px-6 font-medium w-1/3">备注</th>
+                                <th class="py-4 px-6 text-center font-medium">状态</th>
+                                <th class="py-4 px-6 text-right font-medium">时间</th>
+                                <th class="py-4 px-6 text-center font-medium">操作</th>
+                            </tr>
+                        </thead>
                         <tbody id="leadsTableBody" class="text-sm divide-y divide-gray-100"></tbody>
                     </table>
                 </div>
             </div>
 
+            <!-- 主理人入驻 -->
             <div id="tab-partners" class="hidden flex-1 p-8 overflow-auto">
                 <div class="mb-4 flex justify-between items-center">
                     <h3 class="text-xl font-bold text-gray-800">主理人入驻申请</h3>
@@ -97,6 +116,7 @@
                 </div>
             </div>
 
+            <!-- 生态库管理 -->
             <div id="tab-resources" class="hidden flex-1 p-8 overflow-auto">
                 <div class="mb-6 flex justify-between items-center">
                     <h3 class="text-xl font-bold text-gray-800">生态体验库列表</h3>
@@ -110,6 +130,7 @@
                 </div>
             </div>
 
+            <!-- 会议管理 -->
             <div id="tab-events" class="hidden flex-1 p-8 overflow-auto">
                 <div class="mb-6 flex justify-between items-center">
                     <h3 class="text-xl font-bold text-gray-800">会议与讲座列表</h3>
@@ -213,6 +234,11 @@
         let currentEventImagesArray = [];
         const API_BASE = 'https://songshan-backend.fastapicloud.dev';
 
+        // 🌟 线索模块全局变量
+        let currentLeadFilter = 'all';
+        let allGuestLeads = [];
+        let allPartnerLeads = [];
+
         // Quill 编辑器
         const quill = new Quill('#eventEditor', {
             theme: 'snow',
@@ -220,13 +246,12 @@
             modules: { toolbar: [[{ 'header': [2, 3, false] }], ['bold', 'italic', 'underline', 'strike'], [{ 'list': 'ordered'}, { 'list': 'bullet' }], ['link', 'image'], ['clean']] }
         });
 
-        // 🌟 新增：统一的格式化时间函数 (将 UTC 转为 YYYY-MM-DD HH:mm)
+        // 格式化时间
         function formatTime(dateStr) {
             if (!dateStr) return '-';
             try {
-                // 兼容带有微秒和 Z 的标准 ISO 格式
                 const d = new Date(dateStr);
-                if (isNaN(d.getTime())) return dateStr; // 如果解析失败，原样返回
+                if (isNaN(d.getTime())) return dateStr;
                 const pad = (n) => String(n).padStart(2, '0');
                 return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
             } catch (e) {
@@ -253,7 +278,14 @@
                 adminToken = data.token; localStorage.setItem('adminToken', adminToken);
                 document.getElementById('loginScreen').classList.add('hidden');
                 document.getElementById('mainApp').classList.remove('hidden');
-                switchTab('dashboard');
+
+                // 检查 URL 参数并跳转
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.get('lead_id')) {
+                    switchTab('leads');
+                } else {
+                    switchTab('dashboard');
+                }
             }).catch(err => { alert(err.message); });
         }
 
@@ -262,10 +294,22 @@
         if (adminToken) {
             document.getElementById('loginScreen').classList.add('hidden');
             document.getElementById('mainApp').classList.remove('hidden');
-            document.addEventListener('DOMContentLoaded', () => switchTab('dashboard'));
+            document.addEventListener('DOMContentLoaded', () => {
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.get('lead_id')) {
+                    switchTab('leads');
+                } else {
+                    switchTab('dashboard');
+                }
+            });
         }
 
         function switchTab(tabId) {
+            // 如果切到 leads，重置筛选为全部
+            if (tabId === 'leads' && currentTab !== 'leads') {
+                filterLeads('all');
+            }
+
             currentTab = tabId;
             ['dashboard','leads','partners','resources','events'].forEach(id => {
                 const nav = document.getElementById('nav-'+id);
@@ -301,27 +345,151 @@
             try {
                 const res = await fetch(`${API_BASE}/api/leads`);
                 const data = await res.json();
-                const guestLeads = data.leads.filter(l => l.resource_name !== '主理人入驻申请');
-                const partnerLeads = data.leads.filter(l => l.resource_name === '主理人入驻申请');
 
-                document.getElementById('leadsTableBody').innerHTML = guestLeads.length === 0 ? '<tr><td colspan="3" class="py-10 text-center text-gray-400">暂无游客留资</td></tr>' :
-                    guestLeads.map(l => `<tr class="hover:bg-gray-50"><td class="py-4 px-6 font-bold text-brand">${l.resource_name || '定制行囊'}</td><td class="py-4 px-6 text-gray-500">${l.message || '-'}</td>
-                    <!-- 🌟 使用 formatTime -->
-                    <td class="py-4 px-6 text-right text-gray-400 text-xs">${formatTime(l.created_at)}</td></tr>`).join('');
+                // 分流
+                allGuestLeads = data.leads.filter(l => l.resource_name !== '主理人入驻申请');
+                allPartnerLeads = data.leads.filter(l => l.resource_name === '主理人入驻申请');
 
-                document.getElementById('partnersTableBody').innerHTML = partnerLeads.length === 0 ? '<tr><td colspan="5" class="py-10 text-center text-gray-400">暂无商家申请</td></tr>' :
-                    partnerLeads.map(l => {
-                        const nameMatch = l.message.match(/【商家名称】：(.*?)(\n|$)/);
-                        const typeMatch = l.message.match(/【业态类型】：(.*?)(\n|$)/);
-                        const phoneMatch = l.message.match(/【联系电话】：(.*?)(\n|$)/);
-                        const introMatch = l.message.match(/【介绍】：(.*?)(\n|$)/);
-                        return `<tr class="hover:bg-gray-50"><td class="py-4 px-6 font-bold text-gray-800">${nameMatch ? nameMatch[1] : '未知'}</td><td class="py-4 px-6 text-xs"><span class="bg-brand/10 text-brand px-2 py-1 rounded">${typeMatch ? typeMatch[1] : '-'}</span></td><td class="py-4 px-6 font-mono text-brand font-bold">${phoneMatch ? phoneMatch[1] : '-'}</td><td class="py-4 px-6 text-gray-500 text-xs max-w-xs truncate">${introMatch ? introMatch[1] : '-'}</td>
-                        <!-- 🌟 使用 formatTime -->
-                        <td class="py-4 px-6 text-right text-gray-400 text-xs">${formatTime(l.created_at)}</td></tr>`;
-                    }).join('');
+                const urlParams = new URLSearchParams(window.location.search);
+                const targetLeadId = urlParams.get('lead_id');
+
+                renderGuestLeads(targetLeadId);
+                renderPartnerLeads();
             } catch(e) { console.error(e); }
         }
 
+        // 渲染定制行囊线索
+        function renderGuestLeads(highlightId = null) {
+            const tbody = document.getElementById('leadsTableBody');
+            if (!tbody) return;
+
+            const filteredData = allGuestLeads.filter(lead => {
+                const status = lead.status || 'pending';
+                if (currentLeadFilter === 'all') return true;
+                return status === currentLeadFilter;
+            });
+
+            if (filteredData.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="py-10 text-center text-gray-400">暂无游客留资</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = filteredData.map(l => {
+                const isPending = (l.status || 'pending') === 'pending';
+                const isHighlight = highlightId && l.id.toString() === highlightId;
+
+                let trClass = "hover:bg-gray-50 transition-colors";
+                let trAttr = "";
+                if (isHighlight) {
+                    trClass = "bg-yellow-50 hover:bg-yellow-100 transition-colors border-l-4 border-yellow-400";
+                    trAttr = `id="highlighted-lead-${l.id}"`;
+                }
+
+                return `<tr class="${trClass}" ${trAttr}>
+                    <td class="py-4 px-6 font-bold text-brand">${l.resource_name || '定制行囊'}</td>
+                    <td class="py-4 px-6 text-gray-500 max-w-md truncate" title="${l.message || '-'}">${l.message || '-'}</td>
+
+                    <td class="py-4 px-6 text-center">
+                        ${isPending
+                            ? '<span class="px-2.5 py-1 bg-yellow-100 text-yellow-700 rounded-md text-xs font-medium">待响应</span>'
+                            : '<span class="px-2.5 py-1 bg-green-100 text-green-700 rounded-md text-xs font-medium">已响应</span>'}
+                    </td>
+
+                    <td class="py-4 px-6 text-right text-gray-400 text-xs whitespace-nowrap">${formatTime(l.created_at)}</td>
+
+                    <td class="py-4 px-6 text-center">
+                        <button onclick="markResponded(${l.id})"
+                                class="px-3 py-1.5 rounded text-xs font-medium transition-colors ${isPending ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-sm' : 'bg-gray-100 text-gray-400 cursor-not-allowed'}"
+                                ${!isPending ? 'disabled' : ''}>
+                            ${isPending ? '标记已响应' : '已处理'}
+                        </button>
+                    </td>
+                </tr>`;
+            }).join('');
+
+            // 滚动到高亮行
+            if (highlightId) {
+                setTimeout(() => {
+                    const el = document.getElementById(`highlighted-lead-${highlightId}`);
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            }
+        }
+
+        // 渲染主理人申请
+        function renderPartnerLeads() {
+            const tbody = document.getElementById('partnersTableBody');
+            if (!tbody) return;
+
+            tbody.innerHTML = allPartnerLeads.length === 0 ? '<tr><td colspan="5" class="py-10 text-center text-gray-400">暂无商家申请</td></tr>' :
+                allPartnerLeads.map(l => {
+                    const nameMatch = l.message.match(/【商家名称】：(.*?)(\n|$)/);
+                    const typeMatch = l.message.match(/【业态类型】：(.*?)(\n|$)/);
+                    const phoneMatch = l.message.match(/【联系电话】：(.*?)(\n|$)/);
+                    const introMatch = l.message.match(/【介绍】：(.*?)(\n|$)/);
+                    return `<tr class="hover:bg-gray-50"><td class="py-4 px-6 font-bold text-gray-800">${nameMatch ? nameMatch[1] : '未知'}</td><td class="py-4 px-6 text-xs"><span class="bg-brand/10 text-brand px-2 py-1 rounded">${typeMatch ? typeMatch[1] : '-'}</span></td><td class="py-4 px-6 font-mono text-brand font-bold">${phoneMatch ? phoneMatch[1] : '-'}</td><td class="py-4 px-6 text-gray-500 text-xs max-w-xs truncate">${introMatch ? introMatch[1] : '-'}</td>
+                    <td class="py-4 px-6 text-right text-gray-400 text-xs">${formatTime(l.created_at)}</td></tr>`;
+                }).join('');
+        }
+
+        // 切换线索筛选状态
+        function filterLeads(status) {
+            currentLeadFilter = status;
+
+            const tabs = {
+                all: document.getElementById('tab-lead-all'),
+                pending: document.getElementById('tab-lead-pending'),
+                responded: document.getElementById('tab-lead-responded')
+            };
+
+            const activeClass = 'px-3 py-1 rounded-md bg-white shadow-sm font-medium transition text-gray-800';
+            const inactiveClass = 'px-3 py-1 rounded-md text-gray-500 hover:text-gray-700 transition';
+
+            Object.keys(tabs).forEach(key => {
+                if(tabs[key]) tabs[key].className = (key === status) ? activeClass : inactiveClass;
+            });
+
+            renderGuestLeads();
+        }
+
+        // 标记已响应
+        async function markResponded(leadId) {
+            if (!confirm('确认已与该客户取得联系，并将其标记为已响应？')) return;
+
+            try {
+                const res = await fetch(`${API_BASE}/api/leads/${leadId}/status`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Admin-Token': adminToken
+                    },
+                    body: JSON.stringify({ status: 'responded' })
+                });
+
+                if (res.ok) {
+                    const lead = allGuestLeads.find(l => l.id === leadId);
+                    if (lead) {
+                        lead.status = 'responded';
+                        lead.responded_at = new Date().toISOString();
+                    }
+
+                    // 清除 URL 上的高亮参数，避免刷新一直高亮
+                    if (window.history.replaceState) {
+                        const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                        window.history.replaceState({ path: newUrl }, '', newUrl);
+                    }
+
+                    renderGuestLeads();
+                } else {
+                    const data = await res.json();
+                    alert(data.detail || '标记失败');
+                }
+            } catch(e) {
+                alert('网络异常，请稍后重试');
+            }
+        }
+
+        // 导出 Excel
         function exportTableToCSV(tableId, filename) {
             let table = document.getElementById(tableId);
             if (!table) return;
