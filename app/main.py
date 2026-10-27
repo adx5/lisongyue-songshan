@@ -72,6 +72,9 @@ class LoginRequest(BaseModel):
 # 🌟 已改为从环境变量读取，请在 FastAPI Cloud 配置 FEISHU_WEBHOOK
 FEISHU_WEBHOOK = os.getenv("FEISHU_WEBHOOK", "")
 
+# 🌟 调试专用：服务启动时打印 Webhook 的前 45 个字符，确认云端是否读到了最新环境变量
+print(f"DEBUG: 启动时检测到的飞书 Webhook 前45位: {FEISHU_WEBHOOK[:45] if FEISHU_WEBHOOK else '空！未配置！'}")
+
 
 def send_feishu_notification(title: str, content: str):
     """发送飞书群机器人通知（静默执行，不影响主业务）"""
@@ -97,8 +100,10 @@ def send_feishu_notification(title: str, content: str):
             }
         }
         resp = requests.post(FEISHU_WEBHOOK, json=payload, timeout=3)
-        if resp.status_code != 200:
-            print(f"❌ 飞书通知发送失败: {resp.text}")
+
+        # 🌟 调试专用：无论成功失败，都把飞书原封不动的返回内容打印出来
+        print(f"DEBUG飞书返回: HTTP {resp.status_code}, 内容: {resp.text}")
+
     except Exception as e:
         print(f"❌ 飞书通知发送异常: {e}")
 
