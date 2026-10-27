@@ -27,6 +27,7 @@
   #splatCanvas { touch-action: none; display: block; }
   #mobileMenu { transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; }
   #mobileMenu.hidden-menu { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+  .writing-vertical { writing-mode: vertical-lr; letter-spacing: 0.2em; }
 </style>
 </head>
 <body class="font-sans antialiased overflow-x-hidden">
@@ -48,7 +49,12 @@
       <a href="events.html" class="hover:text-shan-600 transition">会议专题</a>
     </nav>
     <div class="flex items-center gap-3">
-      <a href="#booking" class="hidden sm:inline-block bg-shan-600 hover:bg-shan-700 text-white text-sm px-5 py-2 rounded-lg transition shadow-sm">定制行囊</a>
+      <!-- 右上角：我的行囊按钮 -->
+      <button onclick="openBag()" class="relative hidden sm:flex items-center bg-shan-600 hover:bg-shan-700 text-white text-sm px-5 py-2 rounded-lg transition shadow-sm">
+        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+        我的行囊
+        <span id="bagBadge" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full shadow-md hidden">0</span>
+      </button>
       <button id="menuBtn" class="md:hidden p-2 text-gray-600 hover:text-shan-600 focus:outline-none">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
       </button>
@@ -62,6 +68,13 @@
     <a href="events.html" class="block px-4 py-3 text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">会议专题</a>
   </div>
 </header>
+
+<!-- 🌟 新增：右侧悬浮行囊按钮（移动端更方便） -->
+<button id="openBagBtn" onclick="openBag()" class="fixed right-0 top-1/2 -translate-y-1/2 bg-shan-600 text-white w-12 py-4 rounded-l-xl shadow-lg z-40 flex flex-col items-center hover:bg-shan-700 transition group sm:hidden">
+  <span class="text-lg">🎒</span>
+  <span class="text-[10px] mt-1 writing-vertical">行囊</span>
+  <span id="bagBadgeMobile" class="absolute -left-2 top-2 bg-red-500 text-white text-[10px] font-bold h-5 w-5 rounded-full flex items-center justify-center shadow-md hidden">0</span>
+</button>
 
 <section id="hero" class="relative min-h-[500px] md:min-h-[560px] overflow-hidden bg-ink">
   <div id="heroTrack" class="absolute inset-0 flex will-change-transform"></div>
@@ -290,7 +303,22 @@
   </div>
 </footer>
 
-<div id="toast" class="fixed left-1/2 bottom-8 z-[100] px-5 py-3 rounded-xl text-white text-sm shadow-2xl transition-all duration-300 opacity-0 translate-y-4 -translate-x-1/2 pointer-events-none bg-shan-600"></div>
+<div id="toast" class="fixed left-1/2 bottom-8 z-[110] px-5 py-3 rounded-xl text-white text-sm shadow-2xl transition-all duration-300 opacity-0 translate-y-4 -translate-x-1/2 pointer-events-none bg-shan-600"></div>
+
+<!-- 🌟 新增：行囊抽屉与遮罩层 -->
+<div id="bagOverlay" class="fixed inset-0 bg-black/50 z-[90] hidden opacity-0 transition-opacity duration-300" onclick="closeBag()"></div>
+<div id="bagDrawer" class="fixed top-0 right-0 w-[300px] h-full bg-white shadow-2xl z-[100] transform translate-x-full transition-transform duration-300 flex flex-col">
+    <div class="flex items-center justify-between p-4 border-b border-gray-100 bg-gray-50">
+        <h3 class="font-serif font-bold text-ink">我的专属行囊</h3>
+        <button onclick="closeBag()" class="text-gray-400 hover:text-gray-800 text-2xl leading-none">&times;</button>
+    </div>
+    <div id="bagList" class="flex-1 overflow-y-auto p-4 space-y-3">
+        <!-- 动态渲染 -->
+    </div>
+    <div class="p-4 border-t border-gray-100 bg-white">
+        <button onclick="goToBooking()" class="w-full bg-shan-600 hover:bg-shan-700 text-white py-3 rounded-lg text-sm font-medium transition shadow-md">去填写定制需求</button>
+    </div>
+</div>
 
 <!-- 主理人弹窗 -->
 <div id="partnerModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
@@ -329,12 +357,92 @@
     const bgClass = type === 'error' ? 'bg-red-500' : type === 'warn' ? 'bg-amber-500' : 'bg-shan-600';
     const icon = type === 'error' ? '✕' : type === 'warn' ? '!' : '✓';
     clearTimeout(toastTimer);
-    el.className = 'fixed left-1/2 bottom-8 z-[100] px-5 py-3 rounded-xl text-white text-sm shadow-2xl transition-all duration-300 -translate-x-1/2 pointer-events-none opacity-0 translate-y-4 ' + bgClass;
+    el.className = 'fixed left-1/2 bottom-8 z-[110] px-5 py-3 rounded-xl text-white text-sm shadow-2xl transition-all duration-300 -translate-x-1/2 pointer-events-none opacity-0 translate-y-4 ' + bgClass;
     el.innerHTML = '<span class="inline-flex items-center gap-2"><span class="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold">' + icon + '</span><span>' + esc(message) + '</span></span>';
     void el.offsetWidth;
     el.classList.remove('opacity-0', 'translate-y-4');
     toastTimer = setTimeout(function () { el.classList.add('opacity-0', 'translate-y-4'); }, 2600);
   }
+
+  // 🌟 行囊管理逻辑
+  function getBag() { try { return JSON.parse(localStorage.getItem('songshan_bag') || '[]'); } catch(e) { return []; } }
+  function saveBag(bag) { localStorage.setItem('songshan_bag', JSON.stringify(bag)); updateBagUI(); }
+
+  window.updateBagUI = function() {
+      let bag = getBag();
+      const badge = document.getElementById('bagBadge');
+      const badgeMobile = document.getElementById('bagBadgeMobile');
+      const listEl = document.getElementById('bagList');
+
+      // 更新角标
+      if (bag.length > 0) {
+          if(badge) { badge.innerText = bag.length; badge.classList.remove('hidden'); badge.classList.add('flex'); }
+          if(badgeMobile) { badgeMobile.innerText = bag.length; badgeMobile.classList.remove('hidden'); badgeMobile.classList.add('flex'); }
+      } else {
+          if(badge) { badge.classList.add('hidden'); badge.classList.remove('flex'); }
+          if(badgeMobile) { badgeMobile.classList.add('hidden'); badgeMobile.classList.remove('flex'); }
+      }
+
+      // 更新列表
+      if (!listEl) return;
+      if (bag.length === 0) {
+          listEl.innerHTML = '<div class="text-center text-gray-400 text-sm mt-10 flex flex-col items-center gap-2"><span class="text-4xl opacity-50">🛒</span>行囊还是空的<br>去体验库挑选心仪的路线吧~</div>';
+          return;
+      }
+      listEl.innerHTML = bag.map(item => `
+          <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100">
+              <div>
+                  <h4 class="text-sm font-bold text-ink line-clamp-1">${esc(item.title)}</h4>
+                  <p class="text-xs text-shan-600 font-medium mt-1">¥ ${esc(item.price)}</p>
+              </div>
+              <button onclick="removeFromBag(${item.id})" class="text-gray-400 hover:text-red-500 transition p-1" title="移除">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+              </button>
+          </div>
+      `).join('');
+  }
+
+  window.addToBag = function(item) {
+      let bag = getBag();
+      if (!bag.find(i => i.id === item.id)) {
+          bag.push(item);
+          saveBag(bag);
+          showToast('已成功收入行囊', 'success');
+          openBag(); // 加入后自动弹出抽屉
+      } else {
+          showToast('该体验已在行囊中', 'warn');
+      }
+  }
+
+  window.removeFromBag = function(id) {
+      let bag = getBag().filter(i => i.id !== id);
+      saveBag(bag);
+      showToast('已从行囊移除', 'success');
+  }
+
+  window.openBag = function() {
+      document.getElementById('bagOverlay').classList.remove('hidden');
+      void document.getElementById('bagOverlay').offsetWidth;
+      document.getElementById('bagOverlay').classList.remove('opacity-0');
+      document.getElementById('bagDrawer').classList.remove('translate-x-full');
+  }
+
+  window.closeBag = function() {
+      document.getElementById('bagOverlay').classList.add('opacity-0');
+      document.getElementById('bagDrawer').classList.add('translate-x-full');
+      setTimeout(() => {
+          document.getElementById('bagOverlay').classList.add('hidden');
+      }, 300);
+  }
+
+  window.goToBooking = function() {
+      closeBag();
+      document.getElementById('booking').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // 初始化行囊UI
+  updateBagUI();
+
 
   // 轮播
   const HERO_IMAGES = [
@@ -400,18 +508,6 @@
     heroSection.addEventListener('mouseleave', startAutoPlay);
   }
 
-  // 收入行囊逻辑
-  window.addToBag = function(item) {
-      let bag = JSON.parse(localStorage.getItem('songshan_bag') || '[]');
-      if (!bag.find(i => i.id === item.id)) {
-          bag.push({ id: item.id, title: item.title, price: item.price });
-          localStorage.setItem('songshan_bag', JSON.stringify(bag));
-          showToast('已成功收入行囊', 'success');
-      } else {
-          showToast('该体验已在行囊中', 'warn');
-      }
-  }
-
   // 表单提交
   const bookingForm = document.getElementById('bookingForm');
   const submitBtn = document.getElementById('submitBtn');
@@ -431,7 +527,7 @@
       if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '正在提交…'; }
 
       // 读取行囊内容并拼接到备注
-      let bagItems = JSON.parse(localStorage.getItem('songshan_bag') || '[]');
+      let bagItems = getBag();
       let bagText = bagItems.length > 0 ? `，已选行囊：[${bagItems.map(i => i.title).join(', ')}]` : '';
       let finalNote = (note || '无') + bagText;
 
@@ -442,7 +538,7 @@
         if (!res.ok) throw new Error('HTTP ' + res.status);
         showToast('提交成功！顾问将在 2 小时内联系你', 'success');
         bookingForm.reset();
-        // 提交后可以选择清空行囊（这里暂不清空，保留用户偏好）
+        saveBag([]); // 提交成功后清空行囊
       } catch (err) { showToast('提交失败，请稍后重试', 'error'); }
       finally { if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalText; } }
     });
@@ -594,7 +690,6 @@
   const splatCanvas = document.getElementById('splatCanvas'), splatCtx = splatCanvas ? splatCanvas.getContext('2d') : null;
   const splatScenesEl = document.getElementById('splatScenes'), splatLoadingEl = document.getElementById('splatLoading'), splatSceneNameEl = document.getElementById('splatSceneName');
 
-  // 移动端提示自适应
   if (window.innerWidth < 768) {
       const hintEl = document.getElementById('splatHint');
       if (hintEl) hintEl.innerText = '单指旋转 · 双指缩放';
