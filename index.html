@@ -246,8 +246,7 @@
       <canvas id="splatCanvas" class="w-full h-[320px] md:h-[480px]"></canvas>
 
       <!-- 3D 悬浮折叠标签 (移入黑框内) -->
-      <div id="splatScenes" class="absolute top-3 right-3 md:top-6 md:right-6 flex flex-col items-end gap-2 z-20 pointer-events-auto"></div>
-
+      <div id="splatScenes" class="absolute top-1/2 -translate-y-1/2 right-0 flex flex-col items-end gap-3 z-20 pointer-events-auto overflow-hidden pr-0 py-4 w-[300px]"></div>
       <div class="absolute top-3 left-3 md:top-4 md:left-4 flex items-center gap-2 pointer-events-none">
         <span id="splatSceneName" class="text-[11px] md:text-[12px] font-medium text-white bg-black/40 backdrop-blur-sm px-2.5 py-1 md:px-3 md:py-1.5 rounded-md border border-white/10">少林塔林</span>
       </div>
@@ -635,16 +634,30 @@
     }, 280);
   }
 
-  // 3D 悬浮标签 (折叠显示)
+    // 3D 悬浮标签 (半隐藏靠右，抽屉式展开)
   function initSplatScenes() {
     if (!splatScenesEl) return;
     splatScenesEl.innerHTML = SPLAT_SCENES.map(function (s, i) {
-      return `<button type="button" class="scene-btn group text-left rounded-lg border border-white/20 bg-black/40 backdrop-blur-md p-2 w-[120px] hover:w-[200px] md:w-[140px] md:hover:w-[240px] transition-all duration-300 overflow-hidden" data-idx="${i}">
-          <span class="block text-xs md:text-sm font-semibold text-white truncate transition-all duration-300 group-hover:text-shan-300">${esc(s.name)}</span>
-          <span class="block text-[10px] text-gray-300 truncate mt-0.5 opacity-0 h-0 group-hover:opacity-100 group-hover:h-auto transition-all duration-300">${esc(s.sub)}</span>
-        </button>`;
+      return `
+      <button type="button" class="scene-btn group text-left rounded-l-xl border border-r-0 border-white/20 bg-black/60 backdrop-blur-md pl-4 pr-2 py-3 w-[220px] translate-x-[140px] hover:translate-x-0 active:translate-x-0 transition-all duration-500 ease-out relative shadow-lg" data-idx="${i}">
+          <!-- 主标题 -->
+          <span class="block text-xs md:text-sm font-bold text-white whitespace-nowrap transition-colors duration-300 group-hover:text-shan-300">
+            ${esc(s.name)}
+          </span>
+          <!-- 副标题简介 (展开时显示) -->
+          <span class="block text-[10px] md:text-[11px] text-gray-300 whitespace-nowrap mt-0 max-h-0 opacity-0 transition-all duration-500 ease-out group-hover:max-h-[20px] group-hover:opacity-100 group-hover:mt-1">
+            ${esc(s.sub)}
+          </span>
+          <!-- 选中时的左侧发光条 -->
+          <span class="absolute left-0 top-0 bottom-0 w-1 bg-transparent group-[.active]:bg-shan-400 rounded-l-xl transition-colors duration-300"></span>
+      </button>`;
     }).join('');
-    splatScenesEl.addEventListener('click', function (e) { const btn = e.target.closest('.scene-btn'); if (!btn) return; const idx = parseInt(btn.getAttribute('data-idx'), 10); if (!isNaN(idx)) selectSplatScene(idx); });
+    splatScenesEl.addEventListener('click', function (e) {
+      const btn = e.target.closest('.scene-btn');
+      if (!btn) return;
+      const idx = parseInt(btn.getAttribute('data-idx'), 10);
+      if (!isNaN(idx)) selectSplatScene(idx);
+    });
   }
 
   function bindSplatInteraction() {
