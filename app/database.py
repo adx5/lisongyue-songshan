@@ -52,6 +52,10 @@ class Lead(Base):
     message = Column(Text)
     created_at = Column(DateTime, default=datetime.utcnow)
 
+    # 🌟 P2 新增：响应状态与时间
+    status = Column(String(20), default="pending", server_default="pending", comment="响应状态: pending/responded")
+    responded_at = Column(DateTime, nullable=True, comment="首次响应时间")
+
 # 会议表
 class Event(Base):
     __tablename__ = "events"
