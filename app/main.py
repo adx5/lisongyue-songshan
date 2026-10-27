@@ -2,7 +2,7 @@ import sys
 import os
 import requests
 from pathlib import Path
-from fastapi import FastAPI, HTTPException, Depends, File, UploadFile
+from fastapi import FastAPI, HTTPException, Depends, File, UploadFile, BackgroundTasks
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
@@ -63,6 +63,38 @@ class LoginRequest(BaseModel):
     password: str
 
 
+# ================= 飞书通知推送 =================
+# ⚠️ 测试完成后，建议在飞书群设置中重置 Webhook，并将其放入环境变量中保护
+FEISHU_WEBHOOK = "https://open.feishu.cn/open-apis/bot/v2/hook/f16b9c94-31bd-405e-b272-3cf06fa156b6"
+
+
+def send_feishu_notification(title: str, content: str):
+    """发送飞书群机器人通知（静默执行，不影响主业务）"""
+    if not FEISHU_WEBHOOK:
+        return
+    try:
+        # 采用飞书互动卡片格式，更美观
+        payload = {
+            "msg_type": "interactive",
+            "card": {
+                "config": {"wide_screen_mode": True},
+                "header": {
+                    "title": {"tag": "plain_text", "content": title},
+                    # 主理人申请用绿色，游客定制用蓝色
+                    "template": "green" if "主理人" in title else "blue"
+                },
+                "elements": [
+                    {"tag": "div", "text": {"tag": "lark_md", "content": content}},
+                    {"tag": "hr"},
+                    {"tag": "note", "elements": [{"tag": "plain_text", "content": "来自：天地之中 · 嵩山人文志"}]}
+                ]
+            }
+        }
+        requests.post(FEISHU_WEBHOOK, json=payload, timeout=3)
+    except Exception as e:
+        print(f"❌ 飞书通知发送失败: {e}")
+
+
 # ================= 接口 =================
 @app.post("/api/admin/login")
 def admin_login(req: LoginRequest):
@@ -70,7 +102,7 @@ def admin_login(req: LoginRequest):
     raise HTTPException(status_code=401, detail="密码错误")
 
 
-# 资源接口 (新增了单条查询接口，供详情页使用)
+# 资源接口
 @app.post("/api/resources")
 def create_resource(resource: ResourceCreate, db: Session = Depends(get_db)):
     db_resource = Resource(**resource.model_dump())
@@ -143,12 +175,23 @@ def delete_event(id: int, db: Session = Depends(get_db)):
     return {"message": "删除成功"}
 
 
-# 线索接口
+# 🌟 核心更新：线索接口加入飞书后台推送
 @app.post("/api/leads")
-def create_lead(lead: LeadCreate, db: Session = Depends(get_db)):
+def create_lead(lead: LeadCreate, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
+    # 1. 存入数据库
     db_lead = Lead(**lead.model_dump())
-    db.add(db_lead);
+    db.add(db_lead)
     db.commit()
+
+    # 2. 判断线索类型，组装飞书通知
+    if lead.resource_name == '主理人入驻申请':
+        title = "🌟 收到新的[主理人入驻申请]"
+    else:
+        title = "📩 收到新的[定制行囊需求]"
+
+    # 3. 将发送任务扔给后台，不阻塞用户提交响应
+    background_tasks.add_task(send_feishu_notification, title, lead.message)
+
     return {"message": "提交成功"}
 
 
@@ -163,6 +206,7 @@ def get_admin_stats(db: Session = Depends(get_db)):
             "total_events": db.query(Event).count()}
 
 
+# 图床接口
 BEEIMG_TOKEN = os.getenv("BEEIMG_TOKEN", "")
 BEEIMG_API_URL = "https://www.beeimg.cn/api/v2/upload"
 

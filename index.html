@@ -24,33 +24,10 @@
   .tab { padding: 8px 16px; border-radius: 9999px; font-size: 14px; line-height: 1.4; border: 1px solid #E5E7EB; background: #FFFFFF; color: #4B5563; transition: all 0.2s ease; cursor: pointer; white-space: nowrap; }
   .tab:hover { border-color: #34D399; color: #059669; }
   .tab.active { background: #059669; border-color: #059669; color: #FFFFFF; }
-  .scene-btn { transition: all 0.2s ease; cursor: pointer; min-width: 240px; scroll-snap-align: start; }
-  .scene-btn:hover { border-color: #6EE7B7; }
-  .scene-btn.active { border-color: #059669; background: #ECFDF5; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12); }
   #splatCanvas { touch-action: none; display: block; }
   #mobileMenu { transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; }
   #mobileMenu.hidden-menu { transform: translateY(-100%); opacity: 0; pointer-events: none; }
 </style>
-  <!-- SEO: 结构化数据 -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "天地之中 · 嵩山人文志",
-  "url": "https://adx5.github.io/lisongyue-songshan/",
-  "description": "连接历史与未来、大咖与大众、文化与产业的文旅生态平台。",
-  "publisher": {
-    "@type": "Organization",
-    "name": "河南嵩玉文化旅游有限公司",
-    "email": "zysongshan@163.com",
-    "telephone": "15515816811",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "中国 天地之中 登封嵩山"
-    }
-  }
-}
-</script>
 </head>
 <body class="font-sans antialiased overflow-x-hidden">
 
@@ -63,7 +40,6 @@
       </div>
       <span class="text-[9px] md:text-[10px] text-gray-400 tracking-[0.2em] uppercase ml-11">Songshan Humanities Chronicle</span>
     </a>
-
     <nav class="hidden md:flex items-center gap-8 text-sm text-gray-600">
       <a href="#hero" class="nav-link text-shan-600 font-bold border-b-2 border-shan-600 pb-1">首页</a>
       <a href="#library" class="nav-link hover:text-shan-600 transition">生态体验库</a>
@@ -71,7 +47,6 @@
       <a href="#ai-match" class="nav-link hover:text-shan-600 transition">AI 寻路</a>
       <a href="events.html" class="hover:text-shan-600 transition">会议专题</a>
     </nav>
-
     <div class="flex items-center gap-3">
       <a href="#booking" class="hidden sm:inline-block bg-shan-600 hover:bg-shan-700 text-white text-sm px-5 py-2 rounded-lg transition shadow-sm">定制行囊</a>
       <button id="menuBtn" class="md:hidden p-2 text-gray-600 hover:text-shan-600 focus:outline-none">
@@ -79,7 +54,6 @@
       </button>
     </div>
   </div>
-
   <div id="mobileMenu" class="hidden-menu md:hidden absolute top-16 left-0 w-full bg-white border-b border-gray-100 shadow-xl z-40 flex flex-col p-4 space-y-2">
     <a href="#hero" class="block px-4 py-3 text-[15px] text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">首页</a>
     <a href="#library" class="block px-4 py-3 text-[15px] text-gray-700 font-medium hover:bg-shan-50 hover:text-shan-600 rounded-lg transition">生态体验库</a>
@@ -93,27 +67,21 @@
   <div id="heroTrack" class="absolute inset-0 flex will-change-transform"></div>
   <div class="absolute inset-0 bg-gradient-to-r from-[#08130F]/95 via-[#08130F]/75 to-[#08130F]/25"></div>
   <div class="absolute inset-0 bg-gradient-to-t from-[#08130F]/90 via-[#08130F]/40 to-transparent"></div>
-
   <div class="relative z-10 container-1100 min-h-[500px] md:min-h-[560px] flex flex-col justify-center py-12 md:py-16">
     <span class="inline-flex items-center gap-2 w-fit text-[11px] md:text-[12px] tracking-widest text-shan-300 border border-shan-400/40 bg-shan-900/30 px-3 py-1.5 rounded-full backdrop-blur-sm">
       <span class="w-1.5 h-1.5 rounded-full bg-shan-400"></span> 天地之中 · 嵩山人文志
     </span>
-
     <h1 class="mt-4 md:mt-5 font-sans text-white text-[2.3rem] md:text-5xl leading-[1.35] md:leading-[1.25] font-black drop-shadow-xl tracking-wider">
       连接历史与未来<br />大咖与大众、文化与产业
     </h1>
-
     <p class="mt-3 md:mt-4 text-gray-300 text-sm md:text-base max-w-xl leading-relaxed">
       少林禅武 · 嵩阳书院 · 中岳庙 · 登封窑 —— 从深度研学、康养旅居，到非遗匠人与产业共建，读懂天地之中的大美嵩山。
     </p>
-
     <div class="mt-6 md:mt-8 w-full max-w-2xl">
       <div class="bg-white/95 rounded-2xl p-1.5 md:p-2 flex flex-col sm:flex-row gap-2 shadow-2xl shadow-black/30">
-        <input id="aiSearchInput" type="text" placeholder="试试：少林功夫 / 民宿 / 租车"
-               class="flex-1 px-4 py-3 bg-transparent outline-none text-ink text-base placeholder-gray-500 rounded-xl" />
+        <input id="aiSearchInput" type="text" placeholder="试试：少林功夫 / 民宿 / 租车" class="flex-1 px-4 py-3 bg-transparent outline-none text-ink text-base placeholder-gray-500 rounded-xl" />
         <button id="aiSearchBtn" class="bg-shan-600 hover:bg-shan-700 text-white px-6 py-3.5 sm:py-3 rounded-xl text-base sm:text-sm font-medium transition shadow-md">AI 寻路</button>
       </div>
-
       <div class="mt-3 flex flex-wrap items-center gap-2 text-[11px] md:text-xs text-gray-300">
         <span class="text-gray-400">热门：</span>
         <button class="hot-tag px-3 py-1.5 md:py-1 rounded-full border border-white/20 bg-black/20 hover:border-shan-400 hover:text-shan-300 transition" data-kw="少林">少林功夫</button>
@@ -140,17 +108,16 @@
     <div class="lg:col-span-7">
       <div class="bg-white rounded-2xl border border-gray-100 p-5 md:p-6 shadow-sm h-full flex flex-col">
         <div class="flex items-center justify-between mb-2">
-          <h2 class="font-serif text-xl md:text-xl font-bold text-ink">AI 寻路演示</h2>
+          <h2 class="font-serif text-xl font-bold text-ink">AI 寻路演示</h2>
           <span class="text-[11px] text-shan-700 bg-shan-50 border border-shan-100 px-2 py-1 rounded-full">实时</span>
         </div>
         <p class="text-sm text-gray-600 leading-relaxed">
           描述你的期待，AI 将从 200+ 嵩山人文体验中，为你量身定制一条顺畅惬意的专属行程。
         </p>
-
         <div class="mt-4 rounded-xl border border-gray-200 bg-sand p-3.5 md:p-4">
           <div class="flex items-center justify-between">
-            <span class="text-xs md:text-[11px] tracking-wider text-gray-500">① 需求解析</span>
-            <span class="text-xs md:text-[11px] text-gray-500">来自用户输入</span>
+            <span class="text-xs text-gray-500">① 需求解析</span>
+            <span class="text-xs text-gray-500">来自用户输入</span>
           </div>
           <div class="mt-2.5 flex flex-wrap gap-2">
             <span class="text-xs px-2 py-1 rounded-md bg-white border border-gray-200 text-gray-700">亲子家庭</span>
@@ -159,19 +126,17 @@
           </div>
           <p class="mt-3 text-sm text-gray-800 leading-relaxed">“想用两天时间，让孩子在行走中真正理解嵩山的文化，别只是拍照打卡。”</p>
         </div>
-
         <div class="flex items-center justify-center gap-2 py-3 text-shan-600 text-xs">
           <span class="h-px w-8 md:w-12 bg-shan-200"></span>
           <span>AI 匹配中 · 已比对 47 条体验</span>
           <span class="h-px w-8 md:w-12 bg-shan-200"></span>
         </div>
-
         <div class="rounded-xl border border-shan-200 bg-shan-50/70 p-3.5 md:p-4">
           <div class="flex items-center justify-between">
-            <span class="text-xs md:text-[11px] tracking-wider text-shan-700">② 匹配方案</span>
-            <span class="text-xs md:text-[11px] font-semibold text-shan-700 bg-white border border-shan-200 px-2 py-0.5 rounded-full">匹配度 96%</span>
+            <span class="text-xs text-shan-700">② 匹配方案</span>
+            <span class="text-xs font-semibold text-shan-700 bg-white border border-shan-200 px-2 py-0.5 rounded-full">匹配度 96%</span>
           </div>
-          <h3 class="mt-2 font-serif text-lg md:text-lg font-bold text-ink leading-snug">嵩阳书院国学讲坛 ＋ 少林功夫晨课</h3>
+          <h3 class="mt-2 font-serif text-lg font-bold text-ink leading-snug">嵩阳书院国学讲坛 ＋ 少林功夫晨课</h3>
           <p class="mt-1 text-sm text-gray-600 leading-relaxed">2 天 1 夜 · 含 1 晚禅意民宿 · 适龄 7 岁以上</p>
           <button id="viewPlanBtn" class="mt-4 w-full sm:w-auto text-sm text-white bg-shan-600 hover:bg-shan-700 px-5 py-3 md:py-2.5 rounded-lg transition">查看完整行程 →</button>
         </div>
@@ -180,21 +145,19 @@
 
     <div class="lg:col-span-5" id="booking">
       <div class="bg-white rounded-2xl border border-gray-100 p-5 md:p-6 shadow-sm h-full">
-        <h2 class="font-serif text-xl md:text-xl font-bold text-ink">定制专属行囊</h2>
+        <h2 class="font-serif text-xl font-bold text-ink">定制专属行囊</h2>
         <p class="text-sm text-gray-600 mt-1">留下您的需求，专属文化顾问将为您悉心梳理方案。</p>
-
         <form id="bookingForm" class="mt-5 space-y-4" novalidate>
           <div class="grid grid-cols-2 gap-4">
             <div>
               <label class="block text-sm text-gray-600 mb-1.5">您的称呼</label>
-              <input id="fName" type="text" required placeholder="如：王先生" class="w-full px-3 py-3.5 md:py-2.5 rounded-lg border border-gray-200 text-base md:text-sm text-ink outline-none transition placeholder-gray-400 focus:border-shan-500 focus:ring-2 focus:ring-shan-100" />
+              <input id="fName" type="text" required placeholder="如：王先生" class="w-full px-3 py-3.5 md:py-2.5 rounded-lg border border-gray-200 text-base md:text-sm text-ink outline-none transition focus:border-shan-500 focus:ring-2 focus:ring-shan-100" />
             </div>
             <div>
               <label class="block text-sm text-gray-600 mb-1.5">联系方式</label>
-              <input id="fContact" type="text" required placeholder="手机/微信号" class="w-full px-3 py-3.5 md:py-2.5 rounded-lg border border-gray-200 text-base md:text-sm text-ink outline-none transition placeholder-gray-400 focus:border-shan-500 focus:ring-2 focus:ring-shan-100" />
+              <input id="fContact" type="text" required placeholder="手机/微信号" class="w-full px-3 py-3.5 md:py-2.5 rounded-lg border border-gray-200 text-base md:text-sm text-ink outline-none transition focus:border-shan-500 focus:ring-2 focus:ring-shan-100" />
             </div>
           </div>
-
           <div class="grid grid-cols-2 gap-4">
             <div>
               <label for="fTheme" class="block text-sm text-gray-600 mb-1.5">旅行主题</label>
@@ -208,15 +171,13 @@
             </div>
             <div>
               <label for="fTime" class="block text-sm text-gray-600 mb-1.5">出行时间</label>
-              <input id="fTime" type="date" required class="w-full px-3 py-3.5 md:py-2.5 rounded-lg border border-gray-200 text-base md:text-sm text-ink outline-none transition placeholder-gray-400 focus:border-shan-500 focus:ring-2 focus:ring-shan-100 text-gray-500" />
+              <input id="fTime" type="date" required class="w-full px-3 py-3.5 md:py-2.5 rounded-lg border border-gray-200 text-base md:text-sm text-ink outline-none transition focus:border-shan-500 focus:ring-2 focus:ring-shan-100 text-gray-500" />
             </div>
           </div>
-
           <div>
             <label for="fNote" class="block text-sm text-gray-600 mb-1.5">补充备注</label>
-            <textarea id="fNote" rows="2" placeholder="同行人数 / 预算 / 特殊偏好" class="w-full px-3 py-3.5 md:py-2.5 rounded-lg border border-gray-200 text-base md:text-sm text-ink outline-none transition resize-none placeholder-gray-400 focus:border-shan-500 focus:ring-2 focus:ring-shan-100"></textarea>
+            <textarea id="fNote" rows="2" placeholder="同行人数 / 预算 / 特殊偏好" class="w-full px-3 py-3.5 md:py-2.5 rounded-lg border border-gray-200 text-base md:text-sm text-ink outline-none transition resize-none focus:border-shan-500 focus:ring-2 focus:ring-shan-100"></textarea>
           </div>
-
           <button id="submitBtn" type="submit" class="w-full bg-shan-600 hover:bg-shan-700 text-white py-3.5 md:py-3 rounded-lg text-base md:text-sm font-medium transition shadow-md">提交需求，定制行囊</button>
           <p class="text-xs text-gray-500 text-center">提交即表示同意我们与你联系</p>
         </form>
@@ -252,6 +213,7 @@
   </div>
 </section>
 
+<!-- 3D 景区 (已将卡片移入内部) -->
 <section id="splat" class="bg-white py-12 md:py-16 border-t border-gray-100">
   <div class="container-1100">
     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6 md:mb-8">
@@ -261,18 +223,9 @@
         <p class="text-sm text-gray-600 mt-1.5 max-w-xl leading-relaxed">无需下载插件，直接在浏览器中旋转、缩放，观察嵩山历史建筑的三维点云重建。</p>
       </div>
     </div>
-
     <div class="relative rounded-xl md:rounded-2xl overflow-hidden border border-gray-200 shadow-sm bg-[#0B1410]">
       <canvas id="splatCanvas" class="w-full h-[320px] md:h-[480px]"></canvas>
-
-      <!-- 🌟 新增：3D交互引导提示 -->
-      <div id="splatGuide" class="absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-1000 z-30">
-        <div class="bg-black/60 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm flex items-center gap-2 border border-white/20 shadow-lg animate-pulse">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
-          按住拖动旋转 · 滚轮缩放
-        </div>
-      </div>
-      <!-- 3D 悬浮折叠标签 (移入黑框内) -->
+      <!-- 3D 悬浮折叠标签 -->
       <div id="splatScenes" class="absolute top-1/2 -translate-y-1/2 right-0 flex flex-col items-end gap-3 z-20 pointer-events-auto overflow-hidden pr-0 py-4 w-[300px]"></div>
       <div class="absolute top-3 left-3 md:top-4 md:left-4 flex items-center gap-2 pointer-events-none">
         <span id="splatSceneName" class="text-[11px] md:text-[12px] font-medium text-white bg-black/40 backdrop-blur-sm px-2.5 py-1 md:px-3 md:py-1.5 rounded-md border border-white/10">少林塔林</span>
@@ -291,6 +244,7 @@
   </div>
 </section>
 
+<!-- 页脚 -->
 <footer id="footer" class="bg-ink text-gray-300 pt-10 md:pt-12 pb-6 md:pb-8">
   <div class="container-1100 grid grid-cols-1 md:grid-cols-3 gap-8">
     <div>
@@ -308,7 +262,6 @@
         <button onclick="openPartnerModal()" class="inline-block text-xs md:text-sm text-shan-400 border border-shan-600/50 hover:bg-shan-600 hover:text-white px-4 py-2 rounded-lg transition">我是主理人 / 诚邀共建 →</button>
       </div>
     </div>
-
     <div>
       <h3 class="text-white text-sm font-semibold mb-4">快速导航</h3>
       <ul class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-gray-400">
@@ -320,7 +273,6 @@
         <li><a href="events.html" class="hover:text-shan-400 transition">会议专题</a></li>
       </ul>
     </div>
-
     <div>
       <h3 class="text-white text-sm font-semibold mb-4">联系我们</h3>
       <ul class="space-y-2.5 text-sm text-gray-400">
@@ -331,7 +283,6 @@
       </ul>
     </div>
   </div>
-
   <div class="border-t border-white/10 mt-8 md:mt-12">
     <div class="container-1100 pt-4 text-center text-xs text-gray-500">
       © 2026 河南嵩玉文化旅游有限公司 · 天地之中 · 嵩山人文志　保留所有权利
@@ -341,6 +292,7 @@
 
 <div id="toast" class="fixed left-1/2 bottom-8 z-[100] px-5 py-3 rounded-xl text-white text-sm shadow-2xl transition-all duration-300 opacity-0 translate-y-4 -translate-x-1/2 pointer-events-none bg-shan-600"></div>
 
+<!-- 主理人弹窗 -->
 <div id="partnerModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
     <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
         <div class="bg-shan-900 px-6 py-4 flex justify-between items-center text-white">
@@ -384,7 +336,7 @@
     toastTimer = setTimeout(function () { el.classList.add('opacity-0', 'translate-y-4'); }, 2600);
   }
 
-  // ====== Hero 轮播 ======
+  // 轮播
   const HERO_IMAGES = [
     'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1600&q=80',
     'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1600&q=80',
@@ -403,7 +355,6 @@
       img.src = src; img.alt = '嵩山景观';
       img.className = 'absolute inset-0 w-full h-full object-cover select-none';
       img.setAttribute('draggable', 'false');
-      // 🌟 新增：首图高优先级，其余懒加载
       if (i === 0) img.setAttribute('fetchpriority', 'high');
       else img.setAttribute('loading', 'lazy');
       img.onerror = function () { this.onerror = null; this.src = FALLBACK_IMG; };
@@ -447,12 +398,9 @@
   if (heroSection) {
     heroSection.addEventListener('mouseenter', stopAutoPlay);
     heroSection.addEventListener('mouseleave', startAutoPlay);
-    heroSection.addEventListener('touchstart', stopAutoPlay, { passive: true });
-    heroSection.addEventListener('touchend', startAutoPlay, { passive: true });
   }
-  document.addEventListener('visibilitychange', function () { document.hidden ? stopAutoPlay() : startAutoPlay(); });
 
-  // ====== 表单提交 ======
+  // 表单提交
   const bookingForm = document.getElementById('bookingForm');
   const submitBtn = document.getElementById('submitBtn');
   if (bookingForm) {
@@ -470,7 +418,6 @@
       const originalText = submitBtn ? submitBtn.textContent : '提交';
       if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '正在提交…'; }
 
-      // 将称呼和电话拼接到 message 里，以便复用之前的线索池逻辑
       const payload = { resource_name: '定制行囊需求', message: `主题：${theme}，时间：${time}，客户：${name}，联系方式：${contact}，备注：${note || '无'}` };
 
       try {
@@ -482,7 +429,26 @@
     });
   }
 
-  // ====== 体验库与过滤 ======
+  // 主理人弹窗
+  window.openPartnerModal = function() { document.getElementById('partnerModal').classList.remove('hidden'); document.getElementById('partnerModal').classList.add('flex'); }
+  window.closePartnerModal = function() { document.getElementById('partnerModal').classList.add('hidden'); document.getElementById('partnerModal').classList.remove('flex'); }
+  window.submitPartnerForm = async function() {
+      const name = document.getElementById('ptName').value.trim();
+      const phone = document.getElementById('ptPhone').value.trim();
+      const type = document.getElementById('ptType').value;
+      const intro = document.getElementById('ptIntro').value.trim();
+      if (!name || !phone) { showToast('请填写名称和联系电话', 'warn'); return; }
+      const payload = { resource_name: '主理人入驻申请', message: `【商家名称】：${name}\n【业态类型】：${type}\n【联系电话】：${phone}\n【介绍】：${intro || '无'}` };
+      try {
+          const res = await fetch(API_LEADS, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) });
+          if (!res.ok) throw new Error('提交失败');
+          showToast('申请已提交！我们会尽快与您联系', 'success');
+          closePartnerModal();
+          document.getElementById('ptName').value = ''; document.getElementById('ptPhone').value = ''; document.getElementById('ptIntro').value = '';
+      } catch (err) { showToast('网络错误，请稍后再试', 'error'); }
+  }
+
+  // 体验库
   const MOCK_EXPERIENCES = [
     { id: 1, category: '非遗', tag: '禅武传承', title: '少林功夫晨课', desc: '随武僧在塔林间习练八段锦与基础桩功。', duration: '3 小时', price: 380, img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=70', keywords: '少林 功夫 武术 禅修 晨课 亲子' },
     { id: 2, category: '文化', tag: '书院研学', title: '嵩阳书院 · 国学讲坛', desc: '在千年书院里听一堂《中庸》，着汉服行释菜礼。', duration: '半日', price: 260, img: 'https://images.unsplash.com/photo-1599571234909-29ed5d1321d6?auto=format&fit=crop&w=900&q=70', keywords: '书院 国学 研学 汉服 礼仪 亲子' },
@@ -498,16 +464,20 @@
     if (!expGrid) return;
     if (!list || list.length === 0) { expGrid.innerHTML = ''; if (emptyState) emptyState.classList.remove('hidden'); return; }
     if (emptyState) emptyState.classList.add('hidden');
-
     expGrid.innerHTML = list.map(function (item) {
       const priceText = (item.price === 0 || item.price === '0') ? '免费' : '¥ ' + esc(item.price);
       return '<article onclick="window.location.href=\'detail.html?id=' + item.id + '\'" class="cursor-pointer group bg-white rounded-xl md:rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">' +
           '<div class="relative h-40 overflow-hidden bg-gray-100">' +
-            // 🌟 新增：loading="lazy" 和 decoding="async"
             '<img src="' + esc(item.img) + '" alt="' + esc(item.title) + '" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src=\'' + FALLBACK_IMG + '\'">' +
             '<span class="absolute top-3 left-3 text-xs px-2 py-1 rounded-md bg-white/95 text-shan-700 font-medium shadow-sm">' + esc(item.tag) + '</span>' +
           '</div>' +
-          // ... (下方不变)
+          '<div class="p-4 flex flex-col flex-1">' +
+            '<h3 class="font-serif text-[17px] font-bold leading-snug text-ink line-clamp-1">' + esc(item.title) + '</h3>' +
+            '<p class="text-sm text-gray-600 mt-2 leading-relaxed line-clamp-2 flex-1">' + esc(item.desc) + '</p>' +
+            '<div class="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between gap-2">' +
+              '<div class="text-sm text-gray-500 whitespace-nowrap">' + esc(item.duration) + ' · <span class="text-shan-700 font-semibold">' + priceText + '</span></div>' +
+              '<button type="button" onclick="event.stopPropagation(); showToast(\'已成功收入行囊\', \'success\')" class="add-btn text-xs px-3 py-2 md:py-1.5 rounded-lg bg-shan-50 text-shan-700 hover:bg-shan-600 hover:text-white transition whitespace-nowrap">+ 收入行囊</button>' +
+            '</div>' +
           '</div>' +
         '</article>';
     }).join('');
@@ -554,14 +524,10 @@
       if (!rawList.length) throw new Error('empty list');
       const mapped = rawList.map(function (it, i) {
         return {
-          id: (it && it.id != null) ? it.id : i,
-          category: (it && (it.category || it.type)) || '文化',
-          tag: (it && (it.tag || it.sub_category)) || '精选',
-          title: (it && (it.title || it.name || it.resource_name)) || '',
-          desc: (it && (it.description || it.desc || it.summary)) || '',
-          duration: (it && it.duration) || '规格',
-          price: (it && it.price != null) ? it.price : '—',
-          img: (it && (it.image || it.cover || it.image_url || it.img)) || FALLBACK_IMG,
+          id: (it && it.id != null) ? it.id : i, category: (it && (it.category || it.type)) || '文化',
+          tag: (it && (it.tag || it.sub_category)) || '精选', title: (it && (it.title || it.name || it.resource_name)) || '',
+          desc: (it && (it.description || it.desc || it.summary)) || '', duration: (it && it.duration) || '规格',
+          price: (it && it.price != null) ? it.price : '—', img: (it && (it.image || it.cover || it.image_url || it.img)) || FALLBACK_IMG,
           keywords: (it && (it.keywords || it.title || it.name)) || ''
         };
       }).filter(function (it) { return !!it.title; });
@@ -572,7 +538,7 @@
   }
   loadExperiences();
 
-  // AI 寻路搜索
+  // AI 寻路
   const aiSearchInput = document.getElementById('aiSearchInput'), aiSearchBtn = document.getElementById('aiSearchBtn'), librarySection = document.getElementById('library');
   function runAISearch(keyword) {
     const kw = String(keyword || '').trim(); if (!kw) { showToast('先说说你想体验什么吧', 'warn'); return; }
@@ -605,12 +571,11 @@
   const viewPlanBtn = document.getElementById('viewPlanBtn');
   if (viewPlanBtn) { viewPlanBtn.addEventListener('click', function () { if (aiSearchInput) aiSearchInput.value = '书院'; runAISearch('书院'); }); }
 
-  // ====== 3D 渲染 ======
+  // 3D 景区
   const splatCanvas = document.getElementById('splatCanvas'), splatCtx = splatCanvas ? splatCanvas.getContext('2d') : null;
   const splatScenesEl = document.getElementById('splatScenes'), splatLoadingEl = document.getElementById('splatLoading'), splatSceneNameEl = document.getElementById('splatSceneName');
   const SPLAT_PALETTES = { stone: ['#2E3A34', '#3C4A42', '#4C5C52', '#5E6E62', '#728275', '#8A9A8C', '#A2B2A4', '#BACABC'], wood: ['#2C342E', '#3A4840', '#485A50', '#586E60', '#6C8272', '#869C8C', '#A4B8A8', '#C2D2C4'], temple: ['#332C28', '#463C32', '#584C3E', '#6A6450', '#7C8A6E', '#8EA08A', '#A2B2A2', '#B8C8B8'], mountain: ['#1B2A22', '#263B31', '#334E42', '#436257', '#587A6B', '#6F9483', '#8AB09C', '#A8CCB8'] };
 
-  // 用模拟点云替代
   function genMockPoints(num, spread) { let pts=[]; for(let i=0;i<num;i++) pts.push({x:(Math.random()-0.5)*spread, y:Math.random()*4, z:(Math.random()-0.5)*spread, b:Math.floor(Math.random()*8)}); return pts; }
   const SPLAT_SCENES = [
     { id: 'talin', name: '少林塔林', sub: '全国现存规模最大的古塔群', palette: 'stone', gen: () => genMockPoints(3500, 16) },
@@ -659,30 +624,17 @@
     }, 280);
   }
 
-    // 3D 悬浮标签 (半隐藏靠右，抽屉式展开)
   function initSplatScenes() {
     if (!splatScenesEl) return;
     splatScenesEl.innerHTML = SPLAT_SCENES.map(function (s, i) {
       return `
       <button type="button" class="scene-btn group text-left rounded-l-xl border border-r-0 border-white/20 bg-black/60 backdrop-blur-md pl-4 pr-2 py-3 w-[220px] translate-x-[140px] hover:translate-x-0 active:translate-x-0 transition-all duration-500 ease-out relative shadow-lg" data-idx="${i}">
-          <!-- 主标题 -->
-          <span class="block text-xs md:text-sm font-bold text-white whitespace-nowrap transition-colors duration-300 group-hover:text-shan-300">
-            ${esc(s.name)}
-          </span>
-          <!-- 副标题简介 (展开时显示) -->
-          <span class="block text-[10px] md:text-[11px] text-gray-300 whitespace-nowrap mt-0 max-h-0 opacity-0 transition-all duration-500 ease-out group-hover:max-h-[20px] group-hover:opacity-100 group-hover:mt-1">
-            ${esc(s.sub)}
-          </span>
-          <!-- 选中时的左侧发光条 -->
+          <span class="block text-xs md:text-sm font-bold text-white whitespace-nowrap transition-colors duration-300 group-hover:text-shan-300">${esc(s.name)}</span>
+          <span class="block text-[10px] md:text-[11px] text-gray-300 whitespace-nowrap mt-0 max-h-0 opacity-0 transition-all duration-500 ease-out group-hover:max-h-[20px] group-hover:opacity-100 group-hover:mt-1">${esc(s.sub)}</span>
           <span class="absolute left-0 top-0 bottom-0 w-1 bg-transparent group-[.active]:bg-shan-400 rounded-l-xl transition-colors duration-300"></span>
       </button>`;
     }).join('');
-    splatScenesEl.addEventListener('click', function (e) {
-      const btn = e.target.closest('.scene-btn');
-      if (!btn) return;
-      const idx = parseInt(btn.getAttribute('data-idx'), 10);
-      if (!isNaN(idx)) selectSplatScene(idx);
-    });
+    splatScenesEl.addEventListener('click', function (e) { const btn = e.target.closest('.scene-btn'); if (!btn) return; const idx = parseInt(btn.getAttribute('data-idx'), 10); if (!isNaN(idx)) selectSplatScene(idx); });
   }
 
   function bindSplatInteraction() {
@@ -695,15 +647,6 @@
   }
 
   function initSplat() {
-    // ... 之前的代码
-    initSplatScenes(); bindSplatInteraction(); resizeSplatCanvas();
-
-    // 🌟 新增：4秒后自动淡出引导
-    setTimeout(() => {
-      const guide = document.getElementById('splatGuide');
-      if (guide) guide.style.opacity = '0';
-    }, 4000);
-
     if (!splatCanvas || !splatCtx) return;
     initSplatScenes(); bindSplatInteraction(); resizeSplatCanvas();
     const first = SPLAT_SCENES[0], pts = first.gen();
@@ -719,26 +662,7 @@
   }
   initSplat();
 
-  // ====== 主理人弹窗与页面细节 ======
-  window.openPartnerModal = function() { document.getElementById('partnerModal').classList.remove('hidden'); document.getElementById('partnerModal').classList.add('flex'); }
-  window.closePartnerModal = function() { document.getElementById('partnerModal').classList.add('hidden'); document.getElementById('partnerModal').classList.remove('flex'); }
-  window.submitPartnerForm = async function() {
-      const name = document.getElementById('ptName').value.trim();
-      const phone = document.getElementById('ptPhone').value.trim();
-      const type = document.getElementById('ptType').value;
-      const intro = document.getElementById('ptIntro').value.trim();
-      if (!name || !phone) { showToast('请填写名称和联系电话', 'warn'); return; }
-      const payload = { resource_name: '主理人入驻申请', message: `【商家名称】：${name}\n【业态类型】：${type}\n【联系电话】：${phone}\n【介绍】：${intro || '无'}` };
-      try {
-          const res = await fetch(API_LEADS, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) });
-          if (!res.ok) throw new Error('提交失败');
-          showToast('申请已提交！我们会尽快与您联系', 'success');
-          closePartnerModal();
-          document.getElementById('ptName').value = ''; document.getElementById('ptPhone').value = ''; document.getElementById('ptIntro').value = '';
-      } catch (err) { showToast('网络错误，请稍后再试', 'error'); }
-  }
-
-  // 导航 Scroll Spy
+  // 导航高亮
   const navLinks = document.querySelectorAll('.nav-link');
   const sections = document.querySelectorAll('section[id]');
   window.addEventListener('scroll', function() {
