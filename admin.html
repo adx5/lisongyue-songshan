@@ -20,7 +20,7 @@
         /* 侧边栏过渡动画 */
         #sidebar { transition: width 0.3s ease; }
         .nav-text { transition: opacity 0.3s ease; }
-        /* Tooltip 简单实现 */
+        /* Tooltip */
         .nav-item { position: relative; }
         .nav-item:hover .tooltip { opacity: 1; visibility: visible; }
         .tooltip { opacity: 0; visibility: hidden; transition: all 0.2s; position: absolute; left: 100%; margin-left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.8); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; white-space: nowrap; z-index: 100; pointer-events: none; }
@@ -40,8 +40,14 @@
     </div>
 
     <div id="mainApp" class="flex w-full h-full hidden">
-        <!-- 侧边栏：支持折叠 -->
-        <aside id="sidebar" class="w-64 bg-inkBlue text-white flex flex-col shadow-xl z-20 shrink-0">
+        <!-- 🌟 侧边栏：支持折叠 -->
+        <aside id="sidebar" class="w-64 bg-inkBlue text-white flex flex-col shadow-xl z-20 shrink-0 relative">
+
+            <!-- 🌟 侧边悬浮折叠按钮 -->
+            <button onclick="toggleSidebar()" class="absolute -right-3 top-1/2 -translate-y-1/2 z-50 bg-brand text-white w-6 h-6 flex items-center justify-center rounded-full shadow-md hover:bg-brandHover transition cursor-pointer border-2 border-white">
+                <svg id="collapseIcon" class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+
             <div class="h-16 flex items-center justify-between px-4 border-b border-gray-800">
                 <div class="flex items-center gap-3 overflow-hidden">
                     <div class="w-8 h-8 shrink-0 bg-brand rounded-lg flex items-center justify-center font-serif font-bold text-lg text-white">嵩</div>
@@ -50,9 +56,6 @@
                         <span class="text-[9px] text-gray-400 tracking-widest uppercase block">Admin System</span>
                     </div>
                 </div>
-                <button onclick="toggleSidebar()" class="text-gray-400 hover:text-white shrink-0">
-                    <svg id="sidebarIcon" class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                </button>
             </div>
 
             <nav class="flex-1 py-6 space-y-1 overflow-y-auto overflow-x-hidden">
@@ -62,7 +65,6 @@
                     <span class="tooltip">数据仪表盘</span>
                 </a>
 
-                <!-- 带红点角标的线索导航 -->
                 <a href="#" id="nav-leads" onclick="switchTab('leads')" class="nav-item flex items-center px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 transition whitespace-nowrap relative">
                     <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                     <span class="nav-text ml-3 flex-1">定制行囊线索</span>
@@ -104,13 +106,25 @@
                 </div>
             </header>
 
-            <!-- 数据仪表盘 -->
+            <!-- 🌟 仪表盘：增加点击跳转 -->
             <div id="tab-dashboard" class="hidden flex-1 p-8 overflow-auto">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6"><p class="text-sm text-gray-500 mb-1">生态库总数</p><h3 id="stat-resources" class="text-3xl font-bold text-gray-900">0</h3></div>
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6"><p class="text-sm text-gray-500 mb-1">游客留资</p><h3 id="stat-leads" class="text-3xl font-bold text-blue-600">0</h3></div>
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6"><p class="text-sm text-gray-500 mb-1">主理人申请</p><h3 id="stat-partners" class="text-3xl font-bold text-brand">0</h3></div>
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6"><p class="text-sm text-gray-500 mb-1">会议讲座</p><h3 id="stat-events" class="text-3xl font-bold text-amber-600">0</h3></div>
+                    <div onclick="switchTab('resources')" class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 cursor-pointer hover:border-brand hover:shadow-md transition group">
+                        <p class="text-sm text-gray-500 mb-1 group-hover:text-brand transition">生态库总数</p>
+                        <h3 id="stat-resources" class="text-3xl font-bold text-gray-900 group-hover:text-brand transition">0</h3>
+                    </div>
+                    <div onclick="switchTab('leads')" class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 cursor-pointer hover:border-blue-500 hover:shadow-md transition group">
+                        <p class="text-sm text-gray-500 mb-1 group-hover:text-blue-600 transition">游客留资</p>
+                        <h3 id="stat-leads" class="text-3xl font-bold text-blue-600">0</h3>
+                    </div>
+                    <div onclick="switchTab('partners')" class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 cursor-pointer hover:border-brand hover:shadow-md transition group">
+                        <p class="text-sm text-gray-500 mb-1 group-hover:text-brand transition">主理人申请</p>
+                        <h3 id="stat-partners" class="text-3xl font-bold text-brand">0</h3>
+                    </div>
+                    <div onclick="switchTab('events')" class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 cursor-pointer hover:border-amber-500 hover:shadow-md transition group">
+                        <p class="text-sm text-gray-500 mb-1 group-hover:text-amber-600 transition">会议讲座</p>
+                        <h3 id="stat-events" class="text-3xl font-bold text-amber-600">0</h3>
+                    </div>
                 </div>
             </div>
 
@@ -130,21 +144,23 @@
                         <button onclick="exportTableToCSV('leadsTable', '游客留资')" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm transition">⬇ 导出 Excel</button>
                     </div>
                 </div>
+
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-x-auto">
-                    <table id="leadsTable" class="w-full text-left border-collapse min-w-[900px]">
+                    <!-- 🌟 重新分配了列宽，留足空间 -->
+                    <table id="leadsTable" class="w-full text-left border-collapse min-w-[950px]">
                         <thead>
                             <tr class="bg-gray-50 text-gray-500 text-sm border-b">
-                                <th class="py-4 px-4 font-medium w-1/5">客户与联系方式</th>
-                                <th class="py-4 px-4 font-medium w-1/5">需求主题与偏好</th>
-                                <th class="py-4 px-4 font-medium w-1/4">意向行囊清单</th>
-                                <th class="py-4 px-4 text-center font-medium">状态</th>
-                                <th class="py-4 px-4 text-center font-medium cursor-pointer hover:text-brand select-none group" onclick="toggleSort()">
+                                <th class="py-4 px-4 font-medium w-[15%]">客户与联系方式</th>
+                                <th class="py-4 px-4 font-medium w-[18%]">需求主题与偏好</th>
+                                <th class="py-4 px-4 font-medium w-[35%]">意向行囊清单</th>
+                                <th class="py-4 px-4 text-center font-medium w-[10%]">状态</th>
+                                <th class="py-4 px-4 text-center font-medium w-[12%] cursor-pointer hover:text-brand select-none group" onclick="toggleSort()">
                                     <div class="flex items-center justify-center gap-1">
                                         提交时间
                                         <svg id="sortIcon" class="w-4 h-4 text-gray-400 group-hover:text-brand transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                     </div>
                                 </th>
-                                <th class="py-4 px-4 text-center font-medium">操作</th>
+                                <th class="py-4 px-4 text-center font-medium w-[10%]">操作</th>
                             </tr>
                         </thead>
                         <tbody id="leadsTableBody" class="text-sm divide-y divide-gray-100"></tbody>
@@ -317,15 +333,19 @@
         // ================= 工具函数 =================
         window.toggleSidebar = function() {
             const sidebar = document.getElementById('sidebar');
+            const icon = document.getElementById('collapseIcon');
             const isCollapsed = sidebar.classList.contains('w-20');
+
             if (isCollapsed) {
                 sidebar.classList.remove('w-20');
                 sidebar.classList.add('w-64');
                 document.querySelectorAll('.nav-text').forEach(el => el.classList.remove('hidden'));
+                icon.style.transform = 'rotate(0deg)'; // 展开时朝左
             } else {
                 sidebar.classList.remove('w-64');
                 sidebar.classList.add('w-20');
                 document.querySelectorAll('.nav-text').forEach(el => el.classList.add('hidden'));
+                icon.style.transform = 'rotate(180deg)'; // 收起时朝右
             }
         }
 
@@ -350,7 +370,7 @@
                 '亲子家庭': 'bg-pink-100 text-pink-700'
             };
             const cls = map[theme] || 'bg-gray-100 text-gray-700';
-            return `<span class="px-2 py-0.5 rounded text-xs font-medium ${cls}">${theme || '未填'}</span>`;
+            return `<span class="px-2 py-0.5 rounded text-xs font-medium ${cls} whitespace-nowrap">${theme || '未填'}</span>`;
         }
 
         function parseLeadMessage(msg) {
@@ -362,13 +382,11 @@
             const themeMatch = msg.match(/主题：([^，]+)/); if (themeMatch) result.theme = themeMatch[1];
             const timeMatch = msg.match(/时间：([^，]+)/); if (timeMatch) result.time = timeMatch[1];
 
-            // 提取行囊
             const bagMatch = msg.match(/已选行囊：\[(.*?)\]/);
             if (bagMatch && bagMatch[1]) {
                 result.bag = bagMatch[1].split(',').map(s => s.trim());
             }
 
-            // 清理备注
             let cleanNote = msg.replace(/主题：[^，]+，?/, '').replace(/时间：[^，]+，?/, '').replace(/客户：[^，]+，?/, '').replace(/联系方式：[^，]+，?/, '').replace(/备注：?/, '').replace(/，已选行囊：\[.*?\]/, '').trim();
             result.note = cleanNote || '-';
             return result;
@@ -449,7 +467,7 @@
                 const data = await response.json();
                 document.getElementById('stat-resources').innerText = data.total_resources || 0;
                 document.getElementById('stat-leads').innerText = data.total_leads || 0;
-                document.getElementById('stat-partners').innerText = data.total_leads || 0;
+                document.getElementById('stat-partners').innerText = data.total_leads || 0; // 暂共用同一总量
                 document.getElementById('stat-events').innerText = data.total_events || 0;
             } catch (error) { console.error(error); }
         }
@@ -517,6 +535,7 @@
                     trAttr = `id="highlighted-lead-${l.id}"`;
                 }
 
+                // 行囊清单尽可能展示更多字符
                 const bagHtml = parsed.bag.length > 0
                     ? `<div class="text-xs text-gray-600 line-clamp-2" title="${parsed.bag.join(', ')}">共 ${parsed.bag.length} 项：<span class="text-gray-400">${parsed.bag.join(' · ')}</span></div>`
                     : `<span class="text-xs text-gray-300">-</span>`;
@@ -527,8 +546,11 @@
                         <div class="text-xs text-brand font-mono mt-1">${esc(parsed.contact)}</div>
                     </td>
                     <td class="py-4 px-4">
-                        <div class="mb-1">${getThemeBadge(parsed.theme)}</div>
-                        <div class="text-xs text-gray-500">出行：${esc(parsed.time)}</div>
+                        <!-- 🌟 单行显示主题与时间 -->
+                        <div class="flex items-center gap-2">
+                            ${getThemeBadge(parsed.theme)}
+                            <span class="text-xs text-gray-500 whitespace-nowrap">${esc(parsed.time)}</span>
+                        </div>
                     </td>
                     <td class="py-4 px-4">
                         ${bagHtml}
@@ -626,7 +648,6 @@
         }
 
         function esc(value) { return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); }
-
         // ================= 以下是纯原生导出与资源、会议管理逻辑 =================
 
         function exportTableToCSV(tableId, filename) {
